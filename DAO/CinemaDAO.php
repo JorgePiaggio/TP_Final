@@ -43,11 +43,14 @@
         }
 
         public function Update(Cinema $cinema){
+                $rta = false;
                 $wanted = $this->Search($cinema->getId());
                 if($wanted != null){ 
                     $this->Remove($wanted->getId());                    
                     $this->Add($cinema);
+                    $rta = true;
                 }
+                return $rta; //Retorna falso si no existe el cine y true si lo modificó correctamente 
         }
 
         private function SaveData(){
@@ -55,9 +58,9 @@
             foreach($this->cinemaList as $cinema){
                 $valuesArray["id"] = $cinema->getId();
                 $valuesArray["name"] = $cinema->getName();
-                $valuesArray["adress"] = $cinema->getName();
-                $valuesArray["phone"] = $cinema->getName();
-                $valuesArray["email"] = $cinema->getName();
+                $valuesArray["adress"] = $cinema->getAddress();
+                $valuesArray["phone"] = $cinema->getPhone();
+                $valuesArray["email"] = $cinema->getEmail();
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
@@ -77,7 +80,7 @@
                     $cinema = new Cinema();
                     $cinema->setId($valuesArray["id"]);
                     $cinema->setName($valuesArray["name"]);
-                    $cinema->setAdress($valuesArray["adress"]);
+                    $cinema->setAddress($valuesArray["adress"]);
                     $cinema->setPhone($valuesArray["phone"]);
                     $cinema->setEmail($valuesArray["email"]);
                     array_push($this->cinemaList, $cinema);
@@ -85,6 +88,6 @@
 
             }
         }
-               
+    }             
 
 ?>

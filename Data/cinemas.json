@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Ambassador",
+        "adress": "Cordoba 2800",
+        "phone": "155666666",
+        "email": "ambassador@hotmail.com"
+    },
+    {
+        "id": 1,
+        "name": "Paseo Diagonal",
+        "adress": "Rivadavia  3000",
+        "phone": "122333333",
+        "email": "paseo@hotmail.com"
+    }
+]
