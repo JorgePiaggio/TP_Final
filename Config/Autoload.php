@@ -7,7 +7,7 @@
 			{
                 $classPath = ucwords(str_replace("\\", "/", ROOT.$className).".php");
                 
-				include_once($classPath);
+                include_once($classPath);
 			});
         }
     }
