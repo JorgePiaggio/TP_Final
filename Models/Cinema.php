@@ -2,7 +2,6 @@
 namespace Models;
 
 class Cinema{ 
-    #testing webhook
 
     private $id;
     private $state;

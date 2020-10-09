@@ -1,10 +1,10 @@
 <?php
 namespace Models;
 
-class Show{     /* funcion de cine */
+class Show{          /* funcion de cine */
 
     private $date;
-    private $shift; /* turno -mañana,tarde,noche- */
+    private $shift;             /* turno -mañana,tarde,noche- */
     private $remainingTickets; 
 
     function __construct(){}

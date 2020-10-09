@@ -5,7 +5,7 @@ class Room{         /* sala */
 
     private $number;
     private $capacity;
-    private $type; /* 2d, 3d */
+    private $type;      /* 2d, 3d */
 
     function __construct(){}
 
