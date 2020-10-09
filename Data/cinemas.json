@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "state": false,
+        "name": "Ambassador",
+        "address": "Cordoba 123",
+        "phone": "123",
+        "email": "ambassador@hotmail.com"
+    },
+    {
+        "id": 2,
+        "state": false,
+        "name": "Paseo Diagonal",
+        "address": "sdfsdf 123",
+        "phone": "123",
+        "email": "paseo@hotmail.com"
+    },
+    {
+        "id": 3,
+        "state": false,
+        "name": "cine3",
+        "address": "2 222",
+        "phone": "222222",
+        "email": "we@g.com"
+    },
+    {
+        "id": 4,
+        "state": false,
+        "name": "ww",
+        "address": "2 2",
+        "phone": "2",
+        "email": "w@w.com"
+    },
+    {
+        "id": 5,
+        "state": true,
+        "name": "Del Paseo",
+        "address": "Rivadavia 8882",
+        "phone": "23214124",
+        "email": "paseo@h.com"
+    }
+]
