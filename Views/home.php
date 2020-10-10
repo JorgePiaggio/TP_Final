@@ -7,26 +7,16 @@ Licence URI: https://www.os-templates.com/template-terms
 -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/4b4779e1dcb86984abe55c08366f9babe7-13-empty-theater.png');"> 
- <!-- <div class="wrapper row1">
-    <header id="header" class="hoc clear"> 
-      <div id="logo" class="fl_left">
-        <h1><a href="index.html">Overerts</a></h1>
-      </div>
-    </header>
-  </div>-->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
+<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/demo/backgrounds/4b4779e1dcb86984abe55c08366f9babe7-13-empty-theater.png');"> 
+  <!-- ################################# FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
-    <!-- ################################################################################################ -->
     <div class="flexslider basicslider">
       <ul class="slides">
         <li>
           <article>
             <!--<p class="heading">Waking Life</p>-->
             <h2 class="heading">Waking Life</h2>
-            <img class="poster" src="images/waking-life.4.jpg" alt="wakinglife poster">
+            <img class="poster" src="<?php echo IMG_PATH?>waking-life.4.jpg" alt="wakinglife poster">
             <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
             <footer>
               <ul class="nospace inline pushright">
@@ -40,7 +30,7 @@ Licence URI: https://www.os-templates.com/template-terms
           <article>
             <!--<p class="heading">Waking Life</p>-->
             <h2 class="heading">2001: A Space Odyssey</h2>
-            <img class="poster" src="images/2001-A-Space-Odyssey-7.jpg" alt="wakinglife poster">
+            <img class="poster" src="<?php echo IMG_PATH?>2001-A-Space-Odyssey-7.jpg" alt="wakinglife poster">
             <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
             <footer>
               <ul class="nospace inline pushright">
@@ -52,8 +42,23 @@ Licence URI: https://www.os-templates.com/template-terms
         </li>
         <li>
           <article>
+          <!--<p class="heading">Waking Life</p>-->
           <h2 class="heading">La Guerre du feu </h2>
-            <img class="poster" src="images/key_art_quest_for_fire.jpg" alt="wakinglife poster">
+            <img class="poster" src="<?php echo IMG_PATH?>key_art_quest_for_fire.jpg" alt="wakinglife poster">
+            <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
+            <footer>
+              <ul class="nospace inline pushright">
+                <li><a class="btn" href="#">Accumsan</a></li>
+                <li><a class="btn inverse" href="#">Molestie</a></li>
+              </ul>
+            </footer>
+          </article>
+        </li>
+        <li>
+          <article>
+          <!--<p class="heading">Waking Life</p>-->
+          <h2 class="heading">Porno Delirio </h2>
+            <img class="poster" src="<?php echo IMG_PATH?>mafe_flesh_01.jpg" alt="wakinglife poster">
             <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
             <footer>
               <ul class="nospace inline pushright">
@@ -65,13 +70,9 @@ Licence URI: https://www.os-templates.com/template-terms
         </li>
       </ul>
     </div>
-    <!-- ################################################################################################ -->
   </div>
-  <!-- ################################################################################################ -->
 </div>
 <!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <div class="wrapper row4">
   <section class="hoc container clear"> 

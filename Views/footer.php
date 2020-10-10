@@ -50,9 +50,9 @@
   </footer>
 </div>
 <!-- JAVASCRIPTS -->
-<script src="layout/scripts/jquery.min.js"></script> 
-<script src="layout/scripts/jquery.backtotop.js"></script>
-<script src="layout/scripts/jquery.mobilemenu.js"></script>
-<script src="layout/scripts/jquery.flexslider-min.js"></script>
+<script src="<?php echo SCRIPT_PATH ?>jquery.min.js"></script> 
+<script src="<?php echo SCRIPT_PATH ?>jquery.backtotop.js"></script>
+<script src="<?php echo SCRIPT_PATH ?>jquery.mobilemenu.js"></script>
+<script src="<?php echo SCRIPT_PATH ?>jquery.flexslider-min.js"></script>
 </body>
 </html>

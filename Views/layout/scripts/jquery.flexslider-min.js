@@ -17,15 +17,15 @@ File: Flexslider Configuration Settings
 // All configuration settings / properties can be found here: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties
 
 // Homepage Slider
-
 $('.basicslider').flexslider({
 	animation: "slide",
 	pauseOnHover: true,
 	controlNav: true,
-	directionNav: false,
+	directionNav: true,
 	smoothHeight: true,
-	slideshowSpeed: 1000,//no anda ¡?
+	slideshowSpeed: 2500,
 	initDelay: 0,
+	randomize: true,
 	start: function(slider) {
 		$('body').removeClass('loading');
 	}
