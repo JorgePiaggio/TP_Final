@@ -1,7 +1,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1>MoviePass</h1>
+      <h1><a href="<?php echo FRONT_ROOT?>Home/Index">MoviePass</a></h1>
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
@@ -9,7 +9,7 @@
           <ul>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowAddView">Add Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowListView">List Cinema</a></li>
-      </ul>
+      </ul></ul>
     </nav>
   </header>
 </div>

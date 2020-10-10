@@ -24,21 +24,21 @@ File: Layout CSS
 /* Header
 --------------------------------------------------------------------------------------------------------------- */
 #header{}
-#header #logo{margin:30px;}
-#header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
 
+#header #logo{margin:30px 0 0 0;}
+#header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
 
 
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
-#pageintro{padding:50px 0;}
+#pageintro{padding:150px 0;}
 
 #pageintro article{max-width:75%;}
 #pageintro article *{text-transform:uppercase;}
-#pageintro article .heading{margin:0 0 20px 0; padding:0; line-height:1; font-size:46px;}
+#pageintro article .heading{margin:0 0 50px 0; padding:0; line-height:1; font-size:46px;}
 #pageintro article p{margin:0;}
 #pageintro article p:first-of-type{margin-bottom:35px; font-size:22px; letter-spacing:5px;}
-#pageintro article footer{margin-top:20px;}
+#pageintro article footer{margin-top:80px;}
 
 
 /* Content Area
@@ -150,7 +150,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
 #mainav li:last-child{margin-right:0;}
 #mainav li li{width:100%; margin:0;}
-#mainav li a{display:block; padding:30px 130px;}
+#mainav li a{display:block; padding:30px 0;}
 #mainav li li a{border:solid; border-width:0 0 1px 0;}
 #mainav .drop{padding-left:15px;}
 #mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;}
@@ -199,9 +199,9 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 /* Tables
 --------------------------------------------------------------------------------------------------------------- */
-table, th, td{border:1px solid; border-collapse:collapse; color:black; vertical-align:top;}
+table, th, td{border:1px solid; border-collapse:collapse; vertical-align:top;}
 table, th{table-layout:auto;}
-table{width:90%;  margin: auto; margin-bottom:15px;}
+table{width:100%; margin-bottom:15px;}
 th, td{padding:5px 8px;}
 td{border-width:0 1px;}
 
