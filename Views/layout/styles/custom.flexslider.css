@@ -20,8 +20,9 @@ File: Custom Flexslider CSS => For FlexSlider v2.6.1
 .flexslider .slides{display:block; width:100%; overflow:hidden;}
 .flexslider .slides > li{display:none; -webkit-backface-visibility:hidden;}/* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides a{text-decoration:none; outline:none;}
+.flexslider .slides h2.heading{position: relative; left:90px;bottom:5px;} /*TITULO DEL SLIDE*/
 .flexslider .slides a img{border:none;}
-.flexslider .slides img{display:block;  width:768px; height:302px;max-width:1000px; margin:-2px 0 20px 105px;} /*IMAGENES SLIDE*/
+.flexslider .slides img{display:block;  width:782px; height:306px;max-width:1000px; margin:-13px 0 20px 95px;} /*IMAGENES SLIDE*/
 /* Modern Clear fix for the .slides element */
 .slides::before, .slides::after{display:table; content:"";}
 .slides, .slides::after{clear:both;}
@@ -61,6 +62,24 @@ File: Custom Flexslider CSS => For FlexSlider v2.6.1
 @media screen and (max-width:900px){
 	.flexslider .slides img{display:block;  width:800px; height:350px;max-width:800px; margin:auto;} /*IMAGENES SLIDE*/
 }
+
+/*************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+PROBAR ESTO*/
+@media screen and (min-width: 1400px) {
+	.flexslider{
+	  width: 80%;
+	}
+  }
+/*************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************
+*************************************************************************************************/
+
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */
 .flex-direction-nav a{color:rgba(255,255,255,1);}

@@ -23,8 +23,8 @@ File: Layout CSS
 
 /* Header
 --------------------------------------------------------------------------------------------------------------- */
-#header{}
-#header #logo{margin:30px;}
+#header{height: 60px;}
+#header #logo{margin:20px 0 0 140px;}
 #header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
 
 
@@ -143,7 +143,7 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 /* Top Navigation */
 #mainav{}
-#mainav ul.clear{margin-top:3px;}
+#mainav ul.clear{margin-top:-5px;}
 #mainav ul{text-transform:uppercase;}
 #mainav ul ul{z-index:9999; position:absolute; width:180px; text-transform:none;}
 #mainav ul ul ul{left:180px; top:0;}
@@ -265,7 +265,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 /* Header */
 #header #logo a{color:inherit;}
-
+#header{background-color:rgba(0,0,0,.95);}
 
 /* Content Area */
 .services article i{color:#FFFFFF; border-color:#FF5723;}
@@ -335,21 +335,16 @@ table a, #comments a{background-color:inherit;}
 	.hoc{max-width:90%;}
 
 	#header{padding:30px 0 15px;}
-	#header #logo{margin:0;}
+	#header #logo{margin:0 0 0 40px;}
 
-	#mainav{}
-	#mainav ul{display:none;}
-	#mainav form{display:block;}
+	#header{height: auto;}
+	#mainav{display:block;}
+	#mainav ul.clear{text-align: center;margin: -10px 0 0 150px;}
 
-	#breadcrumb{}
-
-	.container{}
 	#comments input[type="reset"]{margin-top:10px;}
 	.pagination li{display:inline-block; margin:0 5px 5px 0;}
 
-	#footer{}
 
-	#copyright{}
 	#copyright p:first-of-type{margin-bottom:10px;}
 }
 
