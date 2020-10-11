@@ -30,16 +30,41 @@
             return $newList;
         }
 
-        public function Remove($idCinema){
+        public function ChangeState($idCinema){
             $wanted = $this->Search($idCinema);
             if($wanted != null){
                 $this->RetrieveData();
-                $this->cinemaList[($wanted->getId())-1]->setState(false);
+                if($this->cinemaList[($wanted->getId())-1]->getState() == true){
+                    $this->cinemaList[($wanted->getId())-1]->setState(false);
+                }
+                else{
+                    $this->cinemaList[($wanted->getId())-1]->setState(true);
+                }
                 $this->SaveData();
             }
         }
 
+        public function GetAllInactive(){
+            $this->RetrieveData();
+            $newList=array();
+            foreach($this->cinemaList as $cinema){
+                if($cinema->getState() != true){
+                    array_push($newList, $cinema);
+                }
+            }
+            return $newList;
+        }
+
         /*
+        public function Restore($idCinema){
+            $wanted = $this->Search($idCinema);
+            if($wanted != null){
+                $this->RetrieveData();
+                $this->cinemaList[($wanted->getId())-1]->setState(true);
+                $this->SaveData();
+            }
+        }
+        
         public function Remove($idCinema){
             $this->RetrieveData();
             $newList = array();

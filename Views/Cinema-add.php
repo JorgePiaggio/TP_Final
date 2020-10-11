@@ -4,7 +4,7 @@
           <div class="container">
                <h3 class="mb-3">Add Cinema</h3>
 
-               <div class="bg-light p-4">
+               <div class="bg-light-p-4">
                     <div class="row">
                          <div class="col-lg-3">
                               <label for="">Cinema</label>

@@ -6,7 +6,7 @@
     interface ICinemaDAO{
         function Add(Cinema $cinema);
         function GetAll();
-        function Remove($idCinema);
+        function ChangeState($idCinema);
         function Search($idCinema);
         function Update(Cinema $Cinema);
     }

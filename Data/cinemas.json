@@ -1,42 +1,58 @@
 [
     {
         "id": "1",
-        "state": false,
+        "state": true,
         "name": "Ambassador",
         "address": "Cordoba 123",
         "phone": "123",
         "email": "ambassador@hotmail.com"
     },
     {
-        "id": 2,
-        "state": false,
+        "id": "2",
+        "state": true,
         "name": "Paseo Diagonal",
-        "address": "sdfsdf 123",
-        "phone": "123",
-        "email": "paseo@hotmail.com"
+        "address": "Rivadavia  1250",
+        "phone": "4956666",
+        "email": "paseodiagonal@hotmail.com"
     },
     {
-        "id": 3,
-        "state": false,
-        "name": "cine3",
-        "address": "2 222",
-        "phone": "222222",
-        "email": "we@g.com"
+        "id": "3",
+        "state": true,
+        "name": "Paseo Aldrey",
+        "address": "Sarmiento 2222",
+        "phone": "4748888",
+        "email": "paseoaldrey@gmail.com"
     },
     {
-        "id": 4,
+        "id": "4",
         "state": false,
-        "name": "ww",
+        "name": "wwcngfnfg",
         "address": "2 2",
         "phone": "2",
         "email": "w@w.com"
     },
     {
-        "id": 5,
+        "id": "5",
+        "state": false,
+        "name": "Cine Puerto",
+        "address": "12 de Octubre 8882",
+        "phone": "4156363",
+        "email": "puerto@hotmail.com"
+    },
+    {
+        "id": "6",
         "state": true,
-        "name": "Del Paseo",
-        "address": "Rivadavia 8882",
-        "phone": "23214124",
-        "email": "paseo@h.com"
+        "name": "Los Gallegos",
+        "address": "Rivadavia 1500 2255",
+        "phone": "4756363",
+        "email": "gallegosShopping@hotmail.com"
+    },
+    {
+        "id": 7,
+        "state": false,
+        "name": "asdasd",
+        "address": "asdasds 3",
+        "phone": "155632932",
+        "email": "franciscogrande91@hotmail.com"
     }
 ]

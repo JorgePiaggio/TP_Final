@@ -20,6 +20,7 @@
 
         public function ShowListView(){
             $cinemaList = $this->cinemaDAO->GetAllActive();
+            $cinemaListInactive = $this->cinemaDAO->GetAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
         }
 
@@ -38,13 +39,11 @@
             $this->ShowAddView();
         }
 
-        public function Remove($idRemove){
-            $this->cinemaDAO->Remove($idRemove);
+        public function ChangeState($idRemove){
+            $this->cinemaDAO->ChangeState($idRemove);
             $this->ShowListView();
         }
         
-        
-
         public function SearchEdit($idCinema){
             $editCinema = $this->cinemaDAO->Search($idCinema);
 
@@ -61,7 +60,10 @@
         }
 
         public function Edit($name, $street, $number, $phone, $email, $id){
+            $aux = $this->cinemaDAO->Search($id);
+
             $cinemaEdit= new Cinema();
+            $cinemaEdit->setState($aux->getState());
             $cinemaEdit->setName($name);
             $cinemaEdit->setAddress($street." ".$number);
             $cinemaEdit->setPhone($phone);
