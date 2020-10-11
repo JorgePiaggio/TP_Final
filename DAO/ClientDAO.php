@@ -19,11 +19,11 @@
             return $this->clientList;
         }
 
-        public function Search($idClient){
+        public function Search($dniClient){
             $wanted = null;
             $this->RetrieveData();
             foreach($this->clientList as $client){
-                if($client->getId() == $idClient){
+                if($client->getDni() == $dniClient){
                     $wanted = $client;
                 }
             }
@@ -32,21 +32,23 @@
 
         public function Update(Client $client){
                 $this->RetrieveData();
-                $this->clientList[($client->getId())-1]=$client;
+                $this->clientList[($client->getDni())-1]=$client;
                 $this->SaveData();
         }
 
+        /*
         public function lastId(){
             $ids = $this->getAll();
             $lastId = count($ids);
 
             return $lastId;
         }
+        */
 
         private function SaveData(){
             $arrayToEncode = array();
             foreach($this->clientList as $client){
-                $valuesArray["id"] = $client->getId();
+                $valuesArray["dni"] = $client->getDni();
                 $valuesArray["name"] = $client->getName();
                 $valuesArray["surname"] = $client->getSurname();
                 $valuesArray["address"] = $client->getAddress();
@@ -70,7 +72,7 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $client = new Client();
-                    $client->setId($valuesArray["id"]);
+                    $client->setDni($valuesArray["dni"]);
                     $client->setState($valuesArray["name"]);
                     $client->setName($valuesArray["surname"]);
                     $client->setAddress($valuesArray["address"]);
