@@ -7,7 +7,7 @@ Licence URI: https://www.os-templates.com/template-terms
 -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/demo/backgrounds/4b4779e1dcb86984abe55c08366f9babe7-13-empty-theater.png');"> 
+<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/demo/backgrounds/cineBack2.jpg');"> 
   <!-- ################################# FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
@@ -15,8 +15,8 @@ Licence URI: https://www.os-templates.com/template-terms
         <li>
           <article>
             <!--<p class="heading">Waking Life</p>-->
-            <h2 class="heading">Waking Life</h2>
-            <img class="poster" src="<?php echo IMG_PATH?>waking-life.4.jpg" alt="wakinglife poster">
+            <h2 class="heading">The Witch Tree</h2>
+            <img class="poster" src="<?php echo IMG_PATH?>witch.jpg" alt="witchtree poster">
             <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
             <footer>
               <ul class="nospace inline pushright">
