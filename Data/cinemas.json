@@ -3,8 +3,8 @@
         "id": "1",
         "state": true,
         "name": "Ambassador",
-        "address": "Cordoba 123",
-        "phone": "123",
+        "address": "Cordoba 3800",
+        "phone": "4123333",
         "email": "ambassador@hotmail.com"
     },
     {
@@ -26,10 +26,10 @@
     {
         "id": "4",
         "state": false,
-        "name": "wwcngfnfg",
-        "address": "2 2",
-        "phone": "2",
-        "email": "w@w.com"
+        "name": "Cine centro",
+        "address": "Belgrano  2500",
+        "phone": "4789988",
+        "email": "cinemacentro@gmail.com"
     },
     {
         "id": "5",
@@ -48,11 +48,11 @@
         "email": "gallegosShopping@hotmail.com"
     },
     {
-        "id": 7,
+        "id": "7",
         "state": false,
-        "name": "asdasd",
-        "address": "asdasds 3",
-        "phone": "155632932",
-        "email": "franciscogrande91@hotmail.com"
+        "name": "Cinema Mogotes",
+        "address": "Av. de los Trabajadores 5000",
+        "phone": "4751111",
+        "email": "farocinema@hotmail.com"
     }
 ]
