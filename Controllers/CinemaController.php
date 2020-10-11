@@ -24,6 +24,11 @@
             require_once(VIEWS_PATH."Cinema-list.php");
         }
 
+        public function ShowEditView(){
+            
+            require_once(VIEWS_PATH."Cinema-edit.php");
+        }
+
         public function Add($name, $street, $number, $phone, $email){
             $lastId = $this->cinemaDAO->lastId();
 
@@ -51,11 +56,6 @@
             $address= explode(" ",$editCinema->getAddress());
 
             #$this->ShowEditView();
-            require_once(VIEWS_PATH."Cinema-edit.php");
-        }
-
-        public function ShowEditView(){
-            
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
