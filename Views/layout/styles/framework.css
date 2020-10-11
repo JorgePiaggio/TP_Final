@@ -61,6 +61,103 @@ label, input, textarea, select, button{display:inline; resize:none; outline:none
 label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
 
+/*Forms with floating label
+------------------------------------------------------------------------------------------------------*/
+.form-title{
+    margin: -30px 0 20px 10px;
+}
+.floating-label { 
+    display:inline-block;
+    position:relative; 
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+ .floating-input  {
+    font-size:14px;
+    padding:4px 4px;
+    display:inline;
+    height:30px;
+    background-color: transparent;
+    border:none;
+    border-bottom:1px solid orangered;
+  }
+  
+ .floating-input:focus {
+       outline:none;
+       border-bottom:2px solid rgb(253, 117, 13); 
+  }
+ 
+  .floating-input ~ label {
+    color:#999; 
+    font-size:14px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:5px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  
+  .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+    top:-18px;
+    font-size:10px;
+    color:#e05505;
+  }
+  
+  /* active state */
+  .floating-input:focus ~ .bar:before, .floating-input:focus ~ .bar:after{
+    width:50%;
+  }
+  /*
+  *, *:before, *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+  }
+  */
+  .floating-textarea {
+     min-height: 30px;
+     max-height: 260px; 
+     overflow:hidden;
+    overflow-x: hidden; 
+  }
+  
+  /* highlighter */
+  .highlight {
+    position:absolute;
+    height:50%; 
+    width:100%; 
+    top:15%; 
+    left:0;
+    pointer-events:none;
+    opacity:0.5;
+  }
+  
+  /* active state */
+  .floating-input:focus ~ .highlight , .floating-select:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+  }
+  
+  /* animation */
+  @-webkit-keyframes inputHighlighter {
+      from { background:#e05505; }
+    to 	{ width:0; background:transparent; }
+  }
+  @-moz-keyframes inputHighlighter {
+      from { background:#e05505; }
+    to 	{ width:0; background:transparent; }
+  }
+  @keyframes inputHighlighter {
+      from { background:#e05505; }
+    to 	{ width:0; background:transparent; }
+  }
+  
+  /****  floating-Lable style end ****/
+  
 
 /* Generalise
 --------------------------------------------------------------------------------------------------------------- */
