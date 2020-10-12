@@ -1,6 +1,8 @@
 <?php
     namespace Controllers;
-
+    if(!$_SESSION || $_SESSION["logedUser"]!="admin@moviepass.com"){
+        header("location:../Home/Index");
+    }
     use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
 
@@ -12,18 +14,28 @@
             $this->cinemaDAO = new CinemaDAO(); 
         }
 
+        
+
         public function ShowAddView(){
-            
-            require_once(VIEWS_PATH."Cinema-add.php");
            
+            require_once(VIEWS_PATH."Cinema-add.php");
+            
         }
 
         public function ShowListView(){
+           
             $cinemaList = $this->cinemaDAO->GetAllActive();
             $cinemaListInactive = $this->cinemaDAO->GetAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
+            
         }
 
+        public function ShowEditView(){
+            
+            require_once(VIEWS_PATH."Cinema-edit.php");
+            
+        }
+    
         public function Add($name, $street, $number, $phone, $email){
             $lastId = $this->cinemaDAO->lastId();
 
@@ -54,10 +66,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function ShowEditView(){
-            
-            require_once(VIEWS_PATH."Cinema-edit.php");
-        }
+    
 
         public function Edit($name, $street, $number, $phone, $email, $id){
             $aux = $this->cinemaDAO->Search($id);
