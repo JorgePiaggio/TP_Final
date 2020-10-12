@@ -20,9 +20,10 @@
             require_once(VIEWS_PATH."login.php");
         }
         public function Login($email,$pass){
+
             $client=$this->ClientDAO->Search($email);
             if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){
-                $_SESSION["logedUser"]=$email;
+                $_SESSION["loggedUser"]=$email;
                 $_SESSION["pass"]=$pass;
                 header("location:Index");
             }else{
@@ -97,8 +98,6 @@
         }
 
        
-    
-
         public function Logout(){
         
             session_destroy();
