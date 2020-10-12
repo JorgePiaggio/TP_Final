@@ -1,14 +1,14 @@
 <?php
     namespace DAO;
 
-    use DAO\ICinemaDAO as ICinemaDAO;
+    use DAO\IDAO as IDAO;
     use Models\Cinema as Cinema;
 
-    class CinemaDAO implements ICinemaDAO{
+    class CinemaDAO implements IDAO{
         private $cinemaList = array();
 
 
-        public function Add(Cinema $cinema){
+        public function Add($cinema){
             $this->RetrieveData();
             array_push($this->cinemaList, $cinema);
             $this->SaveData();
@@ -88,7 +88,7 @@
             return $wanted;
         }
 
-        public function Update(Cinema $cinema){
+        public function Update($cinema){
                 $this->RetrieveData();
                 $this->cinemaList[($cinema->getId())-1]=$cinema;
                 $this->SaveData();

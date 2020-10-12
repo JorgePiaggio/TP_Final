@@ -1,14 +1,14 @@
 <?php
     namespace DAO;
 
-    use DAO\IClientDAO as IClientDAO;
+    use DAO\IDAO as IDAO;
     use Models\Client as Client;
 
-    class ClientDAO implements IClientDAO{
+    class ClientDAO implements IDAO{
         private $clientList = array();
 
 
-        public function Add(Client $client){
+        public function Add($client){
             $this->RetrieveData();
             array_push($this->clientList, $client);
             $this->SaveData();
@@ -19,18 +19,18 @@
             return $this->clientList;
         }
 
-        public function Search($dniClient){
+        public function Search($emailClient){
             $wanted = null;
             $this->RetrieveData();
             foreach($this->clientList as $client){
-                if($client->getDni() == $dniClient){
+                if($client->getEmail() == $emailClient){
                     $wanted = $client;
                 }
             }
             return $wanted;
         }
 
-        public function Update(Client $client){
+        public function Update( $client){
                 $this->RetrieveData();
                 $this->clientList[($client->getDni())-1]=$client;
                 $this->SaveData();
@@ -73,8 +73,8 @@
                 foreach($arrayToDecode as $valuesArray){
                     $client = new Client();
                     $client->setDni($valuesArray["dni"]);
-                    $client->setState($valuesArray["name"]);
-                    $client->setName($valuesArray["surname"]);
+                    $client->setName($valuesArray["name"]);
+                    $client->setSurName($valuesArray["surname"]);
                     $client->setAddress($valuesArray["address"]);
                     $client->setPhone($valuesArray["phone"]);
                     $client->setEmail($valuesArray["email"]);

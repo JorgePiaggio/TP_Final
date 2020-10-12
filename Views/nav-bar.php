@@ -5,7 +5,13 @@
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
+        <?php if($_SESSION){?>
+        <li class="active"><a class="drop" href="#"><?php echo $_SESSION["logedUser"];?></a>
+        <?php 
+      }else{ ?>
         <li class="active"><a class="drop" href="#">Actions</a>
+
+        <?php }?>
           <ul>
           <?php if($_SESSION){   ?>
     
