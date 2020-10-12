@@ -5,11 +5,17 @@
     </div>
     <nav id="mainav" class="fl_right">
       <ul class="clear">
+        <?php if($_SESSION){?>
+        <li class="active"><a class="drop" href="#"><?php echo $_SESSION["loggedUser"];?></a>
+        <?php 
+      }else{ ?>
         <li class="active"><a class="drop" href="#">Actions</a>
+
+        <?php }?>
           <ul>
           <?php if($_SESSION){   ?>
     
-          <?php if($_SESSION["logedUser"]=="admin@moviepass.com")  { ?>
+          <?php if($_SESSION["loggedUser"]=="admin@moviepass.com")  { ?>
             <!---Admin*/-->
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowAddView">Add Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowListView">List Cinema</a></li>
@@ -17,7 +23,8 @@
             
           <?php }else{ ?>
             <!---User*/-->
-          <li><a href="<?php echo FRONT_ROOT?>User/ShowProfile">Profile</a></li>
+
+          <li><a href="<?php echo FRONT_ROOT?>Client/ShowProfile">Profile</a></li>
           <li><a href="<?php echo FRONT_ROOT?>Home/Logout">Sign out</a></li>
           <?php }?>
           <?php } else{ ?>  

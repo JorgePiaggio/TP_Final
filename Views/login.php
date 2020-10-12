@@ -9,18 +9,22 @@
                          <div class="floating-label">
                               <input type="email" name="mail" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
-                         </div>                         
+                         </div>                       
 
                          <div class="floating-label">
                               <input type="password" name="pass" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">PassWord</label>
-                         </div>
+                         </div><br>
 
                          <div class="floating-label">
                               <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
                          </div>
-                    </div>                    
+                    </div> 
+                    <?php
+                 if($_GET){
+                    echo $_GET["alert"];
+                    }   ?>                    
           </div>
           </form>
 </center>
