@@ -48,7 +48,7 @@
                         $newUser->setEmail($email);
                         $newUser->setPassword($pass);
                         $this->ClientDAO->add($newUser);
-                        $_SESSION["logedUser"]=$email;
+                        $_SESSION["loggedUser"]=$email;
                         $_SESSION["pass"]=$pass;
                         header("location:Index");
     
