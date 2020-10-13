@@ -23,6 +23,7 @@
             
           <?php }else{ ?>
             <!---User*/-->
+
           <li><a href="<?php echo FRONT_ROOT?>Client/ShowProfile">Profile</a></li>
           <li><a href="<?php echo FRONT_ROOT?>Home/Logout">Sign out</a></li>
           <?php }?>
