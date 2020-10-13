@@ -7,33 +7,33 @@
 
                     <div class="floating-label-form">
                     <div class="floating-label">
-                              <input type="text" name="name" placeholder="" class="floating-input" required>
+                              <input type="text" name="name" value="<?php if($_GET){echo $_GET["name"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Name</label>
                          </div>  <br>
 
                          <div class="floating-label">
-                              <input type="text" name="surname" placeholder="" class="floating-input" required>
+                              <input type="text" name="surname" value="<?php if($_GET){echo $_GET["surname"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Surname</label>
                          </div>  <br>
                          <div class="floating-label">
-                              <input type="text" name="dni" placeholder="" class="floating-input" required>
+                              <input type="text" name="dni" value="<?php if($_GET){echo $_GET["dni"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">DNI</label>
                          </div>  <br>
                          <div class="floating-label">
-                              <input type="text" name="street" placeholder="" class="floating-input" required>
+                              <input type="text" name="street" value="<?php if($_GET){echo $_GET["street"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Street</label>
                          </div> 
                          <div class="floating-label">
-                              <input type="number" name="number" placeholder="" class="floating-input" required>
+                              <input type="number" name="number" value="<?php if($_GET){echo $_GET["number"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Number</label>
                          </div> <br> 
                          <div class="floating-label">
-                              <input type="text" name="phone" placeholder="" class="floating-input" required>
+                              <input type="text" name="phone" value="<?php if($_GET){echo $_GET["phone"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Phone</label>
                          </div>  <br>
                          
                          <div class="floating-label">
-                              <input type="email" name="mail" placeholder="" class="floating-input" required>
+                              <input type="email" name="mail" value="<?php if($_GET){echo $_GET["email"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
                          </div>   <br>                      
 

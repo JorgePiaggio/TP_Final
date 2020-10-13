@@ -1,6 +1,6 @@
 <?php 
 namespace Controllers;
-if(!$_SESSION){
+if(!$_SESSION || $_SESSION["loggedUser"]=="admin@moviepass.com"){
     header("location:../Home/Index");
 }
 use Models\Client as Client;

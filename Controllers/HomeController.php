@@ -54,16 +54,16 @@
     
                     }else{
 
-                        header("location:ShowRegister?alert=Invalid PassWord .$msg");   
+                        header("location:ShowRegister?alert=Invalid PassWord .$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
                     }
                 }else{
                     $msg='Incorrect DNI';
-                    header("location:ShowRegister?alert=$msg");  
+                    header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
                 }
     
             }else{
                 $msg='Incorrect Name or Surname';
-                header("location:ShowRegister?alert=$msg");
+                header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
             }
         }
 
