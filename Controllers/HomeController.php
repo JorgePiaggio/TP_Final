@@ -35,40 +35,44 @@
 
         public function Register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
             $msg='';
-    
-            if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
-                if(strlen($dni)>=7 && strlen($dni)<10){
-                    if(strcmp($pass,$repass)==0 && $this->validatePass($pass,$msg)){
-                        $newUser= new Client();
-                        $newUser->setName($name);
-                        $newUser->setsurName($surname);
-                        $newUser->setDni($dni);
-                        $newUser->setAddress($street." ".$number);
-                        $newUser->setPhone($phone);
-                        $newUser->setEmail($email);
-                        $newUser->setPassword($pass);
-                        $this->ClientDAO->add($newUser);
-                        $_SESSION["loggedUser"]=$email;
-                        $_SESSION["pass"]=$pass;
-                        header("location:Index");
-    
-                    }else{
-
-                        header("location:ShowRegister?alert=Invalid Password$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
-                    }
-                }else{
-                    $msg='Incorrect DNI';
-                    header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
-                }
-    
+            
+            if(!$this->validateEmail($email)){ 
+                #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
+                    #if(strlen($dni)>=7 && strlen($dni)<10){
+                        if($this->validatePass($pass, $repass, $msg)){
+                            $newUser= new Client();
+                            $newUser->setName($name);
+                            $newUser->setsurName($surname);
+                            $newUser->setDni($dni);
+                            $newUser->setAddress($street." ".$number);
+                            $newUser->setPhone($phone);
+                            $newUser->setEmail($email);
+                            $newUser->setPassword($pass);
+                            $this->ClientDAO->add($newUser);
+                            $_SESSION["loggedUser"]=$email;
+                            $_SESSION["pass"]=$pass;
+                            header("location:Index");
+        
+                        }else{
+                            header("location:ShowRegister?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
+                        }
+                    #}else{
+                    #    $msg='Incorrect DNI';
+                    #    header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
+                    #}
+        
+                #}else{
+                #    $msg='Incorrect Name or Surname';
+                #   header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
+                #}
             }else{
-                $msg='Incorrect Name or Surname';
+                $msg='Email is already exist';
                 header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
             }
         }
 
-         private function validatePass($pass,&$error){
-            if(strlen($pass) < 8){
+         private function validatePass($pass, $repass, &$error){
+            /*if(strlen($pass) < 8){
                $error = "The password must be at least 8 characters";
                return false;
             }
@@ -88,11 +92,26 @@
                $error = "The Password must have at least one numeric character";
                return false;
             }
-            $error = "";
+            if (strcmp($pass,$repass)==0){
+                $error = "Passwords don't match";
+                return false;
+            }
+            
+            $error = "";*/
             return true;
-         }
+        }
 
-
+        public function validateEmail($email){
+            $answer = false;
+            $clients = $this->ClientDAO->GetAll();
+            foreach($clients as $value){
+                if($value->getEmail() == $email){
+                    $answer = true;
+                } 
+            }
+            return $answer;
+        }
+    
         public function ShowRegister(){
             require_once(VIEWS_PATH."register.php");
         }

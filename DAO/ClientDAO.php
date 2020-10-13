@@ -45,7 +45,6 @@
 
             return $lastId;
         }
-        
 
         private function SaveData(){
             $arrayToEncode = array();
