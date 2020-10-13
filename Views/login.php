@@ -9,7 +9,7 @@
                          <div class="floating-label">
                               <input type="email" name="mail" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
-                         </div>                       
+                         </div> <br>                      
 
                          <div class="floating-label">
                               <input type="password" name="pass" placeholder=" " class="floating-input" required>
