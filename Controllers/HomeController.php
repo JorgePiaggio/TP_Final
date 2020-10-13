@@ -22,7 +22,7 @@
         public function Login($email,$pass){
             $client=$this->ClientDAO->Search($email);
             if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){
-                $_SESSION["logedUser"]=$email;
+                $_SESSION["loggedUser"]=$email;
                 $_SESSION["pass"]=$pass;
                 header("location:Index");
             }else{
@@ -47,22 +47,22 @@
                         $newUser->setEmail($email);
                         $newUser->setPassword($pass);
                         $this->ClientDAO->add($newUser);
-                        $_SESSION["logedUser"]=$email;
+                        $_SESSION["loggedUser"]=$email;
                         $_SESSION["pass"]=$pass;
                         header("location:Index");
     
                     }else{
 
-                        header("location:ShowRegister?alert=Invalid PassWord .$msg");   
+                        header("location:ShowRegister?alert=Invalid PassWord .$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
                     }
                 }else{
                     $msg='Incorrect DNI';
-                    header("location:ShowRegister?alert=$msg");  
+                    header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
                 }
     
             }else{
                 $msg='Incorrect Name or Surname';
-                header("location:ShowRegister?alert=$msg");
+                header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
             }
         }
 

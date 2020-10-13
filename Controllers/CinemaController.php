@@ -1,6 +1,6 @@
 <?php
     namespace Controllers;
-    if(!$_SESSION || $_SESSION["logedUser"]!="admin@moviepass.com"){
+    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
         header("location:../Home/Index");
     }
     use Models\Cinema as Cinema;
