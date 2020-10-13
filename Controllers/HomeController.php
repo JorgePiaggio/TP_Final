@@ -28,7 +28,7 @@
                 header("location:Index");
             }else{
 
-                header("location:Showlogin?alert=Incorrect Email or PassWord");
+                header("location:Showlogin?alert=Incorrect Email or Password");
             }
 
         }
@@ -54,7 +54,7 @@
     
                     }else{
 
-                        header("location:ShowRegister?alert=Invalid PassWord .$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
+                        header("location:ShowRegister?alert=Invalid Password$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
                     }
                 }else{
                     $msg='Incorrect DNI';
@@ -77,7 +77,7 @@
                return false;
             }
             if (!preg_match('`[a-z]`',$pass)){
-               $error = "The PassWord must have at least one lowercase letter";
+               $error = "The Password must have at least one lowercase letter";
                return false;
             }
             if (!preg_match('`[A-Z]`',$pass)){
@@ -85,7 +85,7 @@
                return false;
             }
             if (!preg_match('`[0-9]`',$pass)){
-               $error = "The PassWord must have at least one numeric character";
+               $error = "The Password must have at least one numeric character";
                return false;
             }
             $error = "";

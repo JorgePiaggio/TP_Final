@@ -10,6 +10,8 @@
 
         public function Add($client){
             $this->RetrieveData();
+            $id=($this->lastId()+1);
+            $client->setId($id);
             array_push($this->clientList, $client);
             $this->SaveData();
         }
@@ -30,24 +32,25 @@
             return $wanted;
         }
 
-        public function Update( $client){
+        public function Update($client){
                 $this->RetrieveData();
-                $this->clientList[($client->getDni())-1]=$client;
+                $this->clientList[$client->getId()-1]=$client;
                 $this->SaveData();
         }
 
-        /*
+        
         public function lastId(){
             $ids = $this->getAll();
             $lastId = count($ids);
 
             return $lastId;
         }
-        */
+        
 
         private function SaveData(){
             $arrayToEncode = array();
             foreach($this->clientList as $client){
+                $valuesArray["id"] = $client->getId();
                 $valuesArray["dni"] = $client->getDni();
                 $valuesArray["name"] = $client->getName();
                 $valuesArray["surname"] = $client->getSurname();
@@ -72,6 +75,7 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $client = new Client();
+                    $client->setId($valuesArray["id"]);
                     $client->setDni($valuesArray["dni"]);
                     $client->setName($valuesArray["name"]);
                     $client->setSurName($valuesArray["surname"]);

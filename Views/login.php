@@ -13,7 +13,7 @@
 
                          <div class="floating-label">
                               <input type="password" name="pass" placeholder=" " class="floating-input" required>
-                              <span class="highlight"></span><label for="">PassWord</label>
+                              <span class="highlight"></span><label for="">Password</label>
                          </div><br>
 
                          <div class="floating-label">

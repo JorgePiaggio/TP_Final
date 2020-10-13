@@ -3,7 +3,7 @@ namespace Models;
 
 class Client{
 
-    #private $id;
+    private $id;
     private $dni;
     private $name;
     private $surname;
@@ -21,8 +21,8 @@ class Client{
         $this->cardList = array();
     }
 
-    #public function setId($id){$this->id=$id;}
-    #public function getId(){return $this->id;}
+    public function setId($id){$this->id=$id;}
+    public function getId(){return $this->id;}
     public function setDni($dni){$this->dni=$dni;}
     public function getDni(){return $this->dni;}
     public function setName($name){$this->name=$name;}

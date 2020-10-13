@@ -204,6 +204,17 @@ table, th{table-layout:auto;}
 table{width:90%;  margin: auto; margin-bottom:15px;}
 th, td{padding:5px 8px;}
 td{border-width:0 1px;}
+.tabla-perfil{margin-top: 60px;}
+.tabla-perfil .button-right{margin: 1.5rem 1rem 1rem 0; float:inline-end;}
+.tabla-perfil .grey{background-color: rgba(136,136,136,.5); }
+.tabla-perfil .message{background-color: rgba(84, 83, 83, 0.5); color: #fa0a0a; text-align: center; padding-top:2rem;}
+.tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
+.page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 2rem 0 1rem;}
+
+/*Background images 
+--------------------------------------------------------------------------------------------------------------- */
+.background-pic{background-size: cover; height: 800px; background-position: center; background-repeat: no-repeat;}
+
 
 
 /* Gallery
