@@ -1,29 +1,12 @@
 [
     {
-        "dni": "15222444",
-        "name": "Lucas",
-        "surname": "Ramirez",
-        "address": "San remo  4444",
-        "phone": "01136515566",
-        "email": "nico@msn.com",
-        "password": "Alta123456"
-    },
-    {
-        "dni": "2222222",
-        "name": "Lucas",
-        "surname": "Ramirez",
-        "address": "vivaldi 456",
-        "phone": "01136515566",
-        "email": "nico@msn.com",
-        "password": "Alta123456"
-    },
-    {
-        "dni": "15625896",
-        "name": "Richard",
-        "surname": "Tolle",
-        "address": "Finaldi 4589",
-        "phone": "485695148",
-        "email": "richard@msn.com",
-        "password": "Vista1234"
+        "id": 1,
+        "dni": "23444222",
+        "name": "Nicolo",
+        "surname": "Paganini",
+        "address": "Rue Morgue 224",
+        "phone": "84242842",
+        "email": "nicolo22@msn.com",
+        "password": "Nicolo999"
     }
 ]

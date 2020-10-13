@@ -204,6 +204,10 @@ table, th{table-layout:auto;}
 table{width:90%;  margin: auto; margin-bottom:15px;}
 th, td{padding:5px 8px;}
 td{border-width:0 1px;}
+.tabla-perfil .button-right{margin: 1.5rem 1rem 1rem 0; float:inline-end;}
+.tabla-perfil .grey{background-color: rgba(136,136,136,.5); }
+.tabla-perfil .message{background-color: rgba(84, 83, 83, 0.5); color: #fa0a0a; text-align: center; padding-top:2rem;}
+.tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
 
 
 /* Gallery
