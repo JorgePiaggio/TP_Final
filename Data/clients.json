@@ -8,5 +8,15 @@
         "phone": "84242842",
         "email": "nicolo22@msn.com",
         "password": "Nicolo999"
+    },
+    {
+        "id": 2,
+        "dni": "123123123",
+        "name": "Patricio",
+        "surname": "Jackson",
+        "address": "sdsdf 123",
+        "phone": "123555",
+        "email": "patrick@msn.com",
+        "password": "123"
     }
 ]
