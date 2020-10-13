@@ -147,11 +147,11 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 #mainav li:last-child{margin-right:0;}
 #mainav li li{width:100%; margin:0;}
 #mainav li a{display:block; padding:30px 130px;}
-#mainav li li a{border:solid; border-width:0 0 1px 0;}
-#mainav .drop{padding-left:15px;}
-#mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;}
+/*#mainav li li a{border:solid; border-width:0 0 0.1px 0;}*/
+#mainav .drop{padding-left:0px;}
+#mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;border-radius: 25px; width:70%;} /*BOTONES MENU NAV*/
 #mainav .drop::after, #mainav li li .drop::after{content:"\f0d7";}
-#mainav .drop::after{top:35px; left:5px;}
+#mainav .drop::after{top:35px; left:15px;}
 #mainav li li .drop::after{top:15px; left:5px;}
 #mainav ul ul{visibility:hidden; opacity:0;}
 #mainav ul li:hover > ul{visibility:visible; opacity:1;}
@@ -211,6 +211,11 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: 800px; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
+
+/*Icons
+--------------------------------------------------------------------------------------------------------------- */
+.icon{width:20px; height:20px; opacity:0.8;margin: 0 30px; }
+
 
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
@@ -290,8 +295,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 /* Navigation */
 #mainav li a{color:inherit;}
 #mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#FF5723; background-color:inherit;}
-#mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.6);}
-#mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:#FF5723;}
+#mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(235, 71, 11, 0.776);}
+#mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:rgba(235, 71, 11, 0.9);}
 #mainav form select{color:#FFFFFF; background-color:#000000; border-color:rgba(136,136,136,.5);/* #888888 */}
 
 #breadcrumb a{color:inherit; background-color:inherit;}
