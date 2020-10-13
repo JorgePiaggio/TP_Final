@@ -10,6 +10,7 @@ File: Framework CSS
 
 html{overflow-y:scroll; overflow-x:hidden;}
 html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
+body{height: 100%;}
 
 *, *::before, *::after{box-sizing:border-box;}
 
@@ -32,6 +33,7 @@ html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
 .circle{border-radius:50%; background-clip:padding-box;}
 
 .btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid;}
+.btn2{margin-left:-60px; position: absolute; top:50%;}
 
 .clear, .group{display:block;}
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}
@@ -60,12 +62,16 @@ legend{display:none;}
 label, input, textarea, select, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
 label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
+.center{align-content: center;}
+
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
+
 .form-title{
     margin: -30px 0 20px 10px;
 }
+
 .floating-label { 
     display:inline-block;
     position:relative; 

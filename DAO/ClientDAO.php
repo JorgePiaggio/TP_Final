@@ -34,7 +34,7 @@
 
         public function Update($client){
                 $this->RetrieveData();
-                $this->clientList[$client->getId()-1]=$client;
+                $this->clientList[($client->getId())-1]=$client;
                 $this->SaveData();
         }
 

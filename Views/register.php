@@ -1,12 +1,10 @@
 <main class="py-5">
-     <section id="listado" class="mb-5">
-         <center>
-          <form action="<?php echo FRONT_ROOT?>Home/Register" method="post">
-          <div class="container">
-               <h3 class="form-title">Register</h3><br>
-
+     <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/toni-cuenca-bxoSoro8gd0-unsplash2.jpg');">  
+          <h3 class="page-title up2">Register</h3><br>
+          <form action="<?php echo FRONT_ROOT?>Home/Register" class="center" method="post">
+               <div class="container up2">
                     <div class="floating-label-form">
-                    <div class="floating-label">
+                         <div class="floating-label">
                               <input type="text" name="name" value="<?php if($_GET){echo $_GET["name"];}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Name</label>
                          </div>  <br>
@@ -48,17 +46,11 @@
 
                          <div class="floating-label">
                               <span>&nbsp;</span>
-                              <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
+                              <button type="submit" name="btn" class="btn btn2">Confirm</button>
                          </div>
                     </div>    
-                    <?php
-                 if($_GET){
-                    echo $_GET["alert"];
-                    }   ?>                
-          </div>
-
+                    <?php if($_GET){echo $_GET["alert"];}?>                
+               </div>
           </form>
-     
-</center>
-     </section>
+     </div>
 </main>

@@ -17,10 +17,10 @@ class ClientController{
 
     public function ShowProfile($msg = ""){
         $client=$this->ClientDAO->Search($_SESSION['loggedUser']);
-        
+
         $words= explode(" ",$client->getAddress());
         $numberOfWords=count($words);
-
+        
         $street="";
         $number=$words[$numberOfWords-1];
         for($i=0; $i<$numberOfWords-1;$i++){ 

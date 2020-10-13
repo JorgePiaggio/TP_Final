@@ -132,11 +132,11 @@ Licence URI: https://www.os-templates.com/template-terms
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
-<div class="wrapper row3">
+<div class="background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/alex-litvin-MAYsdoYpGuk-unsplash.jpg');">
   <main class="hoc container clear"> 
     <!-- main body -->
     <!-- ################################################################################################ -->
-    <div class="center btmspace-80">
+    <div class="center btmspace-80" >
       <h2 class="heading nospace">Pellentesque mattis euismod</h2>
       <p class="nospace">Semper donec commodo est at risus bibendum id hendrerit erat rhoncus duis varius</p>
     </div>
