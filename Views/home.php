@@ -7,7 +7,7 @@ Licence URI: https://www.os-templates.com/template-terms
 -->
 
 <!-- Top Background Image Wrapper -->
-<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/demo/backgrounds/cineBack2.jpg');"> 
+<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');"> 
   <!-- ################################# FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
