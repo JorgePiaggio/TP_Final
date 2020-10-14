@@ -15,8 +15,8 @@
                          <form action="<?php echo FRONT_ROOT?>Cinema/Edit" method="post">
                               <tr> 
                               <td><input type="text" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
-                              <td><input type="text" name="street" value= "<?php echo $address[0] ?>">  </td>
-                              <td><input type="number" name="number" value= "<?php echo $address[1] ?>">  </td>
+                              <td><input type="text" name="street" value= "<?php echo $street ?>">  </td>
+                              <td><input type="number" name="number" value= "<?php echo $number ?>">  </td>
                               <td><input type="number" name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
                               <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
                               <td><button type="submit" name="id" class="btn" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>

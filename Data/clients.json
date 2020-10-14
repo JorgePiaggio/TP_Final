@@ -1,19 +1,9 @@
 [
     {
         "id": 1,
-        "dni": "23444222",
-        "name": "Nicoloddwdw",
-        "surname": "Paganini",
-        "address": "Rue Morgue 224",
-        "phone": "84242842",
-        "email": "nicolo22@msn.com",
-        "password": "Nicolo999"
-    },
-    {
-        "id": 2,
         "dni": "123123123",
-        "name": "Patricio",
-        "surname": "Jackson",
+        "name": "Nicolo",
+        "surname": "Benevento",
         "address": "sdsdf 123",
         "phone": "123555",
         "email": "patrick@msn.com",

@@ -58,9 +58,14 @@
         public function SearchEdit($idCinema){
             $editCinema = $this->cinemaDAO->Search($idCinema);
 
-            $address= array();
-            $address= explode(" ",$editCinema->getAddress());
-
+            $words= explode(" ",$editCinema->getAddress());
+            $numberOfWords=count($words);
+            
+            $street="";
+            $number=$words[$numberOfWords-1];
+            for($i=0; $i<$numberOfWords-1;$i++){ 
+                $street.=$words[$i]." ";
+            }
             #$this->ShowEditView();
             require_once(VIEWS_PATH."Cinema-edit.php");
         }

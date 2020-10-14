@@ -64,7 +64,6 @@ label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
 .center{align-content: center;}
 
-
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
 
@@ -218,3 +217,12 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 .inspace-30{padding:30px;}
 .inspace-50{padding:50px;}
 .inspace-80{padding:80px;}
+
+
+
+@media screen and (min-width: 1400px) {
+  .margin-left{margin-left:180px; margin-top:20px;}
+}
+
+
+

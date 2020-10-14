@@ -195,7 +195,8 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 /* Tables
 --------------------------------------------------------------------------------------------------------------- */
-table, th, td{border:1px solid; border-collapse:collapse; color:black; vertical-align:top;}
+table, th, td{border:1px solid; border-collapse:collapse; color:black; vertical-align:top; opacity: 0.85 ;-moz-opacity: 0.85;
+	filter: alpha(opacity=80);-khtml-opacity: 0.85;}
 table, th{table-layout:auto;}
 table{width:90%;  margin: auto; margin-bottom:15px;}
 th, td{padding:5px 8px;}
@@ -205,7 +206,7 @@ td{border-width:0 1px;}
 .tabla-perfil .grey{background-color: rgba(136,136,136,.5); }
 .tabla-perfil .message{background-color: rgba(84, 83, 83, 0.5); color: #fa0a0a; text-align: center; padding-top:2rem;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
-
+/*.table .bg-light{opacity: .8;}*/
 
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
@@ -331,13 +332,21 @@ table a, #comments a{background-color:inherit;}
 --------------------------------------------------------------------------------------------------------------- */
 @-ms-viewport{width:device-width;}
 
+@media screen and (min-width: 1400px) {
+	#pageintro article p{margin:0;}																			
+#pageintro article p:first-of-type{margin-bottom:35px; margin-left:0px; text-align: center;font-size:12px; letter-spacing:5px;} 
+}
 
 /* Max Wrapper Width - Laptop, Desktop etc.
 --------------------------------------------------------------------------------------------------------------- */
 @media screen and (min-width:978px){
 	.hoc{max-width:978px;}
 }
-
+@media screen and (min-width: 1400px) {
+	.hoc #header #mainav #body #footer {
+	  width: 1370px;
+	}
+  }
 
 /* Mobile Devices
 --------------------------------------------------------------------------------------------------------------- */
