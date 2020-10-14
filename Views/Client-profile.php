@@ -5,7 +5,7 @@
 
                     <table class="tabla-perfil" style="width: 50%;">
                         <thead >
-                            <th colspan="3"><h4 class="thead-orange"><?php echo $client->getEmail();?></h4></th>
+                            <th colspan="3"><h4 class="thead-orange"><?php echo $client->getName()." ".$client->getSurname();?></h4></th>
                         </thead>
                         <tbody>
                         <form action="<?php echo FRONT_ROOT?>Client/Edit" method="post">
@@ -35,7 +35,7 @@
                             </tr>
                             <tr> 
                                 <td style="width: 35%;">Email</td>    
-                                <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $client->getEmail();?>"></td>
+                                <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $client->getEmail();?>" disabled></td>
                             </tr>
                             <!---<tr>
                                 <td style="width: 35%;">Credit Cards</td>

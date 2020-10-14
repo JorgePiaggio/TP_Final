@@ -17,7 +17,7 @@ Licence URI: https://www.os-templates.com/template-terms
             <!--<p class="heading">Waking Life</p>-->
             <h2 class="heading">The Witch Tree</h2>
             <img class="poster" src="<?php echo IMG_PATH?>witch.jpg" alt="witchtree poster">
-            <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
+            <p>Et magnis dis montes ridiculus mus</p> 
             <footer>
               <ul class="nospace inline pushright">
                 <li><a class="btn" href="#">Parturient</a></li>
@@ -57,8 +57,8 @@ Licence URI: https://www.os-templates.com/template-terms
         <li>
           <article>
           <!--<p class="heading">Waking Life</p>-->
-          <h2 class="heading">Porno Delirio </h2>
-            <img class="poster" src="<?php echo IMG_PATH?>mafe_flesh_01.jpg" alt="wakinglife poster">
+          <h2 class="heading">Into the wild</h2>
+            <img class="poster" src="<?php echo IMG_PATH?>Into-The-Wild.jpg" alt="wakinglife poster">
             <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
             <footer>
               <ul class="nospace inline pushright">
