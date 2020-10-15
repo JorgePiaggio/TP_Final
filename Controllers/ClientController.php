@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-
-
 use Models\Client as Client;
 use DAO\ClientDAO as ClientDAO;
 
@@ -13,6 +11,7 @@ class ClientController{
     public function __construct(){
         $this->ClientDAO = new ClientDAO(); 
     }
+
 
     public function ShowLogin(){
         require_once(VIEWS_PATH."login.php");
@@ -135,7 +134,6 @@ class ClientController{
             header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
         }
     }
-
 
     public function validatePass($pass, $repass, &$error){
         /*if(strlen($pass) < 8){

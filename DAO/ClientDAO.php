@@ -1,10 +1,10 @@
 <?php
     namespace DAO;
 
-    use DAO\IDAO as IDAO;
+    use DAO\IClientDAO as IClientDAO;
     use Models\Client as Client;
 
-    class ClientDAO implements IDAO{
+    class ClientDAO implements IClientDAO{
         private $clientList = array();
 
 
@@ -37,7 +37,6 @@
                 $this->clientList[($client->getId())-1]=$client;
                 $this->SaveData();
         }
-
         
         public function lastId(){
             $ids = $this->getAll();

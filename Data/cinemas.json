@@ -26,8 +26,8 @@
     {
         "id": "4",
         "state": false,
-        "name": "Cine centro",
-        "address": "Belgrano  2500",
+        "name": "Cine Centro",
+        "address": "Belgrano   2500",
         "phone": "4789988",
         "email": "cinemacentro@gmail.com"
     },
@@ -54,5 +54,13 @@
         "address": "Av. de los Trabajadores 5000",
         "phone": "4751111",
         "email": "farocinema@hotmail.com"
+    },
+    {
+        "id": 8,
+        "state": false,
+        "name": "Cine Santa Clara",
+        "address": "Santa Clara  456",
+        "phone": "4782222",
+        "email": "santaclara@hotmail.com"
     }
 ]

@@ -1,10 +1,10 @@
 <?php
     namespace DAO;
 
-    use DAO\IDAO as IDAO;
+    use DAO\ICinemaDAO as ICinemaDAO;
     use Models\Cinema as Cinema;
 
-    class CinemaDAO implements IDAO{
+    class CinemaDAO implements ICinemaDAO{
         private $cinemaList = array();
 
 
@@ -30,6 +30,17 @@
             return $newList;
         }
 
+        public function GetAllInactive(){
+            $this->RetrieveData();
+            $newList=array();
+            foreach($this->cinemaList as $cinema){
+                if($cinema->getState() != true){
+                    array_push($newList, $cinema);
+                }
+            }
+            return $newList;
+        }
+
         public function ChangeState($idCinema){
             $wanted = $this->Search($idCinema);
             if($wanted != null){
@@ -42,17 +53,6 @@
                 }
                 $this->SaveData();
             }
-        }
-
-        public function GetAllInactive(){
-            $this->RetrieveData();
-            $newList=array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getState() != true){
-                    array_push($newList, $cinema);
-                }
-            }
-            return $newList;
         }
 
         /*
@@ -77,6 +77,7 @@
 		    $this->SaveData();
         }
         */
+        
         public function Search($idCinema){
             $wanted = null;
             $this->RetrieveData();
