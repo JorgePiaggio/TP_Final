@@ -2,11 +2,21 @@
     {
         "id": 1,
         "dni": "123123123",
+        "name": "Patrick",
+        "surname": "Jackson",
+        "address": "First Avenue   123",
+        "phone": "155666666",
+        "email": "patrick@msn.com",
+        "password": "123"
+    },
+    {
+        "id": 2,
+        "dni": "28666665",
         "name": "Nicolo",
         "surname": "Benevento",
-        "address": "sdsdf 123",
-        "phone": "123555",
-        "email": "patrick@msn.com",
+        "address": "La Via del Corso    555",
+        "phone": "36456456",
+        "email": "nicolo22@msn.com",
         "password": "123"
     }
 ]

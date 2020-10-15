@@ -8,6 +8,7 @@
         <?php if($_SESSION){?>
         <li class="active"><a class="drop" href="#"><?php echo $_SESSION["loggedUser"];?></a>
         <?php 
+      
       }else{ ?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user.png"></a>
 

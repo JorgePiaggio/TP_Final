@@ -97,42 +97,36 @@ class ClientController{
 
     public function Edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $this->validateSession();
-        $client=$this->ClientDAO->Search($_SESSION["loggedUser"]);
+        $client=$this->ClientDAO->Search($email); //Como el email queda fijo se busca el cliente anterior para identificar su id
         $msg='';
-        if(!$this->validateEmail($email, 1)){ 
-            #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
-                #if(strlen($dni)>=7 && strlen($dni)<10){
-                    if($this->validatePass($pass, $repass, $msg)){
-                        $newUser= new Client();
-                        $newUser->setId($client->getId());
-                        $newUser->setName($name);
-                        $newUser->setsurName($surname);
-                        $newUser->setDni($dni);
-                        $newUser->setAddress($street.$number);
-                        $newUser->setPhone($phone);
-                        $newUser->setEmail($email);
-                        $newUser->setPassword($pass);
-                        $this->ClientDAO->Update($newUser);
-                        $_SESSION["loggedUser"]=$email;
-                        $_SESSION["pass"]=$pass;
-                        header("location:ShowProfile?alert=Profile Updated");
+        #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
+            #if(strlen($dni)>=7 && strlen($dni)<10){
+                if($this->validatePass($pass, $repass, $msg)){
+                    $newUser= new Client();
+                    $newUser->setId($client->getId());  //Se setea el id buscado anteriormente, para que el nuevo cliente(mofidicado) tenga el mismo id que el anterior
+                    $newUser->setName($name); 
+                    $newUser->setsurName($surname);
+                    $newUser->setDni($dni);
+                    $newUser->setAddress($street . " " . $number);
+                    $newUser->setPhone($phone);
+                    $newUser->setEmail($email);
+                    $newUser->setPassword($pass);
+                    $this->ClientDAO->Update($newUser);
 
-                    }else{
-                        header("location:ShowProfile?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
-                    }
-                #}else{
-                #    $msg='Incorrect DNI';
-                #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
-                #}
+                    $_SESSION["pass"]=$pass; //Se vuelve a igualar la session por si se modificó la contraseña
+                    header("location:ShowProfile?alert=Profile Updated");
 
+                }else{
+                    header("location:ShowProfile?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
+                }
             #}else{
-            #    $msg='Incorrect Name or Surname';
-            #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
+            #    $msg='Incorrect DNI';
+            #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
             #}
-        }else{
-            $msg='Email already exists';
-            header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
-        }
+        #}else{
+        #    $msg='Incorrect Name or Surname';
+        #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
+        #}
     }
 
     public function validatePass($pass, $repass, &$error){
