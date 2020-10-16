@@ -9,21 +9,16 @@
     class CinemaController{
         private $cinemaDAO;
     
-
         public function __construct(){
             $this->cinemaDAO = new CinemaDAO(); 
         }
 
-        
 
         public function ShowAddView(){
-           
             require_once(VIEWS_PATH."Cinema-add.php");
-            
         }
 
         public function ShowListView(){
-           
             $cinemaList = $this->cinemaDAO->GetAllActive();
             $cinemaListInactive = $this->cinemaDAO->GetAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
@@ -31,7 +26,6 @@
         }
 
         public function ShowEditView(){
-            
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 

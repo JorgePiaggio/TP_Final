@@ -17,11 +17,11 @@ Licence URI: https://www.os-templates.com/template-terms
             <!--<p class="heading">Waking Life</p>-->
             <h2 class="heading">The Witch Tree</h2>
             <img class="poster" src="<?php echo IMG_PATH?>witch.jpg" alt="witchtree poster">
-            <p>Et magnis dis montes ridiculus mus</p> 
+            <p>Five teenage girls head into the woods in search of a local legend...the Witch Tree.</p> 
             <footer>
               <ul class="nospace inline pushright">
-                <li><a class="btn" href="#">Parturient</a></li>
-                <li><a class="btn inverse" href="#">Nascetur</a></li>
+                <li><a class="btn" href="#">Movie description</a></li>
+                <li><a class="btn inverse" href="#">Buy ticket</a></li>
               </ul>
             </footer>
           </article>
@@ -31,11 +31,11 @@ Licence URI: https://www.os-templates.com/template-terms
             <!--<p class="heading">Waking Life</p>-->
             <h2 class="heading">2001: A Space Odyssey</h2>
             <img class="poster" src="<?php echo IMG_PATH?>2001-A-Space-Odyssey-7.jpg" alt="wakinglife poster">
-            <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
+            <p>After discovering a mysterious artifact buried beneath the Lunar surface, mankind sets off on a quest to find its origins with help from intelligent supercomputer H.A.L. 9000.</p> 
             <footer>
               <ul class="nospace inline pushright">
-                <li><a class="btn" href="#">Consequat</a></li>
-                <li><a class="btn inverse" href="#">Phasellus</a></li>
+                <li><a class="btn" href="#">Movie description</a></li>
+                <li><a class="btn inverse" href="#">Buy ticket</a></li>
               </ul>
             </footer>
           </article>
@@ -43,13 +43,13 @@ Licence URI: https://www.os-templates.com/template-terms
         <li>
           <article>
           <!--<p class="heading">Waking Life</p>-->
-          <h2 class="heading">La Guerre du feu </h2>
+          <h2 class="heading">Quest for fire</h2>
             <img class="poster" src="<?php echo IMG_PATH?>key_art_quest_for_fire.jpg" alt="wakinglife poster">
-            <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
+            <p>This story takes place in prehistoric time when three tribesmen search for a new fire source.</p> 
             <footer>
               <ul class="nospace inline pushright">
-                <li><a class="btn" href="#">Accumsan</a></li>
-                <li><a class="btn inverse" href="#">Molestie</a></li>
+                <li><a class="btn" href="#">Movie description</a></li>
+                <li><a class="btn inverse" href="#">Buy ticket</a></li>
               </ul>
             </footer>
           </article>
@@ -59,11 +59,11 @@ Licence URI: https://www.os-templates.com/template-terms
           <!--<p class="heading">Waking Life</p>-->
           <h2 class="heading">Into the wild</h2>
             <img class="poster" src="<?php echo IMG_PATH?>Into-The-Wild.jpg" alt="wakinglife poster">
-            <p>Et magnis dis montes ridiculus mus sed mi eros molestie eget mauris</p> 
+            <p>Christopher McCandless abandons his possessions, gives his entire $24,000 savings account to charity and hitchhikes to Alaska to live in the wilderness.</p> 
             <footer>
               <ul class="nospace inline pushright">
-                <li><a class="btn" href="#">Accumsan</a></li>
-                <li><a class="btn inverse" href="#">Molestie</a></li>
+                <li><a class="btn" href="#">Movie description</a></li>
+                <li><a class="btn inverse" href="#">Buy ticket</a></li>
               </ul>
             </footer>
           </article>
@@ -267,8 +267,8 @@ Licence URI: https://www.os-templates.com/template-terms
 <div class="wrapper row5">
   <div id="copyright" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">UTN</a></p>
+    <!--<p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
     <!-- ################################################################################################ -->
   </div>
 </div>

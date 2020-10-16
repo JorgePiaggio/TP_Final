@@ -23,7 +23,7 @@ $('.basicslider').flexslider({
 	controlNav: true,
 	directionNav: true,
 	smoothHeight: true,
-	slideshowSpeed: 2500,
+	slideshowSpeed: 3500,
 	initDelay: 0,
 	randomize: true,
 	start: function(slider) {

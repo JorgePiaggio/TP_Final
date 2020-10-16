@@ -2,9 +2,10 @@
 <footer id="footer" class="hoc clear"> 
     <!-- ################################################################################################ -->
     <div class="one_third first">
-      <h6 class="heading">est ut dolor tristique</h6>
-      <p>maecenas tempus vestibulum felis in efficitur sed facilisis urna metus interdum pretium mi dignissim et fusce.</p>
-      <p class="btmspace-15">sagittis tempor nullam iaculis dolor id condimentum cursus duis scelerisque ac metus amet laoreet vestibulum dictum.</p>
+      <h6 class="heading">About us</h6>
+      <p>We are the number 1 website for cinemas.</p>
+      <p class="btmspace-15">Add your cinema. Work with us.</p>
+      <p>Our social networks.</p>
       <ul class="faico clear">
         <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
         <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -15,16 +16,16 @@
       </ul>
     </div>
     <div class="one_third">
-      <h6 class="heading">luctus vestibulum magna</h6>
+      <h6 class="heading">Contacts</h6>
       <ul class="nospace linklist contact">
         <li><i class="fa fa-map-marker"></i>
           <address>
-          Street Name &amp; Number, Town, Postcode/Zip
+          Broadway Avenue &amp; 123, New York, United States.
           </address>
         </li>
-        <li><i class="fa fa-phone"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
+        <li><i class="fa fa-phone"></i> +1 (718) 456 7890</li>
+        <li><i class="fa fa-fax"></i> +1 (718) 456 7890</li>
+        <li><i class="fa fa-envelope-o"></i> info@moviepass.com</li>
       </ul>
     </div>
     <div class="one_third">
