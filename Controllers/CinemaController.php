@@ -35,7 +35,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function Add($name, $street, $number, $phone, $email){
+        public function Add($name, $street, $number, $phone, $email,$price){
             $lastId = $this->cinemaDAO->lastId();
 
             $cinema = new Cinema();
@@ -44,6 +44,7 @@
             $cinema->setAddress($street." ".$number);
             $cinema->setPhone($phone);
             $cinema->setEmail($email);
+            $cinema->setPrice($price);
 
             $this->cinemaDAO->Add($cinema);
 
@@ -70,7 +71,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function Edit($name, $street, $number, $phone, $email, $id){
+        public function Edit($name, $street, $number, $phone, $email,$price, $id){
             $aux = $this->cinemaDAO->Search($id);
 
             $cinemaEdit= new Cinema();
@@ -80,6 +81,7 @@
             $cinemaEdit->setPhone($phone);
             $cinemaEdit->setEmail($email);
             $cinemaEdit->setId($id);
+            $cinemaEdit->setPrice($price);
 
             $this->cinemaDAO->Update($cinemaEdit);
             $this->ShowListView();

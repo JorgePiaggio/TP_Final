@@ -61,7 +61,7 @@ class ClientController{
     public function Register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $msg='';
         
-        if(!$this->validateEmail($email, 0)){ 
+        if(!$this->validateEmail($email)){ 
             #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
                 #if(strlen($dni)>=7 && strlen($dni)<10){
                     if($this->validatePass($pass, $repass, $msg)){
@@ -98,9 +98,9 @@ class ClientController{
 
     public function Edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $this->validateSession();
-        $client=$this->ClientDAO->Search($_SESSION["loggedUser"]);
+        $client=$this->ClientDAO->Search($email);
         $msg='';
-        if(!$this->validateEmail($email, 1)){ 
+        if(!$this->validateEmail($email)){ 
             #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
                 #if(strlen($dni)>=7 && strlen($dni)<10){
                     if($this->validatePass($pass, $repass, $msg)){
@@ -167,22 +167,16 @@ class ClientController{
         return true;
     }
 
-    public function validateEmail($email, $aux){    //0 Register - 1 Edit
+    public function validateEmail($email){    //0 Register - 1 Edit
         $clients = $this->ClientDAO->GetAll(); 
-        $client=$this->ClientDAO->Search($email); 
         $answer = false;
         foreach($clients as $value){
-            if($aux == 1){ 
-                if(($value->getEmail() == $email) && ($client->getId() != $value->getId())){
-                    $answer = true;
-                }
-            }
-            else{
+       
                 if($value->getEmail() == $email){
                     $answer = true;
                 }
             }
-        }
+        
         return $answer;
     }
 

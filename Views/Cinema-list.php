@@ -8,6 +8,7 @@
                                    <th>Address</th>
                                    <th>Phone</th>
                                    <th>Email</th>
+                                   <th>Price</th>
                                    <th  colspan="2">Action</th>
                               </thead>
                               <tbody>
@@ -17,6 +18,7 @@
                                         <td><?php echo $cinema->getAddress(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
+                                        <td><?php echo $cinema->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/SearchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
                                         </form>
@@ -36,6 +38,7 @@
                                    <th>Addres</th>
                                    <th>Phone</th>
                                    <th>Email</th>
+                                   <th>Price</th>
                                    <th  colspan="2">Action</th>
                               </thead>
                               <tbody>
@@ -45,6 +48,7 @@
                                         <td><?php echo $cinema->getAddress(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
+                                        <td><?php echo $cinema->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/SearchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
                                         </form>

@@ -36,6 +36,7 @@
                             <tr> 
                                 <td style="width: 35%;">Email</td>    
                                 <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $client->getEmail();?>" disabled></td>
+                                <input type="hidden" name="email" value="<?php echo $client->getEmail();?>" >
                             </tr>
                             <!---<tr>
                                 <td style="width: 35%;">Credit Cards</td>

@@ -27,6 +27,12 @@
                                    <input type="email" name="email" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Email</label>
                               </div>
+
+                              <div class="floating-label">
+                                   <input type="number" name="price" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Price</label>
+                              </div>
+
                               <div class="floating-label">
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button>

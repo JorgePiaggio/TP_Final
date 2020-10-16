@@ -3,9 +3,10 @@
         "id": "1",
         "state": true,
         "name": "Ambassador",
-        "address": "Cordoba 3800",
+        "address": "Cordoba  3800",
         "phone": "4123333",
-        "email": "ambassador@hotmail.com"
+        "email": "ambassador@hotmail.com",
+        "ticketPrice": "240"
     },
     {
         "id": "2",
@@ -13,7 +14,8 @@
         "name": "Paseo Diagonal",
         "address": "Rivadavia  1250",
         "phone": "4956666",
-        "email": "paseodiagonal@hotmail.com"
+        "email": "paseodiagonal@hotmail.com",
+        "ticketPrice": 250
     },
     {
         "id": "3",
@@ -21,7 +23,8 @@
         "name": "Paseo Aldrey",
         "address": "Sarmiento 2222",
         "phone": "4748888",
-        "email": "paseoaldrey@gmail.com"
+        "email": "paseoaldrey@gmail.com",
+        "ticketPrice": 350
     },
     {
         "id": "4",
@@ -29,7 +32,8 @@
         "name": "Cine centro",
         "address": "Belgrano  2500",
         "phone": "4789988",
-        "email": "cinemacentro@gmail.com"
+        "email": "cinemacentro@gmail.com",
+        "ticketPrice": 155
     },
     {
         "id": "5",
@@ -37,7 +41,8 @@
         "name": "Cine Puerto",
         "address": "12 de Octubre 8882",
         "phone": "4156363",
-        "email": "puerto@hotmail.com"
+        "email": "puerto@hotmail.com",
+        "ticketPrice": 450
     },
     {
         "id": "6",
@@ -45,7 +50,8 @@
         "name": "Los Gallegos",
         "address": "Rivadavia 1500 2255",
         "phone": "4756363",
-        "email": "gallegosShopping@hotmail.com"
+        "email": "gallegosShopping@hotmail.com",
+        "ticketPrice": 350
     },
     {
         "id": "7",
@@ -53,6 +59,16 @@
         "name": "Cinema Mogotes",
         "address": "Av. de los Trabajadores 5000",
         "phone": "4751111",
-        "email": "farocinema@hotmail.com"
+        "email": "farocinema@hotmail.com",
+        "ticketPrice": 250
+    },
+    {
+        "id": 8,
+        "state": false,
+        "name": "Hoyts",
+        "address": "Calchaqui 4050",
+        "phone": "42155666",
+        "email": "hoyts@hoyts.com",
+        "ticketPrice": "500"
     }
 ]

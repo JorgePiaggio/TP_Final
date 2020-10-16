@@ -9,6 +9,7 @@
                               <th>Number</th>
                               <th>Phone</th>
                               <th>Email</th>
+                              <th>Price</th>
                               <th>Action</th>
                          </thead>
                          <tbody>
@@ -19,6 +20,7 @@
                               <td><input type="number" name="number" value= "<?php echo $number ?>">  </td>
                               <td><input type="number" name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
                               <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
+                              <td><input type="number" name="price" value= "<?php echo $editCinema->getPrice(); ?>"> </td>
                               <td><button type="submit" name="id" class="btn" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
                               </tr>
                          </form>

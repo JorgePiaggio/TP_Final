@@ -6,7 +6,7 @@
     <nav id="mainav" class="fl_right">
       <ul class="clear">
         <?php if($_SESSION){?>
-        <li class="active"><a class="drop" href="#"><?php echo $_SESSION["loggedUser"];?></a>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-userlogged.png"></a>
         <?php 
       }else{ ?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user.png"></a>
@@ -21,9 +21,9 @@
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowListView">List Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Client/Logout">Sign out</a></li>
             
-          <?php }else{ ?>
+           <?php }else{ ?>
             <!---User*/-->
-
+          
           <li><a href="<?php echo FRONT_ROOT?>Client/ShowProfile">Profile</a></li>
           <li><a href="<?php echo FRONT_ROOT?>Client/Logout">Sign out</a></li>
           <?php }?>
