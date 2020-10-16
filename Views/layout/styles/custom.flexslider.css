@@ -22,7 +22,7 @@ File: Custom Flexslider CSS => For FlexSlider v2.6.1
 .flexslider .slides a{text-decoration:none; outline:none;}
 .flexslider .slides h2.heading{position: relative; left:90px;bottom:5px;} /*TITULO DEL SLIDE*/
 .flexslider .slides a img{border:none;}
-.flexslider .slides img{display:block;  width:782px; height:306px;max-width:1000px; margin:-13px 0 20px 95px;} /*IMAGENES SLIDE*/
+.flexslider .slides img{display:block;  width:860px; height:339px;max-width:1000px; margin:-5px 0 20px 60px;} /*IMAGENES SLIDE*/
 /* Modern Clear fix for the .slides element */
 .slides::before, .slides::after{display:table; content:"";}
 .slides, .slides::after{clear:both;}

@@ -212,6 +212,7 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: 800px; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
+.back{height:680px;} /*fondo slide*/
 
 /*Icons
 --------------------------------------------------------------------------------------------------------------- */
@@ -260,7 +261,7 @@ hr, .borderedbox{border-color:#D7D7D7;}
 label span{color:#FF0000; background-color:inherit;}
 input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay{color:#CBCBCB; background-color:inherit;}
-.overlay::after{color:inherit; background-color:rgba(0,0,0,.55);}
+.overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
 
 .btn, .btn.inverse:hover{color:#FFFFFF; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
