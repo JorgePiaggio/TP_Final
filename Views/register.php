@@ -48,7 +48,7 @@
                               <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn2">Confirm</button>
                          </div>
-                    </div>    
+                    </div><br>    
                     <?php if($_GET){echo $_GET["alert"];}?>                
                </div>
           </form>

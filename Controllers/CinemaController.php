@@ -24,7 +24,7 @@
             require_once(VIEWS_PATH."Cinema-list.php");
             
         }
-
+        
         public function ShowEditView(){
             require_once(VIEWS_PATH."Cinema-edit.php");
         }

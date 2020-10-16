@@ -59,27 +59,16 @@
         "name": "Cinema Mogotes",
         "address": "Av. de los Trabajadores 5000",
         "phone": "4751111",
-<<<<<<< HEAD
         "email": "farocinema@hotmail.com",
         "ticketPrice": 250
-=======
-        "email": "farocinema@hotmail.com"
->>>>>>> 722b912f42f10c3f6169d9824dd42a2e016c2f54
     },
     {
         "id": 8,
         "state": false,
-<<<<<<< HEAD
         "name": "Hoyts",
         "address": "Calchaqui 4050",
         "phone": "42155666",
         "email": "hoyts@hoyts.com",
         "ticketPrice": "500"
-=======
-        "name": "Cine Santa Clara",
-        "address": "Santa Clara  456",
-        "phone": "4782222",
-        "email": "santaclara@hotmail.com"
->>>>>>> 722b912f42f10c3f6169d9824dd42a2e016c2f54
     }
 ]

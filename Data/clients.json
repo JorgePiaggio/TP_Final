@@ -2,9 +2,6 @@
     {
         "id": 1,
         "dni": "123123123",
-<<<<<<< HEAD
-        "name": "Nicola",
-=======
         "name": "Patrick",
         "surname": "Jackson",
         "address": "First Avenue   123",
@@ -16,11 +13,20 @@
         "id": 2,
         "dni": "28666665",
         "name": "Nicolo",
->>>>>>> 722b912f42f10c3f6169d9824dd42a2e016c2f54
         "surname": "Benevento",
         "address": "La Via del Corso    555",
         "phone": "36456456",
         "email": "nicolo22@msn.com",
         "password": "123"
+    },
+    {
+        "id": 3,
+        "dni": "12445929",
+        "name": "Lucas",
+        "surname": "Ramirez",
+        "address": "hjiio 2256",
+        "phone": "01123294079",
+        "email": "juani@gmail.com",
+        "password": "456"
     }
 ]
