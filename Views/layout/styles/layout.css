@@ -206,11 +206,11 @@ td{border-width:0 1px;}
 .tabla-perfil .grey{background-color: rgba(136,136,136,.5); }
 .tabla-perfil .message{background-color: rgba(84, 83, 83, 0.5); color: #fa0a0a; text-align: center; padding-top:2rem;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
-/*.table .bg-light{opacity: .8;}*/
+.unique{margin-top: 20px;margin-left: 48%;}
 
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
-.background-pic{background-size: cover; height: 800px; background-position: center; background-repeat: no-repeat;}
+.background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
 

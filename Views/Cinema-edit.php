@@ -21,7 +21,9 @@
                               <td><input type="number" name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
                               <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
                               <td><input type="number" name="price" value= "<?php echo $editCinema->getPrice(); ?>"> </td>
-                              <td><button type="submit" name="id" class="btn" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
+                              </tr>
+                              <tr>
+                              <td colspan="7"><button type="submit" name="id" class="btn unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
                               </tr>
                          </form>
                          </tbody>

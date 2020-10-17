@@ -34,7 +34,6 @@ body{height: 100%;}
 
 .btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid;}
 .btn2{margin-left:-60px; position: absolute; top:50%;}
-
 .clear, .group{display:block;}
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}
 .clear, .clear::after, .group, .group::after{clear:both;}
