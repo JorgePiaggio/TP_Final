@@ -60,6 +60,21 @@ class MovieDAO implements IMovieDAO{
         return false;
     }
 
+      /* retorna las peliculas por genero*/
+      public function getByGenre($idGenre){
+        $movieByGenre = array();
+        $this->RetrieveData();
+        foreach($this->movieList as $movie){
+            foreach($movie->getGenreIds() as $id){
+                if($id == $idGenre){
+                    array_push($movieByGenre, $movie);
+                }
+            }
+        }
+        return $movieByGenre;
+    }
+
+
 
     private function SaveData(){
         $arrayToEncode = array();

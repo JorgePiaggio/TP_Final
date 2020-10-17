@@ -1,7 +1,7 @@
 <?php
     namespace DAO;
     
-    use Model\Client as Client;
+    use Models\Client as Client;
 
     interface IClientDAO{
         function Add(Client $client);

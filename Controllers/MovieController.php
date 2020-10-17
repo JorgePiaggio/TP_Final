@@ -1,13 +1,14 @@
 <?php
     namespace Controllers;
-
+/*
     if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
         header("location:../Home/Index");
     }
-
+*/
     use Models\Movie as Movie;
     use Models\Genre as Genre;
     use DAO\MovieDAO as MovieDAO;
+    use DAO\GenreDAO as GenreDAO;
 
     define("APIURL","http://api.themoviedb.org/3/");
     define("POSTERURL","https://image.tmdb.org/t/p/w500/");
@@ -15,15 +16,23 @@
 
     class MovieController{
         private $MovieDAO;
+        private $genreDAO;
     
         public function __construct(){
-            $this->MovieDAO = new MovieDAO(); 
+            $this->MovieDAO = new MovieDAO();
+            $this->genreDAO = new GenreDAO();
         }
 
 
         /* ver todas las pelis de la base de datos */
         public function ShowAllMovies(){
             $movieList=$this->MovieDAO->GetAll();
+            $genreList=$this->genreDAO->GetAll();
+            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
+        }
+
+        public function showFilterMovies(){
+            $genreList=$this->genreDAO->GetAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
@@ -49,20 +58,27 @@
         }
 
 
-        /* agregar peliculas nuevas al DAO */
+        /* agregar peliculas nuevas y generos a los DAO  */
         public function UpdateMovieList(){
             $nowPlaying=$this->GetNowPlayingMovies();
             $this->MovieDAO->UpdateList($nowPlaying);
+            
             $this->ShowAllMovies();
+        }
+
+        public function filterByGenre($idGenre){
+            $movieList=$this->MovieDAO->getByGenre($idGenre);
+            $genreList=$this->genreDAO->GetAll();
+            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
-        public function GetNowPlayingMovies($page = 1,$language="en"){
+        public function GetNowPlayingMovies($page = "1",$language="en"){
             $movies= array();
             
-            $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."page=".$page);
-            
+            $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);
+
             $jsonNowPlaying=($request) ? json_decode($request, true) : array();
             
             foreach($jsonNowPlaying['results'] as $valuesArray){
