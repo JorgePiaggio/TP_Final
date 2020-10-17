@@ -266,6 +266,9 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .btn, .btn.inverse:hover{color:#FFFFFF; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
+.gradient{background: linear-gradient(180deg, #3e0000, #9a0101,#3e0000);}
+.orange{color:#FF5723;}
+
 /* Rows */
 .row1{color:#FFFFFF; background-color:rgba(255,255,255,.2);}
 .row2{color:#CBCBCB; background-color:#222222;}
@@ -295,8 +298,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 
 /* Navigation */
-#mainav li a{color:inherit;}
-#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#FF5723; background-color:inherit;}
+#mainav li a{color:#FF5723;}
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#b02e06; background-color:inherit;}
 #mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(235, 71, 11, 0.776);}
 #mainav li li:hover > a, #mainav .active .active > a{color:#FFFFFF; background-color:rgba(235, 71, 11, 0.9);}
 #mainav form select{color:#FFFFFF; background-color:#000000; border-color:rgba(136,136,136,.5);/* #888888 */}

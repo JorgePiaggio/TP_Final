@@ -1,11 +1,3 @@
-<!--
-Template Name: Overerts
-Author: <a href="https://www.os-templates.com/">OS Templates</a>
-Author URI: https://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: https://www.os-templates.com/template-terms 
--->
-
 <!-- Top Background Image Wrapper -->
 <div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');"> 
   <!-- ################################# FLEXSLIDER ######################################## -->
@@ -260,17 +252,6 @@ Licence URI: https://www.os-templates.com/template-terms
     </ul>
     <!-- ################################################################################################ -->
   </nav>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row5">
-  <div id="copyright" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">UTN</a></p>
-    <!--<p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>-->
-    <!-- ################################################################################################ -->
-  </div>
 </div>
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->

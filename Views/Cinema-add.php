@@ -3,7 +3,7 @@
           <h2 class="page-title up2">Add Cinema</h2> 
                <form action="<?php echo FRONT_ROOT?>Cinema/Add" class="center" method="post">
                          <div class="floating-label-form">
-                              <div class="floating-label margin-left">
+                              <div class="floating-label">
                                    <input type="text" name="name" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Name</label>
                               </div>                         

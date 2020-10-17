@@ -1,0 +1,384 @@
+[
+    {
+        "id": 528085,
+        "title": "2067",
+        "original_title": "2067",
+        "vote_average": 5.70000000000000017763568394002504646778106689453125,
+        "overview": "A lowly utility worker is called to the future by a mysterious radio signal, he must leave his dying wife to embark on a journey that will force him to face his deepest fears in an attempt to change the fabric of reality and save humankind from its greatest environmental crisis yet.",
+        "release_date": "2020-10-01",
+        "popularity": 3020.90299999999979263520799577236175537109375,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+        "backdrop_path": "\/5UkzNSOK561c2QRy2Zr4AkADzLT.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            878,
+            53
+        ]
+    },
+    {
+        "id": 337401,
+        "title": "Mulan",
+        "original_title": "Mulan",
+        "vote_average": 7.29999999999999982236431605997495353221893310546875,
+        "overview": "When the Emperor of China issues a decree that one man per family must serve in the Imperial Chinese Army to defend the country from Huns, Hua Mulan, the eldest daughter of an honored warrior, steps in to take the place of her ailing father. She is spirited, determined and quick on her feet. Disguised as a man by the name of Hua Jun, she is tested every step of the way and must harness her innermost strength and embrace her true potential.",
+        "release_date": "2020-09-04",
+        "popularity": 881.0449999999999590727384202182292938232421875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg",
+        "backdrop_path": "\/zzWGRw277MNoCs3zhyG3YmYQsXv.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28,
+            12,
+            18,
+            14
+        ]
+    },
+    {
+        "id": 694919,
+        "title": "Money Plane",
+        "original_title": "Money Plane",
+        "vote_average": 6.0999999999999996447286321199499070644378662109375,
+        "overview": "A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
+        "release_date": "2020-09-29",
+        "popularity": 851.299999999999954525264911353588104248046875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+        "backdrop_path": "\/pq0JSpwyT2URytdFG0euztQPAyR.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28
+        ]
+    },
+    {
+        "id": 539885,
+        "title": "Ava",
+        "original_title": "Ava",
+        "vote_average": 5.9000000000000003552713678800500929355621337890625,
+        "overview": "A black ops assassin is forced to fight for her own survival after a job goes dangerously wrong.",
+        "release_date": "2020-07-02",
+        "popularity": 687.8139999999999645297066308557987213134765625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/qzA87Wf4jo1h8JMk9GilyIYvwsA.jpg",
+        "backdrop_path": "\/54yOImQgj8i85u9hxxnaIQBRUuo.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28,
+            80,
+            18,
+            53
+        ]
+    },
+    {
+        "id": 581392,
+        "title": "Peninsula",
+        "original_title": "\ubc18\ub3c4",
+        "vote_average": 7.0999999999999996447286321199499070644378662109375,
+        "overview": "A soldier and his team battle hordes of post-apocalyptic zombies in the wastelands of the Korean Peninsula.",
+        "release_date": "2020-07-15",
+        "popularity": 631.55999999999994543031789362430572509765625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/sy6DvAu72kjoseZEjocnm2ZZ09i.jpg",
+        "backdrop_path": "\/gEjNlhZhyHeto6Fy5wWy5Uk3A9D.jpg",
+        "original_language": "ko",
+        "genre_ids": [
+            28,
+            27,
+            53
+        ]
+    },
+    {
+        "id": 726739,
+        "title": "Cats & Dogs 3: Paws Unite",
+        "original_title": "Cats & Dogs 3: Paws Unite",
+        "vote_average": 6.5999999999999996447286321199499070644378662109375,
+        "overview": "It's been ten years since the creation of the Great Truce, an elaborate joint-species surveillance system designed and monitored by cats and dogs to keep the peace when conflicts arise. But when a tech-savvy villain hacks into wireless networks to use frequencies only heard by cats and dogs, he manipulates them into conflict and the worldwide battle between cats and dogs is BACK ON. Now, a team of inexperienced and untested agents will have to use their old-school animal instincts to restore order and peace between cats and dogs everywhere.",
+        "release_date": "2020-10-02",
+        "popularity": 429.19400000000001682565198279917240142822265625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/4BgSWFMW2MJ0dT5metLzsRWO7IJ.jpg",
+        "backdrop_path": "\/t22fWbzdnThPseipsdpwgdPOPCR.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28,
+            35
+        ]
+    },
+    {
+        "id": 667141,
+        "title": "12 Hour Shift",
+        "original_title": "12 Hour Shift",
+        "vote_average": 5.70000000000000017763568394002504646778106689453125,
+        "overview": "It's 1998 and over the course of one 12-hour shift at an Arkansas hospital, a junkie nurse, her scheming cousin and a group of black market organ-trading criminals start a heist that could lead to their collective demise.",
+        "release_date": "2020-10-02",
+        "popularity": 394.61200000000002319211489520967006683349609375,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/c3SbZPZPOfGMHq7DB7FnTIMQKuY.jpg",
+        "backdrop_path": "\/2LL1jHtNKJhTDc3tA1difsAnLui.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            35,
+            80,
+            27,
+            53
+        ]
+    },
+    {
+        "id": 592350,
+        "title": "My Hero Academia: Heroes Rising",
+        "original_title": "\u50d5\u306e\u30d2\u30fc\u30ed\u30fc\u30a2\u30ab\u30c7\u30df\u30a2 THE MOVIE \u30d2\u30fc\u30ed\u30fc\u30ba\uff1a\u30e9\u30a4\u30b8\u30f3\u30b0",
+        "vote_average": 8.5999999999999996447286321199499070644378662109375,
+        "overview": "Class 1-A visits Nabu Island where they finally get to do some real hero work. The place is so peaceful that it's more like a vacation \u2026 until they're attacked by a villain with an unfathomable Quirk! His power is eerily familiar, and it looks like Shigaraki had a hand in the plan. But with All Might retired and citizens' lives on the line, there's no time for questions. Deku and his friends are the next generation of heroes, and they're the island's only hope.",
+        "release_date": "2019-12-20",
+        "popularity": 334.35800000000000409272615797817707061767578125,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/zGVbrulkupqpbwgiNedkJPyQum4.jpg",
+        "backdrop_path": "\/9guoVF7zayiiUq5ulKQpt375VIy.jpg",
+        "original_language": "ja",
+        "genre_ids": [
+            28,
+            16
+        ]
+    },
+    {
+        "id": 613504,
+        "title": "After We Collided",
+        "original_title": "After We Collided",
+        "vote_average": 6.5,
+        "overview": "Tessa finds herself struggling with her complicated relationship with Hardin; she faces a dilemma that could change their lives forever.",
+        "release_date": "2020-09-02",
+        "popularity": 323.76200000000000045474735088646411895751953125,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/kiX7UYfOpYrMFSAGbI6j1pFkLzQ.jpg",
+        "backdrop_path": "\/r5srC0cqU36n38azFnCyReEksiR.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            18,
+            10749
+        ]
+    },
+    {
+        "id": 446893,
+        "title": "Trolls World Tour",
+        "original_title": "Trolls World Tour",
+        "vote_average": 7.5999999999999996447286321199499070644378662109375,
+        "overview": "Queen Poppy and Branch make a surprising discovery \u2014 there are other Troll worlds beyond their own, and their distinct differences create big clashes between these various tribes. When a mysterious threat puts all of the Trolls across the land in danger, Poppy, Branch, and their band of friends must embark on an epic quest to create harmony among the feuding Trolls to unite them against certain doom.",
+        "release_date": "2020-03-12",
+        "popularity": 311.65399999999999636202119290828704833984375,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/7W0G3YECgDAfnuiHG91r8WqgIOe.jpg",
+        "backdrop_path": "\/qsxhnirlp7y4Ae9bd11oYJSX59j.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            12,
+            16,
+            35,
+            14,
+            10402,
+            10751
+        ]
+    },
+    {
+        "id": 425001,
+        "title": "The War with Grandpa",
+        "original_title": "The War with Grandpa",
+        "vote_average": 6,
+        "overview": "Sixth-grader Peter is pretty much your average kid\u2014he likes gaming, hanging with his friends and his beloved pair of Air Jordans. But when his recently widowed grandfather Ed  moves in with Peter\u2019s family, the boy is forced to give up his most prized possession of all, his bedroom. Unwilling to let such an injustice stand, Peter devises a series of increasingly elaborate pranks to drive out the interloper, but Grandpa Ed won\u2019t go without a fight.",
+        "release_date": "2020-08-27",
+        "popularity": 248.44999999999998863131622783839702606201171875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/ltyARDw2EFXZ2H2ERnlEctXPioP.jpg",
+        "backdrop_path": "\/4gKyQ1McHa8ZKDsYoyKQSevF01J.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            35,
+            18,
+            10751
+        ]
+    },
+    {
+        "id": 531876,
+        "title": "The Outpost",
+        "original_title": "The Outpost",
+        "vote_average": 6.70000000000000017763568394002504646778106689453125,
+        "overview": "A small unit of U.S. soldiers, alone at the remote Combat Outpost Keating, located deep in the valley of three mountains in Afghanistan, battles to defend against an overwhelming force of Taliban fighters in a coordinated attack. The Battle of Kamdesh, as it was known, was the bloodiest American engagement of the Afghan War in 2009 and Bravo Troop 3-61 CAV became one of the most decorated units of the 19-year conflict.",
+        "release_date": "2020-06-24",
+        "popularity": 205.61799999999999499777914024889469146728515625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/hPkqY2EMqWUnFEoedukilIUieVG.jpg",
+        "backdrop_path": "\/n1RohH2VoK1CdVI2fXvcP19dSlm.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28,
+            18,
+            36,
+            10752
+        ]
+    },
+    {
+        "id": 413518,
+        "title": "Pinocchio",
+        "original_title": "Pinocchio",
+        "vote_average": 6.79999999999999982236431605997495353221893310546875,
+        "overview": "In this live-action adaptation of the beloved fairytale, old woodcarver Geppetto fashions a wooden puppet, Pinocchio, who magically comes to life. Pinocchio longs for adventure and is easily led astray, encountering magical beasts, fantastical spectacles, while making friends and foes along his journey. However, his dream is to become a real boy, which can only come true if he finally changes his ways.",
+        "release_date": "2019-12-19",
+        "popularity": 168.878999999999990677679306827485561370849609375,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/4w1ItwCJCTtSi9nPfJC1vU6NIVg.jpg",
+        "backdrop_path": "\/AdqOBPw4PdtzOcfEuQuZ8MNeTKb.jpg",
+        "original_language": "it",
+        "genre_ids": [
+            12,
+            18,
+            14,
+            10751
+        ]
+    },
+    {
+        "id": 499932,
+        "title": "The Devil All the Time",
+        "original_title": "The Devil All the Time",
+        "vote_average": 7.4000000000000003552713678800500929355621337890625,
+        "overview": "In Knockemstiff, Ohio and its neighboring backwoods, sinister characters converge around young Arvin Russell as he fights the evil forces that threaten him and his family.",
+        "release_date": "2020-09-11",
+        "popularity": 146.861999999999994770405464805662631988525390625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/7G2VvG1lU8q758uOqU6z2Ds0qpA.jpg",
+        "backdrop_path": "\/rUeqBuNDR9zN6vZV9kpEFMtQm0E.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            80,
+            18,
+            53
+        ]
+    },
+    {
+        "id": 627290,
+        "title": "Antebellum",
+        "original_title": "Antebellum",
+        "vote_average": 6,
+        "overview": "Successful author Veronica finds herself trapped in a horrifying reality and must uncover the mind-bending mystery before it's too late.",
+        "release_date": "2020-09-02",
+        "popularity": 144.90600000000000591171556152403354644775390625,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/irkse1FMm9dWemwlxKJ7RINT9Iy.jpg",
+        "backdrop_path": "\/pGqBDYycGWsMYc57sYv5M9GAQoW.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            27
+        ]
+    },
+    {
+        "id": 479259,
+        "title": "Lost Girls & Love Hotels",
+        "original_title": "Lost Girls & Love Hotels",
+        "vote_average": 5.29999999999999982236431605997495353221893310546875,
+        "overview": "Searching for escape in Tokyo's back alleys, a haunted English teacher explores love and lust with a dashing Yakuza, as their tumultuous affair takes her on a journey through the city's dive bars and three-hour love hotels.",
+        "release_date": "2020-09-18",
+        "popularity": 141.9859999999999899955582804977893829345703125,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/vQgXwuJrlpzGDI8169tRQRy71Nv.jpg",
+        "backdrop_path": "\/wUP0KIAXcRevjjJpoSKT7LLhiaK.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            18,
+            53
+        ]
+    },
+    {
+        "id": 635302,
+        "title": "Demon Slayer: Kimetsu no Yaiba - The Movie: Mugen Train",
+        "original_title": "\u5287\u5834\u7248\u300c\u9b3c\u6ec5\u306e\u5203\u300d\u7121\u9650\u5217\u8eca\u7de8",
+        "vote_average": 9.5,
+        "overview": "Tanjir\u014d Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Ky\u014djur\u014d Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
+        "release_date": "2020-10-16",
+        "popularity": 138.11299999999999954525264911353588104248046875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
+        "backdrop_path": "\/xoqr4dMbRJnzuhsWDF3XNHQwJ9x.jpg",
+        "original_language": "ja",
+        "genre_ids": [
+            28,
+            12,
+            16,
+            18,
+            14,
+            36
+        ]
+    },
+    {
+        "id": 530723,
+        "title": "Bad Education",
+        "original_title": "Bad Education",
+        "vote_average": 6.9000000000000003552713678800500929355621337890625,
+        "overview": "A superintendent of a school district works for the betterment of the student\u2019s education when an embezzlement scheme is discovered, threatening to destroy everything.",
+        "release_date": "2020-09-23",
+        "popularity": 136.657000000000010686562745831906795501708984375,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/gizz5FphOtfSnLaGpRALOZgILd5.jpg",
+        "backdrop_path": "\/kriOlxu4KVEjd0ZaY3dW7YYyP4z.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            35,
+            18,
+            10770
+        ]
+    },
+    {
+        "id": 659986,
+        "title": "The Owners",
+        "original_title": "The Owners",
+        "vote_average": 5.70000000000000017763568394002504646778106689453125,
+        "overview": "A group of friends think they found the perfect easy score - an empty house with a safe full of cash. But when the elderly couple that lives there comes home early, the tables are suddenly turned. As a deadly game of cat and mouse ensues, the would-be thieves must fight to save themselves from a nightmare they could never have imagined.",
+        "release_date": "2020-08-27",
+        "popularity": 136.614000000000004320099833421409130096435546875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/gzFatNrw0lhKD5NxaU6zC7S2KjP.jpg",
+        "backdrop_path": "\/xUUtcxWC6H48UCrpRwwSPQz69XC.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            28,
+            27,
+            53
+        ]
+    },
+    {
+        "id": 501979,
+        "title": "Bill & Ted Face the Music",
+        "original_title": "Bill & Ted Face the Music",
+        "vote_average": 6.29999999999999982236431605997495353221893310546875,
+        "overview": "Yet to fulfill their rock and roll destiny, the now middle-aged best friends Bill and Ted set out on a new adventure when a visitor from the future warns them that only their song can save life as we know it. Along the way, they are helped by their daughters, a new batch of historical figures and a few music legends\u2014to seek the song that will set their world right and bring harmony to the universe.",
+        "release_date": "2020-08-27",
+        "popularity": 136.26699999999999590727384202182292938232421875,
+        "video": false,
+        "adult": false,
+        "poster_path": "https:\/\/image.tmdb.org\/t\/p\/w500\/\/4V2nTPfeB59TcqJcUfQ9ziTi7VN.jpg",
+        "backdrop_path": "\/oazPqs1z78LcIOFslbKtJLGlueo.jpg",
+        "original_language": "en",
+        "genre_ids": [
+            12,
+            35,
+            878
+        ]
+    }
+]
