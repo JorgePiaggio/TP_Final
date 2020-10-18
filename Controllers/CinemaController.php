@@ -44,13 +44,14 @@
                 $cinema->setPrice($price);
 
                 $this->cinemaDAO->add($cinema);
-
-                
+                $this->msg = "Cinema added successfully!";
+                $this->showListView();
             }   
             else{
-                $this->msg = "Cinema already exist";
-            }
+                $this->msg = "Cinema already exists!";
                 $this->showAddView();
+            }
+                
         }
 
         //Valida el cine si no existe ya un cine con el mismo nombre y misma dirección
@@ -88,18 +89,25 @@
             $aux = $this->cinemaDAO->Search($id);
             $address = $street." ".$number;
 
-            //VALIDAR EDIT CINE
-            $cinemaEdit= new Cinema();
-            $cinemaEdit->setState($aux->getState());
-            $cinemaEdit->setName($name);
-            $cinemaEdit->setAddress($address);
-            $cinemaEdit->setPhone($phone);
-            $cinemaEdit->setEmail($email);
-            $cinemaEdit->setId($id);
-            $cinemaEdit->setPrice($price);
+            if($this->validateCinema($name, $address)){ 
+               $cinemaEdit= new Cinema();
+                $cinemaEdit->setState($aux->getState());
+                $cinemaEdit->setName($name);
+                $cinemaEdit->setAddress($address);
+                $cinemaEdit->setPhone($phone);
+                $cinemaEdit->setEmail($email);
+                $cinemaEdit->setId($id);
+                $cinemaEdit->setPrice($price);
 
-            $this->cinemaDAO->update($cinemaEdit);
-            $this->showListView();
+                $this->cinemaDAO->update($cinemaEdit);
+                $this->msg = "Cinema modified successfully";
+                $this->showListView();
+            }
+            else{
+                $this->msg = "Cinema already exists";
+                $this->searchEdit($id);
+            }
+            
         }
 
     }
