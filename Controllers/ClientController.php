@@ -7,9 +7,17 @@ use DAO\ClientDAO as ClientDAO;
 
 class ClientController{
     private $clientDAO;
+    private $newClient;
+    private $msg;
+    private $street;
+    private $number;
     
     public function __construct(){
         $this->clientDAO = new ClientDAO(); 
+        $this->client = null;
+        $this->msg = null;
+        $this->street = null;
+        $this->number = null;
     }
 
 
@@ -42,127 +50,101 @@ class ClientController{
     }
 
     public function login($email,$pass){
-        $client=$this->clientDAO->search($email);
-        if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){
-            $_SESSION["loggedUser"]=$email;
+        $client=$this->clientDAO->search($email); //busco el cliente a traves del email
+        if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){ //Comparo si es el admin o un cliente y coincide mail y pass
+            $_SESSION["loggedUser"]=$email;    
             $_SESSION["pass"]=$pass;
             header("location:../Home/index");
         }else{
-            header("location:showLogin?alert=Incorrect Email or Password");
+            $this->msg = "Incorrect Email or Password";
+            $this->showLogin();
         }
     }
 
     public function logout(){     
         session_destroy();
-        header("location:../Home/Index");
+        header("location:../Home/index");
     }
     
     public function register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
-        $msg='';
-        
+
         if(!$this->validateEmail($email)){ 
-            #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
-                #if(strlen($dni)>=7 && strlen($dni)<10){
-                    if($this->validatePass($pass, $repass, $msg)){
-                        $newUser= new Client();
-                        $newUser->setName($name);
-                        $newUser->setsurName($surname);
-                        $newUser->setDni($dni);
-                        $newUser->setAddress($street." ".$number);
-                        $newUser->setPhone($phone);
-                        $newUser->setEmail($email);
-                        $newUser->setPassword($pass);
-                        $this->ClientDAO->add($newUser);
-                        $_SESSION["loggedUser"]=$email;
-                        $_SESSION["pass"]=$pass;
-                        header("location:../Home/index");
-    
-                    }else{
-                        header("location:showRegister?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
-                    }
-                #}else{
-                #    $msg='Incorrect DNI';
-                #    header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
-                #}
-    
-            #}else{
-            #    $msg='Incorrect Name or Surname';
-            #   header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
-            #}
-        }else{
-            $msg='email is already exist';
-            header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
+            if($this->validatePass($pass, $repass)){
+                $this->newClient= new Client();
+                $this->newClient->setName($name);
+                $this->newClient->setsurName($surname);
+                $this->newClient->setDni($dni);
+                $this->newClient->setAddress($street." ".$number);
+                $this->street = $street;
+                $this->number = $number;
+                $this->newClient->setPhone($phone);
+                $this->newClient->setEmail($email);
+                $this->newClient->setPassword($pass);
+                $this->clientDAO->add($this->newClient);
+                $_SESSION["loggedUser"]=$email;
+                $_SESSION["pass"]=$pass;
+                header("location:../Home/index");
+            }
+            else{
+                $this->msg = "Invalid password";  
+            }
         }
+        else{
+            $this->msg='Email already exists';
+        }
+        $this->showRegister();
     }
 
     public function edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $this->validateSession();
         $client=$this->clientDAO->search($email);
-        $msg='';
+            
+        if($this->validatePass($pass, $repass)){
+            $newClient= new Client();
+            $newClient->setId($client->getId());
+            $newClient->setName($name);
+            $newClient->setsurName($surname);
+            $newClient->setDni($dni);
+            $newClient->setAddress($street.$number);
+            $newClient->setPhone($phone);
+            $newClient->setEmail($email);
+            $newClient->setPassword($pass);
+            $this->clientDAO->update($newClient);
+            $_SESSION["loggedUser"]=$email;
+            $_SESSION["pass"]=$pass;
+            $this->msg = "Profile updated";
+        }
+        else{
+            $this->msg = "Invalid password";  
+        }
+        $this->showProfile();
+    }
 
-            #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
-                #if(strlen($dni)>=7 && strlen($dni)<10){
-                    if($this->validatePass($pass, $repass, $msg)){
-                        $newUser= new Client();
-                        $newUser->setId($client->getId());
-                        $newUser->setName($name);
-                        $newUser->setsurName($surname);
-                        $newUser->setDni($dni);
-                        $newUser->setAddress($street.$number);
-                        $newUser->setPhone($phone);
-                        $newUser->setEmail($email);
-                        $newUser->setPassword($pass);
-                        $this->clientDAO->update($newUser);
-                        $_SESSION["loggedUser"]=$email;
-                        $_SESSION["pass"]=$pass;
-                        header("location:showProfile?alert=Profile Updated");
-
-                    }else{
-                        header("location:showProfile?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
-                    }
-                #}else{
-                #    $msg='Incorrect DNI';
-                #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
-                #}
-
-            #}else{
-            #    $msg='Incorrect DNI';
-            #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");  
-            #}
-        #}else{
-        #    $msg='Incorrect Name or Surname';
-        #    header("location:ShowProfile?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
-        #}
-    
-}
-
-    public function validatePass($pass, $repass, &$error){
+    public function validatePass($pass, $repass){
         /*if(strlen($pass) < 8){
-           $error = "The password must be at least 8 characters";
+           $this->msg = "The password must be at least 8 characters";
            return false;
         }
         if(strlen($pass) > 16){
-           $error = "The password cannot be longer than 16 characters";
+           $this->msg = "The password cannot be longer than 16 characters";
            return false;
         }
         if (!preg_match('`[a-z]`',$pass)){
-           $error = "The password must have at least one lowercase letter";
+           $this->msg = "The password must have at least one lowercase letter";
            return false;
         }
         if (!preg_match('`[A-Z]`',$pass)){
-           $error = "The key must have at least one capital letter";
+           $this->msg = "The key must have at least one capital letter";
            return false;
         }
         if (!preg_match('`[0-9]`',$pass)){
-           $error = "The password must have at least one numeric character";
+           $this->msg = "The password must have at least one numeric character";
            return false;
         }
-        if (strcmp($pass,$repass)==0){
-            $error = "Passwords don't match";
-            return false;
-        }
+        if (strcmp($pass, $repass) == 0){     ///VERIFICAR QUE PASA SI COMPARA 2 PASS NUMERICAS
+            $this->msg = "Passwords don't match";
+            return false;*/
 
-        $error = "";*/
         return true;
     }
 

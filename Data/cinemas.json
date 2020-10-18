@@ -3,7 +3,7 @@
         "id": "1",
         "state": true,
         "name": "Ambassador",
-        "address": "Cordoba    3800",
+        "address": "Cordoba 3800",
         "phone": "4123333",
         "email": "ambassador@hotmail.com",
         "ticketPrice": "240"
@@ -12,7 +12,7 @@
         "id": "2",
         "state": true,
         "name": "Paseo Diagonal",
-        "address": "Rivadavia  1250",
+        "address": "Rivadavia 1250",
         "phone": "4956666",
         "email": "paseodiagonal@hotmail.com",
         "ticketPrice": 250
@@ -30,7 +30,7 @@
         "id": "4",
         "state": false,
         "name": "Cine Centro",
-        "address": "Belgrano   2500",
+        "address": "Belgrano 2500",
         "phone": "4789988",
         "email": "cinemacentro@gmail.com",
         "ticketPrice": 155
