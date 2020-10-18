@@ -20,6 +20,7 @@ File: Layout CSS
 #header #logo{margin:20px 0 0 140px;}
 #header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
+.page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
 .down{margin-top:60px;}
@@ -31,9 +32,9 @@ File: Layout CSS
 
 #pageintro article{max-width:75%;}
 #pageintro article *{text-transform:uppercase;}
-#pageintro article .heading{margin:0 0 20px 0; padding:0; line-height:1; font-size:46px;}
+#pageintro article .heading{margin:0 0 20px -20px; padding:0; line-height:1; font-size:46px;}
 #pageintro article p{margin:0;}																			
-#pageintro article p:first-of-type{margin-bottom:35px; margin-left:150px; text-align: right;font-size:12px; letter-spacing:5px;} 			/* PARRAFO INFERIOR DE SLIDES */
+#pageintro article p:first-of-type{margin-bottom:35px; margin-left:150px; text-align: right;font-size:12px;} 			/* PARRAFO INFERIOR DE SLIDES */
 #pageintro article footer{margin-top:-10px;margin-bottom:10px; align-content: center; margin-left: 350px;}
 
 
@@ -211,8 +212,15 @@ td{border-width:0 1px;}
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
+.background-pic-promo{background-size: cover; height: auto; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
+.cinemapic{width:auto; height: 250px;}
+
+/*Promo image
+--------------------------------------------------------------------------------------------------------------- */
+.promo{width:50%; height: auto; float:left; display: inline;margin-bottom: 20px;}
+
 
 /*Icons
 --------------------------------------------------------------------------------------------------------------- */
@@ -267,7 +275,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
 .gradient{background: linear-gradient(180deg, #3e0000, #9a0101,#3e0000);}
-.orange{color:#FF5723;}
+.white{background-color: #9a0101;}
 
 /* Rows */
 .row1{color:#FFFFFF; background-color:rgba(255,255,255,.2);}
@@ -276,11 +284,18 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .row4{color:#CBCBCB; background-color:#222222;}
 .row5, .row5 a{color:#CBCBCB; background-color:#222222;}
 
-.overlay .heading, .row2 .heading, .row4 .heading{color:#FFFFFF;}
+.overlay .heading, .row2 .heading, .row4 .heading {color:#FFFFFF;}
+.orange{color:#FF5723;}
+
+.headingcolor{  /* TITULO DE LA PELI EN EL SLIDE */
+	color:white !important; 
+	text-shadow: 2px 2px rgba(255, 11, 11, 0.7) !important; 
+	display:inline-block;
+}
 
 /* Header */
 #header #logo a{color:inherit;}
-#header{background-color:rgba(0,0,0,.95);}
+#header{background:linear-gradient(90deg,#000000, #292929, #000000);}
 
 /* Content Area */
 .services article i{color:#FFFFFF; border-color:#FF5723;}
@@ -330,7 +345,6 @@ table a, #comments a{background-color:inherit;}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
-
 
 /* Media Queries
 --------------------------------------------------------------------------------------------------------------- */

@@ -28,10 +28,10 @@ class MovieDAO implements IMovieDAO{
 
 
     /*obtener objeto pelicula por medio del id*/
-    public function getMovie($imdbId){
+    public function getMovie($tmdbId){
         $this->retrieveData();
         foreach($movieList as $movie){
-            if($movie->getImdbId() == $imdbId)
+            if($movie->getTmdbId() == $tmdbId)
                 return $movie;
         }
         return null;
@@ -42,7 +42,7 @@ class MovieDAO implements IMovieDAO{
     public function updateList($newMovieList){
         $this->retrieveData();
         foreach($newMovieList as $movie){
-            $exists=$this->search($movie->getImdbId());
+            $exists=$this->search($movie->getTmdbId());
             if(!$exists){
                 $this->add($movie);
             }
@@ -51,10 +51,10 @@ class MovieDAO implements IMovieDAO{
 
 
     /* buscar si existe o no una pelicula en el DAO */
-    public function search($imdbId){
+    public function search($tmdbId){
         $this->retrieveData();
         foreach($this->movieList as $movie){
-            if($movie->getImdbId() == $imdbId)
+            if($movie->getTmdbId() == $tmdbId)
                 return true;
         }
         return false;
@@ -79,7 +79,7 @@ class MovieDAO implements IMovieDAO{
     private function saveData(){
         $arrayToEncode = array();
         foreach($this->movieList as $movie){
-            $valuesArray["id"] = $movie->getImdbId();
+            $valuesArray["id"] = $movie->getTmdbId();
             $valuesArray["title"] = $movie->getTitle();
             $valuesArray["original_title"] = $movie->getOriginalTitle();
             $valuesArray["vote_average"] = $movie->getVoteAverage();
@@ -113,7 +113,7 @@ class MovieDAO implements IMovieDAO{
 
             foreach($arrayToDecode as $valuesArray){
                 $movie = new Movie();
-                $movie->setImdbId($valuesArray["id"]);
+                $movie->setTmdbId($valuesArray["id"]);
                 $movie->setTitle($valuesArray["title"]);
                 $movie->setOriginalTitle($valuesArray["original_title"]);
                 $movie->setVoteAverage($valuesArray["vote_average"]);
