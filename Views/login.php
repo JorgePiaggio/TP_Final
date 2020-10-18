@@ -19,10 +19,9 @@
                               <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
                          </div>
                     </div> 
-                    <?php
-                 if($_GET){
-                    echo $_GET["alert"];
-                    }   ?>                    
+                    <?php if($this->msg != null){ //Muestro un mensaje si no existe mail o no coincide pass
+                                   echo $this->msg;
+                              } ?>                  
           </div>
           </form>
      </section>
