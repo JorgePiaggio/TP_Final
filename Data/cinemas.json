@@ -48,10 +48,10 @@
         "id": "6",
         "state": true,
         "name": "Los Gallegos",
-        "address": "Rivadavia 1500 2255",
+        "address": "Rivadavia 1500",
         "phone": "4756363",
         "email": "gallegosShopping@hotmail.com",
-        "ticketPrice": 350
+        "ticketPrice": "350"
     },
     {
         "id": "7",

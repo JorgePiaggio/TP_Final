@@ -37,6 +37,10 @@
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button>
                               </div>
+                              <br>
+                              <?php if($this->msg != null){ //Si el cine ya existe muestra el mensaje
+                                   echo $this->msg;
+                              } ?>
                          </div>            
                </form>
           </div>

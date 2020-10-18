@@ -167,15 +167,13 @@ class ClientController{
     }
 
     public function validateEmail($email){    //0 Register - 1 Edit
-        $clients = $this->clientDAO->GetAll(); 
+        $clients = $this->clientDAO->getAll(); 
         $answer = false;
         foreach($clients as $value){
-       
-                if($value->getEmail() == $email){
-                    $answer = true;
-                }
+            if($value->getEmail() == $email){
+                $answer = true;
             }
-        
+        }
         return $answer;
     }
 
