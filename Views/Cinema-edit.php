@@ -10,10 +10,9 @@
                               <th>Phone</th>
                               <th>Email</th>
                               <th>Price</th>
-                              <th>Action</th>
                          </thead>
                          <tbody>
-                         <form action="<?php echo FRONT_ROOT?>Cinema/Edit" method="post">
+                         <form action="<?php echo FRONT_ROOT?>Cinema/edit" method="post">
                               <tr> 
                               <td><input type="text" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
                               <td><input type="text" name="street" value= "<?php echo $street ?>">  </td>
@@ -23,7 +22,7 @@
                               <td><input type="number" name="price" value= "<?php echo $editCinema->getPrice(); ?>"> </td>
                               </tr>
                               <tr>
-                              <td colspan="7"><button type="submit" name="id" class="btn unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
+                              <td colspan="7"><button type="submit" name="id" class="btn-unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
                               </tr>
                          </form>
                          </tbody>

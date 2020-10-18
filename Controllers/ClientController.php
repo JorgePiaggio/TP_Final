@@ -6,58 +6,58 @@ use Models\Client as Client;
 use DAO\ClientDAO as ClientDAO;
 
 class ClientController{
-    private $ClientDAO;
+    private $clientDAO;
     
     public function __construct(){
-        $this->ClientDAO = new ClientDAO(); 
+        $this->clientDAO = new ClientDAO(); 
     }
 
 
-    public function ShowLogin(){
+    public function showLogin(){
         require_once(VIEWS_PATH."login.php");
     }
 
-    public function ShowProfile($msg = ""){
+    public function showProfile($msg = ""){
         $this->validateSession();
-        $client=$this->ClientDAO->Search($_SESSION['loggedUser']);
+        $client = $this->clientDAO->search($_SESSION['loggedUser']);
 
-        $words= explode(" ",$client->getAddress());
-        $numberOfWords=count($words);
+        $words = explode(" ", $client->getAddress());
+        $numberOfWords = count($words);
         
-        $street="";
-        $number=$words[$numberOfWords-1];
+        $street = "";
+        $number = $words[$numberOfWords-1];
         for($i=0; $i<$numberOfWords-1;$i++){ 
             $street.=$words[$i]." ";
         }
         require_once(VIEWS_PATH."Client-profile.php");
     }
 
-    public function ShowRegister(){
+    public function showRegister(){
         require_once(VIEWS_PATH."register.php");
     }
 
-    public function ShowEditView(){
+    public function showEditView(){
         $this->validateSession();
         require_once(VIEWS_PATH."Client-profile.php");
     }
 
-    public function Login($email,$pass){
-        $client=$this->ClientDAO->Search($email);
+    public function login($email,$pass){
+        $client=$this->clientDAO->search($email);
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){
             $_SESSION["loggedUser"]=$email;
             $_SESSION["pass"]=$pass;
-            header("location:../Home/Index");
+            header("location:../Home/index");
         }else{
-            header("location:ShowLogin?alert=Incorrect Email or Password");
+            header("location:showLogin?alert=Incorrect Email or Password");
         }
     }
 
-    public function Logout(){     
+    public function logout(){     
         session_destroy();
         header("location:../Home/Index");
     }
     
-    public function Register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
+    public function register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $msg='';
         
         if(!$this->validateEmail($email)){ 
@@ -75,10 +75,10 @@ class ClientController{
                         $this->ClientDAO->add($newUser);
                         $_SESSION["loggedUser"]=$email;
                         $_SESSION["pass"]=$pass;
-                        header("location:../Home/Index");
+                        header("location:../Home/index");
     
                     }else{
-                        header("location:ShowRegister?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
+                        header("location:showRegister?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
                     }
                 #}else{
                 #    $msg='Incorrect DNI';
@@ -90,14 +90,14 @@ class ClientController{
             #   header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
             #}
         }else{
-            $msg='Email is already exist';
+            $msg='email is already exist';
             header("location:ShowRegister?alert=$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");
         }
     }
 
-    public function Edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
+    public function edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
         $this->validateSession();
-        $client=$this->ClientDAO->Search($email);
+        $client=$this->clientDAO->search($email);
         $msg='';
 
             #if(strlen($name)>2 && strlen($name)<15 && strlen($surname)>2 && strlen($surname)<15){
@@ -112,13 +112,13 @@ class ClientController{
                         $newUser->setPhone($phone);
                         $newUser->setEmail($email);
                         $newUser->setPassword($pass);
-                        $this->ClientDAO->Update($newUser);
+                        $this->clientDAO->update($newUser);
                         $_SESSION["loggedUser"]=$email;
                         $_SESSION["pass"]=$pass;
-                        header("location:ShowProfile?alert=Profile Updated");
+                        header("location:showProfile?alert=Profile Updated");
 
                     }else{
-                        header("location:ShowProfile?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
+                        header("location:showProfile?alert=Invalid Password-$msg&name=$name&surname=$surname&dni=$dni&street=$street&number=$number&phone=$phone&email=$email");   
                     }
                 #}else{
                 #    $msg='Incorrect DNI';
@@ -167,21 +167,19 @@ class ClientController{
     }
 
     public function validateEmail($email){    //0 Register - 1 Edit
-        $clients = $this->ClientDAO->GetAll(); 
+        $clients = $this->clientDAO->getAll(); 
         $answer = false;
         foreach($clients as $value){
-       
-                if($value->getEmail() == $email){
-                    $answer = true;
-                }
+            if($value->getEmail() == $email){
+                $answer = true;
             }
-        
+        }
         return $answer;
     }
 
     public function validateSession(){
         if(!$_SESSION || $_SESSION["loggedUser"]=="admin@moviepass.com"){
-            header("location:../Home/Index");
+            header("location:../Home/index");
         }
     }
 

@@ -1,7 +1,7 @@
 <main class="py-5">
      <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/toni-cuenca-bxoSoro8gd0-unsplash2.jpg');">  
           <h3 class="page-title up2">Register</h3><br>
-          <form action="<?php echo FRONT_ROOT?>Client/Register" class="center" method="post">
+          <form action="<?php echo FRONT_ROOT?>Client/register" class="center" method="post">
                <div class="container up2">
                     <div class="floating-label-form">
                          <div class="floating-label">

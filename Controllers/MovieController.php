@@ -2,7 +2,7 @@
     namespace Controllers;
 /*
     if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
-        header("location:../Home/Index");
+        header("location:../Home/index");
     }
 */
     use Models\Movie as Movie;
@@ -15,24 +15,24 @@
     define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
 
     class MovieController{
-        private $MovieDAO;
+        private $movieDAO;
         private $genreDAO;
     
         public function __construct(){
-            $this->MovieDAO = new MovieDAO();
+            $this->movieDAO = new MovieDAO();
             $this->genreDAO = new GenreDAO();
         }
 
 
         /* ver todas las pelis de la base de datos */
-        public function ShowAllMovies(){
-            $movieList=$this->MovieDAO->GetAll();
-            $genreList=$this->genreDAO->GetAll();
+        public function showAllMovies(){
+            $movieList=$this->movieDAO->getAll();
+            $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
         public function showFilterMovies(){
-            $genreList=$this->genreDAO->GetAll();
+            $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
@@ -46,35 +46,35 @@
 
 
         /* vista de una pelicula en particular */
-        public function ShowMovie($imdbId){
-            $movie=$this->GetMovieData($imdbId);
+        public function showMovie($imdbId){
+            $movie=$this->getMovieData($imdbId);
             require_once(VIEWS_PATH."");
         }
 
         
         /*pedir data de una peli */
-        public function GetMovieData($imdbId){
-            $movie=$this->MovieDAO->GetMovie($imdbId);
+        public function getMovieData($imdbId){
+            $movie=$this->movieDAO->getMovie($imdbId);
         }
 
 
         /* agregar peliculas nuevas y generos a los DAO  */
-        public function UpdateMovieList(){
-            $nowPlaying=$this->GetNowPlayingMovies();
-            $this->MovieDAO->UpdateList($nowPlaying);
+        public function updateMovieList(){
+            $nowPlaying=$this->getNowPlayingMovies();
+            $this->movieDAO->updateList($nowPlaying);
             
-            $this->ShowAllMovies();
+            $this->showAllMovies();
         }
 
         public function filterByGenre($idGenre){
-            $movieList=$this->MovieDAO->getByGenre($idGenre);
-            $genreList=$this->genreDAO->GetAll();
+            $movieList=$this->movieDAO->getByGenre($idGenre);
+            $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
-        public function GetNowPlayingMovies($page = "1",$language="en"){
+        public function getNowPlayingMovies($page = "1",$language="en"){
             $movies= array();
             
             $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);

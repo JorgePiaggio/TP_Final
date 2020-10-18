@@ -2,7 +2,7 @@
      <section id="listado" class="mb-5">
           <div class="container center up2 background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/maxence-pira-uX5nG3AKeXM-unsplash.jpg');">
           <h2 class="page-title">Login</h2>
-          <form action="<?php echo FRONT_ROOT?>Client/Login" method="post">
+          <form action="<?php echo FRONT_ROOT?>Client/login" method="post">
                     <div class="floating-label-form">
                          <div class="floating-label">
                               <input type="email" name="mail" placeholder="" class="floating-input" required>

@@ -8,22 +8,22 @@
         private $clientList = array();
 
 
-        public function Add($client){
-            $this->RetrieveData();
+        public function add($client){
+            $this->retrieveData();
             $id=($this->lastId()+1);
             $client->setId($id);
             array_push($this->clientList, $client);
-            $this->SaveData();
+            $this->saveData();
         }
 
-        public function GetAll(){
-            $this->RetrieveData();
+        public function getAll(){
+            $this->retrieveData();
             return $this->clientList;
         }
 
-        public function Search($emailClient){
+        public function search($emailClient){
             $wanted = null;
-            $this->RetrieveData();
+            $this->retrieveData();
             foreach($this->clientList as $client){
                 if($client->getEmail() == $emailClient){
                     $wanted = $client;
@@ -32,10 +32,10 @@
             return $wanted;
         }
 
-        public function Update($client){
-                $this->RetrieveData();
+        public function update($client){
+                $this->retrieveData();
                 $this->clientList[($client->getId())-1]=$client;
-                $this->SaveData();
+                $this->saveData();
         }
         
         public function lastId(){
@@ -45,7 +45,7 @@
             return $lastId;
         }
 
-        private function SaveData(){
+        private function saveData(){
             $arrayToEncode = array();
             foreach($this->clientList as $client){
                 $valuesArray["id"] = $client->getId();
@@ -62,7 +62,7 @@
             file_put_contents('Data/clients.json', $jsonContent);
         }
 
-        private function RetrieveData(){
+        private function retrieveData(){
             $this->clientList = array();
             
             if(file_exists('Data/clients.json')){

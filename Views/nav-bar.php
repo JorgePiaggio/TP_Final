@@ -1,12 +1,12 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1><a href="<?php echo FRONT_ROOT?>Home/Index">MoviePass</a></h1>
+      <h1><a href="<?php echo FRONT_ROOT?>Home/index">MoviePass</a></h1>
     </div>
     <nav id="mainav" class="fl_right">
       <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
-        <li><a href="<?php echo FRONT_ROOT?>Movie/ShowAllMovies">Movies</a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
         <?php if($_SESSION){?>
       
       <!----------------- MENU USUARIO -----------------------> 
@@ -19,20 +19,20 @@
           <?php if($_SESSION["loggedUser"]=="admin@moviepass.com")  { ?>
             
             <!---Admin*/-->
-            <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowAddView">Add Cinema</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowListView">List Cinema</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Client/Logout">Sign out</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add Cinema</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List Cinema</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
            <?php }else{ ?>
 
             <!---User*/-->
-          <li><a href="<?php echo FRONT_ROOT?>Client/ShowProfile">Profile</a></li>
-          <li><a href="<?php echo FRONT_ROOT?>Client/Logout">Sign out</a></li>
+          <li><a href="<?php echo FRONT_ROOT?>Client/showProfile">Profile</a></li>
+          <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
           <?php }?>
           <?php } else{ ?>  
       
           <!---Guest*/-->
-          <li><a href="<?php echo FRONT_ROOT?>Client/ShowLogin">Login</a></li>
-          <li><a href="<?php echo FRONT_ROOT?>Client/ShowRegister">Register</a></li>
+          <li><a href="<?php echo FRONT_ROOT?>Client/showLogin">Login</a></li>
+          <li><a href="<?php echo FRONT_ROOT?>Client/showRegister">Register</a></li>
           <?php } ?>
       </ul></ul>
     </nav>

@@ -4,10 +4,10 @@
     use Models\Client as Client;
 
     interface IClientDAO{
-        function Add(Client $client);
-        function GetAll();
-        function Search($idClient);
-        function Update(Client $client);
+        function add(Client $client);
+        function getAll();
+        function search($idClient);
+        function update(Client $client);
     }
 
 ?>

@@ -4,11 +4,11 @@
     use Models\Cinema as Cinema;
 
     interface ICinemaDAO{
-        function Add(Cinema $cinema);
-        function GetAll();
-        function ChangeState($idCinema);
-        function Search($idCinema);
-        function Update(Cinema $cinema);
+        function add(Cinema $cinema);
+        function getAll();
+        function changeState($idCinema);
+        function search($idCinema);
+        function update(Cinema $cinema);
     }
 
 ?>
