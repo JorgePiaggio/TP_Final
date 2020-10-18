@@ -10,7 +10,8 @@ File: Framework CSS
 
 html{overflow-y:scroll; overflow-x:hidden;}
 html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
-body{height: 100%;}
+body{height: 100%;   
+}
 
 *, *::before, *::after{box-sizing:border-box;}
 
@@ -52,16 +53,17 @@ img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; l
 --------------------------------------------------------------------------------------------------------------- */
 body, input, textarea, select{font-family:Verdana, Geneva, sans-serif;}
 h1, h2, h3, h4, h5, h6, .heading{font-family:Georgia, "Times New Roman", Times, serif;}
-
+.heading{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif};
 
 /* Forms
 --------------------------------------------------------------------------------------------------------------- */
 form, fieldset, legend{margin:100px;display:inline;  padding:0; border:none;}
 legend{display:none;}
-label, input, textarea, select, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
+label, input, textarea, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
 label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
 .center{align-content: center;}
+.genreselector{float: right; margin-right: 43%; margin-top:-75px;}
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/

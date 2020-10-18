@@ -46,15 +46,15 @@
 
 
         /* vista de una pelicula en particular */
-        public function showMovie($imdbId){
-            $movie=$this->getMovieData($imdbId);
+        public function showMovie($tmdbId){
+            $movie=$this->getMovieData($tmdbId);
             require_once(VIEWS_PATH."");
         }
 
         
         /*pedir data de una peli */
-        public function getMovieData($imdbId){
-            $movie=$this->movieDAO->getMovie($imdbId);
+        public function getMovieData($tmdbId){
+            $movie=$this->movieDAO->getMovie($tmdbId);
         }
 
 
@@ -83,7 +83,7 @@
             
             foreach($jsonNowPlaying['results'] as $valuesArray){
                 $newMovie = new Movie();
-                $newMovie->setImdbId($valuesArray["id"]);
+                $newMovie->setTmdbId($valuesArray["id"]);
                 $newMovie->setTitle($valuesArray["title"]);
                 $newMovie->setOriginalTitle($valuesArray["original_title"]);
                 $newMovie->setVoteAverage($valuesArray["vote_average"]);
