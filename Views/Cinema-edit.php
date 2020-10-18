@@ -22,8 +22,12 @@
                               <td><input type="number" name="price" value= "<?php echo $editCinema->getPrice(); ?>"> </td>
                               </tr>
                               <tr>
-                              <td colspan="7"><button type="submit" name="id" class="btn-unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
+                              <td colspan="7"><button type="submit" name="id" class="btn unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
                               </tr>
+                              <td colspan="7"><?php if($this->msg != null){ //Si el cine ya existe muestra el mensaje
+                                   echo $this->msg;
+                              } ?></td>
+                              
                          </form>
                          </tbody>
                     </table>

@@ -156,13 +156,13 @@ class ClientController{
         if (!preg_match('`[0-9]`',$pass)){
            $error = "The password must have at least one numeric character";
            return false;
-        }
-        if (strcmp($pass,$repass)==0){
+        }*/
+        if (strcmp($pass, $repass) == 0){
             $error = "Passwords don't match";
             return false;
         }
 
-        $error = "";*/
+        $error = "";
         return true;
     }
 
