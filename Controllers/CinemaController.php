@@ -54,12 +54,12 @@
                 
         }
 
-        //Valida el cine si no existe ya un cine con el mismo nombre y misma dirección
+        //Valida si no existe ya un cine con el mismo nombre y misma dirección
         public function validateCinema($name, $address){
             $validate = true;
             $cinemaList = $this->cinemaDAO->getAll();
             foreach($cinemaList as $cinema){
-                if(($cinema->getName() == $name) && ($cinema->getAddress() == $address))
+                if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($cinema->getAddress(), $address) == 0))
                     $validate = false;
             }
             return $validate; //Retorna true si se puede agregar el cine y false si ya existe
