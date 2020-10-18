@@ -14,22 +14,21 @@
         }
 
 
-        public function ShowAddView(){
+        public function showAddView(){
             require_once(VIEWS_PATH."Cinema-add.php");
         }
 
-        public function ShowListView(){
-            $cinemaList = $this->cinemaDAO->GetAllActive();
-            $cinemaListInactive = $this->cinemaDAO->GetAllInactive(); 
+        public function showListView(){
+            $cinemaList = $this->cinemaDAO->getAllActive();
+            $cinemaListInactive = $this->cinemaDAO->getAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
-            
         }
         
-        public function ShowEditView(){
+        public function showEditView(){
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function Add($name, $street, $number, $phone, $email,$price){
+        public function add($name, $street, $number, $phone, $email, $price){
             $lastId = $this->cinemaDAO->lastId();
 
             $cinema = new Cinema();
@@ -40,32 +39,32 @@
             $cinema->setEmail($email);
             $cinema->setPrice($price);
 
-            $this->cinemaDAO->Add($cinema);
+            $this->cinemaDAO->add($cinema);
 
-            $this->ShowAddView();
+            $this->showAddView();
         }
 
-        public function ChangeState($idRemove){
-            $this->cinemaDAO->ChangeState($idRemove);
-            $this->ShowListView();
+        public function changeState($idRemove){
+            $this->cinemaDAO->changeState($idRemove);
+            $this->showListView();
         }
         
-        public function SearchEdit($idCinema){
-            $editCinema = $this->cinemaDAO->Search($idCinema);
+        public function searchEdit($idCinema){
+            $editCinema = $this->cinemaDAO->search($idCinema);
 
-            $words= explode(" ",$editCinema->getAddress());
-            $numberOfWords=count($words);
+            $words = explode(" ", $editCinema->getAddress());
+            $numberOfWords = count($words);
             
-            $street="";
-            $number=$words[$numberOfWords-1];
-            for($i=0; $i<$numberOfWords-1;$i++){ 
+            $street = "";
+            $number = $words[$numberOfWords-1];
+            for($i = 0;$i<$numberOfWords-1;$i++){ 
                 $street.=$words[$i]." ";
             }
-            #$this->ShowEditView();
+            #$this->showEditView();
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function Edit($name, $street, $number, $phone, $email,$price, $id){
+        public function edit($name, $street, $number, $phone, $email, $price, $id){
             $aux = $this->cinemaDAO->Search($id);
 
             $cinemaEdit= new Cinema();
@@ -77,11 +76,9 @@
             $cinemaEdit->setId($id);
             $cinemaEdit->setPrice($price);
 
-            $this->cinemaDAO->Update($cinemaEdit);
-            $this->ShowListView();
+            $this->cinemaDAO->update($cinemaEdit);
+            $this->showListView();
         }
 
-
     }
-
 ?>

@@ -4,8 +4,8 @@
     use Models\Genre as Genre;
 
     interface IGenreDAO{
-        function Add(Genre $genre);
-        function GetAll();
+        function add(Genre $genre);
+        function getAll();
     }
 
 ?>

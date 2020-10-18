@@ -4,7 +4,7 @@
     
     class HomeController
     {
-        public function Index($message = "")
+        public function index($message = "")
         {
             require_once(VIEWS_PATH."home.php");
         }  

@@ -8,7 +8,7 @@
                             <th colspan="3"><h4 class="thead-orange"><?php echo $client->getName()." ".$client->getSurname();?></h4></th>
                         </thead>
                         <tbody>
-                        <form action="<?php echo FRONT_ROOT?>Client/Edit" method="post">
+                        <form action="<?php echo FRONT_ROOT?>Client/edit" method="post">
                             <tr> 
                                 <td colspan="3"></td> 
                             </tr>

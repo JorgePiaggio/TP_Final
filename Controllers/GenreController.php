@@ -1,7 +1,7 @@
 <?php
     namespace Controllers;
     if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
-        header("location:../Home/Index");
+        header("location:../Home/index");
     }
     use Models\Genre as Genre;
     use DAO\GenreDAO as GenreDAO;
@@ -17,20 +17,20 @@
         }
 
          /* ver todos los generos de la base de datos 
-         public function ShowAllGenres(){
-            $genreList=$this->GenreDAO->GetAll();
+         public function showAllGenres(){
+            $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }*/
 
           /* agregar generos al DAO  */
-        public function UpdateGenreList(){
-            $nowGenre=$this->GetNowGenres();
-            $this->genreDAO->UpdateList($nowGenre);
-            header("location:../Movie/ShowAllMovies");
+        public function updateGenreList(){
+            $nowGenre=$this->getNowGenres();
+            $this->genreDAO->updateList($nowGenre);
+            header("location:../Movie/showAllMovies");
         }
 
             /* obtener de la API la lista de generos actuales    */ 
-          public function GetNowGenres($language="en"){
+          public function getNowGenres($language="en"){
             $genres= array();
 
             $request=file_get_contents(APIURL."genre/movie/list?api_key=".APIKEY."&language=".$language);

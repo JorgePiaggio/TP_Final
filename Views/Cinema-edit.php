@@ -13,7 +13,7 @@
                               <th>Action</th>
                          </thead>
                          <tbody>
-                         <form action="<?php echo FRONT_ROOT?>Cinema/Edit" method="post">
+                         <form action="<?php echo FRONT_ROOT?>Cinema/edit" method="post">
                               <tr> 
                               <td><input type="text" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
                               <td><input type="text" name="street" value= "<?php echo $street ?>">  </td>

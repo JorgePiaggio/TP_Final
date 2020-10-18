@@ -1,7 +1,7 @@
 <main class="py-5">
           <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
           <h2 class="page-title up2">Add Cinema</h2> 
-               <form action="<?php echo FRONT_ROOT?>Cinema/Add" class="center" method="post">
+               <form action="<?php echo FRONT_ROOT?>Cinema/add" class="center" method="post">
                          <div class="floating-label-form">
                               <div class="floating-label">
                                    <input type="text" name="name" placeholder=" " class="floating-input" required>
@@ -42,4 +42,4 @@
           </div>
 </main>
 
-<?php include('footer.php') ?>
+
