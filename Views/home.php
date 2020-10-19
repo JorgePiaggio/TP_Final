@@ -51,7 +51,7 @@
           <ul class="nospace clear">
             <?php $indice=0;?>
             <?php foreach ($movieList as $movie){
-            if(($movie->getVoteAverage() > 7) && ($indice < 50)){
+            if(($movie->getVoteAverage() > 6.5) && ($indice < 20)){
             if($indice % 4 == 0){?>
             <li class="one_quarter first anim1 slideDown">
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>

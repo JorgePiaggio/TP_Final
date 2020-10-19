@@ -133,9 +133,9 @@ label{margin-bottom:5px;}
   }
 
   /*footer form*/
-  .reviewTextarea{min-height: 80px; border-right: .5px solid orangered; background-color: #2e2e2e;}
-  .reviewMail{border-right: .5px solid orangered;background-color: #2e2e2e;}
-  .btn.btn-primary.send{ position: relative; margin-left:130px; margin-top:10px;}
+  .floating-label .floating-input.reviewTextarea{min-height: 80px; border-right: .5px solid orangered; background-color: #2e2e2e;}
+  .floating-label .floating-input.reviewMail{border-right: .5px solid orangered;background-color: #2e2e2e;}
+  .floating-label .btn.btn-primary.send{ position: relative; margin-left:130px; margin-top:10px;}
 
   /* highlighter */
   .highlight {
