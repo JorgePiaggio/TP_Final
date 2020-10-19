@@ -26,6 +26,26 @@ class MovieDAO implements IMovieDAO{
         return $this->movieList;
     }
 
+    /* Retorna las mejores 20 peliculas según valoración con más de 6.5 puntos*/
+    public function getBestRated(){
+        $this->retrieveData();
+        $indice=0;
+        $bestRated = array();
+        foreach ($this->movieList as $movie){
+            if(($movie->getVoteAverage() > 6.5) && ($indice < 20)){
+                if($indice % 4 == 0){
+                    array_push($bestRated, $movie);
+                }
+            }
+        }
+        
+        usort($bestRated, function($a, $b){
+            return $a->getVoteAverage() < $b->getVoteAverage();
+        });
+
+        return $bestRated;
+    }
+
 
     /*obtener objeto pelicula por medio del id*/
     public function getMovie($tmdbId){

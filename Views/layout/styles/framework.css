@@ -67,6 +67,10 @@ label{margin-bottom:5px;}
 .genreselector{float: right; margin-right: 43%; margin-top:-75px;}
 .heading.review{margin-left: 10px;}
 
+select.selection{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 20px; padding: 7px;  }
+.normal{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 10px;}
+select.selection option.selected:hover{color: black ; background-color: #FF5723; }
+
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
 

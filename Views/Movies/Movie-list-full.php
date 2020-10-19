@@ -10,7 +10,7 @@
           <?php if($actualGenre){?>
             <option value="selected" selected disabled> <?php echo $actualGenre->getName();?> </option>
             <?php } ?>
-           <option value=<?php echo $allGenre->getId();?> > <?php echo $allGenre->getName();?>  </option>
+           <option value=<?php echo $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
             <?php foreach($genreList as $genre) { ?>
            <option value="<?php echo $genre->getId();?>">
               <?php echo $genre->getName();?>

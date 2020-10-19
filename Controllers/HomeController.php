@@ -13,7 +13,7 @@
 
         public function index($message = "")
         {
-            $movieList=$this->movieDAO->getAll();
+            $movieList=$this->movieDAO->getBestRated();
             require_once(VIEWS_PATH."home.php");
         }  
 

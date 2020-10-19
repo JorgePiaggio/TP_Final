@@ -26,6 +26,7 @@
 
         /* ver todas las pelis de la base de datos */
         public function showAllMovies(){
+            $actualGenre = null;
             $allGenre=$this->getAllgenre();
             $movieList=$this->movieDAO->getAll();
             $genreList=$this->genreDAO->getAll();
@@ -67,21 +68,22 @@
         }
 
         public function filterByGenre($idGenre){
+            $actualGenre = null;
             if($idGenre!=-1){
             $allGenre=$this->getAllgenre();
-            $movieList=$this->MovieDAO->getByGenre($idGenre);
+            $movieList=$this->movieDAO->getByGenre($idGenre);
             $genreList=$this->genreDAO->getAll();
             $actualGenre=$this->genreDAO->search($idGenre);
 
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
             }else{
-                header("location:showAllMovies");
+                $this->showAllMovies();
             }
         }
 
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
-        public function getNowPlayingMovies($page = "1",$language="en"){
+        public function getNowPlayingMovies($page = "2",$language="en"){
             $movies= array();
             
             $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);
@@ -105,7 +107,7 @@
                 foreach($valuesArray["genre_ids"] as $genre){
                     $newMovie->addGenre($genre);
                 }
-                array_push($movies, $newMovie);
+                array_unshift($movies, $newMovie);
             }
         return $movies;
         }

@@ -7,16 +7,20 @@
         <?php for($i=0; $i<5; $i++){ ?>
           <li>
             <article>
-              <h2 class="heading headingcolor"><?php echo $movieList[$i]->getTitle(); ?></h2>
+              <h2 class="heading headingcolor"><?php $str1=""; 
+                        if(strlen($movieList[$i]->getTitle()) > 40){
+                        $str1 = substr($movieList[$i]->getTitle(), 0, 37) . '...';
+                        echo $str1;
+                        }else{ 
+                        echo $movieList[$i]->getTitle(); } ?>
+              </h2>
               <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w500\/<?php echo $movieList[$i]->getBackdropPath(); ?>" alt="<?php echo $movieList[$i]->getTitle(); ?> movie poster">
               <p> <?php $str=""; 
                         if(strlen($movieList[$i]->getDescription()) > 250){
                         $str = substr($movieList[$i]->getDescription(), 0, 247) . '...';
                         echo $str;
                         }else{ 
-                        echo $movieList[$i]->getDescription();
-                        }
-                  ?>
+                        echo $movieList[$i]->getDescription();} ?>
               </p> 
               <footer>
                 <ul class="nospace inline pushright">
@@ -49,24 +53,25 @@
   <div id="gallery">
         <figure>
           <ul class="nospace clear">
-            <?php $indice=0;?>
-            <?php foreach ($movieList as $movie){
-            if(($movie->getVoteAverage() > 6.5) && ($indice < 20)){
-            if($indice % 4 == 0){?>
+            <?php $indice = 0;
+            foreach ($movieList as $movie){
+              if($indice %4 == 0){?>
             <li class="one_quarter first anim1 slideDown">
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
-            </li><?php $indice++;?>
+            </li>
             <?php }else{ ?>
             <li class="one_quarter anim1 slideDown">
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
-            </li><?php $indice++;?>
-            <?php }}} ?>
+            </li>
+            <?php }
+            $indice++;
+            }?>
           </ul>
         </figure>
       </div>
