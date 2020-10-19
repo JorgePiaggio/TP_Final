@@ -4,7 +4,7 @@
                <form action="<?php echo FRONT_ROOT?>Room/add" class="center" method="post">
                          <div class="floating-label-form">
                          <div class="floating-label">
-                                  <select name="selection cinema" >
+                                  <select name="selection cinema" class="selection">
                                       <?php foreach($cinemaList as $cinema){ ?>
                                       <option value="<?php echo $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
                                       <?php }?>
@@ -19,26 +19,26 @@
                                    <span class="highlight"></span><label for="">Capacity</label>
                               </div>
 
-                              <div class="floating-label">
-                                  <select name="typeRoom" >
+                              <div class="floating-label"><label for="" class="orange">Type</label>
+                                  <select name="typeRoom" class="selection">
                                       <option value="2D">2D</option>
                                       <option value="3D">3D</option>
                                   </select>
-                                   <span class="highlight"></span><label for="">Type</label>
+                                   <span class="highlight"></span>
                               </div>
                               
-                              <div class="floating-label">
-                                  <select name="stateRoom" >
+                              <div class="floating-label"><label for="" class="orange">State</label>
+                                  <select name="stateRoom" class="selection">
                                       <option value="1">Active</option>
                                       <option value="0">Inactive</option>
                                   </select>
-                                   <span class="highlight"></span><label for="">State</label>
+                                   <span class="highlight"></span>
                               </div>
                               <br><br>
                               <div class="floating-label">
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button><br><br>
-                                   <li><?php if($this->msg){ echo $this->msg;} ?></li>
+                                   <?php if($this->msg){ echo $this->msg;} ?>
                               </div>
                          </div>            
                </form>

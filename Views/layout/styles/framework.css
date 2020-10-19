@@ -64,12 +64,15 @@ label, input, textarea, button{display:inline; resize:none; outline:none; color:
 label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
 .center{align-content: center;}
-.genreselector{float: right; margin-right: 43%; margin-top:-75px;}
+.genreselector{float: right; margin-right: 40%; margin-top:-82px;}
 .heading.review{margin-left: 10px;}
 
-select.selection{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 20px; padding: 7px;  }
+select.selection{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 15px; padding: 6px;}
 .normal{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 10px;}
 select.selection option.selected:hover{color: black ; background-color: #FF5723; }
+
+.floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
+
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/

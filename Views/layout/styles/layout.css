@@ -22,6 +22,7 @@ File: Layout CSS
 .page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
+.up4{margin-top:-105px;}
 .down{margin-top:60px;}
 
 
@@ -313,7 +314,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay{color:#CBCBCB; background-color:inherit;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
 
-.btn, .btn.inverse:hover{color:#FFFFFF; background-color:#FF5723; border-color:#FF5723;}
+.btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
 .gradient{background: linear-gradient(180deg, #270101, #800606,#270101);}

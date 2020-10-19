@@ -1,10 +1,6 @@
 <?php
     namespace Controllers;
-/*
-    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
-        header("location:../Home/index");
-    }
-*/
+
     use Models\Movie as Movie;
     use Models\Genre as Genre;
     use DAO\MovieDAO as MovieDAO;
@@ -60,8 +56,9 @@
 
 
         /* agregar peliculas nuevas y generos a los DAO  */
-        public function updateMovieList(){
-            $nowPlaying=$this->getNowPlayingMovies();
+        public function updateMovieList($pageNumber){
+            $this->validateSession();
+            $nowPlaying=$this->getNowPlayingMovies($pageNumber,"en");
             $this->movieDAO->updateList($nowPlaying);
             
             $this->showAllMovies();
@@ -83,7 +80,9 @@
 
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
-        public function getNowPlayingMovies($page = "2",$language="en"){
+        public function getNowPlayingMovies($page, $language){
+            $this->validateSession();
+
             $movies= array();
             
             $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);
@@ -112,11 +111,18 @@
         return $movies;
         }
 
+        /*Genero ficticio para traer todas las películas con todos los géneros */
         public function getAllgenre(){
             $all= new Genre();
             $all->setName("All");
             $all->setId(-1);
             return $all;
+        }
+
+        public function validateSession(){
+            if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
+                header("location:../Home/index");
+            }
         }
 
 

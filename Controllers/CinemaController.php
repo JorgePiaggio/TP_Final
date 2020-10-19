@@ -1,8 +1,10 @@
 <?php
     namespace Controllers;
+
     if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
         header("location:../Home/index");
     }
+    
     use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\RoomDAO as RoomDAO;

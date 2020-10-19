@@ -1,7 +1,7 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1 class="logo"><a href="<?php echo FRONT_ROOT?>Home/index">MoviePass</a></h1>
+      <h1 class="logo"><a href="<?php echo FRONT_ROOT?>Home/index"><img src="<?php echo IMG_PATH?>/icons/moviepass.png" alt=""></a></h1>
     </div>
     <nav id="mainav" class="fl_right">
       <!----------------- MENU GENERAL -----------------------> 

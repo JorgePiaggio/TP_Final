@@ -23,11 +23,15 @@
         <?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
           
           <form action="<?php echo FRONT_ROOT?>Movie/updateMovieList" method="post">
-            <td><button type="submit" name="id" class="btn fl_left up2" value="">Update Movie List</button></td> 
+                <div class="floating-label">
+                    <input type="number" name="pass" placeholder="# Page" class="floating-input fl_left pageNumber" min="1" max="1000" required>
+                   
+                </div>
+                    <button type="submit" name="id" class="btn fl_left up2" value="">Update Movie List</button> 
           </form>
 
           <form action="<?php echo FRONT_ROOT?>Genre/updateGenreList" method="post">
-            <td><button type="submit" name="id" class="btn fl_right up2" value="">Update Genre List</button></td> 
+            <button type="submit" name="id" class="btn fl_right up4" value="">Update Genre List</button>
           </form>
 
         <?php  } ?>

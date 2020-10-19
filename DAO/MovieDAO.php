@@ -31,17 +31,17 @@ class MovieDAO implements IMovieDAO{
         $this->retrieveData();
         $indice=0;
         $bestRated = array();
-        foreach ($this->movieList as $movie){
-            if(($movie->getVoteAverage() > 6.5) && ($indice < 20)){
-                if($indice % 4 == 0){
-                    array_push($bestRated, $movie);
-                }
-            }
-        }
-        
-        usort($bestRated, function($a, $b){
+
+        usort($this->movieList, function($a, $b){
             return $a->getVoteAverage() < $b->getVoteAverage();
         });
+
+        foreach ($this->movieList as $movie){
+            if($indice < 20){
+                array_push($bestRated, $movie);
+                $indice++;
+            }
+        }
 
         return $bestRated;
     }
