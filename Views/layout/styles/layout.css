@@ -209,6 +209,7 @@ td{border-width:0 1px;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
 .unique{margin-top: 20px;margin-left: 48%;}
 
+
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
@@ -231,7 +232,42 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 #gallery{display:block; width:100%; margin-bottom:50px;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
-#gallery li{margin-bottom:30px;}
+#gallery li{margin-bottom:-50px;}
+
+
+/* Gallery Animations :v 
+--------------------------------------------------------------------------------------------------------------- */
+.anim1 a{
+	transition: all .3s linear; 
+}
+.anim1:hover a{
+	opacity: 20%;
+	filter: grayscale(100%);
+}
+
+/******************/
+.slideDown{
+max-height: 420px;
+}
+.fa-star{color:yellow;}
+.slideDown p{
+	font-size: 30px;
+	font-weight: bold; 
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+	color: #f93a00; 
+	text-align: center;
+}
+.slideDown p{
+	opacity:0;
+    transform: translateY(-350px);
+    transition: all .3s linear;
+}
+ .slideDown:hover p{
+	opacity:1;
+	transform: translateY(-300px);
+  }
+
+
 
 
 /* Font Awesome Social Icons

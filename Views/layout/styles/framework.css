@@ -197,7 +197,7 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 
 .first{margin-left:0; clear:left;}
 
-.one_quarter{width:22.69938650306748%;}
+.one_quarter{width:22.69938650306748%; }
 .one_third{width:31.28834355828221%;}
 .one_half, .two_quarter{width:48.46625766871166%;}
 .two_third{width:65.6441717791411%;}
