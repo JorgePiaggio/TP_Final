@@ -8,7 +8,7 @@
                             <th colspan="3"><h4 class="thead-orange"><?php echo $client->getName()." ".$client->getSurname();?></h4></th>
                         </thead>
                         <tbody>
-                        <form action="<?php echo FRONT_ROOT?>Client/Edit" method="post">
+                        <form action="<?php echo FRONT_ROOT?>Client/edit" method="post">
                             <tr> 
                                 <td colspan="3"></td> 
                             </tr>
@@ -53,7 +53,7 @@
                                 <td colspan="3"></td> 
                             </tr>
                             <tr>
-                                <td class="message" colspan="2" ><?php if($_GET){echo $_GET["alert"];}?></td>     
+                                <td class="message" colspan="2" ><?php if($this->msg != null){echo $this->msg;}?></td>     
                                 <td class="grey" colspan="1" ><button type="submit" name="submit" class="btn button-right" value=""> Save </button></td>
                             </tr>
                             

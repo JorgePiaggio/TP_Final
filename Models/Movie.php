@@ -3,7 +3,7 @@ namespace Models;
 
 class Movie{     
 
-    private $imdbId;
+    private $tmdbId;
     private $title;
     private $originalTitle;
     private $voteAverage;
@@ -23,7 +23,7 @@ class Movie{
         $this->active=false;
     }
 
-    public function getImdbID() {return $this->imdbId;}
+    public function getTmdbID() {return $this->tmdbId;}
     public function getTitle(){return $this->title;}
     public function getOriginalTitle(){return $this->originalTitle;}
     public function getVoteAverage() {return $this->voteAverage;}
@@ -38,7 +38,7 @@ class Movie{
     public function getGenreIds() {return $this->genreIds;}
     public function getActive(){return $this->active;}
 
-    public function setImdbId($id){$this->imdbId=$id;}
+    public function setTmdbId($id){$this->tmdbId=$id;}
     public function setTitle($title){$this->title=$title;}
     public function setOriginalTitle($originalTitle){$this->originalTitle=$originalTitle;}
     public function setVoteAverage($voteAverage){$this->voteAverage=$voteAverage;}

@@ -69,8 +69,8 @@ File: Custom Flexslider CSS => For FlexSlider v2.6.1
 	  width: 1366px;
 	   
 	}
-	.flexslider .slides img{display:block;  width:804px; height:316px; margin:auto;}
-	.flexslider .slides img{ margin-top: -9px; margin-left: 88px; opacity: 0.6;}
+	.flexslider .slides img{display:block;  width:860px; height:336px; margin:auto;}
+	.flexslider .slides img{ margin-top: -2px; margin-left: 60px; opacity: 1;}
 	.flex-control-nav{display:block; position:absolute; margin-left: -193px; bottom:-30px; width:100%; text-align:center;}
 	#pageintro article p:first-of-type{margin-left:-100px;} 
 	.flex-direction-nav .flex-next{right:27.5rem;}

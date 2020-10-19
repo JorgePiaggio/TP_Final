@@ -13,13 +13,13 @@ File: Layout CSS
 @import url("framework.css");
 
 
-
 /* Header
 --------------------------------------------------------------------------------------------------------------- */
 #header{height: 60px;}
-#header #logo{margin:20px 0 0 140px;}
-#header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
+#header #logo{margin:5px 0 0 55px;}
+#header #logo h1{margin:0; padding:0; font-size:50px; text-transform:uppercase; color:#FF5723; }
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
+.page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
 .down{margin-top:60px;}
@@ -31,9 +31,9 @@ File: Layout CSS
 
 #pageintro article{max-width:75%;}
 #pageintro article *{text-transform:uppercase;}
-#pageintro article .heading{margin:0 0 20px 0; padding:0; line-height:1; font-size:46px;}
-#pageintro article p{margin:0;}																			
-#pageintro article p:first-of-type{margin-bottom:35px; margin-left:150px; text-align: right;font-size:12px; letter-spacing:5px;} 			/* PARRAFO INFERIOR DE SLIDES */
+#pageintro article .heading{margin:0 0 20px -20px; padding:0; line-height:1; font-size:46px;}
+#pageintro article p{margin:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }																			
+#pageintro article p:first-of-type{margin-bottom:35px; margin-left:150px; text-align: right;font-size:12px;} 			/* PARRAFO INFERIOR DE SLIDES */
 #pageintro article footer{margin-top:-10px;margin-bottom:10px; align-content: center; margin-left: 350px;}
 
 
@@ -90,7 +90,7 @@ File: Layout CSS
 
 #footer .heading{margin-bottom:50px; font-size:1.2rem;}
 
-#footer .linklist li{display:block; margin-bottom:15px; padding:0 0 15px 0; border-bottom:1px solid;}
+#footer .linklist li{display:block; margin-bottom:15px; padding:0 0 15px 0; border-bottom:.4px solid;}
 #footer .linklist li:last-child{margin:0; padding:0; border:none;}
 #footer .linklist li::before, #footer .linklist li::after{display:table; content:"";}
 #footer .linklist li, #footer .linklist li::after{clear:both;}
@@ -135,6 +135,7 @@ File: Layout CSS
 --------------------------------------------------------------------------------------------------------------- */
 nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
+h1.logo{font-family: 'Faster One', cursive;}
 #mainav, #breadcrumb, .sidebar nav{line-height:normal;}
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
 
@@ -208,11 +209,19 @@ td{border-width:0 1px;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
 .unique{margin-top: 20px;margin-left: 48%;}
 
+
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
+.background-pic-promo{background-size: cover; height: auto; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
+.cinemapic{width:auto; height: 250px;}
+
+/*Promo image
+--------------------------------------------------------------------------------------------------------------- */
+.promo{width:50%; height: auto; float:left; display: inline;margin-bottom: 20px;}
+
 
 /*Icons
 --------------------------------------------------------------------------------------------------------------- */
@@ -223,7 +232,49 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 #gallery{display:block; width:100%; margin-bottom:50px;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
-#gallery li{margin-bottom:30px;}
+#gallery li{margin-bottom:-50px;}
+
+
+/* Gallery Animations :v 
+--------------------------------------------------------------------------------------------------------------- */
+.anim1 a{
+	transition: all .3s linear; 
+}
+.anim1:hover a{
+	opacity: 20%;
+	filter: grayscale(100%);
+}
+
+/******************/
+.slideDown{
+max-height: 420px;
+}
+
+.fa-star{color:yellow;}
+.fa-tags{color:green;}
+
+.slideDown p{
+	font-size: 25px;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+	color: #f93a00; 
+	text-align: center;
+}
+
+.slideDown .p-title{
+	font-weight: bold;
+	font-size: 30px;
+} 
+.slideDown p{
+	opacity:0;
+    transform: translateY(-350px);
+    transition: all .3s linear;
+}
+ .slideDown:hover p{
+	opacity:1;
+	transform: translateY(-300px);
+  }
+
+
 
 
 /* Font Awesome Social Icons
@@ -266,8 +317,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .btn, .btn.inverse:hover{color:#FFFFFF; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
 
-.gradient{background: linear-gradient(180deg, #3e0000, #9a0101,#3e0000);}
-.orange{color:#FF5723;}
+.gradient{background: linear-gradient(180deg, #270101, #800606,#270101);}
+.white{background-color: #9a0101;}
 
 /* Rows */
 .row1{color:#FFFFFF; background-color:rgba(255,255,255,.2);}
@@ -276,11 +327,18 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .row4{color:#CBCBCB; background-color:#222222;}
 .row5, .row5 a{color:#CBCBCB; background-color:#222222;}
 
-.overlay .heading, .row2 .heading, .row4 .heading{color:#FFFFFF;}
+.overlay .heading, .row2 .heading, .row4 .heading {color:#FFFFFF;}
+.orange{color:#FF5723;}
+
+.headingcolor{  /* TITULO DE LA PELI EN EL SLIDE */
+	color:white !important; 
+	text-shadow: 2px 2px rgba(255, 11, 11, 0.7) !important; 
+	display:inline-block;
+}
 
 /* Header */
 #header #logo a{color:inherit;}
-#header{background-color:rgba(0,0,0,.95);}
+#header{background:linear-gradient(90deg,#000000, #292929, #000000);}
 
 /* Content Area */
 .services article i{color:#FFFFFF; border-color:#FF5723;}
@@ -288,7 +346,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 
 /* Footer */
-#footer .linklist li{border-color:rgba(255,255,255,.2);}
+#footer .linklist li{border-color:#FF5723;}
+.one_third .heading{color:#FF5723; }
 
 
 /* Quick Links */
@@ -331,15 +390,24 @@ table a, #comments a{background-color:inherit;}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
 
-
 /* Media Queries
 --------------------------------------------------------------------------------------------------------------- */
 @-ms-viewport{width:device-width;}
 
 @media screen and (min-width: 1400px) {
-	#pageintro article p{margin:0;}																			
-#pageintro article p:first-of-type{margin-bottom:35px; margin-left:0px; text-align: center;font-size:12px; letter-spacing:5px;} 
+	#pageintro article p{
+		margin:0;
+	}																			
+	#pageintro article p:first-of-type{
+	margin-top:14px;
+	margin-bottom:35px; 
+	margin-left:0px; 
+	text-align: center;
+	font-size:12px; 
+	letter-spacing:5px;
+} 
 }
+
 
 /* Max Wrapper Width - Laptop, Desktop etc.
 --------------------------------------------------------------------------------------------------------------- */

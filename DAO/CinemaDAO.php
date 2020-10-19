@@ -8,19 +8,19 @@
         private $cinemaList = array();
 
 
-        public function Add($cinema){
-            $this->RetrieveData();
+        public function add($cinema){
+            $this->retrieveData();
             array_push($this->cinemaList, $cinema);
-            $this->SaveData();
+            $this->saveData();
         }
 
-        public function GetAll(){
-            $this->RetrieveData();
+        public function getAll(){
+            $this->retrieveData();
             return $this->cinemaList;
         }
 
-        public function GetAllActive(){
-            $this->RetrieveData();
+        public function getAllActive(){
+            $this->retrieveData();
             $newList=array();
             foreach($this->cinemaList as $cinema){
                 if($cinema->getState() == true){
@@ -30,8 +30,8 @@
             return $newList;
         }
 
-        public function GetAllInactive(){
-            $this->RetrieveData();
+        public function getAllInactive(){
+            $this->retrieveData();
             $newList=array();
             foreach($this->cinemaList as $cinema){
                 if($cinema->getState() != true){
@@ -41,32 +41,32 @@
             return $newList;
         }
 
-        public function ChangeState($idCinema){
-            $wanted = $this->Search($idCinema);
+        public function changeState($idCinema){
+            $wanted = $this->search($idCinema);
             if($wanted != null){
-                $this->RetrieveData();
+                $this->retrieveData();
                 if($this->cinemaList[($wanted->getId())-1]->getState() == true){
                     $this->cinemaList[($wanted->getId())-1]->setState(false);
                 }
                 else{
                     $this->cinemaList[($wanted->getId())-1]->setState(true);
                 }
-                $this->SaveData();
+                $this->saveData();
             }
         }
 
         /*
-        public function Restore($idCinema){
-            $wanted = $this->Search($idCinema);
+        public function restore($idCinema){
+            $wanted = $this->search($idCinema);
             if($wanted != null){
-                $this->RetrieveData();
+                $this->retrieveData();
                 $this->cinemaList[($wanted->getId())-1]->setState(true);
-                $this->SaveData();
+                $this->saveData();
             }
         }
         
-        public function Remove($idCinema){
-            $this->RetrieveData();
+        public function remove($idCinema){
+            $this->retrieveData();
             $newList = array();
             foreach($this->cinemaList as $cinema){
                 if($cinema->getId() != $idCinema){
@@ -74,13 +74,13 @@
                 }
             }
             $this->cinemaList = $newList;
-		    $this->SaveData();
+		    $this->saveData();
         }
         */
         
-        public function Search($idCinema){
+        public function search($idCinema){
             $wanted = null;
-            $this->RetrieveData();
+            $this->retrieveData();
             foreach($this->cinemaList as $cinema){
                 if($cinema->getId() == $idCinema){
                     $wanted = $cinema;
@@ -89,10 +89,10 @@
             return $wanted;
         }
 
-        public function Update($cinema){
-                $this->RetrieveData();
+        public function update($cinema){
+                $this->retrieveData();
                 $this->cinemaList[($cinema->getId())-1]=$cinema;
-                $this->SaveData();
+                $this->saveData();
         }
 
         public function lastId(){
@@ -102,7 +102,7 @@
             return $lastId;
         }
 
-        private function SaveData(){
+        private function saveData(){
             $arrayToEncode = array();
             foreach($this->cinemaList as $cinema){
                 $valuesArray["id"] = $cinema->getId();
@@ -118,7 +118,7 @@
             file_put_contents('Data/cinemas.json', $jsonContent);
         }
 
-        private function RetrieveData(){
+        private function retrieveData(){
             $this->cinemaList = array();
             
             if(file_exists('Data/cinemas.json')){

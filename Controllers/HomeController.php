@@ -1,11 +1,19 @@
 <?php
     
     namespace Controllers;
-    
+    use DAO\MovieDAO as MovieDAO;
+
     class HomeController
     {
-        public function Index($message = "")
+        private $movieDAO;
+
+        public function __construct(){
+            $this->movieDAO = new MovieDAO();
+        }
+
+        public function index($message = "")
         {
+            $movieList=$this->movieDAO->getAll();
             require_once(VIEWS_PATH."home.php");
         }  
 

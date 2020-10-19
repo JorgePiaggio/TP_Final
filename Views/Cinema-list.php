@@ -19,10 +19,10 @@
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
                                         <td><?php echo $cinema->getPrice(); ?> </td>
-                                        <form action="<?php echo FRONT_ROOT?>Cinema/SearchEdit" method="post">
+                                        <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT?>Cinema/ChangeState" method="post">
+                                        <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Remove </button></td>
                                         </form>
                                    </tr>
@@ -49,14 +49,15 @@
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
                                         <td><?php echo $cinema->getPrice(); ?> </td>
-                                        <form action="<?php echo FRONT_ROOT?>Cinema/SearchEdit" method="post">
+                                        <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT?>Cinema/ChangeState" method="post">
+                                        <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Restore </button></td>
                                         </form>
                                    </tr>
                               <?php } ?>
+                              
                               </tbody>
                          </table>
                     </div>

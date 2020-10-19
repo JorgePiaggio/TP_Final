@@ -4,8 +4,8 @@
     use Models\Movie as Movie;
 
     interface IMovieDAO{
-        function Add(Movie $movie);
-        function GetAll();
+        function add(Movie $movie);
+        function getAll();
     }
 
 ?>

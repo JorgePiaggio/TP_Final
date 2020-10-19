@@ -10,7 +10,9 @@ File: Framework CSS
 
 html{overflow-y:scroll; overflow-x:hidden;}
 html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
-body{height: 100%;}
+body{height: 100%;   
+}
+hr.orangeHr{border:1px solid orangered !important;}
 
 *, *::before, *::after{box-sizing:border-box;}
 
@@ -52,16 +54,18 @@ img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; l
 --------------------------------------------------------------------------------------------------------------- */
 body, input, textarea, select{font-family:Verdana, Geneva, sans-serif;}
 h1, h2, h3, h4, h5, h6, .heading{font-family:Georgia, "Times New Roman", Times, serif;}
-
+.heading{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif};
 
 /* Forms
 --------------------------------------------------------------------------------------------------------------- */
 form, fieldset, legend{margin:100px;display:inline;  padding:0; border:none;}
 legend{display:none;}
-label, input, textarea, select, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
+label, input, textarea, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
 label{margin-bottom:5px;}
 :required, :invalid{outline:none; box-shadow:none;}
 .center{align-content: center;}
+.genreselector{float: right; margin-right: 43%; margin-top:-75px;}
+.heading.review{margin-left: 10px;}
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
@@ -127,7 +131,12 @@ label{margin-bottom:5px;}
      overflow:hidden;
     overflow-x: hidden; 
   }
-  
+
+  /*footer form*/
+  .floating-label .floating-input.reviewTextarea{min-height: 80px; border-right: .5px solid orangered; background-color: #2e2e2e;}
+  .floating-label .floating-input.reviewMail{border-right: .5px solid orangered;background-color: #2e2e2e;}
+  .floating-label .btn.btn-primary.send{ position: relative; margin-left:130px; margin-top:10px;}
+
   /* highlighter */
   .highlight {
     position:absolute;
@@ -195,7 +204,7 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 
 .first{margin-left:0; clear:left;}
 
-.one_quarter{width:22.69938650306748%;}
+.one_quarter{width:22.69938650306748%; }
 .one_third{width:31.28834355828221%;}
 .one_half, .two_quarter{width:48.46625766871166%;}
 .two_third{width:65.6441717791411%;}

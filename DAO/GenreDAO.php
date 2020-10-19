@@ -8,31 +8,30 @@
         private $genreList = array();
 
 
-        public function Add($genre){
-            $this->RetrieveData();
+        public function add($genre){
+            $this->retrieveData();
             array_push($this->genreList, $genre);
-            $this->SaveData();
+            $this->saveData();
         }
 
-        public function GetAll(){
-            $this->RetrieveData();
+        public function getAll(){
+            $this->retrieveData();
             return $this->genreList;
         }
 
           /* agregar generos al DAO */
-        public function UpdateList($genreList){
-            $this->RetrieveData();
+        public function updateList($genreList){
+            $this->retrieveData();
             foreach($genreList as $genre){
                 $exists=$this->search($genre->getId());
                 if(!$exists){
-                    $this->Add($genre);
+                    $this->add($genre);
                 }
             }
         }   
 
         public function search($idGenre){
-            $this->RetrieveData();
-            
+            $this->retrieveData();
             foreach($this->genreList as $genre){
                 if($genre->getId() == $idGenre){
                     return $genre;
@@ -41,7 +40,7 @@
             return null;
         }
 
-        private function SaveData(){
+        private function saveData(){
             $arrayToEncode = array();
             foreach($this->genreList as $genre){
                 $valuesArray["id"] = $genre->getId();
@@ -52,7 +51,7 @@
             file_put_contents('Data/genres.json', $jsonContent);
         }
 
-        private function RetrieveData(){
+        private function retrieveData(){
             $this->genreList = array();
             
             if(file_exists('Data/genres.json')){

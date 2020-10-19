@@ -14,24 +14,24 @@ class MovieDAO implements IMovieDAO{
         $this->movieList=array();
     }
 
-    public function Add($movie){
-        $this->RetrieveData();
+    public function add($movie){
+        $this->retrieveData();
         array_push($this->movieList, $movie);
-        $this->SaveData();
+        $this->saveData();
     }
 
     /* obtener todas las peliculas del DAO, activas o no */
-    public function GetAll(){
-        $this->RetrieveData();
+    public function getAll(){
+        $this->retrieveData();
         return $this->movieList;
     }
 
 
     /*obtener objeto pelicula por medio del id*/
-    public function GetMovie($imdbId){
-        $this->RetrieveData();
+    public function getMovie($tmdbId){
+        $this->retrieveData();
         foreach($this->movieList as $movie){
-            if($movie->getImdbId() == $imdbId)
+            if($movie->getTmdbId() == $tmdbId)
                 return $movie;
         }
         return null;
@@ -39,22 +39,22 @@ class MovieDAO implements IMovieDAO{
 
 
     /* agregar peliculas q no existan al DAO, luego de actualizar con la API */
-    public function UpdateList($newMovieList){
-        $this->RetrieveData();
+    public function updateList($newMovieList){
+        $this->retrieveData();
         foreach($newMovieList as $movie){
-            $exists=$this->Search($movie->getImdbId());
+            $exists=$this->search($movie->getTmdbId());
             if(!$exists){
-                $this->Add($movie);
+                $this->add($movie);
             }
         }
     }
 
 
     /* buscar si existe o no una pelicula en el DAO */
-    public function Search($imdbId){
-        $this->RetrieveData();
+    public function search($tmdbId){
+        $this->retrieveData();
         foreach($this->movieList as $movie){
-            if($movie->getImdbId() == $imdbId)
+            if($movie->getTmdbId() == $tmdbId)
                 return true;
         }
         return false;
@@ -63,7 +63,7 @@ class MovieDAO implements IMovieDAO{
       /* retorna las peliculas por genero*/
       public function getByGenre($idGenre){
         $movieByGenre = array();
-        $this->RetrieveData();
+        $this->retrieveData();
         foreach($this->movieList as $movie){
             foreach($movie->getGenreIds() as $id){
                 if($id == $idGenre){
@@ -76,10 +76,10 @@ class MovieDAO implements IMovieDAO{
 
 
 
-    private function SaveData(){
+    private function saveData(){
         $arrayToEncode = array();
         foreach($this->movieList as $movie){
-            $valuesArray["id"] = $movie->getImdbId();
+            $valuesArray["id"] = $movie->getTmdbId();
             $valuesArray["title"] = $movie->getTitle();
             $valuesArray["original_title"] = $movie->getOriginalTitle();
             $valuesArray["vote_average"] = $movie->getVoteAverage();
@@ -102,7 +102,7 @@ class MovieDAO implements IMovieDAO{
     }
 
     
-    private function RetrieveData(){
+    private function retrieveData(){
         $this->movieList = array();
         
         if(file_exists('Data/movies.json')){
@@ -113,7 +113,7 @@ class MovieDAO implements IMovieDAO{
 
             foreach($arrayToDecode as $valuesArray){
                 $movie = new Movie();
-                $movie->setImdbId($valuesArray["id"]);
+                $movie->setTmdbId($valuesArray["id"]);
                 $movie->setTitle($valuesArray["title"]);
                 $movie->setOriginalTitle($valuesArray["original_title"]);
                 $movie->setVoteAverage($valuesArray["vote_average"]);
