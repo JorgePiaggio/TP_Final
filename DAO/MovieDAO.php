@@ -30,7 +30,7 @@ class MovieDAO implements IMovieDAO{
     /*obtener objeto pelicula por medio del id*/
     public function GetMovie($imdbId){
         $this->RetrieveData();
-        foreach($movieList as $movie){
+        foreach($this->movieList as $movie){
             if($movie->getImdbId() == $imdbId)
                 return $movie;
         }

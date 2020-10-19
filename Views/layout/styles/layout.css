@@ -397,3 +397,8 @@ table a, #comments a{background-color:inherit;}
 	#pageintro li article{max-width:none; width:100%;}
 	#pageintro li .heading{font-size:2rem;}
 }
+
+/*Selection */
+
+select.selection{color: white ; background-color: black; border-color:orange; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 20px; position: relative; top:-50px; left:700px ; padding: 7px;  }
+.normal{color: white ; background-color: black; border-color:orange; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 10px;}

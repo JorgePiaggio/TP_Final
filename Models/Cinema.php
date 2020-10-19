@@ -10,9 +10,11 @@ class Cinema{
     private $phone;
     private $email;
     private $ticketPrice;
+   
 
     function __construct(){
         $this->state = true;
+        $this->roomList=array();
     }
     
     function getId(){return $this->id;}
@@ -29,6 +31,7 @@ class Cinema{
     function setEmail($email){$this->email=$email;}
     function setState($state){$this->state=$state;}
     function setPrice($ticketPrice){$this->ticketPrice=$ticketPrice;}
+    
 
 
 }

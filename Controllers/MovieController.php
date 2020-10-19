@@ -26,17 +26,13 @@
 
         /* ver todas las pelis de la base de datos */
         public function ShowAllMovies(){
+            $allGenre=$this->getAllgenre();
             $movieList=$this->MovieDAO->GetAll();
             $genreList=$this->genreDAO->GetAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
-        public function showFilterMovies(){
-            $genreList=$this->genreDAO->GetAll();
-            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
-        }
-
-
+        
         /* acomodar - llamar funcion getActive */ 
         /*
         public function ShowNowPlayingView(){
@@ -67,9 +63,15 @@
         }
 
         public function filterByGenre($idGenre){
+            if($idGenre!=-1){
+            $allGenre=$this->getAllgenre();
             $movieList=$this->MovieDAO->getByGenre($idGenre);
             $genreList=$this->genreDAO->GetAll();
+            $Actualgenre=$this->genreDAO->search($idGenre);
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
+            }else{
+                header("location:ShowAllMovies");
+            }
         }
 
 
@@ -103,6 +105,12 @@
         return $movies;
         }
 
+        public function getAllgenre(){
+            $all= new Genre();
+            $all->setName("All");
+            $all->setId(-1);
+            return $all;
+        }
 
 
     /* GET VIDEOS ---> EXAMPLE URL

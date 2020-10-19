@@ -32,12 +32,13 @@
 
         public function search($idGenre){
             $this->RetrieveData();
+            
             foreach($this->genreList as $genre){
                 if($genre->getId() == $idGenre){
-                    return true;
+                    return $genre;
                 }
             }
-            return false;
+            return null;
         }
 
         private function SaveData(){

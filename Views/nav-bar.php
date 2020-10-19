@@ -10,9 +10,9 @@
         <?php if($_SESSION){?>
       
       <!----------------- MENU USUARIO -----------------------> 
-        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-userlogged.png"></a>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
         <?php }else{ ?>
-        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user.png"></a>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest.png"></a>
         <?php }?>
           <ul>
           <?php if($_SESSION){   ?>
@@ -21,7 +21,10 @@
             <!---Admin*/-->
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowAddView">Add Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/ShowListView">List Cinema</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Room/showAddroom">Add Room</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectcinema">List Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Client/Logout">Sign out</a></li>
+           
            <?php }else{ ?>
 
             <!---User*/-->

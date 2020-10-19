@@ -4,22 +4,26 @@
   <main class="hoc container clear" > 
     <div class="content" > 
            <!-- ################################################################################################ -->
-        <?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
-        <form action="<?php echo FRONT_ROOT?>Movie/UpdateMovieList" method="post">
-        <td><button type="submit" name="id" class="btn fl_left up2" value="">Update Movie List</button></td> </form>
-        <form action="<?php echo FRONT_ROOT?>Genre/UpdateGenreList" method="post">
-        <td><button type="submit" name="id" class="btn fl_left" value="">Update Genre List</button></td> </form>
-        <?php  } ?>
-         <!-- ################################################################################################ -->
-        <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post"><select name="Genres" onchange="this.form.submit()" id="genre">
-           <option value="Genres" selected disabled > Genres  </option>
+           <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post"><select name="Genres" class="selection" onchange="this.form.submit()" id="genre">
+          <?php if($Actualgenre){?>
+            <option value="selected" selected disabled> <?php echo $Actualgenre->getName();?> </option>
+            <?php } ?>
+           <option value=<?php echo $allGenre->getId();?> > <?php echo $allGenre->getName();?>  </option>
             <?php foreach($genreList as $genre) { ?>
            <option value="<?php echo $genre->getId();?>">
               <?php echo $genre->getName();?>
            </option>
-            <? } ?> 
+            <?php } ?> 
             </select>
         </form>
+         <!-- ################################################################################################ -->
+   
+        <section><?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
+        <form action="<?php echo FRONT_ROOT?>Movie/UpdateMovieList" method="post">
+        <td ><button type="submit" name="id" class="btn fl_left up2" value="">Update Movie List</button></td> </form>
+        <form action="<?php echo FRONT_ROOT?>Genre/UpdateGenreList" method="post">
+        <td><button type="submit" name="id" class="btn fl_left" value="">Update Genre List</button></td> </form>
+        <?php  } ?></section><br>
          <!-- ################################################################################################ -->
 
       <div id="gallery">

@@ -1,0 +1,23 @@
+[
+    {
+        "idCinema": "1",
+        "number": "5",
+        "capacity": "150",
+        "type": "2D",
+        "state": true
+    },
+    {
+        "idCinema": "1",
+        "number": "15",
+        "capacity": "185",
+        "type": "2D",
+        "state": false
+    },
+    {
+        "idCinema": "1",
+        "number": "7",
+        "capacity": "205",
+        "type": "3D",
+        "state": "1"
+    }
+]
