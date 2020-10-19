@@ -13,12 +13,11 @@ File: Layout CSS
 @import url("framework.css");
 
 
-
 /* Header
 --------------------------------------------------------------------------------------------------------------- */
 #header{height: 60px;}
-#header #logo{margin:20px 0 0 140px;}
-#header #logo h1{margin:0; padding:0; font-size:22px; text-transform:uppercase;}
+#header #logo{margin:5px 0 0 55px;}
+#header #logo h1{margin:0; padding:0; font-size:50px; text-transform:uppercase; color:#FF5723; }
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
 .page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
@@ -136,6 +135,7 @@ File: Layout CSS
 --------------------------------------------------------------------------------------------------------------- */
 nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
+h1.logo{font-family: 'Faster One', cursive;}
 #mainav, #breadcrumb, .sidebar nav{line-height:normal;}
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
 
