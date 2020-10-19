@@ -10,6 +10,7 @@
                               <th>Phone</th>
                               <th>Email</th>
                               <th>Price</th>
+
                          </thead>
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Cinema/edit" method="post">
@@ -21,6 +22,7 @@
                               <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
                               <td><input type="number" name="price" value= "<?php echo $editCinema->getPrice(); ?>"> </td>
                               </tr>
+
                               <tr>
                               <td colspan="7"><button type="submit" name="id" class="btn unique" value="<?php echo $editCinema->getId(); ?>"> Save </button></td>
                               </tr>
@@ -28,9 +30,11 @@
                                    echo $this->msg;
                               } ?></td>
                               
+
                          </form>
                          </tbody>
                     </table>
+           
                </div>    
           </div>
 </main>

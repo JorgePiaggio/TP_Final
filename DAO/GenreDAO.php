@@ -34,10 +34,10 @@
             $this->retrieveData();
             foreach($this->genreList as $genre){
                 if($genre->getId() == $idGenre){
-                    return true;
+                    return $genre;
                 }
             }
-            return false;
+            return null;
         }
 
         private function saveData(){

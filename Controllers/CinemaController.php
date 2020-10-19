@@ -5,10 +5,13 @@
     }
     use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
+    use DAO\RoomDAO as RoomDAO;
+    use DAO\Room as Room;
 
     class CinemaController{
         private $cinemaDAO;
         private $msg;
+    
     
         public function __construct(){
             $this->cinemaDAO = new CinemaDAO(); 

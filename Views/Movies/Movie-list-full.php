@@ -3,6 +3,22 @@
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 
     <div class="content" > 
+      
+           <!-- ####################################### OPTION GENRES ######################################################### -->
+           <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post" class= "genreselector">
+              <select name="Genres" class=" selection" onchange="this.form.submit()" id="genre">
+          <?php if($actualGenre){?>
+            <option value="selected" selected disabled> <?php echo $actualGenre->getName();?> </option>
+            <?php } ?>
+           <option value=<?php echo $allGenre->getId();?> > <?php echo $allGenre->getName();?>  </option>
+            <?php foreach($genreList as $genre) { ?>
+           <option value="<?php echo $genre->getId();?>">
+              <?php echo $genre->getName();?>
+           </option>
+            <?php } ?> 
+            </select>
+        </form>
+
            <!-- ##################################### ADMIN BUTTONS ########################################################### -->
         <?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
           
@@ -15,17 +31,7 @@
           </form>
 
         <?php  } ?>
-         <!-- ####################################### OPTION GENRES ########################################################## -->
-        <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" class="genreselector" method="post">
-          <select name="Genres"  onchange="this.form.submit()" id="genre">
-            <option value="Genres" selected disabled> Genres </option>
-            <?php foreach($genreList as $genre) { ?>
-                <option value="<?php echo $genre->getId();?>">
-                <?php echo $genre->getName();?>
-                </option>
-            <?php } ?> 
-          </select>
-        </form>
+        
          <!-- ####################################### MOVIE GALLERY ######################################################### -->
       <div id="gallery">
         <figure>
