@@ -8,11 +8,13 @@
     {
         private $cinemaDAO;
         private $roomDAO;
+        private $msg;
         
         public function __construct()
         {
             $this->cinemaDAO=new CinemaDAO();
             $this->roomDAO=new RoomDAO();
+            $this->msg=null;
         }
         public function showAddroom()
         {
@@ -34,7 +36,6 @@
 
         public function add($idCine,$number,$capacity,$type,$state){
             $wanted=$this->roomDAO->getRoom($idCine,$number);
-            $alert="";
             if(!$wanted){
                 $newRoom= new Room();
                 $newRoom->setIdcinema($idCine);
@@ -44,13 +45,14 @@
                 $newRoom->setState(boolval($state)); 
             
                 $this->roomDAO->add($newRoom);
-                $alert="Added correctly";
-                header("location:showAddroom?alert=$alert");
+                $this->msg="Added correctly";
+                
             }else{
-                $alert="This Room already exists";
-                header("location:showAddroom?alert=$alert");  
+                $this->msg="This Room already exists";
+                 
             }
-
+            $cinemaList=$this->cinemaDAO->GetAll();
+            require_once(VIEWS_PATH."Room-add.php");
         }
 
         public function edit($idCinema,$capacity,$type,$state,$number){

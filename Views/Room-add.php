@@ -38,11 +38,11 @@
                               <div class="floating-label">
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button><br><br>
-                                   <li><?php if($_GET){ echo $_GET["alert"];} ?></li>
+                                   <li><?php if($this->msg){ echo $this->msg;} ?></li>
                               </div>
                          </div>            
                </form>
                
           </div>
 </main>
-<?php var_dump($_POST);?>
+
