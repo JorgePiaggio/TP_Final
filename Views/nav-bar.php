@@ -2,7 +2,6 @@
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
       <h1 class="logo"><a href="<?php echo FRONT_ROOT?>Home/index">MoviePass</a></h1>
-      <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
     </div>
     <nav id="mainav" class="fl_right">
       <!----------------- MENU GENERAL -----------------------> 

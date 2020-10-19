@@ -90,7 +90,7 @@ File: Layout CSS
 
 #footer .heading{margin-bottom:50px; font-size:1.2rem;}
 
-#footer .linklist li{display:block; margin-bottom:15px; padding:0 0 15px 0; border-bottom:1px solid;}
+#footer .linklist li{display:block; margin-bottom:15px; padding:0 0 15px 0; border-bottom:.4px solid;}
 #footer .linklist li:last-child{margin:0; padding:0; border:none;}
 #footer .linklist li::before, #footer .linklist li::after{display:table; content:"";}
 #footer .linklist li, #footer .linklist li::after{clear:both;}
@@ -346,7 +346,8 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 
 /* Footer */
-#footer .linklist li{border-color:rgba(255,255,255,.2);}
+#footer .linklist li{border-color:#FF5723;}
+.one_third .heading{color:#FF5723; }
 
 
 /* Quick Links */
