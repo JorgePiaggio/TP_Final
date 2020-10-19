@@ -249,14 +249,21 @@ td{border-width:0 1px;}
 .slideDown{
 max-height: 420px;
 }
+
 .fa-star{color:yellow;}
+.fa-tags{color:green;}
+
 .slideDown p{
-	font-size: 30px;
-	font-weight: bold; 
+	font-size: 25px;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
 	color: #f93a00; 
 	text-align: center;
 }
+
+.slideDown .p-title{
+	font-weight: bold;
+	font-size: 30px;
+} 
 .slideDown p{
 	opacity:0;
     transform: translateY(-350px);

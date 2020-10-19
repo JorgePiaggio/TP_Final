@@ -53,9 +53,19 @@
             <?php foreach ($movieList as $movie){
             if(($movie->getVoteAverage() > 7) && ($indice < 50)){
             if($indice % 4 == 0){?>
-            <li class="one_quarter first"><a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a></li><?php $indice++;?>
+            <li class="one_quarter first anim1 slideDown">
+              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
+              <p class="p-title"><?php echo $movie->getTitle()?></p>
+              <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+            </li><?php $indice++;?>
             <?php }else{ ?>
-            <li class="one_quarter"><a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a></li><?php $indice++;?>
+            <li class="one_quarter anim1 slideDown">
+              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
+              <p class="p-title"><?php echo $movie->getTitle()?></p>
+              <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+            </li><?php $indice++;?>
             <?php }}} ?>
           </ul>
         </figure>
