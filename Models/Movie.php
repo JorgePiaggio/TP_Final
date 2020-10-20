@@ -16,8 +16,10 @@ class Movie{
     private $backdropPath;
     private $originalLanguage;
     private $genreIds;
-    private $genreStrings; // arreglo auxiliar para string de generos, no se guarda
-    private $active; //true-> en una funcion actual, false-> solo activa en DAO
+    private $genreStrings;      // arreglo auxiliar para string de generos, no se guarda
+    private $runtime;
+    private $homepage; 
+    private $active;            //true-> en una funcion actual
 
     public function __construct(){
         $this->genreIds=array();
@@ -40,6 +42,8 @@ class Movie{
     public function getGenreIds() {return $this->genreIds;}
     public function getGenreStrings() {return $this->genreStrings;}
     public function getActive(){return $this->active;}
+    public function getRuntime(){return $this->runtime;}
+    public function getHomepage(){return $this->homepage;}
 
     public function setTmdbId($id){$this->tmdbId=$id;}
     public function setTitle($title){$this->title=$title;}
@@ -56,11 +60,13 @@ class Movie{
     public function addGenre($genre){array_push($this->genreIds,$genre);}
     public function addGenreString($genre){array_push($this->genreStrings,$genre);}
     public function setActive($value){$this->active=$value;}
+    public function setRuntime($runtime){$this->runtime=$runtime;}
+    public function setHomepage($homepage){$this->homepage=$homepage;}
+
 
  /*   private $id;
     private $name;
     private $title;
-    private $homepage; 
     private $adult;
     private $original_language;
     private $original_title;
@@ -70,7 +76,6 @@ class Movie{
     private $status;
     private $spoken_languages;
     private $logo_path;
-    private $origin_country;
     private $overview;
     private $popularity;
     private $vote_average;
@@ -89,17 +94,14 @@ class Movie{
     public function getId(){return $this->id;}
     public function getName(){return $this->name;}
     public function getTitle(){return $this->title;}
-    public function getHomepage(){return $this->homepage;}
     public function getAdult(){return $this->adult;}
     public function getOriginal_language(){return $this->original_language;}
     public function getOriginal_title(){return $this->original_title;}
     public function getPoster_path(){return $this->poster_path;}
     public function getRelease_date(){return $this->release_date;}
-    public function getRuntime(){return $this->runtime;}
     public function getStatus(){return $this->status;}
     public function getSpoken_languages(){return $this->spoken_languages;}
     public function getLogo_path(){return $this->logo_path;}
-    public function getOrigin_country(){return $this->origin_country;}
     public function getOverview(){return $this->overview;}
     public function getPopularity(){return $this->popularity;}
     public function getVote_average(){return $this->vote_average;}
@@ -112,17 +114,14 @@ class Movie{
     public function setId($id){$this->id=$id;}
     public function setName($name){$this->name=$name;}
     public function setTitle($title){$this->title=$title;}
-    public function setHomepage($homepage){$this->homepage=$homepage;}
     public function setAdult($adult){$this->adult=$adult;}
     public function setOriginal_language($original_language){$this->original_language=$original_language;}
     public function setOriginal_title($original_title){$this->original_title=$original_title;}
     public function setPoster_path($poster_path){$this->poster_path=$poster_path;}
     public function setRelease_date($release_date){$this->release_date=$release_date;}
-    public function setRuntime($runtime){$this->runtime=$runtime;}
     public function setStatus($status){$this->status=$status;}
     public function setSpoken_languages($spoken_languages){$this->spoken_languages=$spoken_languages;}
     public function setLogo_path($logo_path){$this->logo_path=$logo_path;}
-    public function setOrigin_country($origin_country){$this->origin_country=$origin_country;}
     public function setOverview($overview){$this->overview=$overview;}
     public function setPopularity($popularity){$this->popularity=$popularity;}
     public function setVote_average($vote_average){$this->vote_average=$vote_average;}

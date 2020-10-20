@@ -44,14 +44,11 @@
 
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
-            $movie=$this->getMovieData($tmdbId);
-            require_once(VIEWS_PATH."");
-        }
-
-        
-        /*pedir data de una peli */
-        public function getMovieData($tmdbId){
-            $movie=$this->movieDAO->getMovie($tmdbId);
+            $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
+            $jsonMovie=($request) ? json_decode($request, true) : array();
+            $movie=$this->movieDAO->constructMovie($jsonMovie);
+            
+            require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }
 
 
@@ -60,7 +57,6 @@
             $this->validateSession();
             $nowPlaying=$this->getNowPlayingMovies($pageNumber,"en");
             $this->movieDAO->updateList($nowPlaying);
-            
             $this->showAllMovies();
         }
 
@@ -89,7 +85,7 @@
 
             $jsonNowPlaying=($request) ? json_decode($request, true) : array();
             
-            foreach($jsonNowPlaying['results'] as $valuesArray){
+            foreach($jsonNowPlaying['results'] as $valuesArray){  /* MANDAR AL DAO A Q LO CONSTRUYA */ 
                 $newMovie = new Movie();
                 $newMovie->setTmdbId($valuesArray["id"]);
                 $newMovie->setTitle($valuesArray["title"]);
@@ -108,7 +104,7 @@
                 }
                 array_unshift($movies, $newMovie);
             }
-        return $movies;
+            return $movies;
         }
 
         /*Genero ficticio para traer todas las películas con todos los géneros */

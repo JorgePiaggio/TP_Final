@@ -1,9 +1,8 @@
-<!-- Top Background Image Wrapper -->
 <div class="wrapper row3 gradient">
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 
     <div class="content" > 
-      
+
            <!-- ####################################### OPTION GENRES ######################################################### -->
            <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post" class= "genreselector">
               <select name="Genres" class=" selection" onchange="this.form.submit()" id="genre">
@@ -44,7 +43,8 @@
             <?php foreach ($movieList as $movie){
             if($indice % 4 == 0){?>
             <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
-              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>         
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+              <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
@@ -53,7 +53,8 @@
             </li><?php $indice++;?>
             <?php }else{ ?>
             <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
-              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+              <img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
