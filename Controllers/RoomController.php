@@ -20,6 +20,7 @@
             $this->roomDAO=new RoomDAO();
             $this->msg=null;
         }
+        
         public function showAddroom()
         {
             $cinemaList=$this->cinemaDAO->getAll();
@@ -33,7 +34,7 @@
 
         public function showRoomlist($idCinema){
             $roomList=$this->roomDAO->getRooms($idCinema);
-            $roomsInactives=$this->roomDAO->getAllinactives($idCinema);
+            $roomsInactives=$this->roomDAO->getAllInactives($idCinema);
             require_once(VIEWS_PATH."Room-list.php");
         }
 
@@ -43,7 +44,7 @@
 
             if(!$wanted){
                 $newRoom= new Room();
-                $newRoom->setIdcinema($idCine);
+                $newRoom->setIdCinema($idCine);
                 $newRoom->setNumber($number);
                 $newRoom->setCapacity($capacity);
                 $newRoom->setType($type);
@@ -54,14 +55,14 @@
                 $this->showRoomList($idCine);
             }
             else{
-                $this->msg="This Room already exists";
+                $this->msg="This room already exists";
                 require_once(VIEWS_PATH."Room-add.php");
             }
         }
 
         public function edit($idCinema,$capacity,$type,$state,$number){
             $room=new Room();
-            $room->setIdcinema($idCinema);
+            $room->setIdCinema($idCinema);
             $room->setCapacity($capacity);
             $room->setType($type);
             $room->setState($state);
@@ -73,7 +74,7 @@
         }
 
         public function showSelectCinema(){
-        $cinemaList=$this->cinemaDAO->GetAll();
+        $cinemaList=$this->cinemaDAO->getAll();
         require_once(VIEWS_PATH."Select-cinema.php");
         }
 

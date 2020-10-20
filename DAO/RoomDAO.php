@@ -19,10 +19,8 @@
             return $this->roomList;
         }
 
-     
-
         public function changeState($room){
-                $index= $this->search($room->getIdcinema(),$room->getNumber());
+                $index= $this->search($room->getIdCinema(),$room->getNumber());
             if($index != -1){
                 $this->retrieveData();
                 if($this->roomList[$index]->getState() == true){
@@ -62,7 +60,7 @@
             $index= -1;
             $this->retrieveData();
             for( $i=0;$i<count($this->roomList);$i++){
-                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdcinema()==$idCinema){
+                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdCinema()==$idCinema){
                    $index=$i; 
                 }
             }
@@ -72,7 +70,7 @@
         public function getRoom($idCinema,$number){
             $this->retrieveData();
             for( $i=0;$i<count($this->roomList);$i++){
-                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdcinema()==$idCinema){
+                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdCinema()==$idCinema){
                    return $this->roomList[$i]; 
                 }
             }
@@ -83,17 +81,17 @@
             $cinemaRooms=array();
             $this->retrieveData();
             foreach($this->roomList as $room){
-                if($room->getIdcinema()==$idcinema && $room->getState()==true){
+                if($room->getIdCinema()==$idcinema && $room->getState()==true){
                     array_push($cinemaRooms,$room);
                 }
             }
             return $cinemaRooms;
         }
-        public function getAllinactives($idCinema){
+        public function getAllInactives($idCinema){
             $inactiveRooms=array();
             $this->retrieveData();
             foreach($this->roomList as $room){
-                if($room->getIdcinema()==$idCinema && $room->getState()==false){
+                if($room->getIdCinema()==$idCinema && $room->getState()==false){
                     array_push($inactiveRooms,$room);
                 }
             }
@@ -102,16 +100,15 @@
         }
         public function update($room){
                 $this->retrieveData();
-                $index=$this->search($room->getIdcinema(),$room->getNumber());
+                $index=$this->search($room->getIdCinema(),$room->getNumber());
                 $this->roomList[$index]=$room;
                 $this->saveData();
         }
 
-
         private function saveData(){
             $arrayToEncode = array();
             foreach($this->roomList as $room){
-                $valuesArray["idCinema"] = $room->getIdcinema();
+                $valuesArray["idCinema"] = $room->getIdCinema();
                 $valuesArray["number"] = $room->getNumber();
                 $valuesArray["capacity"] = $room->getCapacity();
                 $valuesArray["type"] = $room->getType();
@@ -140,7 +137,6 @@
                     $room->setCapacity($valuesArray["capacity"]);
                     array_push($this->roomList, $room);
                 }
-
             }
         }
     }             

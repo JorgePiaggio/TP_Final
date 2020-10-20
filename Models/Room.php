@@ -15,11 +15,11 @@ class Room{         /* sala */
     function getNumber(){return $this->number;}
     function getCapacity(){return $this->capacity;}
     function getType(){return $this->type;}
-    function getIdcinema(){return $this->idCinema;}
+    function getIdCinema(){return $this->idCinema;}
     function setNumber($number){$this->number=$number;}
     function setCapacity($capacity){$this->capacity=$capacity;}
     function setType($type){$this->type=$type;}
-    function setIdcinema($idCinema){$this->idCinema=$idCinema;}
+    function setIdCinema($idCinema){$this->idCinema=$idCinema;}
     function setState($state){$this->state=$state;}
 
 }

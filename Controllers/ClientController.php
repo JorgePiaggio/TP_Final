@@ -90,7 +90,7 @@ class ClientController{
             }
         }
         else{
-            $this->msg='Email already exists';
+            $this->msg="Email: '$email' already exists";
         }
         $this->showRegister();
     }

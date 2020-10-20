@@ -53,7 +53,7 @@
                 $this->showListView();
             }   
             else{
-                $this->msg = "Cinema already exists!";
+                $this->msg = "Already exists cinema . '$name' with address . $address.";
                 $this->showAddView();
             }
         }
@@ -108,7 +108,7 @@
                 $this->showListView();
             }
             else{
-                $this->msg = "Cinema already exists";
+                $this->msg = "Already exists cinema: '$name' with address: '$address'.";
                 $this->searchEdit($id);
             }
             
