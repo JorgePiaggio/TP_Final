@@ -18,24 +18,24 @@
           <?php if($_SESSION){   ?>
           <?php if($_SESSION["loggedUser"]=="admin@moviepass.com")  { ?>
             
-            <!---Admin*/-->
+            <!---Admin-->
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List Cinema</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Room/showAddroom">Add Room</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectcinema">List Room</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
-           <?php }else{ ?>
+            <?php }else{ ?>
 
-            <!---User*/-->
-          <li><a href="<?php echo FRONT_ROOT?>Client/showProfile">Profile</a></li>
-          <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
-          <?php }?>
-          <?php } else{ ?>  
+            <!---User-->
+            <li><a href="<?php echo FRONT_ROOT?>Client/showProfile">Profile</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
+            <?php }?>
+            <?php } else{ ?>  
       
-          <!---Guest*/-->
-          <li><a href="<?php echo FRONT_ROOT?>Client/showLogin">Login</a></li>
-          <li><a href="<?php echo FRONT_ROOT?>Client/showRegister">Register</a></li>
-          <?php } ?>
+            <!---Guest-->
+            <li><a href="<?php echo FRONT_ROOT?>Client/showLogin">Login</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Client/showRegister">Register</a></li>
+            <?php } ?>
       </ul></ul>
     </nav>
   </header>

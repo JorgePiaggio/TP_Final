@@ -40,5 +40,12 @@
         "capacity": "55",
         "type": "2D",
         "state": true
+    },
+    {
+        "idCinema": "2",
+        "number": "5",
+        "capacity": "200",
+        "type": "3D",
+        "state": true
     }
 ]
