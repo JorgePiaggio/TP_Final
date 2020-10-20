@@ -48,10 +48,11 @@
                               <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn2">Confirm</button>
                          </div>
-                    </div><br>    
-                    <?php if($this->msg != null){ //Muestro un mensaje con el error en el registro
-                                   echo $this->msg;
-                              } ?>                
+                    </div>
+                    <br>    
+                    <h1 class="msg"> <?php if($this->msg != null){ //Muestro un mensaje con el error en el registro
+                         echo $this->msg;
+                    } ?> </h1>               
                </div>
           </form>
      </div>

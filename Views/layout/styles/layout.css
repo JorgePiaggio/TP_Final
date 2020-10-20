@@ -19,7 +19,11 @@ File: Layout CSS
 #header #logo{margin:5px 0 0 55px;}
 #header #logo h1{margin:0; padding:0; font-size:50px; text-transform:uppercase; color:#FF5723; }
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
+<<<<<<< HEAD
 .page-title-variation{font-size: 40px; background-color: rgba(7, 7, 7, 0.687);color:white;text-align: center; padding: 1.5rem 0 1.5rem; border-radius: 15%;}
+=======
+.page-title.v2{font-size: 55px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
+>>>>>>> b73b42cf4162c3e51cdd122c76aea73a646e700a
 .page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
@@ -78,7 +82,7 @@ File: Layout CSS
 #comments textarea{overflow:auto;}
 #comments div{margin-bottom:15px;}
 #coments input[type="submit"], #comments input[type="reset"]{display:inline-block; width:auto; min-width:150px; margin:0; padding:8px 5px; cursor:pointer;}
-h1.msg{color: #fa0a0a; text-align: center; padding-top:1rem; font-size: 18px; }
+h1.msg{color: #FF5723; text-align: center; padding-top:1rem; font-size: 18px; text-shadow: 1px 1px rgb(14, 13, 13);}
 
 
 /* Sidebar */

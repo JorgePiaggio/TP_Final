@@ -53,7 +53,7 @@
                 $this->showListView();
             }   
             else{
-                $this->msg = "Already exists cinema . '$name' with address . $address.";
+                $this->msg = "Already exists cinema: '$name' with address: '$address'.";
                 $this->showAddView();
             }
         }
