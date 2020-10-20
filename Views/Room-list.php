@@ -1,5 +1,5 @@
 <main class="list">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/kilyan-sockalingum-nW1n9eNHOsc-unsplash.jpg');">
+          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/serena-wong-SdjA-_Xzuxg-unsplash.jpg');">
                <h2 class="page-title up2">Active Rooms</h2>
                     <div class="container2">
                          <table class="table bg-light small">

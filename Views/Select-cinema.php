@@ -1,5 +1,5 @@
 <main class="py-5">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
+          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/jeffrey-gruszka-INzXqOHMh44-unsplash.jpg');">  
           <h2 class="page-title up2">Select Cinema</h2> 
                <form action="<?php echo FRONT_ROOT?>Room/showRoomlist" class="center" method="post">
                          <div class="floating-label-form">

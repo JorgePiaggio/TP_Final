@@ -1,6 +1,6 @@
 <main class="py-5">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
-          <h2 class="page-title up2">Add Room</h2> 
+          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/jake-hills-23LET4Hxj_U-unsplash.jpg');">  
+          <h2 class="page-title up2">Add Room</h2><br><br>
                <form action="<?php echo FRONT_ROOT?>Room/add" class="center" method="post">
                          <div class="floating-label-form">
                          <div class="floating-label">
