@@ -256,16 +256,22 @@ max-height: 420px;
 .fa-tags{color:green;}
 
 .slideDown p{
-	font-size: 25px;
+	font-size: 22px;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-	color: #f93a00; 
+	color: #bc2c00; 
 	text-align: center;
+	text-shadow: 2px 2px #000000;
 }
 
 .slideDown .p-title{
+	font-size: 25px;
+	color: #ff3c00; 
 	font-weight: bold;
 	font-size: 30px;
-} 
+	} 
+.slideDown i{
+	text-shadow: none;
+	} 
 .slideDown p{
 	opacity:0;
     transform: translateY(-350px);
@@ -328,6 +334,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .row3{color:#474747; background-color:#FFFFFF;}
 .row4{color:#CBCBCB; background-color:#222222;}
 .row5, .row5 a{color:#CBCBCB; background-color:#222222;}
+.row6{color:#CBCBCB; background-color:#121212;}
 
 .overlay .heading, .row2 .heading, .row4 .heading {color:#FFFFFF;}
 .orange{color:#FF5723;}

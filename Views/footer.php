@@ -59,9 +59,9 @@
           </div>             
         </form>
     </div>
-    </div><hr class="orangeHr">
+    </div>
     <!-- ########################################### COPYRIGHT ##################################################### -->
-  <div class="wrapper row5">
+  <div class="wrapper row6"><hr class="orangeHr">
     <div id="copyright" class="hoc clear"> 
       <p class="center">Copyright &copy; 2020 - All Rights Reserved - <a href="#">localhost.com - </a>Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
     </div>
