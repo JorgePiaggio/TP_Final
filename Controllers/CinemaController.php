@@ -49,14 +49,13 @@
                 $cinema->setPrice($price);
 
                 $this->cinemaDAO->add($cinema);
-                $this->msg = "Cinema added successfully!";
+                
                 $this->showListView();
             }   
             else{
                 $this->msg = "Cinema already exists!";
                 $this->showAddView();
             }
-                
         }
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección

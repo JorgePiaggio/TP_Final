@@ -18,10 +18,12 @@
                               <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
                          </div>
-                    </div> 
+                    </div>
+                    <h1 class="msg"> 
                     <?php if($this->msg != null){      //Muestro un mensaje si no existe mail o no coincide pass
                          echo $this->msg;
-                         } ?>                  
+                         } ?>
+                    </h1>                  
                </form>
           </div>
      </section>

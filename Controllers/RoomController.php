@@ -22,11 +22,11 @@
         }
         public function showAddroom()
         {
-            $cinemaList=$this->cinemaDAO->GetAll();
+            $cinemaList=$this->cinemaDAO->getAll();
             require_once(VIEWS_PATH."Room-add.php");
         }  
 
-        public function showRoomedit($idCinema,$number){
+        public function showRoomEdit($idCinema,$number){
             $editRoom=$this->roomDAO->getRoom($idCinema,$number);
             require_once(VIEWS_PATH."Room-edit.php");
         }
@@ -37,9 +37,10 @@
             require_once(VIEWS_PATH."Room-list.php");
         }
 
-
         public function add($idCine,$number,$capacity,$type,$state){
             $wanted=$this->roomDAO->getRoom($idCine,$number);
+            $cinemaList=$this->cinemaDAO->getAll();
+
             if(!$wanted){
                 $newRoom= new Room();
                 $newRoom->setIdcinema($idCine);
@@ -49,14 +50,13 @@
                 $newRoom->setState(boolval($state)); 
             
                 $this->roomDAO->add($newRoom);
-                $this->msg="Added correctly";
                 
-            }else{
-                $this->msg="This Room already exists";
-                 
+                $this->showRoomList($idCine);
             }
-            $cinemaList=$this->cinemaDAO->GetAll();
-            require_once(VIEWS_PATH."Room-add.php");
+            else{
+                $this->msg="This Room already exists";
+                require_once(VIEWS_PATH."Room-add.php");
+            }
         }
 
         public function edit($idCinema,$capacity,$type,$state,$number){
@@ -66,15 +66,15 @@
             $room->setType($type);
             $room->setState($state);
             $room->setnumber($number);
+            
             $this->roomDAO->update($room);
-            header("location:showSelectcinema");
+
+            $this->showSelectCinema();
         }
 
-        public function showSelectcinema(){
+        public function showSelectCinema(){
         $cinemaList=$this->cinemaDAO->GetAll();
         require_once(VIEWS_PATH."Select-cinema.php");
-        
-
         }
 
         public function changeState($idCinema,$number){
@@ -85,7 +85,7 @@
                 $room->setState(true);
             }
             $this->roomDAO->update($room);
-            header("location:showSelectcinema");
+            $this->showSelectcinema();
 
         }
 

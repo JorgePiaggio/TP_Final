@@ -19,5 +19,26 @@
         "capacity": "205",
         "type": "3D",
         "state": "1"
+    },
+    {
+        "idCinema": "1",
+        "number": "88",
+        "capacity": "150",
+        "type": "3D",
+        "state": false
+    },
+    {
+        "idCinema": "1",
+        "number": "145",
+        "capacity": "123",
+        "type": "2D",
+        "state": true
+    },
+    {
+        "idCinema": "1",
+        "number": "111",
+        "capacity": "55",
+        "type": "2D",
+        "state": true
     }
 ]
