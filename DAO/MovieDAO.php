@@ -7,7 +7,6 @@ use Models\Genre as Genre;
 use DAO\GenreDAO as GenreDAO;
 use DAO\IMovieDAO as IMovieDAO;
 
-
 class MovieDAO implements IMovieDAO{
     private $movieList;
 
@@ -100,6 +99,33 @@ class MovieDAO implements IMovieDAO{
     }
 
 
+
+    /* construir objeto pelicula a traves del json q manda la API, devolver al controller */
+    public function constructMovie($jsonObject){
+        $newMovie = new Movie();
+        $newMovie->setTmdbId($jsonObject["id"]);
+        $newMovie->setTitle($jsonObject["title"]);
+        $newMovie->setOriginalTitle($jsonObject["original_title"]);
+        $newMovie->setVoteAverage($jsonObject["vote_average"]);
+        $newMovie->setDescription($jsonObject["overview"]);
+        $newMovie->setReleaseDate($jsonObject["release_date"]);
+        $newMovie->setPopularity($jsonObject["popularity"]);
+        $newMovie->setVideo($jsonObject["video"]);
+        $newMovie->setAdult($jsonObject["adult"]);
+        $newMovie->setRuntime($jsonObject["runtime"]);
+        $newMovie->setHomepage($jsonObject["homepage"]);
+        $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
+        $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
+        $newMovie->setOriginalLanguage($jsonObject["original_language"]);
+        foreach($jsonObject["genres"] as $genre){
+            $newMovie->addGenre($genre);
+        }
+        $newMovie=$this->genreToString($newMovie);
+
+        return $newMovie;
+    }
+
+
     /* insertar strings de genero en peliculas */
     public function genreToString($movieList){
 
@@ -118,6 +144,7 @@ class MovieDAO implements IMovieDAO{
         }
         return $movieList;
     }
+
 
     private function saveData(){
         $arrayToEncode = array();

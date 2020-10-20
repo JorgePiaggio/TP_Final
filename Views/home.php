@@ -13,7 +13,9 @@
                         }else{ 
                         echo $movieList[$i]->getTitle(); } ?>
               </h2>
-              <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w500\/<?php echo $movieList[$i]->getBackdropPath(); ?>" alt="<?php echo $movieList[$i]->getTitle(); ?> movie poster">
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList[$i]->getTmdbID()?>">
+                <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movieList[$i]->getBackdropPath(); ?>" alt="<?php echo $movieList[$i]->getTitle(); ?> movie poster">
+              </a>
               <p> <?php $str=""; 
                         if(strlen($movieList[$i]->getDescription()) > 250){
                         $str = substr($movieList[$i]->getDescription(), 0, 247) . '...';
@@ -53,7 +55,8 @@
             foreach ($movieList as $movie){
               if($indice %4 == 0){?>
             <li class="one_quarter first anim1 slideDown">
-              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+              <img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
@@ -62,7 +65,8 @@
             </li>
             <?php }else{ ?>
             <li class="one_quarter anim1 slideDown">
-              <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+              <img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
               <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
