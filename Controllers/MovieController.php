@@ -104,7 +104,7 @@
                 }
                 array_unshift($movies, $newMovie);
             }
-        return $movies;
+            return $movies;
         }
 
         /*Genero ficticio para traer todas las películas con todos los géneros */

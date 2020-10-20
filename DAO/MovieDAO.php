@@ -118,7 +118,7 @@ class MovieDAO implements IMovieDAO{
         $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
         $newMovie->setOriginalLanguage($jsonObject["original_language"]);
         foreach($jsonObject["genres"] as $genre){
-            $newMovie->addGenre($genre);
+                $newMovie->addGenre($genre['id']);
         }
         $newMovie=$this->genreToString($newMovie);
 
@@ -133,11 +133,21 @@ class MovieDAO implements IMovieDAO{
         $genreList=$genreDAO->getAll();
         $aux=null;
 
-        foreach($movieList as $movie){
-            foreach($movie->getGenreIds() as $genreId){
+        if(is_array($movieList)){                   /* si es un array de peliculas */
+            foreach($movieList as $movie){
+                foreach($movie->getGenreIds() as $genreId){
+                    foreach($genreList as $genre){
+                        if($genre->getId() == $genreId){
+                        $movie->addGenreString($genre->getName());
+                        }
+                    }
+                }
+            }
+        }else{                                      /* si es solo una pelicula */
+            foreach($movieList->getGenreIds() as $genreId){
                 foreach($genreList as $genre){
                     if($genre->getId() == $genreId){
-                    $movie->addGenreString($genre->getName());
+                    $movieList->addGenreString($genre->getName());
                     }
                 }
             }
