@@ -16,10 +16,12 @@ class Movie{
     private $backdropPath;
     private $originalLanguage;
     private $genreIds;
+    private $genreStrings; // arreglo auxiliar para string de generos, no se guarda
     private $active; //true-> en una funcion actual, false-> solo activa en DAO
 
     public function __construct(){
         $this->genreIds=array();
+        $this->genreStrings=array();
         $this->active=false;
     }
 
@@ -36,6 +38,7 @@ class Movie{
     public function getBackdropPath() {return $this->backdropPath;}
     public function getOriginalLanguage() {return $this->originalLanguage;}
     public function getGenreIds() {return $this->genreIds;}
+    public function getGenreStrings() {return $this->genreStrings;}
     public function getActive(){return $this->active;}
 
     public function setTmdbId($id){$this->tmdbId=$id;}
@@ -51,6 +54,7 @@ class Movie{
     public function setBackdropPath($backdropPath){$this->backdropPath=$backdropPath;}
     public function setOriginalLanguage($originalLanguage){$this->originalLanguage=$originalLanguage;}
     public function addGenre($genre){array_push($this->genreIds,$genre);}
+    public function addGenreString($genre){array_push($this->genreStrings,$genre);}
     public function setActive($value){$this->active=$value;}
 
  /*   private $id;

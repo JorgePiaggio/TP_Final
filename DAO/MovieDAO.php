@@ -4,6 +4,7 @@ namespace DAO;
 
 use Models\Movie as Movie;
 use Models\Genre as Genre;
+use DAO\GenreDAO as GenreDAO;
 use DAO\IMovieDAO as IMovieDAO;
 
 
@@ -23,10 +24,11 @@ class MovieDAO implements IMovieDAO{
     /* obtener todas las peliculas del DAO, activas o no */
     public function getAll(){
         $this->retrieveData();
+        $this->movieList=$this->genreToString($this->movieList);
         return $this->movieList;
     }
 
-    /* Retorna las mejores 20 peliculas según valoración con más de 6.5 puntos*/
+    /* Retorna las mejores 20 peliculas según valoración */
     public function getBestRated(){
         $this->retrieveData();
         $indice=0;
@@ -42,6 +44,7 @@ class MovieDAO implements IMovieDAO{
                 $indice++;
             }
         }
+        $bestRated=$this->genreToString($bestRated);
 
         return $bestRated;
     }
@@ -91,10 +94,30 @@ class MovieDAO implements IMovieDAO{
                 }
             }
         }
+        $movieByGenre=$this->genreToString($movieByGenre);
+
         return $movieByGenre;
     }
 
 
+    /* insertar strings de genero en peliculas */
+    public function genreToString($movieList){
+
+        $genreDAO= new GenreDAO();     
+        $genreList=$genreDAO->getAll();
+        $aux=null;
+
+        foreach($movieList as $movie){
+            foreach($movie->getGenreIds() as $genreId){
+                foreach($genreList as $genre){
+                    if($genre->getId() == $genreId){
+                    $movie->addGenreString($genre->getName());
+                    }
+                }
+            }
+        }
+        return $movieList;
+    }
 
     private function saveData(){
         $arrayToEncode = array();

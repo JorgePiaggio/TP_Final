@@ -40,21 +40,25 @@
       <div id="gallery">
         <figure>
           <ul class="nospace clear">
-            <?php $indice=0;?>
+            <?php $indice=0; ?>
             <?php foreach ($movieList as $movie){
             if($indice % 4 == 0){?>
             <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>         
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
+                                                            $str .=" ".$genre." /";}
+                                                            echo substr_replace($str,"", -1); ?></p>
             </li><?php $indice++;?>
             <?php }else{ ?>
             <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
+                                                            $str .=" ".$genre." /";}
+                                                            echo substr_replace($str,"", -1); ?></p>
             </li><?php $indice++;?>
             <?php }} ?>
           </ul>

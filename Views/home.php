@@ -1,6 +1,5 @@
-<!-- Top Background Image Wrapper -->
 <div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');"> 
-  <!-- ################################# FLEXSLIDER ######################################## -->
+  <!-- ###################################### FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
       <ul class="slides">
@@ -8,8 +7,8 @@
           <li>
             <article>
               <h2 class="heading headingcolor"><?php $str1=""; 
-                        if(strlen($movieList[$i]->getTitle()) > 40){
-                        $str1 = substr($movieList[$i]->getTitle(), 0, 37) . '...';
+                        if(strlen($movieList[$i]->getTitle()) > 33){
+                        $str1 = substr($movieList[$i]->getTitle(), 0, 30) . '...';
                         echo $str1;
                         }else{ 
                         echo $movieList[$i]->getTitle(); } ?>
@@ -35,8 +34,7 @@
     </div>
   </div>
 </div>
-<!-- End Top Background Image Wrapper -->
-<!-- ########################################### PUBLICIDADES   ##################################################### -->
+<!-- ########################################### PUBLICIDADES ##################################################### -->
 <div class="wrapper row4" >
   <div class="background-pic-promo" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/alex-litvin-MAYsdoYpGuk-unsplash.jpg');">
     <h2 class="page-title page-title-special">Promos</h2> 
@@ -44,8 +42,6 @@
   <img class="promo" src="<?php echo IMG_PATH?>promo25.jpg" alt="25% off promo poster">
   <img class="promo" src="<?php echo IMG_PATH?>promo25.jpg" alt="25% off promo poster">
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ########################################### TOP RATED MOVIES  ##################################################### -->
 <div class="background-pic gradient" >
 <h2 class="page-title">Top Rated Movies</h2>  
@@ -60,14 +56,18 @@
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
+                                                            $str .=" ".$genre." /";}
+                                                            echo substr_replace($str,"", -1); ?></p>
             </li>
             <?php }else{ ?>
             <li class="one_quarter anim1 slideDown">
               <a href="#"><img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php echo " ".$movie->getVoteAverage()?></p>
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
+                                                            $str .=" ".$genre." /";}
+                                                            echo substr_replace($str,"", -1); ?></p>
             </li>
             <?php }
             $indice++;
@@ -77,8 +77,6 @@
       </div>
   </main>
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ###########################################   OUR CINEMAS  ##################################################### -->
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/christian-wiediger-AEeoY_aqvNk-unsplash.jpg');">
 <h2 class="page-title">Our Cinemas</h2>  

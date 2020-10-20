@@ -1,7 +1,7 @@
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container center up2 background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/maxence-pira-uX5nG3AKeXM-unsplash.jpg');">
-               <h2 class="page-title">Login</h2>
+               <h2 class="page-title">Login</h2><br>
                <form action="<?php echo FRONT_ROOT?>Client/login" method="post">
                     <div class="floating-label-form">
                          <div class="floating-label">

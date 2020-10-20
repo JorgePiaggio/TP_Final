@@ -119,17 +119,12 @@
             return $all;
         }
 
+    
         public function validateSession(){
             if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
                 header("location:../Home/index");
             }
         }
-
-
-    /* GET VIDEOS ---> EXAMPLE URL
-
-    http://api.themoviedb.org/3/movie/157336/videos?api_key=###
-    
-    */                    
+              
 
 }?>
