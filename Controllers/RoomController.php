@@ -27,7 +27,7 @@
             require_once(VIEWS_PATH."Room-add.php");
         }  
 
-        public function showRoomEdit($idCinema,$number){
+        public function showRoomEdit($idCinema, $number){
             $editRoom=$this->roomDAO->getRoom($idCinema,$number);
             require_once(VIEWS_PATH."Room-edit.php");
         }
