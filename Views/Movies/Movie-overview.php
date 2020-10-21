@@ -29,6 +29,9 @@
             </div>   
           </div>
           <div>
+          <p><h4>Director/s</h4><?php foreach($movie->getDirector() as $director){ echo $director; if(count($movie->getDirector()) > 1) echo " - ";} ?></p>
+          </div>
+          <div>
             <p><h4>Description</h4><?php echo $movie->getDescription()?></p>
           </div>
           <div>

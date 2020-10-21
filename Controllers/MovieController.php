@@ -55,14 +55,25 @@
             /* solicitar trailer de la pelicula */
             $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
             $jsonTrailer=null;
-             if($request_two){
+            if($request_two){
                 $jsonTrailer=json_decode($request_two, true);
-             }
+            }
             if($jsonTrailer['results'][0]['site'] == 'YouTube'){
                 $movie->setVideoPath($jsonTrailer['results'][0]['key']);
             }
             
+            /*Solicitar director/es de la pelicula*/
+            $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
+            $jsonCredits = ($request_three) ? json_decode($request_three, true) : array();
+            $directors = array();
 
+            foreach($jsonCredits['crew'] as $value){
+                    if(strcmp($value['job'], 'Director') == 0){ 
+                        array_push($directors, $value['name']);
+                    }
+            }
+            $movie->setDirector($directors);
+            
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }
 
