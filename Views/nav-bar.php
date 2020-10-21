@@ -1,7 +1,11 @@
 <div class="wrapper row1">
   <header id="header" class="clear"> 
     <div id="logo" class="fl_left">
-      <h1 class="logo"><a href="<?php echo FRONT_ROOT?>Home/index"><img src="<?php echo IMG_PATH?>/icons/moviepass.png" alt=""></a></h1>
+      <a href="<?php echo FRONT_ROOT?>Home/index">
+        <svg width="500" height="61" viewBox="400 0 500 61" >
+            <text x="450%" y="200%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">MoviePass</text>
+        </svg>
+      </a>
     </div>
     <nav id="mainav" class="fl_right">
       <!----------------- MENU GENERAL -----------------------> 
