@@ -10,6 +10,8 @@
     define("POSTERURL","https://image.tmdb.org/t/p/w500/");
     define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
     define("YOUTUBEURL","https://www.youtube.com/watch?v=");
+    define("NOPOSTER","https://image.tmdb.org/t/p/w500/");
+    
 
     class MovieController{
         private $movieDAO;
@@ -101,13 +103,31 @@
         }
 
         /*Obtener pagina de pelicula directamente de la API*/
-        public function showMoviePage($page=1,$language="en"){
+        public function showMoviePage($page=1,$language="en-US"){
             $allGenre=$this->getAllgenre();
             $actualGenre = null;
-            $movieList=$this->getNowPlayingMovies($page,$language);
+            $movies=$this->getNowPlayingMovies($page,$language);
+            $movieList=$this->addNonBannerMovies($movies);
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
 
         }
+
+        /*Quitar las que no tengan portada */
+        public function addNonBannerMovies($movies){
+            $movieList=array();
+
+            foreach($movies as $movie){
+                if($movie->getPoster()==NOPOSTER){
+                    $movie->setPoster(IMG_PATH."banner-not.png");
+                    #var_dump($movie);
+                    }
+
+                array_push($movieList,$movie);
+            }
+
+            return $movieList;
+        }
+
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
         public function getNowPlayingMovies($page, $language){     
             $this->validateSession();
