@@ -8,6 +8,12 @@
 <link href="<?php echo CSS_PATH;?>layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="<?php echo CSS_PATH;?>fontawesome-4.6.3.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap" rel="stylesheet">
+    <style>   
+        @font-face {
+                    font-family: "Faster One";
+                    src: url("<?php echo CSS_PATH;?>fonts/FasterOne-Regular.ttf");
+                    }
+    </style>
 </head>
 <body id="top">
 
