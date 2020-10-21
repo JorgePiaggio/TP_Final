@@ -114,7 +114,11 @@ class MovieDAO implements IMovieDAO{
         $newMovie->setAdult($jsonObject["adult"]);
         $newMovie->setRuntime($jsonObject["runtime"]);
         $newMovie->setHomepage($jsonObject["homepage"]);
-        $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
+        if(!$jsonObject["poster_path"]){
+            $newMovie->setPoster(IMG_PATH."banner-not.png");
+            }else{
+            $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
+        }
         $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
         $newMovie->setOriginalLanguage($jsonObject["original_language"]);
         foreach($jsonObject["genres"] as $genre){

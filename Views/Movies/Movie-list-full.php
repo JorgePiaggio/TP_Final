@@ -23,7 +23,7 @@
           
           <form action="<?php echo FRONT_ROOT?>Movie/showMoviePage" method="post">
                 <div class="floating-label">
-                    <input type="number" name="pass" placeholder="# Page" value="<?php if($page){echo $page;} ?>" class="floating-input fl_left pageNumber" min="1" max="1000" required>
+                    <input type="number" name="pass" placeholder="# Page" value="<?php if($page){echo $page;} ?>" class="floating-input fl_left pageNumber" min="1" max="70" required>
                    
                 </div>
                     <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 

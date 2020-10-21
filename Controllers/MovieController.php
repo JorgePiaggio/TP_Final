@@ -24,6 +24,7 @@
 
         /* ver todas las pelis de la base de datos */
         public function showAllMovies(){
+            $page = null;
             $actualGenre = null;
             $allGenre=$this->getAllgenre();
             $movieList=$this->movieDAO->getAll();
@@ -56,9 +57,8 @@
             /* solicitar trailer de la pelicula */
             $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
             $jsonTrailer=null;
-            if($request_two){
-                $jsonTrailer=json_decode($request_two, true);
-            }
+            $jsonTrailer=json_decode($request_two, true);
+            
             if($jsonTrailer['results'][0]['site'] == 'YouTube'){
                 $movie->setVideoPath($jsonTrailer['results'][0]['key']);
             }

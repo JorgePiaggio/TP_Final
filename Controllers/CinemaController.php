@@ -119,7 +119,10 @@
         private function checkParameter($value=""){
             if($value==""){
                 header("location:../Home/index");
+                return false;
             }
+
+            return true;
         }
 
     
