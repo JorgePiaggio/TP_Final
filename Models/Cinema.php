@@ -9,7 +9,7 @@ class Cinema{
     private $address;
     private $phone;
     private $email;
-    private $ticketPrice;
+    
    
 
     function __construct(){
@@ -23,14 +23,13 @@ class Cinema{
     function getPhone(){return $this->phone;}
     function getEmail(){return $this->email;}
     function getState(){return $this->state;}
-    function getPrice(){return $this->ticketPrice;}
     function setId($id){$this->id=$id;}
     function setName($name){$this->name=$name;}
     function setAddress($address){$this->address=$address;}
     function setPhone($phone){$this->phone=$phone;}
     function setEmail($email){$this->email=$email;}
     function setState($state){$this->state=$state;}
-    function setPrice($ticketPrice){$this->ticketPrice=$ticketPrice;}
+    
     
 
 

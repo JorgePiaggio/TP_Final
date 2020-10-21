@@ -34,6 +34,10 @@
                                   </select>
                                    <span class="highlight"></span>
                               </div>
+                              <div class="floating-label">
+                                   <input type="number" name="price" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Price</label>
+                              </div>
                               <br><br>
                               <div class="floating-label">
                                    <span>&nbsp;</span>

@@ -4,48 +4,63 @@
         "number": "5",
         "capacity": "150",
         "type": "2D",
-        "state": true
+        "state": "1",
+        "ticketPrice": "150"
     },
     {
         "idCinema": "1",
         "number": "15",
         "capacity": "185",
         "type": "2D",
-        "state": false
+        "state": "0",
+        "ticketPrice": "205"
     },
     {
         "idCinema": "1",
         "number": "7",
         "capacity": "205",
         "type": "3D",
-        "state": "1"
+        "state": true,
+        "ticketPrice": 200
     },
     {
         "idCinema": "1",
         "number": "88",
         "capacity": "150",
         "type": "3D",
-        "state": false
+        "state": false,
+        "ticketPrice": 200
     },
     {
         "idCinema": "1",
         "number": "145",
         "capacity": "123",
         "type": "2D",
-        "state": true
+        "state": "1",
+        "ticketPrice": "180"
     },
     {
         "idCinema": "1",
         "number": "111",
         "capacity": "55",
         "type": "2D",
-        "state": true
+        "state": false,
+        "ticketPrice": 200
     },
     {
         "idCinema": "2",
         "number": "5",
         "capacity": "200",
         "type": "3D",
-        "state": true
+        "state": true,
+        "ticketPrice": 200
+    },
+    {
+        "idCinema": "1",
+        "number": "45",
+        "capacity": "56",
+        "type": "2D",
+        "state": true,
+        "ticketPrice": "352"
     }
 ]

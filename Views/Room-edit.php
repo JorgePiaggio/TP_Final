@@ -8,6 +8,7 @@
                               <th>Capacity</th>
                               <th>type</th>
                               <th>State</th>
+                              <th>Price</th>
                              </thead>
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Room/edit" method="post">
@@ -23,6 +24,11 @@
                                       <option value="1">Active</option>
                                       <option value="0">Inactive</option>
                                   </select></td>
+
+                                  <div class="floating-label">
+                                   <td><input type="number" name="price" value= "<?php echo $editRoom->getPrice(); ?>" placeholder=" " class="floating-input" required>
+                              </td>                                  
+                              </div>
     
                               </tr>
                          

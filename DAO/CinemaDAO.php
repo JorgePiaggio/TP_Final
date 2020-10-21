@@ -111,7 +111,6 @@
                 $valuesArray["address"] = $cinema->getAddress();
                 $valuesArray["phone"] = $cinema->getPhone();
                 $valuesArray["email"] = $cinema->getEmail();
-                $valuesArray["ticketPrice"] = $cinema->getPrice();
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
@@ -135,7 +134,7 @@
                     $cinema->setAddress($valuesArray["address"]);
                     $cinema->setPhone($valuesArray["phone"]);
                     $cinema->setEmail($valuesArray["email"]);
-                    $cinema->setPrice($valuesArray["ticketPrice"]);
+                    
                     array_push($this->cinemaList, $cinema);
                 }
 

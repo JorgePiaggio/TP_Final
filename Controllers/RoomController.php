@@ -44,7 +44,7 @@
             require_once(VIEWS_PATH."Select-cinema.php");
             }
 
-        public function add($idCinema,$number,$capacity,$type,$state){
+        public function add($idCinema,$number,$capacity,$type,$state,$price){
             $wanted=$this->roomDAO->getRoom($idCinema,$number);
             $cinemaSearch = $this->cinemaDAO->search($idCinema);
             $cinemaList=$this->cinemaDAO->getAll();
@@ -55,7 +55,8 @@
                 $newRoom->setNumber($number);
                 $newRoom->setCapacity($capacity);
                 $newRoom->setType($type);
-                $newRoom->setState(boolval($state)); 
+                $newRoom->setState(boolval($state));
+                $newRoom->setPrice($price); 
             
                 $this->roomDAO->add($newRoom);
                 
@@ -67,13 +68,14 @@
             }
         }
 
-        public function edit($idCinema,$capacity,$type,$state,$number){
+        public function edit($idCinema,$capacity,$type,$state,$price,$number){
             $room=new Room();
             $room->setIdCinema($idCinema);
             $room->setCapacity($capacity);
             $room->setType($type);
             $room->setState($state);
             $room->setnumber($number);
+            $room->setPrice($price);
             
             $this->roomDAO->update($room);
 

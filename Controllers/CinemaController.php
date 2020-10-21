@@ -7,8 +7,7 @@
     
     use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
-    use DAO\RoomDAO as RoomDAO;
-    use DAO\Room as Room;
+ 
 
     class CinemaController{
         private $cinemaDAO;
@@ -35,7 +34,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function add($name, $street, $number, $phone, $email, $price){
+        public function add($name, $street, $number, $phone, $email){
             $lastId = $this->cinemaDAO->lastId();
             $address = $street." ".$number;
 
@@ -46,7 +45,7 @@
                 $cinema->setAddress($address);
                 $cinema->setPhone($phone);
                 $cinema->setEmail($email);
-                $cinema->setPrice($price);
+                
 
                 $this->cinemaDAO->add($cinema);
                 
@@ -89,7 +88,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function edit($name, $street, $number, $phone, $email, $price, $id){
+        public function edit($name, $street, $number, $phone, $email, $id){
             $aux = $this->cinemaDAO->Search($id);
             $address = $street." ".$number;
 
@@ -101,7 +100,6 @@
                 $cinemaEdit->setPhone($phone);
                 $cinemaEdit->setEmail($email);
                 $cinemaEdit->setId($id);
-                $cinemaEdit->setPrice($price);
 
                 $this->cinemaDAO->update($cinemaEdit);
                 $this->msg = "Cinema modified successfully";

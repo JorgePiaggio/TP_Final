@@ -5,8 +5,7 @@
         "name": "Ambassador",
         "address": "Cordoba 3800",
         "phone": "4123333",
-        "email": "ambassador@hotmail.com",
-        "ticketPrice": "240"
+        "email": "ambassador@hotmail.com"
     },
     {
         "id": "2",
@@ -14,8 +13,7 @@
         "name": "Paseo Diagonal",
         "address": "Rivadavia 1250",
         "phone": "4956666",
-        "email": "paseodiagonal@hotmail.com",
-        "ticketPrice": 250
+        "email": "paseodiagonal@hotmail.com"
     },
     {
         "id": "3",
@@ -23,8 +21,7 @@
         "name": "Paseo Aldrey",
         "address": "Sarmiento 2222",
         "phone": "4748888",
-        "email": "paseoaldrey@gmail.com",
-        "ticketPrice": 350
+        "email": "paseoaldrey@gmail.com"
     },
     {
         "id": "4",
@@ -32,8 +29,7 @@
         "name": "Cine Centro",
         "address": "Belgrano 2500",
         "phone": "4789988",
-        "email": "cinemacentro@gmail.com",
-        "ticketPrice": 155
+        "email": "cinemacentro@gmail.com"
     },
     {
         "id": "5",
@@ -41,8 +37,7 @@
         "name": "Cine Puerto",
         "address": "12 de Octubre 8882",
         "phone": "4156363",
-        "email": "puerto@hotmail.com",
-        "ticketPrice": 450
+        "email": "puerto@hotmail.com"
     },
     {
         "id": "6",
@@ -50,8 +45,8 @@
         "name": "Los Gallegos",
         "address": "Rivadavia 1500",
         "phone": "4756363",
-        "email": "gallegosShopping@hotmail.com",
-        "ticketPrice": "350"
+        "email": "gallegosShopping@hotmail.com"
+
     },
     {
         "id": "7",
@@ -59,8 +54,7 @@
         "name": "Cinema Mogotes",
         "address": "Av. de los Trabajadores 5000",
         "phone": "4751111",
-        "email": "farocinema@hotmail.com",
-        "ticketPrice": 250
+        "email": "farocinema@hotmail.com"
     },
     {
         "id": 8,
@@ -68,7 +62,6 @@
         "name": "Hoyts",
         "address": "Calchaqui 4050",
         "phone": "42155666",
-        "email": "hoyts@hoyts.com",
-        "ticketPrice": "500"
+        "email": "hoyts@hoyts.com"
     }
 ]

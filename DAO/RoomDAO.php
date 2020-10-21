@@ -113,6 +113,8 @@
                 $valuesArray["capacity"] = $room->getCapacity();
                 $valuesArray["type"] = $room->getType();
                 $valuesArray["state"] = $room->getState();
+                $valuesArray["ticketPrice"] = $room->getPrice();
+
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
@@ -135,6 +137,7 @@
                     $room->setNumber($valuesArray["number"]);
                     $room->setType($valuesArray["type"]);
                     $room->setCapacity($valuesArray["capacity"]);
+                    $room->setPrice($valuesArray["ticketPrice"]);
                     array_push($this->roomList, $room);
                 }
             }

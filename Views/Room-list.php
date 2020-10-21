@@ -8,6 +8,7 @@
                                    <th>Number</th>
                                    <th>Capacity</th>
                                    <th>Type</th>
+                                   <th>Price</th>
                                    <th colspan="2">Action</th>
                               </thead>
                               <tbody>
@@ -16,6 +17,7 @@
                                         <td><?php echo $room->getNumber(); ?> </td>
                                         <td><?php echo $room->getCapacity(); ?> </td>
                                         <td><?php echo $room->getType(); ?> </td>
+                                        <td><?php echo $room->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
                                         <input type="hidden" name="idcinema" value="<?php echo $room->getIdCinema();?>">
                                         <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getNumber();?>"> Edit </button></td>
@@ -36,6 +38,7 @@
                                    <th>Number</th>
                                    <th>Capacity</th>
                                    <th>Type</th>
+                                   <th>Price</th>
                                    <th colspan="2">Action</th>
                               </thead>
                               <tbody>
@@ -44,6 +47,7 @@
                                         <td><?php echo $room->getNumber(); ?> </td>
                                         <td><?php echo $room->getCapacity(); ?> </td>
                                         <td><?php echo $room->getType(); ?> </td>
+                                        <td><?php echo $room->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
                                         <input type="hidden" name="idcinema" value="<?php echo $room->getIdCinema();?>">
                                         <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getNumber();?>"> Edit </button></td>
