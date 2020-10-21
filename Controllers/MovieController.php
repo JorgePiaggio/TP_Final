@@ -58,9 +58,8 @@
              if($request_two){
                 $jsonTrailer=json_decode($request_two, true);
              }
-             var_dump($jsonTrailer['results']);
             if($jsonTrailer['results'][0]['site'] == 'YouTube'){
-                $movie->setVideoPath(YOUTUBEURL.$jsonTrailer['results'][0]['key']);
+                $movie->setVideoPath($jsonTrailer['results'][0]['key']);
             }
             
 

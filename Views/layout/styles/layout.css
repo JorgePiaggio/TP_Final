@@ -235,7 +235,7 @@ td{border-width:0 1px;}
 --------------------------------------------------------------------------------------------------------------- */
 .cardStyle{
 	background-color:rgba(7, 7, 7, 0.687);
-	border-radius: 10%;
+	border-radius: 5%;
 	padding: 20px 20px;
 	color: rgb(167, 164, 164);
 }
