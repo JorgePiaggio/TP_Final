@@ -20,12 +20,14 @@ class Movie{
     private $active;            //true-> en una funcion actual
     private $genreStrings;      // arreglo auxiliar para string de generos, de aca para abajo no se guarda
     private $runtime;
-    private $homepage; 
+    private $homepage;
+    private $director; 
 
     public function __construct(){
         $this->genreIds=array();
         $this->genreStrings=array();
         $this->active=false;
+        $this->director = array();
     }
 
     public function getTmdbID() {return $this->tmdbId;}
@@ -46,6 +48,7 @@ class Movie{
     public function getActive(){return $this->active;}
     public function getRuntime(){return $this->runtime;}
     public function getHomepage(){return $this->homepage;}
+    public function getDirector(){return $this->director;}
 
     public function setTmdbId($id){$this->tmdbId=$id;}
     public function setTitle($title){$this->title=$title;}
@@ -65,6 +68,7 @@ class Movie{
     public function setActive($value){$this->active=$value;}
     public function setRuntime($runtime){$this->runtime=$runtime;}
     public function setHomepage($homepage){$this->homepage=$homepage;}
+    public function setDirector($director){$this->director = $director;}
 
 
  /*   private $id;
