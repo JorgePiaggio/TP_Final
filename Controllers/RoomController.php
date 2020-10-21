@@ -27,12 +27,14 @@
             require_once(VIEWS_PATH."Room-add.php");
         }  
 
-        public function showRoomEdit($idCinema, $number){
+        public function showRoomEdit($idCinema="", $number=""){
+            $this->checkParameter($idCinema);
             $editRoom=$this->roomDAO->getRoom($idCinema,$number);
             require_once(VIEWS_PATH."Room-edit.php");
         }
 
-        public function showRoomList($idCinema){
+        public function showRoomList($idCinema=""){
+            $this->checkParameter($idCinema);
             $roomList=$this->roomDAO->getRooms($idCinema);
             $roomsInactives=$this->roomDAO->getAllInactives($idCinema);
             $cinemaSearch = $this->cinemaDAO->search($idCinema);
@@ -44,7 +46,8 @@
             require_once(VIEWS_PATH."Select-cinema.php");
             }
 
-        public function add($idCinema,$number,$capacity,$type,$state,$price){
+        public function add($idCinema="",$number="",$capacity="",$type="",$state="",$price=""){
+            $this->checkParameter($idCinema);
             $wanted=$this->roomDAO->getRoom($idCinema,$number);
             $cinemaSearch = $this->cinemaDAO->search($idCinema);
             $cinemaList=$this->cinemaDAO->getAll();
@@ -68,7 +71,8 @@
             }
         }
 
-        public function edit($idCinema,$capacity,$type,$state,$price,$number){
+        public function edit($idCinema="",$capacity="",$type="",$state="",$price="",$number=""){
+            $this->checkParameter($idCinema);
             $room=new Room();
             $room->setIdCinema($idCinema);
             $room->setCapacity($capacity);
@@ -82,7 +86,8 @@
             $this->showSelectCinema();
         }
 
-        public function changeState($idCinema,$number){
+        public function changeState($idCinema="",$number=""){
+            $this->checkParameter($idCinema);
             $room=$this->roomDAO->getRoom($idCinema,$number);
             
             if($room->getState()==true){
@@ -94,6 +99,14 @@
 
             $this->showSelectCinema();
         }
+
+        private function checkParameter($value=""){
+            if($value==""){
+                header("location:../Home/index");
+            }
+        }
     }
+
+   
 
 ?>

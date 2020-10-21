@@ -9,9 +9,12 @@
 
 
         public function add($cinema){
+            if($this->checkValue($cinema->getName())){
             $this->retrieveData();
             array_push($this->cinemaList, $cinema);
             $this->saveData();
+            }
+            
         }
 
         public function getAll(){
@@ -139,6 +142,14 @@
                 }
 
             }
+        }
+
+        private function checkValue($value){
+            if($value==""){
+                return false;
+            }
+
+            return true;
         }
     }             
 

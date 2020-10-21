@@ -34,7 +34,8 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function add($name, $street, $number, $phone, $email){
+        public function add($name="", $street="", $number="", $phone="", $email=""){
+            $this->checkParameter($name);
             $lastId = $this->cinemaDAO->lastId();
             $address = $street." ".$number;
 
@@ -68,12 +69,14 @@
             return $validate; //Retorna true si se puede agregar el cine y false si ya existe
         }
 
-        public function changeState($idRemove){
+        public function changeState($idRemove=""){
+            $this->checkParameter($idRemove);
             $this->cinemaDAO->changeState($idRemove);
             $this->showListView();
         }
         
-        public function searchEdit($idCinema){
+        public function searchEdit($idCinema=""){
+            $this->checkParameter($idCinema);
             $editCinema = $this->cinemaDAO->search($idCinema);
 
             $words = explode(" ", $editCinema->getAddress());
@@ -88,7 +91,8 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function edit($name, $street, $number, $phone, $email, $id){
+        public function edit($name="", $street="", $number="", $phone="", $email="", $id=""){
+            $this->checkParameter($name);
             $aux = $this->cinemaDAO->Search($id);
             $address = $street." ".$number;
 
@@ -111,6 +115,14 @@
             }
             
         }
+
+        private function checkParameter($value=""){
+            if($value==""){
+                header("location:../Home/index");
+            }
+        }
+
+    
 
     }
 ?>

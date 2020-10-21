@@ -9,9 +9,11 @@
 
 
         public function add($room){
+            if($this->checkValue($room->getNumber())){
             $this->retrieveData();
             array_push($this->roomList, $room);
             $this->saveData();
+            }
         }
 
         public function getAll(){
@@ -141,6 +143,14 @@
                     array_push($this->roomList, $room);
                 }
             }
+        }
+        
+        private function checkValue($value){
+            if($value==""){
+                return false;
+            }
+
+            return true;
         }
     }             
 

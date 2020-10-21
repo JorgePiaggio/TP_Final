@@ -49,7 +49,8 @@ class ClientController{
         require_once(VIEWS_PATH."Client-profile.php");
     }
 
-    public function login($email,$pass){
+    public function login($email="",$pass=""){
+        $this->checkParameter($email);
         $client=$this->clientDAO->search($email); //busco el cliente a traves del email
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($client!=null && strcmp($client->getPassWord(),$pass)==0)){ //Comparo si es el admin o un cliente y coincide mail y pass
             $_SESSION["loggedUser"]=$email;    
@@ -66,8 +67,8 @@ class ClientController{
         header("location:../Home/index");
     }
     
-    public function register($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
-
+    public function register($name="",$surname="",$dni="",$street="",$number="",$phone="",$email="",$pass="",$repass=""){
+        $this->checkParameter($name);
         if(!$this->validateEmail($email)){ 
             if($this->validatePass($pass, $repass)){
                 $this->newClient= new Client();
@@ -95,7 +96,8 @@ class ClientController{
         $this->showRegister();
     }
 
-    public function edit($name,$surname,$dni,$street,$number,$phone,$email,$pass,$repass){
+    public function edit($name="",$surname="",$dni="",$street="",$number="",$phone="",$email="",$pass="",$repass=""){
+        $this->checkParameter($name);
         $this->validateSession();
         $client=$this->clientDAO->search($email);
             
@@ -161,6 +163,12 @@ class ClientController{
 
     public function validateSession(){
         if(!$_SESSION || $_SESSION["loggedUser"]=="admin@moviepass.com"){
+            header("location:../Home/index");
+        }
+    }
+
+    private function checkParameter($value=""){
+        if($value==""){
             header("location:../Home/index");
         }
     }
