@@ -45,7 +45,7 @@
 
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
-
+            
             /* solicitar todos los datos de la pelicula */
             $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
             $jsonMovie=($request) ? json_decode($request, true) : array();
@@ -100,9 +100,16 @@
             }
         }
 
+        /*Obtener pagina de pelicula directamente de la API*/
+        public function showMoviePage($page=1,$language="en"){
+            $allGenre=$this->getAllgenre();
+            $actualGenre = null;
+            $movieList=$this->getNowPlayingMovies($page,$language);
+            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
 
+        }
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
-        public function getNowPlayingMovies($page, $language){
+        public function getNowPlayingMovies($page, $language){     
             $this->validateSession();
 
             $movies= array();
@@ -147,6 +154,6 @@
                 header("location:../Home/index");
             }
         }
-              
 
+      
 }?>
