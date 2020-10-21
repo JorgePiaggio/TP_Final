@@ -9,6 +9,7 @@
     define("APIURL","http://api.themoviedb.org/3/");
     define("POSTERURL","https://image.tmdb.org/t/p/w500/");
     define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
+    define("YOUTUBEURL","https://www.youtube.com/watch?v=");
 
     class MovieController{
         private $movieDAO;
@@ -44,10 +45,25 @@
 
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
+
+            /* solicitar todos los datos de la pelicula */
             $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
             $jsonMovie=($request) ? json_decode($request, true) : array();
             $movie=$this->movieDAO->constructMovie($jsonMovie);
+
+
+            /* solicitar trailer de la pelicula */
+            $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
+            $jsonTrailer=null;
+             if($request_two){
+                $jsonTrailer=json_decode($request_two, true);
+             }
+             var_dump($jsonTrailer['results']);
+            if($jsonTrailer['results'][0]['site'] == 'YouTube'){
+                $movie->setVideoPath(YOUTUBEURL.$jsonTrailer['results'][0]['key']);
+            }
             
+
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }
 

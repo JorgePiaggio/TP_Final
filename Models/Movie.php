@@ -11,15 +11,16 @@ class Movie{
     private $releaseDate;
     private $popularity;
     private $video;
+    private $videoPath;
     private $adult;
     private $posterPath;
     private $backdropPath;
     private $originalLanguage;
     private $genreIds;
-    private $genreStrings;      // arreglo auxiliar para string de generos, no se guarda
+    private $active;            //true-> en una funcion actual
+    private $genreStrings;      // arreglo auxiliar para string de generos, de aca para abajo no se guarda
     private $runtime;
     private $homepage; 
-    private $active;            //true-> en una funcion actual
 
     public function __construct(){
         $this->genreIds=array();
@@ -35,6 +36,7 @@ class Movie{
     public function getReleaseDate() {return $this->releaseDate;}
     public function getPopularity() {return $this->popularity;}
     public function getVideo() {return $this->video;} //true or false//
+    public function getVideoPath() {return $this->videoPath;}
     public function getAdult() {return $this->adult;}
     public function getPoster(){return $this->posterPath;}
     public function getBackdropPath() {return $this->backdropPath;}
@@ -53,6 +55,7 @@ class Movie{
     public function setReleaseDate($releaseDate){$this->releaseDate=$releaseDate;}
     public function setPopularity($popularity){$this->popularity=$popularity;}
     public function setVideo($video){$this->video=$video;}
+    public function setVideoPath($videoPath){$this->videoPath=$videoPath;}
     public function setAdult($adult){$this->adult=$adult;}
     public function setPoster($posterPath){$this->posterPath=$posterPath;}
     public function setBackdropPath($backdropPath){$this->backdropPath=$backdropPath;}

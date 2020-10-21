@@ -19,14 +19,13 @@ File: Layout CSS
 #header #logo{margin:5px 0 0 55px;}
 #header #logo h1{margin:0; padding:0; font-size:50px; text-transform:uppercase; color:#FF5723; }
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
-.page-title-variation{font-size: 40px; background-color: rgba(7, 7, 7, 0.687);color:white;text-align: center; padding: 1.5rem 0 1.5rem; border-radius: 15%;}
+.page-title-variation{font-size: 40px; background-color: rgba(7, 7, 7, 0.687); color:white;text-align: center; padding: 1.5rem 0 1.5rem; border-radius: 15%;}
 .page-title.v2{font-size: 55px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
 .page-title-special{margin: auto;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
 .up4{margin-top:-105px;}
 .down{margin-top:60px;}
-
 
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
@@ -242,7 +241,7 @@ td{border-width:0 1px;}
 }
 .cardStyle a{
 	font-style: none;
-	color: rgb(89, 89, 89);
+	color:rgb(167, 164, 164);
 }
 .cardStyle h4{
 	color: white;
