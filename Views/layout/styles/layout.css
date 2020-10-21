@@ -237,11 +237,11 @@ td{border-width:0 1px;}
 	background-color:rgba(7, 7, 7, 0.687);
 	border-radius: 5%;
 	padding: 20px 20px;
-	color: rgb(167, 164, 164);
+	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
 }
 .cardStyle a{
 	font-style: none;
-	color:rgb(167, 164, 164);
+	color:rgb(167, 164, 164); 
 }
 .cardStyle h4{
 	color: white;
