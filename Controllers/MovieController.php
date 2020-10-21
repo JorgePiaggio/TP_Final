@@ -10,7 +10,6 @@
     define("POSTERURL","https://image.tmdb.org/t/p/w500/");
     define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
     define("YOUTUBEURL","https://www.youtube.com/watch?v=");
-    define("NOPOSTER","https://image.tmdb.org/t/p/w500/");
     
 
     class MovieController{
@@ -106,26 +105,9 @@
         public function showMoviePage($page=1,$language="en-US"){
             $allGenre=$this->getAllgenre();
             $actualGenre = null;
-            $movies=$this->getNowPlayingMovies($page,$language);
-            $movieList=$this->addNonBannerMovies($movies);
+            $movieList=$this->getNowPlayingMovies($page,$language);
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
 
-        }
-
-        /*Quitar las que no tengan portada */
-        public function addNonBannerMovies($movies){
-            $movieList=array();
-
-            foreach($movies as $movie){
-                if($movie->getPoster()==NOPOSTER){
-                    $movie->setPoster(IMG_PATH."banner-not.png");
-                    #var_dump($movie);
-                    }
-
-                array_push($movieList,$movie);
-            }
-
-            return $movieList;
         }
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
@@ -149,7 +131,11 @@
                 $newMovie->setPopularity($valuesArray["popularity"]);
                 $newMovie->setVideo($valuesArray["video"]);
                 $newMovie->setAdult($valuesArray["adult"]);
+                if(!$valuesArray["poster_path"]){
+                $newMovie->setPoster(IMG_PATH."banner-not.png");
+                }else{
                 $newMovie->setPoster(POSTERURL.$valuesArray["poster_path"]);
+                }
                 $newMovie->setBackdropPath($valuesArray["backdrop_path"]);
                 $newMovie->setOriginalLanguage($valuesArray["original_language"]);
                 foreach($valuesArray["genre_ids"] as $genre){
