@@ -143,10 +143,10 @@
         $newMovie->setAdult($jsonObject["adult"]);
         $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
         $newMovie->setOriginalLanguage($jsonObject["original_language"]);
-        if(!$jsonObject["homepage"]){
+        if($jsonObject["homepage"]){
             $newMovie->setHomepage($jsonObject["homepage"]);
         }
-        if(!$jsonObject["runtime"]){
+        if($jsonObject["runtime"]){
             $newMovie->setRuntime($jsonObject["runtime"]);
         }
         if(!$jsonObject["poster_path"]){

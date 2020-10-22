@@ -47,6 +47,27 @@ class MovieDAO implements IMovieDAO{
     }
 
 
+      /* Retorna las mejores 20 peliculas según valoración */
+      public function getMostPopular(){
+        $this->retrieveData();
+        $indice=0;
+        $mostPopular = array();
+
+        usort($this->movieList, function($a, $b){
+            return $a->getPopularity() < $b->getPopularity();
+        });
+
+        foreach ($this->movieList as $movie){
+            if($indice < 5){
+                array_push($mostPopular, $movie);
+                $indice++;
+            }
+        }
+
+        return $mostPopular;
+    }
+
+
     /*obtener objeto pelicula por medio del id*/
     public function getMovie($tmdbId){
         $this->retrieveData();

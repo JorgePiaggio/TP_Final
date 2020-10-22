@@ -14,6 +14,7 @@
         public function index($message = "")
         {
             $movieList=$this->movieDAO->getBestRated();
+            $movieListSlider=$this->movieDAO->getMostPopular();
             require_once(VIEWS_PATH."home.php");
         }  
 
