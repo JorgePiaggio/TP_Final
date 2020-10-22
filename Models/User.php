@@ -1,7 +1,7 @@
 <?php 
 namespace Models;
 
-class Client{
+class User{
 
     private $id;
     private $dni;
@@ -11,8 +11,8 @@ class Client{
     private $phone;
     private $email;
     private $password;
-    private $billList;
-    private $cardList;
+    private $billList; //??
+    private $cardList; //??
 
 
     public function __construct()
