@@ -14,7 +14,7 @@ class Cinema{
 
     function __construct(){
         $this->state = true;
-        $this->roomList=array();
+        
     }
     
     function getId(){return $this->id;}

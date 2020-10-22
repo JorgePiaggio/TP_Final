@@ -7,15 +7,18 @@
     
     use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
+    use DAO\cinemaDAOPDO as cinemaDAOPDO;
  
 
     class CinemaController{
         private $cinemaDAO;
+        #private $cinemaDAO;
         private $msg;
     
     
         public function __construct(){
-            $this->cinemaDAO = new CinemaDAO(); 
+            #$this->cinemaDAO = new CinemaDAO(); 
+            $this->cinemaDAO = new cinemaDAOPDO(); 
             $this->msg = null;
         }
 
@@ -34,20 +37,18 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
 
-        public function add($name="", $street="", $number="", $phone="", $email=""){
+        public function add($name, $street, $number, $phone, $email){
             $this->checkParameter($name);
-            $lastId = $this->cinemaDAO->lastId();
+            #$lastId = $this->cinemaDAO->lastId();
             $address = $street." ".$number;
 
             if($this->validateCinema($name, $address)){ 
                 $cinema = new Cinema();
                 $cinema->setName($name);
-                $cinema->setId($lastId+1);
+                #$cinema->setId($lastId+1);
                 $cinema->setAddress($address);
                 $cinema->setPhone($phone);
                 $cinema->setEmail($email);
-                
-
                 $this->cinemaDAO->add($cinema);
                 
                 $this->showListView();
@@ -55,7 +56,10 @@
             else{
                 $this->msg = "Already exists cinema: '$name' with address: '$address'.";
                 $this->showAddView();
+                
             }
+               
+            
         }
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección
@@ -72,6 +76,7 @@
         public function changeState($idRemove=""){
             $this->checkParameter($idRemove);
             $this->cinemaDAO->changeState($idRemove);
+            
             $this->showListView();
         }
         
@@ -93,7 +98,7 @@
 
         public function edit($name="", $street="", $number="", $phone="", $email="", $id=""){
             $this->checkParameter($name);
-            $aux = $this->cinemaDAO->Search($id);
+            $aux = $this->cinemaDAO->search($id);
             $address = $street." ".$number;
 
             if($this->validateCinema($name, $address)){ 
