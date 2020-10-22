@@ -7,21 +7,26 @@
           <li>
             <article>
               <h2 class="heading headingcolor"><?php $str1=""; 
-                        if(strlen($movieList[$i]->getTitle()) > 33){
-                        $str1 = substr($movieList[$i]->getTitle(), 0, 30) . '...';
-                        echo $str1;
-                        }else{ 
-                        echo $movieList[$i]->getTitle(); } ?>
-              </h2>
-              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList[$i]->getTmdbID()?>">
-                <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movieList[$i]->getBackdropPath(); ?>" alt="<?php echo $movieList[$i]->getTitle(); ?> movie poster">
-              </a>
-              <p> <?php $str=""; 
-                        if(strlen($movieList[$i]->getDescription()) > 250){
-                        $str = substr($movieList[$i]->getDescription(), 0, 247) . '...';
-                        echo $str;
-                        }else{ 
-                        echo $movieList[$i]->getDescription();} ?>
+                        if($movieList[$i]->getBackdropPath()){
+                          if(strlen($movieList[$i]->getTitle()) > 33){
+                            $str1 = substr($movieList[$i]->getTitle(), 0, 30) . '...';
+                            echo $str1;
+                            }else{ 
+                            echo $movieList[$i]->getTitle(); 
+                          } ?>
+                              </h2>
+                              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList[$i]->getTmdbID()?>">
+                                  <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movieList[$i]->getBackdropPath(); ?>" 
+                                  alt="<?php echo $movieList[$i]->getTitle(); ?> movie poster">
+                              </a>
+                              <p> <?php $str=""; 
+                          if(strlen($movieList[$i]->getDescription()) > 250){
+                            $str = substr($movieList[$i]->getDescription(), 0, 247) . '...';
+                            echo $str;
+                          }else{ 
+                            echo $movieList[$i]->getDescription();
+                          } 
+                        }?>
               </p> 
               <footer>
                 <ul class="nospace inline pushright">
