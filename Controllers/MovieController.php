@@ -28,6 +28,7 @@
             $actualGenre = null;
             $allGenre=$this->getAllgenre();
             $movieList=$this->movieDAO->getAll();
+            $movieList=$this->genreToString($movieList);
             $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
@@ -74,6 +75,18 @@
                     }
             }
             $movie->setDirector($directors);
+
+
+            /* solicitar review */
+            $request_four = file_get_contents(APIURL."movie/".$tmdbId."/reviews?api_key=".APIKEY."&language=en-US&page=1");
+            $jsonCredits = ($request_four) ? json_decode($request_four, true) : array();
+            if($jsonCredits['results']){
+                $movie->setReview($jsonCredits['results'][0]);
+            }
+            
+            /* https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1 */
+
+
             
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }

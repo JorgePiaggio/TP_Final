@@ -3,7 +3,7 @@
     <div id="logo" class="fl_left">
       <a href="<?php echo FRONT_ROOT?>Home/index">
         <svg width="500" height="61" viewBox="400 0 500 61" >
-            <text x="450%" y="200%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">MoviePass</text>
+            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">MoviePass</text>
         </svg>
       </a>
     </div>

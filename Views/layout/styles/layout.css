@@ -239,14 +239,28 @@ td{border-width:0 1px;}
 	padding: 20px 20px;
 	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
 }
-.cardStyle a{
+.cardStyle2{
+	background-color:rgba(7, 7, 7, 0.687);
+	border-top-left-radius: 5%;
+	border-top-right-radius: 5%;
+	padding: 20px 20px;
+	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
+}
+.cardStyle3{
+	background-color:rgba(7, 7, 7, 0.687);
+	border-bottom-left-radius: 5%;
+	border-bottom-right-radius: 5%;
+	border-top-right-radius: 5%;
+	padding: 20px 20px;
+	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
+}
+.cardStyle2 a{
 	font-style: none;
 	color:rgb(167, 164, 164); 
 }
-.cardStyle h4{
+.cardStyle2 h4, .cardStyle3 h4{
 	color: white;
 }
-
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
 #gallery{display:block; width:100%; margin-bottom:50px;}

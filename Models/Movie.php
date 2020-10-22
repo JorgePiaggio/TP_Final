@@ -22,6 +22,7 @@ class Movie{
     private $runtime;
     private $homepage;
     private $director; 
+    private $review;
 
     public function __construct(){
         $this->genreIds=array();
@@ -49,6 +50,7 @@ class Movie{
     public function getRuntime(){return $this->runtime;}
     public function getHomepage(){return $this->homepage;}
     public function getDirector(){return $this->director;}
+    public function getReview(){return $this->review;}
 
     public function setTmdbId($id){$this->tmdbId=$id;}
     public function setTitle($title){$this->title=$title;}
@@ -69,6 +71,7 @@ class Movie{
     public function setRuntime($runtime){$this->runtime=$runtime;}
     public function setHomepage($homepage){$this->homepage=$homepage;}
     public function setDirector($director){$this->director = $director;}
+    public function setReview($review){$this->review = $review;}
 
 
  /*   private $id;
