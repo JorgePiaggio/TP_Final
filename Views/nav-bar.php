@@ -27,18 +27,18 @@
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }else{ ?>
 
             <!---User-->
-            <li><a href="<?php echo FRONT_ROOT?>Client/showProfile">Profile</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Client/logout">Sign out</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/showProfile">Profile</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }?>
             <?php } else{ ?>  
       
             <!---Guest-->
-            <li><a href="<?php echo FRONT_ROOT?>Client/showLogin">Login</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Client/showRegister">Register</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/showLogin">Login</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/showRegister">Register</a></li>
             <?php } ?>
       </ul></ul>
     </nav>

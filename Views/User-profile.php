@@ -5,24 +5,24 @@
 
                     <table class="tabla-perfil" style="width: 50%;">
                         <thead >
-                            <th colspan="3"><h4 class="thead-orange"><?php echo $client->getName()." ".$client->getSurname();?></h4></th>
+                            <th colspan="3"><h4 class="thead-orange"><?php echo $user->getName()." ".$user->getSurname();?></h4></th>
                         </thead>
                         <tbody>
-                        <form action="<?php echo FRONT_ROOT?>Client/edit" method="post">
+                        <form action="<?php echo FRONT_ROOT?>User/edit" method="post">
                             <tr> 
                                 <td colspan="3"></td> 
                             </tr>
                             <tr> 
                                 <td style="width: 35%;">Name</td>    
-                                <td colspan="2" style="width: 65%;"><input type="text" name="name" value="<?php echo $client->getName();?>"></td>
+                                <td colspan="2" style="width: 65%;"><input type="text" name="name" value="<?php echo $user->getName();?>"></td>
                             </tr>     
                             <tr> 
                                 <td style="width: 35%;">Surname</td>    
-                                <td colspan="2" style="width: 65%;"><input type="text" name="surname" value="<?php echo $client->getSurname();?>"></td>
+                                <td colspan="2" style="width: 65%;"><input type="text" name="surname" value="<?php echo $user->getSurname();?>"></td>
                             </tr>   
                             <tr> 
                                 <td style="width: 35%;">DNI</td>    
-                                <td colspan="2" style="width: 65%;"><input type="number" name="dni" value="<?php echo $client->getDni();?>"></td>
+                                <td colspan="2" style="width: 65%;"><input type="number" name="dni" value="<?php echo $user->getDni();?>"></td>
                             </tr>   
                             <tr> 
                                 <td style="width: 35%;">Address</td>    
@@ -31,23 +31,23 @@
                             </tr>                        
                             <tr> 
                                 <td style="width: 35%;">Phone</td>    
-                                <td colspan="2" style="width: 65%;"><input type="number" name="phone" value="<?php echo $client->getPhone();?>"></td>
+                                <td colspan="2" style="width: 65%;"><input type="number" name="phone" value="<?php echo $user->getPhone();?>"></td>
                             </tr>
                             <tr> 
                                 <td style="width: 35%;">Email</td>
-                                <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $client->getEmail();?>" disabled></td>
-                                <input type="hidden" name="email" value="<?php echo $client->getEmail();?>" >
+                                <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $user->getEmail();?>" disabled></td>
+                                <input type="hidden" name="email" value="<?php echo $user->getEmail();?>" >
                             </tr>
                             <!---<tr>
                                 <td style="width: 35%;">Credit Cards</td>
-                                <?php # foreach($client->getCardList() as $card){?>    
+                                <?php # foreach($user->getCardList() as $card){?>    
                                 <td colspan="2" style="width: 65%;"><input type="text" name="cards" value="<?php # echo $card->getNumber();?>"></td>
                             </tr> ACOMODAR --->
                                 <?php # }?>
                             <tr> 
                                 <td style="width: 35%;">Password</td>    
-                                <td style="width: 32%;"><input type="password" name="pass" value= <?php echo $client->getPassword()?>></td>
-                                <td style="width: 33%;"><input type="password" name="repass"value= <?php echo $client->getPassword()?>></td>
+                                <td style="width: 32%;"><input type="password" name="pass" value= <?php echo $user->getPassword()?>></td>
+                                <td style="width: 33%;"><input type="password" name="repass"value= <?php echo $user->getPassword()?>></td>
                             </tr>          
                             <tr> 
                                 <td colspan="3"></td> 
