@@ -1,4 +1,4 @@
-<div class="bgded overlay" style="background-image:url('https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movie->getBackdropPath() ?>');"> 
+<div class="bgded overlay gradient" style="background-image:url('https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movie->getBackdropPath() ?>');"> 
   <h2 class="page-title">Movie Overview</h2>
   <main class="hoc container clear"> 
       <div class="content up">
