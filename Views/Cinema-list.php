@@ -54,8 +54,7 @@
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Restore </button></td>
                                         </form>
                                    </tr>
-                              <?php } ?>
-                              
+                              <?php }?>
                               </tbody>
                          </table>
                     </div>
