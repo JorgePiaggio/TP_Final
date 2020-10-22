@@ -5,153 +5,232 @@
     use Models\Room as Room;
 
     class RoomDAO implements IRoomDAO{
-        private $roomList = array();
+        private $connection;
+        private $tableName="rooms";
 
 
         public function add($room){
-            if($this->checkValue($room->getNumber())){
-            $this->retrieveData();
-            array_push($this->roomList, $room);
-            $this->saveData();
+            $sql = "INSERT INTO ".$this->tableName." (idCinema,number,capacity,type,state,price) VALUES (:idCinema,:number,:capacity,:type,:state,:price)";
+
+           $parameters["idCinema"]=$room->getIdCinema();
+           $parameters["number"]=$room->getNumber();
+           $parameters["type"]=$room->getType();
+           $parameters["capacity"]=$room->getCapacity();
+           $parameters["state"]=$room->getState();
+           $parameters["price"]=$room->getPrice();
+
+
+            try{
+
+            $this->connection=Connection::getInstance();
+
+            return $this->connection->executeNonQuery($sql,$parameters);
+
+            }catch(\PDOException $ex){
+                throw $ex;
             }
         }
 
         public function getAll(){
-            $this->retrieveData();
-            return $this->roomList;
+            try
+            {
+                $roomList = array();
+
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $room = new Room();
+                    $room->setIdRoom($row["idRoom"]);
+                    $room->setIdCinema($row["idCinema"]);
+                    $room->setNumber($row["number"]);
+                    $room->setState($row["state"]);
+                    $room->setType($row["type"]);
+                    $room->setCapacity($row["capacity"]);
+                    $room->setPrice($row["price"]);
+
+
+                    array_push($roomList, $room);
+                }
+
+                return $roomList;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function changeState($room){
-                $index= $this->search($room->getIdCinema(),$room->getNumber());
-            if($index != -1){
-                $this->retrieveData();
-                if($this->roomList[$index]->getState() == true){
-                    $this->roomList[$index]->setState(false);
-                }
-                else{
-                    $this->roomList[$index]->setState(true);
-                }
-                $this->saveData();
-            }
-        }
+            try
+            {
 
-        /*
-        public function Restore($idCinema){
-            $wanted = $this->Search($idCinema);
-            if($wanted != null){
-                $this->RetrieveData();
-                $this->cinemaList[($wanted->getId())-1]->setState(true);
-                $this->SaveData();
+                $query = "SELECT * FROM ".$this->tableName." WHERE idRoom= :idRoom";
+                $parameters["idRoom"]=$room->getIdRoom();
+                $this->connection = Connection::getInstance();
+
+                $result = $this->connection->execute($query,$parameters);
+                if(!empty($result)){
+                $aux=$this->map($result);
+                    if($aux->getState()){
+                   
+                    $query = "UPDATE ".$this->tableName." set state=0 WHERE idRoom= :idRoom";
+
+                    }else{
+                    
+                    $query = "UPDATE ".$this->tableName." set state=1 WHERE idRoom= :idRoom";
+                    }
+
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
             }
-        }
-        
-        public function Remove($idCinema){
-            $this->RetrieveData();
-            $newList = array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getId() != $idCinema){
-                    array_push($newList, $cinema);
-                }
+                return $rowCant;
+                
             }
-            $this->cinemaList = $newList;
-		    $this->SaveData();
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            } 
         }
-        */
-        
-        public function search($idCinema,$number){
-            $index= -1;
-            $this->retrieveData();
-            for( $i=0;$i<count($this->roomList);$i++){
-                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdCinema()==$idCinema){
-                   $index=$i; 
-                }
-            }
-            return $index;
-        }
+    
 
         public function getRoom($idCinema,$number){
-            $this->retrieveData();
-            for( $i=0;$i<count($this->roomList);$i++){
-                if($this->roomList[$i]->getNumber() == $number && $this->roomList[$i]->getIdCinema()==$idCinema){
-                   return $this->roomList[$i]; 
-                }
+            try
+            {
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and number=:number";
+                $parameters["idCinema"]=$idCinema;
+                $parameters["number"]=$number;
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+            
+              
             }
-            return null;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else{
+                return null;
+            }
         }
 
-        public function getRooms($idcinema){
-            $cinemaRooms=array();
-            $this->retrieveData();
-            foreach($this->roomList as $room){
-                if($room->getIdCinema()==$idcinema && $room->getState()==true){
-                    array_push($cinemaRooms,$room);
+        public function getRooms($idCinema){
+            try
+            {
+                $roomList = array();
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE state=1 and idCinema=:idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $room = new Room();
+                    $room->setIdRoom($row["idRoom"]);
+                    $room->setIdCinema($row["idCinema"]);
+                    $room->setNumber($row["number"]);
+                    $room->setState($row["state"]);
+                    $room->setType($row["type"]);
+                    $room->setCapacity($row["capacity"]);
+                    $room->setPrice($row["price"]);
+
+
+                    array_push($roomList, $room);
                 }
+
+                return $roomList;
             }
-            return $cinemaRooms;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
         public function getAllInactives($idCinema){
-            $inactiveRooms=array();
-            $this->retrieveData();
-            foreach($this->roomList as $room){
-                if($room->getIdCinema()==$idCinema && $room->getState()==false){
-                    array_push($inactiveRooms,$room);
-                }
-            }
+            try
+            {
+                $roomList = array();
 
-            return $inactiveRooms;
+                $query = "SELECT * FROM ".$this->tableName." WHERE state=0 and idCinema=:idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $room = new Room();
+                    $room->setIdRoom($row["idRoom"]);
+                    $room->setIdCinema($row["idCinema"]);
+                    $room->setNumber($row["number"]);
+                    $room->setState($row["state"]);
+                    $room->setType($row["type"]);
+                    $room->setCapacity($row["capacity"]);
+                    $room->setPrice($row["price"]);
+
+
+                    array_push($roomList, $room);
+                }
+
+                return $roomList;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
         public function update($room){
-                $this->retrieveData();
-                $index=$this->search($room->getIdCinema(),$room->getNumber());
-                $this->roomList[$index]=$room;
-                $this->saveData();
-        }
+            try
+            {
+               
 
-        private function saveData(){
-            $arrayToEncode = array();
-            foreach($this->roomList as $room){
-                $valuesArray["idCinema"] = $room->getIdCinema();
-                $valuesArray["number"] = $room->getNumber();
-                $valuesArray["capacity"] = $room->getCapacity();
-                $valuesArray["type"] = $room->getType();
-                $valuesArray["state"] = $room->getState();
-                $valuesArray["ticketPrice"] = $room->getPrice();
+                $query = "UPDATE ".$this->tableName." set capacity=:capacity , type=:type ,state=:state, price=:price  WHERE idRoom=:idRoom";
 
-                array_push($arrayToEncode, $valuesArray);
+                $this->connection = Connection::getInstance();
+                $parameters["idRoom"]=$room->getIdRoom();
+                $parameters["capacity"]=$room->getCapacity();
+                $parameters["state"]=$room->getState();
+                $parameters["type"]=$room->getType();
+                $parameters["price"]=$room->getPrice();
+
+
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                return $rowCant;
             }
-            $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
-            file_put_contents('Data/rooms.json', $jsonContent);
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
 
-        private function retrieveData(){
-            $this->roomList = array();
+        protected function map($value){
+            $value=is_array($value) ? $value: array();
             
-            if(file_exists('Data/rooms.json')){
-
-                $jsonContent = file_get_contents('Data/rooms.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray){
-                    $room = new Room();
-                    $room->setIdcinema($valuesArray["idCinema"]);
-                    $room->setState($valuesArray["state"]);
-                    $room->setNumber($valuesArray["number"]);
-                    $room->setType($valuesArray["type"]);
-                    $room->setCapacity($valuesArray["capacity"]);
-                    $room->setPrice($valuesArray["ticketPrice"]);
-                    array_push($this->roomList, $room);
-                }
-            }
+            $result= array_map(function ($p){
+                 $room=new Room();
+                $room->setIdRoom($p["idRoom"]);
+                $room->setIdCinema($p["idCinema"]);
+                $room->setType($p["type"]);
+                $room->setCapacity($p["capacity"]);
+                $room->setPrice($p["price"]);
+                $room->setNumber($p["number"]);
+                $room->setState($p["state"]);
+                return $room;
+            },$value);
+ 
+            return count($result)>1 ? $result: $result["0"];
         }
+
         
-        private function checkValue($value){
-            if($value==""){
-                return false;
-            }
-
-            return true;
-        }
     }             
 
 ?>

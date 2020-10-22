@@ -7,7 +7,6 @@ interface IRoomDAO{
         function getAll();
         function getRooms($idCinema);
         function changeState(Room $room);
-        function search($idCinema,$number);
         function update(Room $room);
         function getRoom($idCinema,$number);
         function getAllInactives($idCinema);

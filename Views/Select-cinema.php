@@ -6,7 +6,7 @@
                          <div class="floating-label">
                                   <select name="selection cinema" class="selection">
                                       <?php foreach($cinemaList as $cinema){ ?>
-                                      <option value="<?php echo $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
+                                      <option value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
                                       <?php }?>
                                     </select>
                               <br><br>

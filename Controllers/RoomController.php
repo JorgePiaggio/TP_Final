@@ -7,7 +7,7 @@
 
     use DAO\RoomDAO as RoomDAO;
     use Models\Room as Room;
-    use DAO\CinemaDAO as CinemaDAO;
+    use DAO\CinemaDAOPDO as CinemaDAOPDO;
    
     class RoomController{
         private $cinemaDAO;
@@ -16,18 +16,18 @@
         
         public function __construct()
         {
-            $this->cinemaDAO=new CinemaDAO();
+            $this->cinemaDAO=new CinemaDAOPDO();
             $this->roomDAO=new RoomDAO();
             $this->msg=null;
         }
         
         public function showAddRoom()
         {
-            $cinemaList=$this->cinemaDAO->getAll();
+            $cinemaList=$this->cinemaDAO->getAllActive();
             require_once(VIEWS_PATH."Room-add.php");
         }  
 
-        public function showRoomEdit($idCinema="", $number=""){
+        public function showRoomEdit($idCinema="",$number=""){
             $this->checkParameter($idCinema);
             $editRoom=$this->roomDAO->getRoom($idCinema,$number);
             require_once(VIEWS_PATH."Room-edit.php");
@@ -71,9 +71,10 @@
             }
         }
 
-        public function edit($idCinema="",$capacity="",$type="",$state="",$price="",$number=""){
+        public function edit($idCinema="",$idRoom="",$capacity="",$type="",$state="",$price="",$number=""){
             $this->checkParameter($idCinema);
             $room=new Room();
+            $room->setIdRoom($idRoom);
             $room->setIdCinema($idCinema);
             $room->setCapacity($capacity);
             $room->setType($type);

@@ -43,8 +43,12 @@ class UserController{
         $this->checkParameter($email);
         $user=$this->userDAO->search($email); //busco el user a traves del email
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
-            $_SESSION["loggedUser"]=$email;    
-            $_SESSION["role"]=$user->getIdRole();
+            $_SESSION["loggedUser"]=$email;
+            if($email!="admin@moviepass.com"){    
+                $_SESSION["role"]=$user->getIdRole();
+            }else{
+                $_SESSION["role"]=1;
+            }
             header("location:../Home/index");
         }else{
             $this->msg = "Incorrect Email or Password";

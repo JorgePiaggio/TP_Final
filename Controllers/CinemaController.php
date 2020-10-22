@@ -38,13 +38,11 @@
 
         public function add($name, $street, $number, $phone, $email){
             $this->checkParameter($name);
-            #$lastId = $this->cinemaDAO->lastId();
             $address = $street . $number;
 
             if($this->validateCinema($name, $address)){ 
                 $cinema = new Cinema();
                 $cinema->setName($name);
-                #$cinema->setIdCinema($lastId+1);
                 $cinema->setStreet($street);
                 $cinema->setNumber($number);
                 $cinema->setPhone($phone);

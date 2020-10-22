@@ -11,6 +11,7 @@
         public function add($cinema){
             if($this->checkValue($cinema->getName())){
             $this->retrieveData();
+            $cinema->setIdCinema($this->lastId()+1);
             array_push($this->cinemaList, $cinema);
             $this->saveData();
             }
@@ -111,9 +112,10 @@
                 $valuesArray["idCinema"] = $cinema->getIdCinema();
                 $valuesArray["state"] = $cinema->getState();
                 $valuesArray["name"] = $cinema->getName();
-                $valuesArray["address"] = $cinema->getAddress();
+                $valuesArray["street"] = $cinema->getStreet();
                 $valuesArray["phone"] = $cinema->getPhone();
                 $valuesArray["email"] = $cinema->getEmail();
+                $valuesArray["number"] = $cinema->getNumber();
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
@@ -134,7 +136,8 @@
                     $cinema->setIdCinema($valuesArray["idCinema"]);
                     $cinema->setState($valuesArray["state"]);
                     $cinema->setName($valuesArray["name"]);
-                    $cinema->setAddress($valuesArray["address"]);
+                    $cinema->setStreet($valuesArray["street"]);
+                    $cinema->setNumber($valuesArray["number"]);
                     $cinema->setPhone($valuesArray["phone"]);
                     $cinema->setEmail($valuesArray["email"]);
                     

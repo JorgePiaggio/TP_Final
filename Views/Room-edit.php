@@ -12,7 +12,8 @@
                              </thead>
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Room/edit" method="post">
-                         <input type="hidden" name="idcinema" value="<?php echo $editRoom->getIdcinema(); ?>" >
+                         <input type="hidden" name="idcinema" value="<?php echo $editRoom->getIdCinema(); ?>" >
+                         <input type="hidden" name="idroom" value="<?php echo $editRoom->getIdRoom(); ?>" >
                               <tr>
                               <td><input type="number" name="number" value= "<?php echo $editRoom->getNumber();  ?>" disabled>  </td>
                               <td><input type="number" name="capacity" value= "<?php echo $editRoom->getCapacity(); ?>">  </td>

@@ -11,7 +11,7 @@
         public function add($user){
             $this->retrieveData();
             $id=($this->lastId()+1);
-            $user->setId($id);
+            $user->setIdUser($id);
             array_push($this->userList, $user);
             $this->saveData();
         }
@@ -34,7 +34,7 @@
 
         public function update($user){
                 $this->retrieveData();
-                $this->userList[($user->getId())-1]=$user;
+                $this->userList[($user->getIdUser())-1]=$user;
                 $this->saveData();
         }
         
@@ -52,7 +52,8 @@
                 $valuesArray["dni"] = $user->getDni();
                 $valuesArray["name"] = $user->getName();
                 $valuesArray["surname"] = $user->getSurname();
-                $valuesArray["address"] = $user->getAddress();
+                $valuesArray["street"] = $user->getStreet();
+                $valuesArray["number"] = $user->getNumber();
                 $valuesArray["phone"] = $user->getPhone();
                 $valuesArray["email"] = $user->getEmail();
                 $valuesArray["password"] = $user->getPassword();
@@ -73,11 +74,12 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $user = new user();
-                    $user->setId($valuesArray["id"]);
+                    $user->setIdUser($valuesArray["id"]);
                     $user->setDni($valuesArray["dni"]);
                     $user->setName($valuesArray["name"]);
                     $user->setSurName($valuesArray["surname"]);
-                    $user->setAddress($valuesArray["address"]);
+                    $user->setStreet($valuesArray["street"]);
+                    $user->setNumber($valuesArray["number"]);
                     $user->setPhone($valuesArray["phone"]);
                     $user->setEmail($valuesArray["email"]);
                     $user->setPassword($valuesArray["password"]);
