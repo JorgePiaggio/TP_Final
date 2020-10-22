@@ -121,7 +121,7 @@
                     $cinema->setState($row["state"]);
                     $cinema->setName($row["name"]);
                     $cinema->setStreet($row["street"]);
-                    $cinema->setNumber($row["street"]);
+                    $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
 

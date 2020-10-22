@@ -26,8 +26,8 @@
                             </tr>   
                             <tr> 
                                 <td style="width: 35%;">Address</td>    
-                                <td style="width: 33%;"><input type="text" name="street" value="<?php echo $street;?>"></td>
-                                <td style="width: 32%;"><input type="number" name="number" value="<?php echo $number;?>"></td>
+                                <td style="width: 33%;"><input type="text" name="street" value="<?php echo $user->getStreet();?>"></td>
+                                <td style="width: 32%;"><input type="number" name="number" value="<?php echo $user->getNumber();?>"></td>
                             </tr>                        
                             <tr> 
                                 <td style="width: 35%;">Phone</td>    

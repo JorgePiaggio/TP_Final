@@ -18,11 +18,11 @@
                               <span class="highlight"></span><label for="">DNI</label>
                          </div>  <br>
                          <div class="floating-label">
-                              <input type="text" name="street" value="<?php if($this->street != null){echo $this->street;} ?>" placeholder="" class="floating-input" required>
+                              <input type="text" name="street" value="<?php if($this->user != null){echo $this->user->getStreet();} ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Street</label>
                          </div> 
                          <div class="floating-label">
-                              <input type="number" name="number" value="<?php if($this->number != null){echo $this->number;}  ?>" placeholder="" class="floating-input" required>
+                              <input type="number" name="number" value="<?php if($this->user != null){echo $this->user->getNumber();}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Number</label>
                          </div> <br> 
                          <div class="floating-label">
@@ -45,7 +45,6 @@
                          </div><br>
 
                          <div class="floating-label">
-                              <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn2">Confirm</button>
                          </div>
                     </div>

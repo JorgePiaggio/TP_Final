@@ -3,47 +3,44 @@ namespace Models;
 
 class User{
 
-    private $id;
+    private $idUser;
+    private $idRole;
     private $dni;
     private $name;
     private $surname;
-    private $address;
+    private $street;
+    private $number;
     private $phone;
     private $email;
     private $password;
-    #private $billList; //??
-    #private $cardList; //??
 
 
-    public function __construct()
-    {
-        $this->billList = array();
-        $this->cardList = array();
+
+    public function __construct(){
+        $this->idRole=0;
     }
 
-    public function setId($id){$this->id=$id;}
-    public function getId(){return $this->id;}
+    public function setIdUser($idUser){$this->idUser=$idUser;}
+    public function getIdUser(){return $this->idUser;}
+    public function setIdRole($idRole){$this->idRole=$idRole;}
+    public function getIdRole(){return $this->idRole;}
     public function setDni($dni){$this->dni=$dni;}
     public function getDni(){return $this->dni;}
     public function setName($name){$this->name=$name;}
     public function getName(){return $this->name;}
     public function setSurname($surname){$this->surname=$surname;}
     public function getSurname(){return $this->surname;}
-    public function setAddress($address){$this->address=$address;}
-    public function getAddress(){return $this->address;}
+    public function setStreet($street){$this->street=$street;}
+    public function getStreet(){return $this->street;}
+    public function setNumber($number){$this->number=$number;}
+    public function getNumber(){return $this->number;}
     public function setPhone($phone){$this->phone=$phone;}
     public function getPhone(){return $this->phone;}
     public function setEmail($email){$this->email=$email;}
     public function getEmail(){return $this->email;}
     public function setPassword($password){$this->password=$password;}
     public function getPassword(){return $this->password;}
-    #public function setBillList($billList){$this->billList=$billList;}
-    #public function getBillList(){return $this->billList;}
-    #public function setCardList($cardList){$this->cardList=$cardList;}
-    #public function getCardList(){return $this->cardList;}
-    
-    #public function addBill($bill){array_push($this->billList,$bill);}
-    #public function addCard($card){array_push($this->cardList,$card);}
+
     
 
 

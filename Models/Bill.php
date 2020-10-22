@@ -3,32 +3,31 @@ namespace Models;
 use Models\Ticket as Ticket;
 use Models\Discount as Discount;
 
-class Bill implements Discount, Ticket{ 
+class Bill { 
 
-    private $idTicket;
+    
     private $idBill;
+    private $idUser;
     private $tickets;  //cantidad
     private $date;
     private $totalPrice;
     private $discount; //float
     
-    function __construct(){
-       #$this->discount= new Discount();
-       #$this->discount->setStatus(false);
-    }
+    function __construct(){}
     
-    function getIdTicket(){return $this->idTicket;}
-    function getIdBill(){return $this->idBill;}
-    function getTickets(){return $this->tickets;}
-    function getDate(){return $this->date;}
-    function getTotalPrice(){return $this->totalPrice;}
-    function getDiscount(){return $this->discount;}
-    function setIdTicket($idTicket){$this->idTicket=$idTicket;}
-    function setIdBill($idBill){$this->idBill=$idBill;}
-    function setTickets($tickets){$this->tickets=$tickets;}
-    function setDate($date){$this->date=$date;}
-    function setDiscount($discount){$this->discount=$discount;}
-    function setTotalPrice(){}
+    
+    public function getIdBill(){return $this->idBill;}
+    public function getTickets(){return $this->tickets;}
+    public function getDate(){return $this->date;}
+    public function getTotalPrice(){return $this->totalPrice;}
+    public function getDiscount(){return $this->discount;}
+    public function setIdBill($idBill){$this->idBill=$idBill;}
+    public function setTickets($tickets){$this->tickets=$tickets;}
+    public function setDate($date){$this->date=$date;}
+    public function setDiscount($discount){$this->discount=$discount;}
+    public function setTotalPrice($totalPrice){$this->totalPrice=$totalPrice;}
+    public function setIdUser($idUser){$this->idUser=$idUser;}
+    public function getIdUser(){return $this->idUser;}
     
 }
 ?>

@@ -134,7 +134,7 @@
             $jsonNowPlaying=($request) ? json_decode($request, true) : array();
             
             foreach($jsonNowPlaying['results'] as $valuesArray){  
-                $newMovie = constructMovie($valuesArray);
+                $newMovie = $this->constructMovie($valuesArray);
                 array_unshift($movies, $newMovie);
             }
 
@@ -216,7 +216,7 @@
 
     
         public function validateSession(){
-            if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
+            if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
                 header("location:../Home/index");
             }
         }

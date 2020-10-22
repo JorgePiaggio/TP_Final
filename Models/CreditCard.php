@@ -10,7 +10,7 @@ class CreditCard{
     private $expiration;
     private $state;
 
-    public function setIdCreditCard($id){$this->idCredtiCard=$idCreditCard;}
+    public function setIdCreditCard($idCreditCard){$this->idCredtiCard=$idCreditCard;}
     public function getIdCreditCard(){return $this->idCreditCard;}
     public function setIdUser($idUser){$this->idUser=$idUser;}
     public function getIdUser(){return $this->idUser;}

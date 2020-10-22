@@ -1,7 +1,7 @@
 <?php
     namespace Controllers;
 
-    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com"){
+    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
         header("location:../Home/index");
     }
 

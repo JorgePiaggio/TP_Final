@@ -18,7 +18,6 @@ class Movie{
     private $originalLanguage;
     private $genreIds;
     private $active;            //true-> en una funcion actual
-    private $genreStrings;      // arreglo auxiliar para string de generos, de aca para abajo no se guarda
     private $runtime;
     private $homepage;
     private $director; 
@@ -26,7 +25,6 @@ class Movie{
 
     public function __construct(){
         $this->genreIds=array();
-        $this->genreStrings=array();
         $this->active=false;
         $this->director = array();
     }

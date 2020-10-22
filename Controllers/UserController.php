@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use Models\user as User;
-use DAO\userDAO as UserDAO;
+use Models\User as User;
+use DAO\UserDAO as UserDAO;
 
 class UserController{
     private $userDAO;
@@ -13,11 +13,10 @@ class UserController{
     private $number;
     
     public function __construct(){
-        $this->userDAO = new userDAO(); 
+        $this->userDAO = new UserDAO(); 
         $this->user = null;
         $this->msg = null;
-        $this->street = null;
-        $this->number = null;
+        
     }
 
 
@@ -28,15 +27,6 @@ class UserController{
     public function showProfile($msg = ""){
         $this->validateSession();
         $user = $this->userDAO->search($_SESSION['loggedUser']);
-
-        $words = explode(" ", $user->getAddress());
-        $numberOfWords = count($words);
-        
-        $street = "";
-        $number = $words[$numberOfWords-1];
-        for($i=0; $i<$numberOfWords-1;$i++){ 
-            $street.=$words[$i]." ";
-        }
         require_once(VIEWS_PATH."User-profile.php");
     }
 
@@ -51,10 +41,10 @@ class UserController{
 
     public function login($email="",$pass=""){
         $this->checkParameter($email);
-        $user=$this->userDAO->search($email); //busco el usere a traves del email
+        $user=$this->userDAO->search($email); //busco el user a traves del email
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
             $_SESSION["loggedUser"]=$email;    
-            $_SESSION["pass"]=$pass;
+            $_SESSION["role"]=$user->getIdRole();
             header("location:../Home/index");
         }else{
             $this->msg = "Incorrect Email or Password";
@@ -71,19 +61,18 @@ class UserController{
         $this->checkParameter($name);
         if(!$this->validateEmail($email)){ 
             if($this->validatePass($pass, $repass)){
-                $this->user= new user();
+                $this->user= new User();
                 $this->user->setName($name);
-                $this->user->setsurName($surname);
+                $this->user->setSurname($surname);
                 $this->user->setDni($dni);
-                $this->user->setAddress($street." ".$number);
-                $this->street = $street;
-                $this->number = $number;
+                $this->user->setStreet($street);
+                $this->user->setNumber($number);
                 $this->user->setPhone($phone);
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
                 $this->userDAO->add($this->user);
                 $_SESSION["loggedUser"]=$email;
-                $_SESSION["pass"]=$pass;
+                $_SESSION["role"]=$this->user->getIdRole();
                 header("location:../Home/index");
             }
             else{
@@ -102,18 +91,17 @@ class UserController{
         $userAux = $this->userDAO->search($email);
             
         if($this->validatePass($pass, $repass)){
-            $user= new user();
-            $user->setId($userAux->getId());
+            $user= new User();
+            $user->setIdUser($userAux->getIdUser());
             $user->setName($name);
             $user->setSurname($surname);
             $user->setDni($dni);
-            $user->setAddress($street.$number);
+            $user->setStreet($street);
+            $user->setNumber($number);
             $user->setPhone($phone);
             $user->setEmail($email);
             $user->setPassword($pass);
             $this->userDAO->update($user);
-            $_SESSION["loggedUser"]=$email;
-            $_SESSION["pass"]=$pass;
             $this->msg = "Profile updated";
         }
         else{
