@@ -23,7 +23,6 @@ class MovieDAO implements IMovieDAO{
     /* obtener todas las peliculas del DAO, activas o no */
     public function getAll(){
         $this->retrieveData();
-        $this->movieList=$this->genreToString($this->movieList);
         return $this->movieList;
     }
 
@@ -43,7 +42,6 @@ class MovieDAO implements IMovieDAO{
                 $indice++;
             }
         }
-        $bestRated=$this->genreToString($bestRated);
 
         return $bestRated;
     }
@@ -93,71 +91,10 @@ class MovieDAO implements IMovieDAO{
                 }
             }
         }
-        $movieByGenre=$this->genreToString($movieByGenre);
 
         return $movieByGenre;
     }
 
-
-
-    /* construir objeto pelicula a traves del json q manda la API, devolver al controller */
-    public function constructMovie($jsonObject){
-        $newMovie = new Movie();
-        $newMovie->setTmdbId($jsonObject["id"]);
-        $newMovie->setTitle($jsonObject["title"]);
-        $newMovie->setOriginalTitle($jsonObject["original_title"]);
-        $newMovie->setVoteAverage($jsonObject["vote_average"]);
-        $newMovie->setDescription($jsonObject["overview"]);
-        $newMovie->setReleaseDate($jsonObject["release_date"]);
-        $newMovie->setPopularity($jsonObject["popularity"]);
-        $newMovie->setVideo($jsonObject["video"]);
-        $newMovie->setAdult($jsonObject["adult"]);
-        $newMovie->setRuntime($jsonObject["runtime"]);
-        $newMovie->setHomepage($jsonObject["homepage"]);
-        if(!$jsonObject["poster_path"]){
-            $newMovie->setPoster(IMG_PATH."banner-not.png");
-            }else{
-            $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
-        }
-        $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
-        $newMovie->setOriginalLanguage($jsonObject["original_language"]);
-        foreach($jsonObject["genres"] as $genre){
-                $newMovie->addGenre($genre['id']);
-        }
-        $newMovie=$this->genreToString($newMovie);
-
-        return $newMovie;
-    }
-
-
-    /* insertar strings de genero en peliculas */
-    public function genreToString($movieList){
-
-        $genreDAO= new GenreDAO();     
-        $genreList=$genreDAO->getAll();
-        $aux=null;
-
-        if(is_array($movieList)){                   /* si es un array de peliculas */
-            foreach($movieList as $movie){
-                foreach($movie->getGenreIds() as $genreId){
-                    foreach($genreList as $genre){
-                        if($genre->getId() == $genreId){
-                        $movie->addGenreString($genre->getName());
-                        }
-                    }
-                }
-            }
-        }else{                                      /* si es solo una pelicula */
-            foreach($movieList->getGenreIds() as $genreId){
-                foreach($genreList as $genre){
-                    if($genre->getId() == $genreId){
-                    $movieList->addGenreString($genre->getName());
-                    }
-                }
-            }
-        }
-        return $movieList;
-    }
 
 
     private function saveData(){

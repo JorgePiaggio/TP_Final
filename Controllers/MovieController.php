@@ -51,17 +51,17 @@
             /* solicitar todos los datos de la pelicula */
             $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
             $jsonMovie=($request) ? json_decode($request, true) : array();
-            $movie=$this->movieDAO->constructMovie($jsonMovie);
+            $movie=$this->constructMovie($jsonMovie);
 
 
             /* solicitar trailer de la pelicula */
             $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
-            $jsonTrailer=null;
             $jsonTrailer=json_decode($request_two, true);
             
             if($jsonTrailer['results'][0]['site'] == 'YouTube'){
                 $movie->setVideoPath($jsonTrailer['results'][0]['key']);
             }
+            
             
             /*Solicitar director/es de la pelicula*/
             $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
@@ -120,31 +120,78 @@
 
             $jsonNowPlaying=($request) ? json_decode($request, true) : array();
             
-            foreach($jsonNowPlaying['results'] as $valuesArray){  /* MANDAR AL DAO A Q LO CONSTRUYA */ 
-                $newMovie = new Movie();
-                $newMovie->setTmdbId($valuesArray["id"]);
-                $newMovie->setTitle($valuesArray["title"]);
-                $newMovie->setOriginalTitle($valuesArray["original_title"]);
-                $newMovie->setVoteAverage($valuesArray["vote_average"]);
-                $newMovie->setDescription($valuesArray["overview"]);
-                $newMovie->setReleaseDate($valuesArray["release_date"]);
-                $newMovie->setPopularity($valuesArray["popularity"]);
-                $newMovie->setVideo($valuesArray["video"]);
-                $newMovie->setAdult($valuesArray["adult"]);
-                if(!$valuesArray["poster_path"]){
-                $newMovie->setPoster(IMG_PATH."banner-not.png");
-                }else{
-                $newMovie->setPoster(POSTERURL.$valuesArray["poster_path"]);
-                }
-                $newMovie->setBackdropPath($valuesArray["backdrop_path"]);
-                $newMovie->setOriginalLanguage($valuesArray["original_language"]);
-                foreach($valuesArray["genre_ids"] as $genre){
-                    $newMovie->addGenre($genre);
-                }
+            foreach($jsonNowPlaying['results'] as $valuesArray){  
+                $newMovie = constructMovie($valuesArray);
                 array_unshift($movies, $newMovie);
             }
+
             return $movies;
         }
+
+
+    /* construir objeto pelicula a traves del json q manda la API */
+    public function constructMovie($jsonObject){
+        $newMovie = new Movie();
+        $newMovie->setTmdbId($jsonObject["id"]);
+        $newMovie->setTitle($jsonObject["title"]);
+        $newMovie->setOriginalTitle($jsonObject["original_title"]);
+        $newMovie->setVoteAverage($jsonObject["vote_average"]);
+        $newMovie->setDescription($jsonObject["overview"]);
+        $newMovie->setReleaseDate($jsonObject["release_date"]);
+        $newMovie->setPopularity($jsonObject["popularity"]);
+        $newMovie->setVideo($jsonObject["video"]);
+        $newMovie->setAdult($jsonObject["adult"]);
+        $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
+        $newMovie->setOriginalLanguage($jsonObject["original_language"]);
+        if(!$jsonObject["homepage"]){
+            $newMovie->setHomepage($jsonObject["homepage"]);
+        }
+        if(!$jsonObject["runtime"]){
+            $newMovie->setRuntime($jsonObject["runtime"]);
+        }
+        if(!$jsonObject["poster_path"]){
+            $newMovie->setPoster(IMG_PATH."banner-not.png");
+            }else{
+            $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
+        }
+
+        foreach($jsonObject["genres"] as $genre){
+                $newMovie->addGenre($genre['id']);
+        }
+        $newMovie=$this->genreToString($newMovie);
+
+        return $newMovie;
+    }
+
+
+    /* insertar strings de genero en peliculas */
+    public function genreToString($movieList){
+
+        $genreDAO= new GenreDAO();     
+        $genreList=$genreDAO->getAll();
+        $aux=null;
+
+        if(is_array($movieList)){                   /* si es un array de peliculas */
+            foreach($movieList as $movie){
+                foreach($movie->getGenreIds() as $genreId){
+                    foreach($genreList as $genre){
+                        if($genre->getId() == $genreId){
+                        $movie->addGenreString($genre->getName());
+                        }
+                    }
+                }
+            }
+        }else{                                      /* si es solo una pelicula */
+            foreach($movieList->getGenreIds() as $genreId){
+                foreach($genreList as $genre){
+                    if($genre->getId() == $genreId){
+                    $movieList->addGenreString($genre->getName());
+                    }
+                }
+            }
+        }
+        return $movieList;
+    }
 
         /*Genero ficticio para traer todas las películas con todos los géneros */
         public function getAllgenre(){
