@@ -29,7 +29,16 @@ Existe una política de descuento en el sitio que consiste en cobrar 25% menos e
 
 * El administrador (A) podrá realizar las siguientes actividades:
 1. Ingresar películas a la cartelera del cine con sus días y horarios de proyección.
+>  **(nuevos req.) :**
+>  - **Una película solo puede ser proyectada en un único cine por día (Pero no puede ser reproducida en más de una sala del cine. Revisión 3)**
+>  - **Validar que el comienzo de una función sea 15 minutos después de la anterior.**
 2. Administrar cines. Cada registro debe tener el nombre del cine, su capacidad total, dirección y valor único de entrada.
+>  **(nuevos req.) :**
+>
+> **Se modifica la estructura de los cines. A partir de ahora cuentan con más de una sala
+donde se realizan funciones.
+> Dentro de la administración de cines, se deben crear nuevas salas. Cada sala cuenta con:
+nombre, precio y capacidad en butacas.**
 3. Consultar cantidades vendidas y remanentes de las proyecciones (Película, Cine, Turno).
 4. Consultar totales vendidos en pesos (por película ó por cine, entre fechas).
 
