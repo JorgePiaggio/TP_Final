@@ -11,10 +11,11 @@
 
 
         public function add($cinema){
-            $sql = "INSERT INTO ".$this->tableName." (state,name,address,phone,email) VALUES (:state,:name,:address,:phone,:email)";
+            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email) VALUES (:state,:name,:street,:number,:phone,:email)";
 
             $parameters['name']=$cinema->getName();
-            $parameters['address']=$cinema->getAddress();
+            $parameters['street']=$cinema->getStreet();
+            $parameters['number']=$cinema->getNumber();
             $parameters['email']=$cinema->getEmail();
             $parameters['phone']=$cinema->getPhone();
             $parameters['state']=$cinema->getState();
@@ -46,10 +47,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $cinema = new Cinema();
-                    $cinema->setId($row["id"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setAddress($row["address"]);
+                    $cinema->setIdCinema($row["idCinema"]);
                     $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
 
@@ -80,10 +82,11 @@
                 foreach ($resultSet as $row)
                 {                
                     $cinema = new Cinema();
-                    $cinema->setId($row["id"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setAddress($row["address"]);
+                    $cinema->setIdCinema($row["idCinema"]);
                     $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
 
@@ -112,12 +115,13 @@
                 $resultSet = $this->connection->execute($query);
                 
                 foreach ($resultSet as $row)
-                {                
+                {                  
                     $cinema = new Cinema();
-                    $cinema->setId($row["id"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setAddress($row["address"]);
+                    $cinema->setIdCinema($row["idCinema"]);
                     $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["street"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
 
@@ -137,8 +141,8 @@
             try
             {
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE id= :id";
-                $parameters["id"]=$idCinema;
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
+                $parameters["idCinema"]=$idCinema;
                 $this->connection = Connection::getInstance();
 
                 $result = $this->connection->execute($query,$parameters);
@@ -146,11 +150,11 @@
                 $cinema=$this->map($result);
                     if($cinema->getState()){
                    
-                    $query = "UPDATE ".$this->tableName." set state=0 WHERE id= :id";
+                    $query = "UPDATE ".$this->tableName." set state=0 WHERE idCinema= :idCinema";
 
                     }else{
                     
-                    $query = "UPDATE ".$this->tableName." set state=1 WHERE id= :id";
+                    $query = "UPDATE ".$this->tableName." set state=1 WHERE idCinema= :idCinema";
                     }
 
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
@@ -168,8 +172,8 @@
         public function search($idCinema){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE id= :id";
-                $parameters["id"]=$idCinema;
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
+                $parameters["idCinema"]=$idCinema;
                 $this->connection = Connection::getInstance();
 
                 $results = $this->connection->execute($query,$parameters);
@@ -191,13 +195,14 @@
             {
                
 
-                $query = "UPDATE ".$this->tableName." set name=:name , Address=:address , phone=:phone , state=:state , email=:email WHERE id=:id";
+                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email WHERE idCinema=:idCinema";
 
                 $this->connection = Connection::getInstance();
-                $parameters["id"]=$cinema->getId();
-                $parameters["address"]=$cinema->getAddress();
+                $parameters["idCinema"]=$cinema->getIdCinema();
                 $parameters["state"]=$cinema->getState();
                 $parameters["name"]=$cinema->getName();
+                $parameters["street"]=$cinema->getStreet();
+                $parameters["number"]=$cinema->getNumber();
                 $parameters["email"]=$cinema->getEmail();
                 $parameters["phone"]=$cinema->getPhone();
 
@@ -216,10 +221,11 @@
            
            $result= array_map(function ($p){
                 $cinema=new Cinema();
-                $cinema->setId($p["id"]);
-                $cinema->setName($p["name"]);
-                $cinema->setAddress($p["address"]);
+                $cinema->setIdCinema($p["idCinema"]);
                 $cinema->setState($p["state"]);
+                $cinema->setName($p["name"]);
+                $cinema->setStreet($p["street"]);
+                $cinema->setNumber($p["number"]);
                 $cinema->setEmail($p["email"]);
                 $cinema->setPhone($p["phone"]);
 

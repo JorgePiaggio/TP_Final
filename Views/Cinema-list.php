@@ -5,7 +5,8 @@
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
                                    <th>Name</th>
-                                   <th>Address</th>
+                                   <th>Street</th>
+                                   <th>Number</th>
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
@@ -15,14 +16,15 @@
                               <?php foreach($cinemaList as $cinema){ ?>
                                    <tr>    
                                         <td><?php echo $cinema->getName(); ?> </td>     
-                                        <td><?php echo $cinema->getAddress(); ?> </td>
+                                        <td><?php echo $cinema->getStreet(); ?> </td>
+                                        <td><?php echo $cinema->getNumber(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
-                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Edit </button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
-                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Remove </button></td>
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Remove </button></td>
                                         </form>
                                    </tr>
                               <?php } ?>
@@ -34,7 +36,8 @@
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
                                    <th>Name</th>
-                                   <th>Addres</th>
+                                   <th>Street</th>
+                                   <th>Number</th>
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
@@ -44,14 +47,15 @@
                               <?php foreach($cinemaListInactive as $cinema){ ?>
                                    <tr>    
                                         <td><?php echo $cinema->getName(); ?> </td>     
-                                        <td><?php echo $cinema->getAddress(); ?> </td>
+                                        <td><?php echo $cinema->getStreet(); ?> </td>
+                                        <td><?php echo $cinema->getNumber(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
-                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Edit </button></td>
+                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Edit </button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
-                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getId()?>"> Restore </button></td>
+                                        <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Restore </button></td>
                                         </form>
                                    </tr>
                               <?php }?>

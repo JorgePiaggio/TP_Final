@@ -3,17 +3,23 @@ namespace Models;
 
 class Ticket{ 
 
-    private $id;
+    private $idTicket;
+    private $idBill;
+    private $idShow;
     private $price;
-    private $qrCode;
-  
+    private $qrCode; //???
+   
     function __construct(){
     }
     
-    function getId(){return $this->id;}
+    function getIdTicket(){return $this->idTicket;}
+    function getIdBill(){return $this->idBill;}
+    function getIdShow(){return $this->idShow;}
     function getPrice(){return $this->price;}
     function getQrCode(){return $this->qrCode;}
-    function setId($id){$this->id=$id;}
+    function setIdTicket($idTicket){$this->idTicket=$idTicket;}
+    function setIdBill($idBill){$this->idBill=$idBill;}
+    function setIdShow($idShow){$this->idShow=$idShow;}
     function setPrice($price){$this->price=$price;}
     function setQrCode($qrCode){$this->qrCode=$qrCode;}
 
