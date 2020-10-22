@@ -11,8 +11,8 @@ class User{
     private $phone;
     private $email;
     private $password;
-    private $billList; //??
-    private $cardList; //??
+    #private $billList; //??
+    #private $cardList; //??
 
 
     public function __construct()
@@ -37,13 +37,13 @@ class User{
     public function getEmail(){return $this->email;}
     public function setPassword($password){$this->password=$password;}
     public function getPassword(){return $this->password;}
-    public function setBillList($billList){$this->billList=$billList;}
-    public function getBillList(){return $this->billList;}
-    public function setCardList($cardList){$this->cardList=$cardList;}
-    public function getCardList(){return $this->cardList;}
+    #public function setBillList($billList){$this->billList=$billList;}
+    #public function getBillList(){return $this->billList;}
+    #public function setCardList($cardList){$this->cardList=$cardList;}
+    #public function getCardList(){return $this->cardList;}
     
-    public function addBill($bill){array_push($this->billList,$bill);}
-    public function addCard($card){array_push($this->cardList,$card);}
+    #public function addBill($bill){array_push($this->billList,$bill);}
+    #public function addCard($card){array_push($this->cardList,$card);}
     
 
 

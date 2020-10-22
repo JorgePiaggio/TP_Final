@@ -85,7 +85,7 @@
             $wanted = null;
             $this->retrieveData();
             foreach($this->cinemaList as $cinema){
-                if($cinema->getId() == $idCinema){
+                if($cinema->getIdCinema() == $idCinema){
                     $wanted = $cinema;
                 }
             }
@@ -94,7 +94,7 @@
 
         public function update($cinema){
                 $this->retrieveData();
-                $this->cinemaList[($cinema->getId())-1]=$cinema;
+                $this->cinemaList[($cinema->getIdCinema())-1]=$cinema;
                 $this->saveData();
         }
 
@@ -108,7 +108,7 @@
         private function saveData(){
             $arrayToEncode = array();
             foreach($this->cinemaList as $cinema){
-                $valuesArray["id"] = $cinema->getId();
+                $valuesArray["idCinema"] = $cinema->getIdCinema();
                 $valuesArray["state"] = $cinema->getState();
                 $valuesArray["name"] = $cinema->getName();
                 $valuesArray["address"] = $cinema->getAddress();
@@ -131,7 +131,7 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $cinema = new Cinema();
-                    $cinema->setId($valuesArray["id"]);
+                    $cinema->setIdCinema($valuesArray["idCinema"]);
                     $cinema->setState($valuesArray["state"]);
                     $cinema->setName($valuesArray["name"]);
                     $cinema->setAddress($valuesArray["address"]);

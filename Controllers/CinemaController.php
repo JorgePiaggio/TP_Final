@@ -12,7 +12,6 @@
 
     class CinemaController{
         private $cinemaDAO;
-        #private $cinemaDAO;
         private $msg;
     
     
@@ -40,13 +39,14 @@
         public function add($name, $street, $number, $phone, $email){
             $this->checkParameter($name);
             #$lastId = $this->cinemaDAO->lastId();
-            $address = $street." ".$number;
+            $address = $street . $number;
 
             if($this->validateCinema($name, $address)){ 
                 $cinema = new Cinema();
                 $cinema->setName($name);
-                #$cinema->setId($lastId+1);
-                $cinema->setAddress($address);
+                #$cinema->setIdCinema($lastId+1);
+                $cinema->setStreet($street);
+                $cinema->setNumber($number);
                 $cinema->setPhone($phone);
                 $cinema->setEmail($email);
                 $this->cinemaDAO->add($cinema);
@@ -66,8 +66,10 @@
         public function validateCinema($name, $address){
             $validate = true;
             $cinemaList = $this->cinemaDAO->getAll();
+            
             foreach($cinemaList as $cinema){
-                if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($cinema->getAddress(), $address) == 0))
+                $addressAux = $cinema->getStreet() . $cinema->getNumber();
+                if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
                     $validate = false;
             }
             return $validate; //Retorna true si se puede agregar el cine y false si ya existe
@@ -83,8 +85,15 @@
         public function searchEdit($idCinema=""){
             $this->checkParameter($idCinema);
             $editCinema = $this->cinemaDAO->search($idCinema);
-
-            $words = explode(" ", $editCinema->getAddress());
+            #$this->convertAddress($editCinema->getAddress());
+            
+            #$this->showEditView();
+            require_once(VIEWS_PATH."Cinema-edit.php");
+        }
+        
+        /*
+        public function convertAddress($address){
+            $words = explode(" ", $address);
             $numberOfWords = count($words);
             
             $street = "";
@@ -92,23 +101,23 @@
             for($i = 0;$i<$numberOfWords-1;$i++){ 
                 $street.=$words[$i]." ";
             }
-            #$this->showEditView();
-            require_once(VIEWS_PATH."Cinema-edit.php");
         }
+        */
 
-        public function edit($name="", $street="", $number="", $phone="", $email="", $id=""){
+        public function edit($name="", $street="", $number="", $phone="", $email="", $idCinema=""){
             $this->checkParameter($name);
-            $aux = $this->cinemaDAO->search($id);
-            $address = $street." ".$number;
+            $aux = $this->cinemaDAO->search($idCinema);
+            $address = $street . $number;
 
             if($this->validateCinema($name, $address)){ 
                $cinemaEdit= new Cinema();
                 $cinemaEdit->setState($aux->getState());
                 $cinemaEdit->setName($name);
-                $cinemaEdit->setAddress($address);
+                $cinemaEdit->setStreet($street);
+                $cinemaEdit->setNumber($number);
                 $cinemaEdit->setPhone($phone);
                 $cinemaEdit->setEmail($email);
-                $cinemaEdit->setId($id);
+                $cinemaEdit->setIdCinema($idCinema);
 
                 $this->cinemaDAO->update($cinemaEdit);
                 $this->msg = "Cinema modified successfully";
@@ -116,7 +125,7 @@
             }
             else{
                 $this->msg = "Already exists cinema: '$name' with address: '$address'.";
-                $this->searchEdit($id);
+                $this->searchEdit($idCinema);
             }
             
         }
