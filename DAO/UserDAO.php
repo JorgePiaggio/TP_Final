@@ -11,10 +11,10 @@
 
 
         public function add($user){
-            $sql = "INSERT INTO $this->tableName (idRole, dni, name, surname, street, number, phone, email, password)
-                                VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password");
+            $sql = "INSERT INTO" . "$this->tableName" . "(idRole, dni, name, surname, street, number, phone, email, password)
+                                VALUES  (:role, :dni, :name, :surname, :street, :number, :phone, :email, :password)";
 
-            $parameters['idRole']=$user->getRole()->getIdRole();
+            $parameters['role']=$user->getRole()->getIdRole();
             $parameters['dni']=$user->getDni();
             $parameters['name']=$user->getName();
             $parameters['surname']=$user->getSurname();
@@ -31,6 +31,7 @@
             catch(\PDOException $ex){
                 throw $ex;
             }
+        }
             
 
         public function getAll(){      
@@ -72,7 +73,7 @@
                 $resultSet = $this->connection->execute($sql, $parameters);
             }
             catch(\PDOException $ex){
-                throw $ex;{
+                throw $ex;
             }
             if(!empty($resultSet)){
                 return $this->map($resultSet);
@@ -113,7 +114,13 @@
             $result = array_map(function ($p){
                 $user = new User();
                 $user->setIdUser($p["idUser"]);
-                $user->setRole($p["role"]);
+                
+                //Construye el objeto role y lo setea en el user
+                $idRole = $p["idRole"];
+                $role = new Role();
+                $role->setId($idRole);
+                $user->setRole($role);
+
                 $user->setDni($p["dni"]);
                 $user->setName($p["name"]);
                 $user->setSurname($p["surname"]);

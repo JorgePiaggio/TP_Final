@@ -8,10 +8,20 @@ class Role{
 
     public function __construct(){
         $this->id = 0;
+        $this->description="client";
     }
 
-    function setId($id){$this->id=$id;}
-    function setDescription($description){$this->description = $description;}
+    function setId($id){
+        $this->id=$id;
+        $this->setDescription($id);
+    }
+    
+    function setDescription($id){ 
+        if($id == 1){
+            $this->description="admin";
+        }
+    }
+
     function getId(){return $this->id;}
     function getDescription(){return $this->description;}
 }

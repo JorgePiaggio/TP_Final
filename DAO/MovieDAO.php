@@ -4,175 +4,245 @@ namespace DAO;
 
 use Models\Movie as Movie;
 use Models\Genre as Genre;
-use DAO\GenreDAO as GenreDAO;
 use DAO\IMovieDAO as IMovieDAO;
+use DAO\GenreDAO as GenreDAO;
+use DAO\Connection as Connection;
+
 
 class MovieDAO implements IMovieDAO{
-    private $movieList;
 
-    public function __construct(){
-        $this->movieList=array();
+    private $connection;
+    private $tableName="movies";
+
+
+    public function add(Movie $movie){
+        $sql = "INSERT INTO ".$this->tableName." (idMovie,title,originalTitle,voteAverage,overview,releaseDate,popularity,videoPath,adult,posterPath,backdropPath,originalLanguage,runtime,homepage,director) 
+                    VALUES (:id,:title,:original_title,:vote_average,:overview,:release_date,:popularity,:videoPath,:adult,:poster_path,:backdrop_path,:original_language,:runtime,:homepage,:director)";
+
+        $parameters["id"] = $movie->getTmdbId();
+        $parameters["title"] = $movie->getTitle();
+        $parameters["original_title"] = $movie->getOriginalTitle();
+        $parameters["vote_average"] = $movie->getVoteAverage();
+        $parameters["overview"] = $movie->getDescription();
+        $parameters["release_date"] = $movie->getReleaseDate();
+        $parameters["popularity"] = $movie->getPopularity();
+        $parameters["videoPath"] = $movie->getVideoPath();
+        $parameters["adult"] = $movie->getAdult();
+        $parameters["poster_path"] = $movie->getPoster();
+        $parameters["backdrop_path"] = $movie->getBackdropPath();
+        $parameters["original_language"] = $movie->getOriginalLanguage();
+        $parameters["runtime"] = $movie->getRuntime();
+        $parameters["homepage"] = $movie->getHomepage();
+        $parameters["director"] = $movie->getDirector();
+        
+        try{
+
+        $this->connection=Connection::getInstance();
+
+        $result=$this->connection->executeNonQuery($sql,$parameters);
+
+        if($result > 0){    /* agregar generos x peliculas a tabla intermedia */
+            $this->addGenresXMovies($movie->getGenres(),$movie->getTmdbId());
+        }
+        
+        return $result;
+
+        }catch(\PDOException $ex){
+            throw $ex;
+        }
     }
 
-    public function add($movie){
-        $this->retrieveData();
-        array_push($this->movieList, $movie);
-        $this->saveData();
+
+
+    private function addGenresXMovies($genres, $IdMovie){
+       
+        $sql = "INSERT INTO "."moviesxgenres"." (idMovie,idGenre) VALUES (:idMovie,:idGenre)";
+        
+        foreach($genres as $genre){
+
+            $parameters["idMovie"] = $IdMovie;
+            $parameters["idGenre"] = $genre->getId();   
+            
+            try{
+                $this->connection=Connection::getInstance();
+                return $this->connection->executeNonQuery($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
     }
+
+
+
 
     /* obtener todas las peliculas del DAO, activas o no */
     public function getAll(){
-        $this->retrieveData();
-        return $this->movieList;
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM ".$this->tableName;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+            
+            foreach ($resultSet as $row)
+            {                
+                $movie = $this->map($row);
+                array_push($cinemaList, $movie);
+            }
+
+            return $movieList;
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
     /* Retorna las mejores 20 peliculas según valoración */
     public function getBestRated(){
-        $this->retrieveData();
-        $indice=0;
-        $bestRated = array();
+        try
+        {
+            $movieList = array();
 
-        usort($this->movieList, function($a, $b){
-            return $a->getVoteAverage() < $b->getVoteAverage();
-        });
+            $query = "SELECT * FROM ".$this->tableName." ORDER BY voteAverage LIMIT DESC 20";
 
-        foreach ($this->movieList as $movie){
-            if($indice < 20){
-                array_push($bestRated, $movie);
-                $indice++;
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+            
+            foreach ($resultSet as $row)
+            {                
+                $movie = $this->map($row);
+                array_push($movieList, $movie);
             }
-        }
 
-        return $bestRated;
+            return $movieList;
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
 
-      /* Retorna las mejores 20 peliculas según valoración */
+      /* Retorna las mejores 5 peliculas según popularidad */
       public function getMostPopular(){
-        $this->retrieveData();
-        $indice=0;
-        $mostPopular = array();
+        try
+        {
+            $movieList = array();
 
-        usort($this->movieList, function($a, $b){
-            return $a->getPopularity() < $b->getPopularity();
-        });
+            $query = "SELECT * FROM ".$this->tableName." ORDER BY popularity LIMIT DESC 5";
 
-        foreach ($this->movieList as $movie){
-            if($indice < 5){
-                array_push($mostPopular, $movie);
-                $indice++;
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+            
+            foreach ($resultSet as $row)
+            {                
+                $movie = $this->map($row);
+                array_push($movieList, $movie);
             }
+
+            return $movieList;
         }
-
-        return $mostPopular;
-    }
-
-
-    /*obtener objeto pelicula por medio del id*/
-    public function getMovie($tmdbId){
-        $this->retrieveData();
-        foreach($this->movieList as $movie){
-            if($movie->getTmdbId() == $tmdbId)
-                return $movie;
-        }
-        return null;
-    }
-
-
-    /* agregar peliculas q no existan al DAO, luego de actualizar con la API */
-    public function updateList($newMovieList){
-        $this->retrieveData();
-        foreach($newMovieList as $movie){
-            $exists=$this->search($movie->getTmdbId());
-            if(!$exists){
-                $this->add($movie);
-            }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
         }
     }
+
 
 
     /* buscar si existe o no una pelicula en el DAO */
     public function search($tmdbId){
-        $this->retrieveData();
-        foreach($this->movieList as $movie){
-            if($movie->getTmdbId() == $tmdbId)
-                return true;
+        try
+        {
+            $query = "SELECT * FROM ".$this->tableName." WHERE idMovie= :$tmdbId";
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query,$parameters);
         }
-        return false;
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($result)){
+            return $this->map($results);
+        }else{
+            return null;
+        }
     }
 
       /* retorna las peliculas por genero*/
       public function getByGenre($idGenre){
-        $movieByGenre = array();
-        $this->retrieveData();
-        foreach($this->movieList as $movie){
-            foreach($movie->getGenreIds() as $id){
-                if($id == $idGenre){
-                    array_push($movieByGenre, $movie);
-                }
-            }
-        }
-
-        return $movieByGenre;
+ 
     }
 
 
-
-    private function saveData(){
-        $arrayToEncode = array();
-        foreach($this->movieList as $movie){
-            $valuesArray["id"] = $movie->getTmdbId();
-            $valuesArray["title"] = $movie->getTitle();
-            $valuesArray["original_title"] = $movie->getOriginalTitle();
-            $valuesArray["vote_average"] = $movie->getVoteAverage();
-            $valuesArray["overview"] = $movie->getDescription();
-            $valuesArray["release_date"] = $movie->getReleaseDate();
-            $valuesArray["popularity"] = $movie->getPopularity();
-            $valuesArray["video"] = $movie->getVideo();
-            $valuesArray["adult"] = $movie->getAdult();
-            $valuesArray["poster_path"] = $movie->getPoster();
-            $valuesArray["backdrop_path"] = $movie->getBackdropPath();
-            $valuesArray["original_language"] = $movie->getOriginalLanguage();
-            $valuesArray["genre_ids"] = array();
-                foreach($movie->getGenreIds() as $genre){
-                    array_push($valuesArray["genre_ids"],$genre);
-                }
-            array_push($arrayToEncode, $valuesArray);
-        }
-        $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
-        file_put_contents('Data/movies.json', $jsonContent);
-    }
-
-    
-    private function retrieveData(){
-        $this->movieList = array();
+    protected function map($value){
+        $value=is_array($value) ? $value: array();
         
-        if(file_exists('Data/movies.json')){
+        $result= array_map(function ($p){
+            $movie=new Movie();
+            $movie->setTmdbId($p["id"]);
+            $movie->setTitle($p["title"]);
+            $movie->setOriginalTitle($p["originalTitle"]);
+            $movie->setVoteAverage($p["voteAverage"]);
+            $movie->setDescription($p["overview"]);
+            $movie->setReleaseDate($p["releaseDate"]);
+            $movie->setPopularity($p["popularity"]);
+            $movie->setVideoPath($p["videoPath"]);
+            $movie->setAdult($p["adult"]);
+            $movie->setPoster($p["posterPath"]);
+            $movie->setBackdropPath($p["backdropPath"]);
+            $movie->setOriginalLanguage($p["originalLanguage"]);
+            $movie->setRuntime($p["runtime"]);
+            $movie->setHomepage($p["homepage"]);
+            $movie->setDirector($p["director"]);
 
-            $jsonContent = file_get_contents('Data/movies.json');
+            $genres=getMovieGenres($movie->getTmdbID());
+            $movie->setGenres($genres);
 
-            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+            return $movie;
+        },$value);
 
-            foreach($arrayToDecode as $valuesArray){
-                $movie = new Movie();
-                $movie->setTmdbId($valuesArray["id"]);
-                $movie->setTitle($valuesArray["title"]);
-                $movie->setOriginalTitle($valuesArray["original_title"]);
-                $movie->setVoteAverage($valuesArray["vote_average"]);
-                $movie->setDescription($valuesArray["overview"]);
-                $movie->setReleaseDate($valuesArray["release_date"]);
-                $movie->setPopularity($valuesArray["popularity"]);
-                $movie->setVideo($valuesArray["video"]);
-                $movie->setAdult($valuesArray["adult"]);
-                $movie->setPoster($valuesArray["poster_path"]);
-                $movie->setBackdropPath($valuesArray["backdrop_path"]);
-                $movie->setOriginalLanguage($valuesArray["original_language"]);
-                foreach($valuesArray["genre_ids"] as $genre){
-                    $movie->addGenre($genre);
-                }
-                array_push($this->movieList, $movie);
-            }
-        }
+        return count($result)>1 ? $result: $result["0"];
+    }
+
+
+    protected function getMovieGenres($idMovie){
+
+            $genreList= array();
+
+            $query = "SELECT * FROM "."moviesxgenres"."WHERE idMovie="."$idMovie";
+            
+            $this->connection = Connection::getInstance();
+
+            $result= $this->connection->execute($query);
+
+            $genreList= $this->mapGenre($result);
+
+            return $genreList;
+    }
+
+
+    protected function mapGenre($value){
+        $value=is_array($value) ? $value: array();
+        
+        $result= array_map(function ($p){
+            $genre=new Genre();
+            $genre->setId($p["id"]);
+            $genre->setName($p["title"]);
+     
+            return $genre;
+        },$value);
+
+        return count($result)>1 ? $result: $result["0"];
     }
 
 }?>

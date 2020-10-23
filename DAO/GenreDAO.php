@@ -10,7 +10,7 @@
         private $tableName = "genres";
 
 
-        public function add($genre){
+        public function add(Genre $genre){
             $sql = "INSERT INTO ".$this->tableName." (id, name) VALUES (:id, :name)";
             $parameters['id']=$genre->getId();
             $parameters['name']=$genre->getName();
