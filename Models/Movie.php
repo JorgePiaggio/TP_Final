@@ -65,7 +65,6 @@ class Movie{
     public function setReview($review){$this->review = $review;}
     public function setGenres($genres){$this->genres = $genres;}
 
-
     public function addGenre(Genre $genre){array_push($this->genres, $genre);}
 }
 
