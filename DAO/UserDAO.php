@@ -3,17 +3,18 @@
 
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
+    use Models\Role as Role;
 
     class UserDAO implements IUserDAO{
         private $connection;
         private $tableName = "users";
 
 
-        public function add(){
+        public function add($user){
             $sql = "INSERT INTO $this->tableName (idRole, dni, name, surname, street, number, phone, email, password)
                                 VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password");
 
-            $parameters['idRole']=$user->getIdRole();
+            $parameters['idRole']=$user->getRole()->getIdRole();
             $parameters['dni']=$user->getDni();
             $parameters['name']=$user->getName();
             $parameters['surname']=$user->getSurname();
@@ -42,7 +43,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $user = new User();
-                    $user->setIdRole($row["idRole"]);
+                    $user->setRole($row["role"]);
                     $user->setDni($row["dni"]);
                     $user->setName($row["name"]);
                     $user->setSurname($row["surname"]);
@@ -73,7 +74,6 @@
             catch(\PDOException $ex){
                 throw $ex;{
             }
-
             if(!empty($resultSet)){
                 return $this->map($resultSet);
             }
@@ -85,11 +85,10 @@
 
         public function update($user){
             try{
-                $sql = "UPDATE $this->tableName set idRole=:idRole, dni=:dni,name=:name,surname=:surname,
+                $sql = "UPDATE $this->tableName set dni=:dni,name=:name,surname=:surname,
                                 street=:street,number=:number,phone=:phone,email=:email,password=:password";
                 
                 $this->connection = Connection::getInstance();
-                $parameters["idRole"] = $user->getIdRole();
                 $parameters["dni"] = $user->getDni();
                 $parameters["name"] = $user->getName();
                 $parameters["surname"] = $user->getSurname();
@@ -114,7 +113,7 @@
             $result = array_map(function ($p){
                 $user = new User();
                 $user->setIdUser($p["idUser"]);
-                $user->setIdRole($p["idRole"]);
+                $user->setRole($p["role"]);
                 $user->setDni($p["dni"]);
                 $user->setName($p["name"]);
                 $user->setSurname($p["surname"]);
