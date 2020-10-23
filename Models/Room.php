@@ -20,7 +20,7 @@ class Room{         /* sala */
     }
 
     function getIdRoom(){return $this->idRoom;}
-    function getName(){return $this->number;}
+    function getName(){return $this->name;}
     function getCapacity(){return $this->capacity;}
     function getType(){return $this->type;}
     function getPrice(){return $this->ticketPrice;}

@@ -10,8 +10,8 @@
                                       <?php }?>
                                   </select>
                               <div class="floating-label">
-                                   <input type="number" name="number" placeholder=" " class="floating-input" required>
-                                   <span class="highlight"></span><label for="">Number</label>
+                                   <input type="name" name="name" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Name</label>
                               </div>                         
 
                               <div class="floating-label">
@@ -23,14 +23,6 @@
                                   <select name="typeRoom" class="selection">
                                       <option value="2D">2D</option>
                                       <option value="3D">3D</option>
-                                  </select>
-                                   <span class="highlight"></span>
-                              </div>
-                              
-                              <div class="floating-label"><label for="" class="orange">State</label>
-                                  <select name="stateRoom" class="selection">
-                                      <option value="1">Active</option>
-                                      <option value="0">Inactive</option>
                                   </select>
                                    <span class="highlight"></span>
                               </div>

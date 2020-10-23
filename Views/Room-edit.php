@@ -12,6 +12,7 @@
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Room/edit" method="post">
                               <tr>
+                                   <td><input type="hidden" name="idcinema" value= "<?php echo $editRoom->getCinema()->getIdCinema();  ?>" >  </td>
                                    <td><input type="text" name="name" value= "<?php echo $editRoom->getName();  ?>" >  </td>
                                    <td><input type="number" name="capacity" value= "<?php echo $editRoom->getCapacity(); ?>">  </td>
                                    <td><select name="typeRoom" >

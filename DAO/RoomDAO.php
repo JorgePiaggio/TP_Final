@@ -3,20 +3,29 @@
 
     use DAO\IRoomDAO as IRoomDAO;
     use Models\Room as Room;
+    use DAO\Connection as Connection;
+    use DAO\CinemaDAO as CinemaDAO;
+   
 
     class RoomDAO implements IRoomDAO{
         private $connection;
         private $tableName="rooms";
-
-
-        public function add($room, $idCinema){
+        private $cinemaDAO; 
+        
+        function __construct()
+        {
+            $this->cinemaDAO=new CinemaDAO();
+        }
+        
+        public function add($room){
             $sql = "INSERT INTO ".$this->tableName." (idCinema,name,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
 
-            $parameters["idCinema"]=$idCinema;
+            $parameters["idCinema"]=$room->getCinema()->getIdCinema();
             $parameters["name"]=$room->getName();
             $parameters["type"]=$room->getType();
             $parameters["capacity"]=$room->getCapacity();
             $parameters["price"]=$room->getPrice();
+            
 
 
             try{
@@ -32,6 +41,7 @@
             try
             {
                 $roomList = array();
+               
 
                 $query = "SELECT * FROM ".$this->tableName;
 
@@ -43,10 +53,11 @@
                 {                
                     $room = new Room();
                     $room->setIdRoom($row["idRoom"]);
-                    $room->setNumber($row["number"]);
+                    $room->setName($row["name"]);
                     $room->setType($row["type"]);
                     $room->setCapacity($row["capacity"]);
                     $room->setPrice($row["price"]);
+                    $room->setCinema($this->cinemaDAO->search($row["idCinema"]));
 
                     array_push($roomList, $room);
                 }
@@ -59,12 +70,46 @@
             }
         }
     
-
-        public function search($idRoom){
+        public function getCinemaRooms($idCinema){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE idRoom=:idRoom";
-                $parameters["idRoom"]=$idRoom;
+                $roomList = array();
+               
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $room = new Room();
+                    $room->setIdRoom($row["idRoom"]);
+                    $room->setName($row["name"]);
+                    $room->setType($row["type"]);
+                    $room->setCapacity($row["capacity"]);
+                    $room->setPrice($row["price"]);
+                    $room->setCinema($this->cinemaDAO->search($row["idCinema"]));
+
+                    array_push($roomList, $room);
+                }
+
+                return $roomList;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+
+        }
+        public function search($idCinema,$name){
+            try
+            {
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and name=:name";
+                $parameters["idCinema"]=$idCinema;
+                $parameters["name"]=$name;
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);              
@@ -93,6 +138,7 @@
                 $parameters["capacity"]=$room->getCapacity();
                 $parameters["type"]=$room->getType();
                 $parameters["price"]=$room->getPrice();
+                $parameters["idCinema"]=$room->getCinema()->getIdCinema();
 
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
                 return $rowCant;
@@ -113,6 +159,7 @@
                 $room->setCapacity($p["capacity"]);
                 $room->setPrice($p["price"]);
                 $room->setName($p["name"]);
+                $room->setCinema($this->cinemaDAO->search($p["idCinema"]));
                 return $room;
             },$value);
  

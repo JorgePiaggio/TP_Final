@@ -162,7 +162,6 @@ class MovieDAO implements IMovieDAO{
                 $movie->setDescription($valuesArray["overview"]);
                 $movie->setReleaseDate($valuesArray["release_date"]);
                 $movie->setPopularity($valuesArray["popularity"]);
-                $movie->setVideo($valuesArray["video"]);
                 $movie->setAdult($valuesArray["adult"]);
                 $movie->setPoster($valuesArray["poster_path"]);
                 $movie->setBackdropPath($valuesArray["backdrop_path"]);

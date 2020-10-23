@@ -12,7 +12,7 @@
                               <br><br>
                               <div class="floating-label">
                                    <button type="submit" name="continue" class="btn btn-primary ml-auto d-block">Continue</button><br><br>
-                                
+                                        <?php if($this->msg){ echo $this->msg;} ?>
                               </div>
                          </div>            
                </form>

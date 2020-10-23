@@ -5,7 +5,7 @@
     use Models\Cinema as Cinema;
     use DAO\Connection as Connection;
 
-    class CinemaDAOPDO implements ICinemaDAO{
+    class CinemaDAO implements ICinemaDAO{
         private $connection;
         private $tableName="cinemas";
 

@@ -169,7 +169,7 @@
         foreach($jsonObject["genres"] as $genre){
                 $newMovie->addGenre($genre);
         }
-        $newMovie=$this->genreToString($newMovie);
+        
 
         return $newMovie;
     }

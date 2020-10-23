@@ -12,14 +12,15 @@
                                    <th>Action</th>
                               </thead>
                               <tbody>
-                              <?php foreach($cinemaSearch->getRooms() as $room){ ?>
+                              <?php foreach($roomList as $room){ ?>
                                    <tr>       
                                         <td><?php echo $room->getName(); ?> </td>
                                         <td><?php echo $room->getCapacity(); ?> </td>
                                         <td><?php echo $room->getType(); ?> </td>
                                         <td><?php echo $room->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
-                                        <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getIdRoom();?>"> Edit </button></td>
+                                        <input type="hidden" name="name" value="<?php $room->getName(); ?>">
+                                        <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getCinema()->getIdCinema();?>"> Edit </button></td>
                                         </form>
                                    </tr>
                               <?php } ?>
