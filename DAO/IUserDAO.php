@@ -6,7 +6,7 @@
     interface IUserDAO{
         function add(User $user);
         function getAll();
-        function search($idUser);
+        function search($emailUser);
         function update(User $user);
     }
 

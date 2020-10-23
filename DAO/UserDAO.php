@@ -36,7 +36,7 @@
             try{
                 $userList = array();
                 $sql = "SELECT * FROM ".$this->tableName;
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->execute($sql);
                 
                 foreach ($resultSet as $row)
@@ -64,7 +64,6 @@
 
         public function search($emailUser){
             $sql = "SELECT * FROM $this->tableName WHERE email = :email";
-
             $parameters['email'] = $emailUser;
 
             try{
@@ -83,96 +82,52 @@
             }
         }   
 
-        public function update($user){
-            $sql = "INSERT INTO ("
-        }
-
-
-
-
-
-
-
-        public function add($user){
-            $this->retrieveData();
-            $id=($this->lastId()+1);
-            $user->setIdUser($id);
-            array_push($this->userList, $user);
-            $this->saveData();
-        }
-
-        public function getAll(){
-            $this->retrieveData();
-            return $this->userList;
-        }
-
-        public function search($emailUser){
-            $wanted = null;
-            $this->retrieveData();
-            foreach($this->userList as $user){
-                if($user->getEmail() == $emailUser){
-                    $wanted = $user;
-                }
-            }
-            return $wanted;
-        }
 
         public function update($user){
-                $this->retrieveData();
-                $this->userList[($user->getIdUser())-1]=$user;
-                $this->saveData();
-        }
-        
-        public function lastId(){
-            $ids = $this->getAll();
-            $lastId = count($ids);
+            try{
+                $sql = "UPDATE $this->tableName set idRole=:idRole, dni=:dni,name=:name,surname=:surname,
+                                street=:street,number=:number,phone=:phone,email=:email,password=:password";
+                
+                $this->connection = Connection::getInstance();
+                $parameters["idRole"] = $user->getIdRole();
+                $parameters["dni"] = $user->getDni();
+                $parameters["name"] = $user->getName();
+                $parameters["surname"] = $user->getSurname();
+                $parameters["street"]=$user->getStreet();
+                $parameters["number"]=$user->getNumber();
+                $parameters["email"]=$user->getEmail();
+                $parameters["phone"]=$user->getPhone();
+                $parameters["password"] = $user->getPassword();
 
-            return $lastId;
-        }
-
-        private function saveData(){
-            $arrayToEncode = array();
-            foreach($this->userList as $user){
-                $valuesArray["id"] = $user->getId();
-                $valuesArray["dni"] = $user->getDni();
-                $valuesArray["name"] = $user->getName();
-                $valuesArray["surname"] = $user->getSurname();
-                $valuesArray["street"] = $user->getStreet();
-                $valuesArray["number"] = $user->getNumber();
-                $valuesArray["phone"] = $user->getPhone();
-                $valuesArray["email"] = $user->getEmail();
-                $valuesArray["password"] = $user->getPassword();
-                array_push($arrayToEncode, $valuesArray);
+                $rowCant = $this->connection->executeNonQuery($sql, $parameters);
+                return $rowCant;
             }
-            $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
-            file_put_contents('Data/users.json', $jsonContent);
+            catch(\PDOException $ex){
+                throw $ex;
+            }
+
         }
 
-        private function retrieveData(){
-            $this->userList = array();
+        protected function map($value){
+            $value = is_array($value) ? $value : [];
             
-            if(file_exists('Data/users.json')){
-
-                $jsonContent = file_get_contents('Data/users.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray){
-                    $user = new user();
-                    $user->setIdUser($valuesArray["id"]);
-                    $user->setDni($valuesArray["dni"]);
-                    $user->setName($valuesArray["name"]);
-                    $user->setSurName($valuesArray["surname"]);
-                    $user->setStreet($valuesArray["street"]);
-                    $user->setNumber($valuesArray["number"]);
-                    $user->setPhone($valuesArray["phone"]);
-                    $user->setEmail($valuesArray["email"]);
-                    $user->setPassword($valuesArray["password"]);
-                    array_push($this->userList, $user);
-                }
-
-            }
+            $result = array_map(function ($p){
+                $user = new User();
+                $user->setIdUser($p["idUser"]);
+                $user->setIdRole($p["idRole"]);
+                $user->setDni($p["dni"]);
+                $user->setName($p["name"]);
+                $user->setSurname($p["surname"]);
+                $user->setStreet($p["street"]);
+                $user->setNumber($p["number"]);
+                $user->setEmail($p["email"]);
+                $user->setPhone($p["phone"]);
+                $user->setPassword($p["password"]);
+                return $user;},$value);
+ 
+            return count($result)>1 ? $result: $result["0"];
         }
+
     }             
 
 ?>
