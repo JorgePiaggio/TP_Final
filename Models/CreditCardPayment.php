@@ -4,7 +4,7 @@
 
     use Models\CreditCard as CreditCard;
 
-    class CreditCardPayment(){
+    class CreditCardPayment{
         private $code;
         private $date;
         private $total;

@@ -11,10 +11,10 @@
 
 
         public function add($user){
-            $sql = "INSERT INTO $this->tableName (idRole, dni, name, surname, street, number, phone, email, password)
-                                VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password");
+            $sql = "INSERT INTO" . "$this->tableName" . "(idRole, dni, name, surname, street, number, phone, email, password)
+                                VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password)";
 
-            $parameters['idRole']=$user->getRole()->getIdRole();
+            $parameters['idRole']=$user->getRole()->getId();
             $parameters['dni']=$user->getDni();
             $parameters['name']=$user->getName();
             $parameters['surname']=$user->getSurname();
@@ -31,7 +31,7 @@
             catch(\PDOException $ex){
                 throw $ex;
             }
-            
+        }  
 
         public function getAll(){      
             try{
@@ -72,7 +72,7 @@
                 $resultSet = $this->connection->execute($sql, $parameters);
             }
             catch(\PDOException $ex){
-                throw $ex;{
+                throw $ex;
             }
             if(!empty($resultSet)){
                 return $this->map($resultSet);
@@ -80,7 +80,8 @@
             else{
                 return false;
             }
-        }   
+        }
+
 
 
         public function update($user){

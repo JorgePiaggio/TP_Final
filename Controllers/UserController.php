@@ -49,8 +49,12 @@ class UserController{
         $this->checkParameter($email);
         $user=$this->userDAO->search($email); //busco el usere a traves del email
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
-            $_SESSION["loggedUser"]=$email;    
-            $_SESSION["pass"]=$pass;
+            $_SESSION["loggedUser"]=$email; 
+            if(strcmp($email,"admin@moviepass.com")!=0){   
+                $_SESSION["role"]=$user->getRole()->getId();
+            }else{
+                $_SESSION["role"]=1;
+            }
             header("location:../Home/index");
         }else{
             $this->msg = "Incorrect Email or Password";
@@ -69,17 +73,16 @@ class UserController{
             if($this->validatePass($pass, $repass)){
                 $this->user= new user();
                 $this->user->setName($name);
-                $this->user->setsurName($surname);
+                $this->user->setSurname($surname);
                 $this->user->setDni($dni);
-                $this->user->setAddress($street." ".$number);
-                $this->street = $street;
-                $this->number = $number;
+                $this->user->setStreet($street);
+                $this->user->setNumber($number);
                 $this->user->setPhone($phone);
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
                 $this->userDAO->add($this->user);
                 $_SESSION["loggedUser"]=$email;
-                $_SESSION["pass"]=$pass;
+                $_SESSION["role"]=0;
                 header("location:../Home/index");
             }
             else{
@@ -99,17 +102,18 @@ class UserController{
             
         if($this->validatePass($pass, $repass)){
             $user= new user();
-            $user->setId($userAux->getId());
+            $user->setIdUser($userAux->getId());
             $user->setName($name);
             $user->setSurname($surname);
             $user->setDni($dni);
-            $user->setAddress($street.$number);
+            $user->setStreet($street);
+            $user->setNumber($number);
             $user->setPhone($phone);
             $user->setEmail($email);
             $user->setPassword($pass);
             $this->userDAO->update($user);
             $_SESSION["loggedUser"]=$email;
-            $_SESSION["pass"]=$pass;
+            $_SESSION["role"]=$user->getRole()->getId();
             $this->msg = "Profile updated";
         }
         else{

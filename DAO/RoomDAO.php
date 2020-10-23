@@ -5,6 +5,7 @@
     use Models\Room as Room;
     use DAO\Connection as Connection;
     use DAO\CinemaDAO as CinemaDAO;
+
    
 
     class RoomDAO implements IRoomDAO{
@@ -52,12 +53,13 @@
                 foreach ($resultSet as $row)
                 {                
                     $room = new Room();
-                    $room->setIdRoom($row["idRoom"]);
-                    $room->setName($row["name"]);
-                    $room->setType($row["type"]);
-                    $room->setCapacity($row["capacity"]);
-                    $room->setPrice($row["price"]);
+                    $room->setIdRoom($row["r.idRoom"]);
+                    $room->setName($row["r.name"]);
+                    $room->setType($row["r.type"]);
+                    $room->setCapacity($row["r.capacity"]);
+                    $room->setPrice($row["r.price"]);
                     $room->setCinema($this->cinemaDAO->search($row["idCinema"]));
+                   
 
                     array_push($roomList, $room);
                 }

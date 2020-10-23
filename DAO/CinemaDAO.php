@@ -193,8 +193,6 @@
         public function update($cinema){
             try
             {
-               
-
                 $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email WHERE idCinema=:idCinema";
 
                 $this->connection = Connection::getInstance();
@@ -228,7 +226,6 @@
                 $cinema->setNumber($p["number"]);
                 $cinema->setEmail($p["email"]);
                 $cinema->setPhone($p["phone"]);
-
 
                return $cinema;
            },$value);
