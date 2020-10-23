@@ -1,25 +1,32 @@
 <?php
 namespace Models;
 
-class Ticket{ 
+use Models\Bill as Bill;
+use Models\Show as Show;
+use Models\Seat as Seat;
 
+class Ticket{ 
     private $idTicket;
-    private $idBill;
-    private $idShow;
+    private $bill;
+    private $show;
+    private $seat;
     private $price;
     private $qrCode; //???
    
     function __construct(){
+        $this->bill = new Bill();
+        $this->show = new Show();
+        $this->seat = new Seat();
     }
     
     function getIdTicket(){return $this->idTicket;}
-    function getIdBill(){return $this->idBill;}
-    function getIdShow(){return $this->idShow;}
+    function getBill(){return $this->bill;}
+    function getShow(){return $this->show;}
     function getPrice(){return $this->price;}
     function getQrCode(){return $this->qrCode;}
     function setIdTicket($idTicket){$this->idTicket=$idTicket;}
-    function setIdBill($idBill){$this->idBill=$idBill;}
-    function setIdShow($idShow){$this->idShow=$idShow;}
+    function setBill($bill){$this->bill=$bill;}
+    function setShow($show){$this->show=$show;}
     function setPrice($price){$this->price=$price;}
     function setQrCode($qrCode){$this->qrCode=$qrCode;}
 

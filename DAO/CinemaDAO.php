@@ -3,157 +3,239 @@
 
     use DAO\ICinemaDAO as ICinemaDAO;
     use Models\Cinema as Cinema;
+    use DAO\Connection as Connection;
 
-    class CinemaDAO implements ICinemaDAO{
-        private $cinemaList = array();
+    class CinemaDAOPDO implements ICinemaDAO{
+        private $connection;
+        private $tableName="cinemas";
 
 
         public function add($cinema){
-            if($this->checkValue($cinema->getName())){
-            $this->retrieveData();
-            $cinema->setIdCinema($this->lastId()+1);
-            array_push($this->cinemaList, $cinema);
-            $this->saveData();
+            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email) VALUES (:state,:name,:street,:number,:phone,:email)";
+
+            $parameters['name']=$cinema->getName();
+            $parameters['street']=$cinema->getStreet();
+            $parameters['number']=$cinema->getNumber();
+            $parameters['email']=$cinema->getEmail();
+            $parameters['phone']=$cinema->getPhone();
+            $parameters['state']=$cinema->getState();
+
+            try{
+
+            $this->connection=Connection::getInstance();
+
+            return $this->connection->executeNonQuery($sql,$parameters);
+
+            }catch(\PDOException $ex){
+                throw $ex;
             }
+
             
         }
 
         public function getAll(){
-            $this->retrieveData();
-            return $this->cinemaList;
+            try
+            {
+                $cinemaList = array();
+
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $cinema = new Cinema();
+                    $cinema->setIdCinema($row["idCinema"]);
+                    $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["number"]);
+                    $cinema->setEmail($row["email"]);
+                    $cinema->setPhone($row["phone"]);
+
+                    array_push($cinemaList, $cinema);
+                }
+
+                return $cinemaList;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
+        
+        
 
         public function getAllActive(){
-            $this->retrieveData();
-            $newList=array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getState() == true){
-                    array_push($newList, $cinema);
+            try
+            {
+                $cinemaList = array();
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE state=1";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $cinema = new Cinema();
+                    $cinema->setIdCinema($row["idCinema"]);
+                    $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["number"]);
+                    $cinema->setEmail($row["email"]);
+                    $cinema->setPhone($row["phone"]);
+
+                    array_push($cinemaList, $cinema);
                 }
+
+                return $cinemaList;
             }
-            return $newList;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
+                
+        
 
         public function getAllInactive(){
-            $this->retrieveData();
-            $newList=array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getState() != true){
-                    array_push($newList, $cinema);
+            try
+            {
+                $cinemaList = array();
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE state=0";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->execute($query);
+                
+                foreach ($resultSet as $row)
+                {                  
+                    $cinema = new Cinema();
+                    $cinema->setIdCinema($row["idCinema"]);
+                    $cinema->setState($row["state"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setStreet($row["street"]);
+                    $cinema->setNumber($row["number"]);
+                    $cinema->setEmail($row["email"]);
+                    $cinema->setPhone($row["phone"]);
+
+                    array_push($cinemaList, $cinema);
                 }
+
+                return $cinemaList;
             }
-            return $newList;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
+        
 
         public function changeState($idCinema){
-            $wanted = $this->search($idCinema);
-            if($wanted != null){
-                $this->retrieveData();
-                if($this->cinemaList[($wanted->getId())-1]->getState() == true){
-                    $this->cinemaList[($wanted->getId())-1]->setState(false);
-                }
-                else{
-                    $this->cinemaList[($wanted->getId())-1]->setState(true);
-                }
-                $this->saveData();
+            try
+            {
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::getInstance();
+
+                $result = $this->connection->execute($query,$parameters);
+                if(!empty($result)){
+                $cinema=$this->map($result);
+                    if($cinema->getState()){
+                   
+                    $query = "UPDATE ".$this->tableName." set state=0 WHERE idCinema= :idCinema";
+
+                    }else{
+                    
+                    $query = "UPDATE ".$this->tableName." set state=1 WHERE idCinema= :idCinema";
+                    }
+
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
+            }
+                return $rowCant;
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
             }
         }
 
-        /*
-        public function restore($idCinema){
-            $wanted = $this->search($idCinema);
-            if($wanted != null){
-                $this->retrieveData();
-                $this->cinemaList[($wanted->getId())-1]->setState(true);
-                $this->saveData();
-            }
-        }
-        
-        public function remove($idCinema){
-            $this->retrieveData();
-            $newList = array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getId() != $idCinema){
-                    array_push($newList, $cinema);
-                }
-            }
-            $this->cinemaList = $newList;
-		    $this->saveData();
-        }
-        */
         
         public function search($idCinema){
-            $wanted = null;
-            $this->retrieveData();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getIdCinema() == $idCinema){
-                    $wanted = $cinema;
-                }
+            try
+            {
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::getInstance();
+
+                $results = $this->connection->execute($query,$parameters);
             }
-            return $wanted;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($results)){
+                return $this->map($results);
+            }else{
+                return null;
+            }
         }
 
         public function update($cinema){
-                $this->retrieveData();
-                $this->cinemaList[($cinema->getIdCinema())-1]=$cinema;
-                $this->saveData();
-        }
+            try
+            {
+               
 
-        public function lastId(){
-            $ids = $this->getAll();
-            $lastId = count($ids);
+                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email WHERE idCinema=:idCinema";
 
-            return $lastId;
-        }
+                $this->connection = Connection::getInstance();
+                $parameters["idCinema"]=$cinema->getIdCinema();
+                $parameters["state"]=$cinema->getState();
+                $parameters["name"]=$cinema->getName();
+                $parameters["street"]=$cinema->getStreet();
+                $parameters["number"]=$cinema->getNumber();
+                $parameters["email"]=$cinema->getEmail();
+                $parameters["phone"]=$cinema->getPhone();
 
-        private function saveData(){
-            $arrayToEncode = array();
-            foreach($this->cinemaList as $cinema){
-                $valuesArray["idCinema"] = $cinema->getIdCinema();
-                $valuesArray["state"] = $cinema->getState();
-                $valuesArray["name"] = $cinema->getName();
-                $valuesArray["street"] = $cinema->getStreet();
-                $valuesArray["phone"] = $cinema->getPhone();
-                $valuesArray["email"] = $cinema->getEmail();
-                $valuesArray["number"] = $cinema->getNumber();
-                array_push($arrayToEncode, $valuesArray);
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                return $rowCant;
             }
-            $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
-            file_put_contents('Data/cinemas.json', $jsonContent);
-        }
-
-        private function retrieveData(){
-            $this->cinemaList = array();
-            
-            if(file_exists('Data/cinemas.json')){
-
-                $jsonContent = file_get_contents('Data/cinemas.json');
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray){
-                    $cinema = new Cinema();
-                    $cinema->setIdCinema($valuesArray["idCinema"]);
-                    $cinema->setState($valuesArray["state"]);
-                    $cinema->setName($valuesArray["name"]);
-                    $cinema->setStreet($valuesArray["street"]);
-                    $cinema->setNumber($valuesArray["number"]);
-                    $cinema->setPhone($valuesArray["phone"]);
-                    $cinema->setEmail($valuesArray["email"]);
-                    
-                    array_push($this->cinemaList, $cinema);
-                }
-
+            catch(\PDOException $ex)
+            {
+                throw $ex;
             }
         }
 
-        private function checkValue($value){
-            if($value==""){
-                return false;
-            }
+    
+       protected function map($value){
+           $value=is_array($value) ? $value: array();
+           
+           $result= array_map(function ($p){
+                $cinema=new Cinema();
+                $cinema->setIdCinema($p["idCinema"]);
+                $cinema->setState($p["state"]);
+                $cinema->setName($p["name"]);
+                $cinema->setStreet($p["street"]);
+                $cinema->setNumber($p["number"]);
+                $cinema->setEmail($p["email"]);
+                $cinema->setPhone($p["phone"]);
 
-            return true;
-        }
+
+               return $cinema;
+           },$value);
+
+           return count($result)>1 ? $result: $result["0"];
+       }
+
     }             
 
 ?>

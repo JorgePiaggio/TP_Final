@@ -4,8 +4,93 @@
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
 
-    class userDAO implements IuserDAO{
-        private $userList = array();
+    class UserDAO implements IUserDAO{
+        private $connection;
+        private $tableName = "users";
+
+
+        public function add(){
+            $sql = "INSERT INTO $this->tableName (idRole, dni, name, surname, street, number, phone, email, password)
+                                VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password");
+
+            $parameters['idRole']=$user->getIdRole();
+            $parameters['dni']=$user->getDni();
+            $parameters['name']=$user->getName();
+            $parameters['surname']=$user->getSurname();
+            $parameters['street']=$user->getStreet();
+            $parameters['number']=$user->getNumber();
+            $parameters['phone']=$user->getPhone();
+            $parameters['email']=$user->getEmail();
+            $parameters['password']=$user->getPassword();
+
+            try{
+                $this->connection = Connection::getInstance();
+                return $this->connection::executeNonQuery($sql, $parameters);
+            }
+            catch(\PDOException $ex){
+                throw $ex;
+            }
+            
+
+        public function getAll(){      
+            try{
+                $userList = array();
+                $sql = "SELECT * FROM ".$this->tableName;
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->execute($sql);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $user = new User();
+                    $user->setIdRole($row["idRole"]);
+                    $user->setDni($row["dni"]);
+                    $user->setName($row["name"]);
+                    $user->setSurname($row["surname"]);
+                    $user->setStreet($row["street"]);
+                    $user->setNumber($row["number"]);
+                    $user->setPhone($row["phone"]);
+                    $user->setEmail($row["email"]);
+                    $user->setPassword($row["password"]);
+
+                    array_push($userList, $user);
+                }
+                return $userList;
+            }
+            catch(\PDOException $ex){
+                throw $ex;
+            }
+        }         
+
+
+        public function search($emailUser){
+            $sql = "SELECT * FROM $this->tableName WHERE email = :email";
+
+            $parameters['email'] = $emailUser;
+
+            try{
+                $this->connection = Connection::getInstance();
+                $resultSet = $this->connection->execute($sql, $parameters);
+            }
+            catch(\PDOException $ex){
+                throw $ex;{
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }
+            else{
+                return false;
+            }
+        }   
+
+        public function update($user){
+            $sql = "INSERT INTO ("
+        }
+
+
+
+
+
 
 
         public function add($user){

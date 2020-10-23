@@ -7,8 +7,10 @@
 
     use DAO\RoomDAO as RoomDAO;
     use Models\Room as Room;
-    use DAO\CinemaDAOPDO as CinemaDAOPDO;
+    use DAO\CinemaDAO as CinemaDAO;
    
+    //VALIDAR NOMBRE DE LA SALA EN EL MISMO CINE EN ADD Y EDIT
+
     class RoomController{
         private $cinemaDAO;
         private $roomDAO;
@@ -16,7 +18,7 @@
         
         public function __construct()
         {
-            $this->cinemaDAO=new CinemaDAOPDO();
+            $this->cinemaDAO=new CinemaDAO();
             $this->roomDAO=new RoomDAO();
             $this->msg=null;
         }
@@ -27,16 +29,15 @@
             require_once(VIEWS_PATH."Room-add.php");
         }  
 
-        public function showRoomEdit($idCinema="",$number=""){
-            $this->checkParameter($idCinema);
-            $editRoom=$this->roomDAO->getRoom($idCinema,$number);
+        public function showRoomEdit($idRoom=""){
+            $this->checkParameter($idRoom);
+            $editRoom=$this->roomDAO->search($idRoom);
             require_once(VIEWS_PATH."Room-edit.php");
         }
 
         public function showRoomList($idCinema=""){
-            $this->checkParameter($idCinema);
-            $roomList=$this->roomDAO->getRooms($idCinema);
-            $roomsInactives=$this->roomDAO->getAllInactives($idCinema);
+            $this->checkParameter($idCinema); 
+            
             $cinemaSearch = $this->cinemaDAO->search($idCinema);
             require_once(VIEWS_PATH."Room-list.php");
         }
@@ -46,40 +47,37 @@
             require_once(VIEWS_PATH."Select-cinema.php");
             }
 
-        public function add($idCinema="",$number="",$capacity="",$type="",$state="",$price=""){
+        public function add($idCinema="",$name="",$capacity="",$type="",$price=""){
             $this->checkParameter($idCinema);
-            $wanted=$this->roomDAO->getRoom($idCinema,$number);
+            $wanted=$this->roomDAO->search($idCinema,$number);
             $cinemaSearch = $this->cinemaDAO->search($idCinema);
             $cinemaList=$this->cinemaDAO->getAll();
 
             if(!$wanted){
                 $newRoom= new Room();
-                $newRoom->setIdCinema($idCinema);
-                $newRoom->setNumber($number);
+                $newRoom->setName($name);
                 $newRoom->setCapacity($capacity);
                 $newRoom->setType($type);
-                $newRoom->setState(boolval($state));
                 $newRoom->setPrice($price); 
             
-                $this->roomDAO->add($newRoom);
+                $this->roomDAO->add($newRoom, $idCinema);        //Le pasa la sala al DA0 para que la agregue a la BD
+                $cinemaSearch->addRoom($newRoom);    //Agrega la sala al cine
                 
                 $this->showRoomList($idCinema);
             }
             else{
-                $this->msg="Room: '$number' in cinema '" . $cinemaSearch->getName() ."' already exists";
+                $this->msg="Room: '$name' in cinema '" . $cinemaSearch->getName() ."' already exists";
                 require_once(VIEWS_PATH."Room-add.php");
             }
         }
 
-        public function edit($idCinema="",$idRoom="",$capacity="",$type="",$state="",$price="",$number=""){
+        public function edit($name="",$capacity="",$type="",$price="", $idRoom=""){
             $this->checkParameter($idCinema);
             $room=new Room();
             $room->setIdRoom($idRoom);
-            $room->setIdCinema($idCinema);
+            $room->setName($name);
             $room->setCapacity($capacity);
             $room->setType($type);
-            $room->setState($state);
-            $room->setnumber($number);
             $room->setPrice($price);
             
             $this->roomDAO->update($room);
@@ -87,20 +85,7 @@
             $this->showSelectCinema();
         }
 
-        public function changeState($idCinema="",$number=""){
-            $this->checkParameter($idCinema);
-            $room=$this->roomDAO->getRoom($idCinema,$number);
-            
-            if($room->getState()==true){
-                $room->setState(false);
-            }else{
-                $room->setState(true);
-            }
-            $this->roomDAO->update($room);
-
-            $this->showSelectCinema();
-        }
-
+       
         private function checkParameter($value=""){
             if($value==""){
                 header("location:../Home/index");

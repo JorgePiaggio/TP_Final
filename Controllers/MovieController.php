@@ -26,9 +26,8 @@
         public function showAllMovies(){
             $page = null;
             $actualGenre = null;
-            $allGenre=$this->getAllgenre();
+            $allGenre=$this->getAllGenre();
             $movieList=$this->movieDAO->getAll();
-            $movieList=$this->genreToString($movieList);
             $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
@@ -103,7 +102,7 @@
         public function filterByGenre($idGenre){
             $actualGenre = null;
             if($idGenre!=-1){
-            $allGenre=$this->getAllgenre();
+            $allGenre=$this->getAllGenre();
             $movieList=$this->movieDAO->getByGenre($idGenre);
             $genreList=$this->genreDAO->getAll();
             $actualGenre=$this->genreDAO->search($idGenre);
@@ -116,7 +115,7 @@
 
         /*Obtener pagina de pelicula directamente de la API*/
         public function showMoviePage($page=1,$language="en-US"){
-            $allGenre=$this->getAllgenre();
+            $allGenre=$this->getAllGenre();
             $actualGenre = null;
             $movieList=$this->getNowPlayingMovies($page,$language);
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
@@ -152,7 +151,6 @@
         $newMovie->setDescription($jsonObject["overview"]);
         $newMovie->setReleaseDate($jsonObject["release_date"]);
         $newMovie->setPopularity($jsonObject["popularity"]);
-        $newMovie->setVideo($jsonObject["video"]);
         $newMovie->setAdult($jsonObject["adult"]);
         $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
         $newMovie->setOriginalLanguage($jsonObject["original_language"]);
@@ -164,50 +162,20 @@
         }
         if(!$jsonObject["poster_path"]){
             $newMovie->setPoster(IMG_PATH."banner-not.png");
-            }else{
+        }else{
             $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
         }
 
         foreach($jsonObject["genres"] as $genre){
-                $newMovie->addGenre($genre['id']);
+                $newMovie->addGenre($genre);
         }
         $newMovie=$this->genreToString($newMovie);
 
         return $newMovie;
     }
 
-
-    /* insertar strings de genero en peliculas */
-    public function genreToString($movieList){
-
-        $genreDAO= new GenreDAO();     
-        $genreList=$genreDAO->getAll();
-        $aux=null;
-
-        if(is_array($movieList)){                   /* si es un array de peliculas */
-            foreach($movieList as $movie){
-                foreach($movie->getGenreIds() as $genreId){
-                    foreach($genreList as $genre){
-                        if($genre->getId() == $genreId){
-                        $movie->addGenreString($genre->getName());
-                        }
-                    }
-                }
-            }
-        }else{                                      /* si es solo una pelicula */
-            foreach($movieList->getGenreIds() as $genreId){
-                foreach($genreList as $genre){
-                    if($genre->getId() == $genreId){
-                    $movieList->addGenreString($genre->getName());
-                    }
-                }
-            }
-        }
-        return $movieList;
-    }
-
         /*Genero ficticio para traer todas las películas con todos los géneros */
-        public function getAllgenre(){
+        public function getAllGenre(){
             $all= new Genre();
             $all->setName("All");
             $all->setId(-1);

@@ -4,14 +4,16 @@ namespace Models;
 class CreditCard{
 
     private $idCreditCard;
-    private $idUser;
+    private $company;
     private $number;
-    private $propietary;
+    private $propietary; //name
     private $expiration;
     private $state;
 
     public function setIdCreditCard($idCreditCard){$this->idCredtiCard=$idCreditCard;}
     public function getIdCreditCard(){return $this->idCreditCard;}
+    public function setCompany($company){$this->company=$company;}
+    public function getCompany(){return $this->company;}
     public function setIdUser($idUser){$this->idUser=$idUser;}
     public function getIdUser(){return $this->idUser;}
     public function setNumber($number){$this->number=$number;}

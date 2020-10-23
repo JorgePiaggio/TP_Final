@@ -6,8 +6,8 @@
     }
     
     use Models\Cinema as Cinema;
-    use DAO\CinemaDAO as CinemaDAO;
-    use DAO\cinemaDAOPDO as cinemaDAOPDO;
+    #use DAO\CinemaDAO_JSON as CinemaDAO;
+    use DAO\CinemaDAO as cinemaDAO;
  
 
     class CinemaController{
@@ -16,8 +16,7 @@
     
     
         public function __construct(){
-            #$this->cinemaDAO = new CinemaDAO(); 
-            $this->cinemaDAO = new cinemaDAOPDO(); 
+            $this->cinemaDAO = new cinemaDAO(); 
             $this->msg = null;
         }
 

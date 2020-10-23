@@ -1,10 +1,12 @@
 <?php 
 namespace Models;
 
+use Models\Role as Role;
+
 class User{
 
     private $idUser;
-    private $idRole;
+    private $role;
     private $dni;
     private $name;
     private $surname;
@@ -17,13 +19,13 @@ class User{
 
 
     public function __construct(){
-        $this->idRole=0;
+        $this->role = new Role();
     }
 
     public function setIdUser($idUser){$this->idUser=$idUser;}
     public function getIdUser(){return $this->idUser;}
-    public function setIdRole($idRole){$this->idRole=$idRole;}
-    public function getIdRole(){return $this->idRole;}
+    public function setRole($role){$this->role=$role;}
+    public function getRole(){return $this->role;}
     public function setDni($dni){$this->dni=$dni;}
     public function getDni(){return $this->dni;}
     public function setName($name){$this->name=$name;}
