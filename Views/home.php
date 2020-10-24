@@ -3,7 +3,7 @@
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
       <ul class="slides">
-        <?php $cant = count($movieListSlider);
+        <?php $cant=null; if(isset($movieListSlider)){$cant = count($movieListSlider);}
         if($cant>0){
           for($i=0; $i<$cant; $i++){ ?>
             <li>
@@ -60,40 +60,42 @@
   <div id="gallery">
         <figure>
           <ul class="nospace clear">
-              <?php $indice = 0;                          /* indice para ordenarlas */
-            foreach ($movieList as $movie){
-                if($indice %4 == 0){ ?>                               
-              <li class="one_quarter first anim1 slideDown">                                            <!--- primer pelicula de la izquierda -->
-                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                <img src="<?php echo $movie->getPoster()?>" alt=""></a>
-                <p class="p-title"><?php echo $movie->getTitle()?></p>
-                <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                              echo $movie->getGenres()->getName();
-                                                            }else{
-                                                              foreach($movie->getGenres() as $genre){
-                                                              $str .=" ".$genre->getName()." /";
-                                                              }
-                                                              echo substr_replace($str,"", -1); 
-                                                            } ?></p>
-              </li>
-              <?php }else{ ?>
-              <li class="one_quarter anim1 slideDown">                                                  <!--- las otras 3 peliculas de la fila -->
-                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                <img src="<?php echo $movie->getPoster()?>" alt=""></a>
-                <p class="p-title"><?php echo $movie->getTitle()?></p>
-                <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                              echo $movie->getGenres()->getName();
-                                                            }else{ 
-                                                              foreach($movie->getGenres() as $genre){
-                                                              $str .=" ".$genre->getName()." /";
-                                                              }
-                                                              echo substr_replace($str,"", -1);
-                                                            } ?></p>
-              </li> <?php } 
-              $indice++;  
-            }?>
+              <?php $indice = 0;                         /* indice para ordenarlas */
+              if(isset($movieList)){
+                foreach ($movieList as $movie){
+                    if($indice %4 == 0){ ?>                               
+                  <li class="one_quarter first anim1 slideDown">                                            <!--- primer pelicula de la izquierda -->
+                    <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                    <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                    <p class="p-title"><?php echo $movie->getTitle()?></p>
+                    <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
+                    <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
+                                                                  echo $movie->getGenres()->getName();
+                                                                }else{
+                                                                  foreach($movie->getGenres() as $genre){
+                                                                  $str .=" ".$genre->getName()." /";
+                                                                  }
+                                                                  echo substr_replace($str,"", -1); 
+                                                                } ?></p>
+                  </li>
+                  <?php }else{ ?>
+                  <li class="one_quarter anim1 slideDown">                                                  <!--- las otras 3 peliculas de la fila -->
+                    <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                    <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                    <p class="p-title"><?php echo $movie->getTitle()?></p>
+                    <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
+                    <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
+                                                                  echo $movie->getGenres()->getName();
+                                                                }else{ 
+                                                                  foreach($movie->getGenres() as $genre){
+                                                                  $str .=" ".$genre->getName()." /";
+                                                                  }
+                                                                  echo substr_replace($str,"", -1);
+                                                                } ?></p>
+                  </li> <?php } 
+                  $indice++;  
+                }
+              }?>
           </ul>
         </figure>
       </div>

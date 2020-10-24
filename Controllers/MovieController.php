@@ -38,8 +38,10 @@
         /*Obtener pagina de pelicula directamente de la API*/
         public function showMoviePage($page=1,$language="en-US"){
             $allGenre=$this->getAllGenre();
-            $actualGenre = null;
-            $genreList=$this->genreDAO->getAll();
+            $actualGenre = null; 
+            $this->updateGenreList();                   /* si no hay generos en la BDD se piden a la API y se guardan */ 
+            $genreList=$this->genreDAO->getAll();               
+            var_dump($genreList);
             $movieList=$this->getNowPlayingMovies($page,$language);
             require_once(VIEWS_PATH."Movies/Movie-list-admin.php");
         }

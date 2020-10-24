@@ -249,7 +249,12 @@ class MovieDAO implements IMovieDAO{
             return $movie;
         },$value);
 
-        return count($result)>1 ? $result: $result["0"];
+        if(!empty($result)){
+            return count($result)>1 ? $result: $result["0"];        
+        }else{
+            return null;
+        }
+        
     }
 
 

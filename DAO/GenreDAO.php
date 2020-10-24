@@ -38,7 +38,13 @@
               
                 $genreList= $this->map($result);
             
+
+            if(!empty($genreList)){
                 return $genreList;
+            }else{
+                return null;
+            }  
+                
             }
             catch(\PDOException $ex)
             {
@@ -72,7 +78,7 @@
         public function search($idGenre){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE idGenre= :id";
+                $query = "SELECT * FROM genres AS g WHERE g.idGenre= :id";
                 $parameters["id"]=$idGenre;
 
                 $this->connection = Connection::getInstance();
@@ -103,7 +109,12 @@
                 return $genre;
             },$value);
  
-            return count($result) > 1 ? $result: $result["0"];
+
+            if(!empty($results)){
+                return count($result) > 1 ? $result: $result["0"];
+            }else{
+                return null;
+            }  
         }
 
-    }?>
+}?>
