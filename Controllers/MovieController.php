@@ -28,7 +28,7 @@
         public function showAllMovies(){
             $page = null;
             $actualGenre = null;
-            $allGenre=$this->getAllGenre(); /*HACER pagina diferente para los usuarios */
+            $allGenre=$this->getAllGenre();
             $movieList=$this->movieDAO->getAll();
             $genreList=$this->genreDAO->getAll();
             
