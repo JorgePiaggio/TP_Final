@@ -24,15 +24,6 @@ class UserController{
     public function showProfile($msg = ""){
         $this->validateSession();
         $user = $this->userDAO->search($_SESSION['loggedUser']);
-
-        $words = explode(" ", $user->getAddress());
-        $numberOfWords = count($words);
-        
-        $street = "";
-        $number = $words[$numberOfWords-1];
-        for($i=0; $i<$numberOfWords-1;$i++){ 
-            $street.=$words[$i]." ";
-        }
         require_once(VIEWS_PATH."User-profile.php");
     }
 
@@ -67,7 +58,7 @@ class UserController{
         header("location:../Home/index");
     }
     
-    public function register($name="",$surname="",$dni="",$street="",$number="",$phone="",$email="",$pass="",$repass=""){
+    public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         $this->checkParameter($name);
         if(!$this->validateEmail($email)){ 
             if($this->validatePass($pass, $repass)){
@@ -77,7 +68,6 @@ class UserController{
                 $this->user->setDni($dni);
                 $this->user->setStreet($street);
                 $this->user->setNumber($number);
-                $this->user->setPhone($phone);
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
                 $this->userDAO->add($this->user);
@@ -95,20 +85,19 @@ class UserController{
         $this->showRegister();
     }
 
-    public function edit($name="",$surname="",$dni="",$street="",$number="",$phone="",$email="",$pass="",$repass=""){
+    public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         $this->checkParameter($name);
         $this->validateSession();
         $userAux = $this->userDAO->search($email);
             
         if($this->validatePass($pass, $repass)){
             $user= new user();
-            $user->setIdUser($userAux->getId());
+            $user->setIdUser($userAux->getIdUser());
             $user->setName($name);
             $user->setSurname($surname);
             $user->setDni($dni);
             $user->setStreet($street);
             $user->setNumber($number);
-            $user->setPhone($phone);
             $user->setEmail($email);
             $user->setPassword($pass);
             $this->userDAO->update($user);

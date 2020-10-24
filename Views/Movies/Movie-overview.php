@@ -4,6 +4,10 @@
       <div class="content up">
         <h2 class="center page-title-variation cardStyle"><?php echo $movie->getTitle()?></h2>
       </div>
+      <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
+        <div class="floating-label fl_right">
+          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2">Add</button>
+        </div></form>
           <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
           <div class="one_half first cardStyle2">              
@@ -12,8 +16,8 @@
                 <p><h4>Release Date</h4><?php echo $movie->getReleaseDate()?></p>
               </div><br>
               <div>
-                <p><h4>Genre</h4><?php $str=""; foreach($movie->getGenreStrings() as $genre){
-                                                            $str .=" ".$genre." /";}
+                <p><h4>Genre</h4><?php $str=""; foreach($movie->getGenres() as $genre){
+                                                            $str .=" ".$genre->getName()." /";}
                                                             echo substr_replace($str,"", -1); ?></p>
               </div>
             </div>

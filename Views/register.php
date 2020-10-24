@@ -25,10 +25,6 @@
                               <input type="number" name="number" value="<?php if($this->user != null){echo $this->user->getNumber();}  ?>" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Number</label>
                          </div> <br> 
-                         <div class="floating-label">
-                              <input type="text" name="phone" value="<?php if($this->user != null){echo $this->user->getPhone();}  ?>" placeholder="" class="floating-input" required>
-                              <span class="highlight"></span><label for="">Phone</label>
-                         </div>  <br>
                          
                          <div class="floating-label">
                               <input type="email" name="mail" value="<?php if($this->user != null){echo $this->user->geEmail();}  ?>" placeholder="" class="floating-input" required>

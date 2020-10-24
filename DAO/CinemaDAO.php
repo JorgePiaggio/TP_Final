@@ -75,7 +75,7 @@
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE state=1";
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
                 
@@ -110,7 +110,7 @@
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE state=0";
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
                 

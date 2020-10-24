@@ -4,6 +4,7 @@
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
     use Models\Role as Role;
+    use DAO\Connection as Connection;
 
     class UserDAO implements IUserDAO{
         private $connection;
@@ -11,8 +12,10 @@
 
 
         public function add($user){
-            $sql = "INSERT INTO" . "$this->tableName" . "(idRole, dni, name, surname, street, number, phone, email, password)
-                                VALUES (:idRole, :dni, :name, :surname, :street, :number, :phone, :email, :password)";
+            $sql = "INSERT INTO " .$this->tableName." (idRole, dni, name, surname, street, number, email, password)
+                                      VALUES (:idRole, :dni, :name, :surname, :street, :number, :email, :password)";
+            
+           # $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email) VALUES (:state,:name,:street,:number,:phone,:email)";
 
             $parameters['idRole']=$user->getRole()->getId();
             $parameters['dni']=$user->getDni();
@@ -20,13 +23,14 @@
             $parameters['surname']=$user->getSurname();
             $parameters['street']=$user->getStreet();
             $parameters['number']=$user->getNumber();
-            $parameters['phone']=$user->getPhone();
             $parameters['email']=$user->getEmail();
             $parameters['password']=$user->getPassword();
 
+            echo "PROBANDO" . $parameters['number'];
+
             try{
                 $this->connection = Connection::getInstance();
-                return $this->connection::executeNonQuery($sql, $parameters);
+                return $this->connection->executeNonQuery($sql, $parameters);
             }
             catch(\PDOException $ex){
                 throw $ex;
@@ -43,13 +47,12 @@
                 foreach ($resultSet as $row)
                 {                
                     $user = new User();
-                    $user->setRole($row["role"]);
+                    $user->setRole($row["idRole"]);
                     $user->setDni($row["dni"]);
                     $user->setName($row["name"]);
                     $user->setSurname($row["surname"]);
                     $user->setStreet($row["street"]);
                     $user->setNumber($row["number"]);
-                    $user->setPhone($row["phone"]);
                     $user->setEmail($row["email"]);
                     $user->setPassword($row["password"]);
 
@@ -80,14 +83,13 @@
             else{
                 return false;
             }
-        }
-
+        }   
 
 
         public function update($user){
             try{
                 $sql = "UPDATE $this->tableName set dni=:dni,name=:name,surname=:surname,
-                                street=:street,number=:number,phone=:phone,email=:email,password=:password";
+                                street=:street,number=:number,password=:password";
                 
                 $this->connection = Connection::getInstance();
                 $parameters["dni"] = $user->getDni();
@@ -95,8 +97,6 @@
                 $parameters["surname"] = $user->getSurname();
                 $parameters["street"]=$user->getStreet();
                 $parameters["number"]=$user->getNumber();
-                $parameters["email"]=$user->getEmail();
-                $parameters["phone"]=$user->getPhone();
                 $parameters["password"] = $user->getPassword();
 
                 $rowCant = $this->connection->executeNonQuery($sql, $parameters);
@@ -114,14 +114,17 @@
             $result = array_map(function ($p){
                 $user = new User();
                 $user->setIdUser($p["idUser"]);
-                $user->setRole($p["role"]);
+                
+                $role = new Role();
+                $role->setId($p["idRole"]);
+                $user->setRole($role);
+
                 $user->setDni($p["dni"]);
                 $user->setName($p["name"]);
                 $user->setSurname($p["surname"]);
                 $user->setStreet($p["street"]);
                 $user->setNumber($p["number"]);
                 $user->setEmail($p["email"]);
-                $user->setPhone($p["phone"]);
                 $user->setPassword($p["password"]);
                 return $user;},$value);
  

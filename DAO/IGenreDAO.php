@@ -6,7 +6,7 @@
     interface IGenreDAO{
         function add(Genre $genre);
         function getAll();
-        function updateList($genreList);
+       # function updateList($genreList);
         function search($id);
     }
 

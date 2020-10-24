@@ -22,30 +22,8 @@
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }*/
 
-          /* agregar generos al DAO  */
-        public function updateGenreList(){
-            $nowGenre=$this->getNowGenres();
-            $this->genreDAO->updateList($nowGenre);
-            header("location:../Movie/showAllMovies");
-        }
+    
 
-            /* obtener de la API la lista de generos actuales    */ 
-          public function getNowGenres($language="en"){
-            $genres= array();
-
-            $request=file_get_contents(APIURL."genre/movie/list?api_key=".APIKEY."&language=".$language);
-
-            $jsonNowPlaying=($request) ? json_decode($request, true) : array();
-     
-            foreach($jsonNowPlaying['genres'] as $valuesArray){
-                $newGenre = new Genre();
-                $newGenre->setId($valuesArray["id"]);
-                $newGenre->setName($valuesArray["name"]);
-                array_push($genres, $newGenre);
-            }
-            return $genres;
-  
-        }
 
 
     }

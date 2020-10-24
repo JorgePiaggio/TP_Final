@@ -14,19 +14,19 @@
                             }else{ 
                             echo $movieListSlider[$i]->getTitle(); 
                           } ?>
-                              </h2>
-                              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieListSlider[$i]->getTmdbID()?>">
-                                  <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movieListSlider[$i]->getBackdropPath(); ?>" 
-                                  alt="<?php echo $movieListSlider[$i]->getTitle(); ?> movie poster">
-                              </a>
-                              <p> <?php $str=""; 
-                          if(strlen($movieListSlider[$i]->getDescription()) > 250){
-                            $str = substr($movieListSlider[$i]->getDescription(), 0, 247) . '...';
-                            echo $str;
-                          }else{ 
-                            echo $movieListSlider[$i]->getDescription();
-                          } 
-                        }?>
+              </h2>
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieListSlider[$i]->getTmdbID()?>">
+                  <img class="poster" src="https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movieListSlider[$i]->getBackdropPath(); ?>" 
+                  alt="<?php echo $movieListSlider[$i]->getTitle(); ?> movie poster">
+              </a>
+              <p><?php $str=""; 
+                if(strlen($movieListSlider[$i]->getDescription()) > 250){
+                  $str = substr($movieListSlider[$i]->getDescription(), 0, 247) . '...';
+                  echo $str;
+                }else{ 
+                  echo $movieListSlider[$i]->getDescription();
+                } 
+                }?>
               </p> 
               <footer>
                 <ul class="nospace inline pushright">

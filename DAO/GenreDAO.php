@@ -11,49 +11,55 @@
 
 
         public function add(Genre $genre){
-            $sql = "INSERT INTO ".$this->tableName." (id, name) VALUES (:id, :name)";
-            $parameters['id']=$genre->getId();
-            $parameters['name']=$genre->getName();
+            $exists= $this->search($genre->getId());
+            
+            if(!$exists){
+                $sql = "INSERT INTO ".$this->tableName." (idGenre, name) VALUES (:id, :name)";
+                $parameters['id']=$genre->getId();
+                $parameters['name']=$genre->getName();
 
-            try{
-                $this->connection= Connection::getInstance();
-                return $this->connection->executeNonQuery($sql,$parameters);
-            }catch(\PDOException $ex){
-                throw $ex;
+                try{
+                    $this->connection= Connection::getInstance();
+                    return $this->connection->executeNonQuery($sql,$parameters);
+                }catch(\PDOException $ex){
+                    throw $ex;
+                }
             }
         }
 
 
         public function getAll(){
+            try{
+                $genreList= array();
+                $query = "SELECT * FROM ".$this->tableName;
+                $this->connection = Connection::getInstance();
 
-            $genreList= array();
-            $query = "SELECT * FROM ".$this->tableName;
-            $this->connection = Connection::getInstance();
-
-            $result= $this->connection->execute($query);
-
-            foreach($result as $row){
-                $genre= $this->map($row);
-                
-                array_push($genreList,$genre);
+                $result= $this->connection->execute($query);
+              
+                $genreList= $this->map($result);
+            
+                return $genreList;
             }
-
-            return $genreList;
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
         }
 
-
-          /* actualizar generos en BDD */
+        
+          /* actualizar generos en BDD 
         public function updateList($genreList){
            try{
-               $query= "UPDATE ".$this->tableName." set id=:id, name=:name WHERE id=:id";
+               $query= "UPDATE ".$this->tableName." set idGenre=:id, name=:name WHERE idGenre=:id";
                
                $this->connection = Connection::getInstance();
-               
+                
+               $rowCant = null;
                foreach($genreList as $genre){
-               $parameters['id']=$genre->getId();
-               $parameters['name']=$genre->getName();
+                    $parameters['id']=$genre->getId();
+                    $parameters['name']=$genre->getName();
 
-               $rowCant+=$this->connection->executeNonQuery($query,$parameters);
+                    $rowCant+=$this->connection->executeNonQuery($query,$parameters);
                }
                return $rowCant;
 
@@ -61,12 +67,12 @@
                throw $ex;
            }
         }   
-
+        */
         
         public function search($idGenre){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE id= :id";
+                $query = "SELECT * FROM ".$this->tableName." WHERE idGenre= :id";
                 $parameters["id"]=$idGenre;
 
                 $this->connection = Connection::getInstance();
@@ -89,11 +95,11 @@
         protected function map($value){
             $value=is_array($value) ? $value: array();
             
+
             $result= array_map(function ($f){
                 $genre= new Genre();
-                $genre->SetId($f['id']);
+                $genre->SetId($f['idGenre']);
                 $genre->SetName($f['name']);
-
                 return $genre;
             },$value);
  

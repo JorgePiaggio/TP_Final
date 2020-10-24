@@ -28,11 +28,7 @@
                                 <td style="width: 35%;">Address</td>    
                                 <td style="width: 33%;"><input type="text" name="street" value="<?php echo $user->getStreet();?>"></td>
                                 <td style="width: 32%;"><input type="number" name="number" value="<?php echo $user->getNumber();?>"></td>
-                            </tr>                        
-                            <tr> 
-                                <td style="width: 35%;">Phone</td>    
-                                <td colspan="2" style="width: 65%;"><input type="number" name="phone" value="<?php echo $user->getPhone();?>"></td>
-                            </tr>
+                            </tr>                       
                             <tr> 
                                 <td style="width: 35%;">Email</td>
                                 <td colspan="2" style="width: 65%;"><input type="email" name="email" value="<?php echo $user->getEmail();?>" disabled></td>

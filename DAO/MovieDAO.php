@@ -15,40 +15,52 @@ class MovieDAO implements IMovieDAO{
     private $tableName="movies";
 
 
-    public function add(Movie $movie){
-        $sql = "INSERT INTO ".$this->tableName." (idMovie,title,originalTitle,voteAverage,overview,releaseDate,popularity,videoPath,adult,posterPath,backdropPath,originalLanguage,runtime,homepage,director) 
-                    VALUES (:id,:title,:original_title,:vote_average,:overview,:release_date,:popularity,:videoPath,:adult,:poster_path,:backdrop_path,:original_language,:runtime,:homepage,:director)";
+    public function add($movie){
 
-        $parameters["id"] = $movie->getTmdbId();
-        $parameters["title"] = $movie->getTitle();
-        $parameters["original_title"] = $movie->getOriginalTitle();
-        $parameters["vote_average"] = $movie->getVoteAverage();
-        $parameters["overview"] = $movie->getDescription();
-        $parameters["release_date"] = $movie->getReleaseDate();
-        $parameters["popularity"] = $movie->getPopularity();
-        $parameters["videoPath"] = $movie->getVideoPath();
-        $parameters["adult"] = $movie->getAdult();
-        $parameters["poster_path"] = $movie->getPoster();
-        $parameters["backdrop_path"] = $movie->getBackdropPath();
-        $parameters["original_language"] = $movie->getOriginalLanguage();
-        $parameters["runtime"] = $movie->getRuntime();
-        $parameters["homepage"] = $movie->getHomepage();
-        $parameters["director"] = $movie->getDirector();
         
-        try{
+        $exists=$this->search($movie->getTmdbID());
 
-        $this->connection=Connection::getInstance();
-
-        $result=$this->connection->executeNonQuery($sql,$parameters);
-
-        if($result > 0){    /* agregar generos x peliculas a tabla intermedia */
-            $this->addGenresXMovies($movie->getGenres(),$movie->getTmdbId());
-        }
         
-        return $result;
+       
+        if(!$exists){
+            $sql = "INSERT INTO ".$this->tableName." (idMovie,title,originalTitle,voteAverage,overview,releaseDate,popularity,videoPath,adult,posterPath,backDropPath,originalLanguage,runtime,homepage,director,review) 
+                                            VALUES (:idMovie,:title,:originalTitle,:voteAverage,:overview,:releaseDate,:popularity,:videoPath,:adult,:posterPath,:backDropPath,:originalLanguage,:runtime,:homepage,:director,:review)";
 
-        }catch(\PDOException $ex){
-            throw $ex;
+
+            $parameters["idMovie"] = $movie->getTmdbId();
+            $parameters["title"] = $movie->getTitle();
+            $parameters["originalTitle"] = $movie->getOriginalTitle();
+            $parameters["voteAverage"] = $movie->getVoteAverage();
+            $parameters["overview"] = $movie->getDescription();
+            $parameters["releaseDate"] = $movie->getReleaseDate();
+            $parameters["popularity"] = $movie->getPopularity();
+            $parameters["videoPath"] = $movie->getVideoPath();
+            $parameters["adult"] = $movie->getAdult();
+            $parameters["posterPath"] = $movie->getPoster();
+            $parameters["backDropPath"] = $movie->getBackdropPath();
+            $parameters["originalLanguage"] = $movie->getOriginalLanguage();
+            $parameters["runtime"] = $movie->getRuntime();
+            $parameters["homepage"] = $movie->getHomepage();
+            $parameters["review"] = $movie->getReview();
+            $directors = implode(" - ", $movie->getDirector());
+            $parameters["director"] = $directors;
+
+
+            try{
+
+            $this->connection=Connection::getInstance();
+
+            $result=$this->connection->executeNonQuery($sql,$parameters);
+
+            if($result > 0){    /* agregar generos x peliculas a tabla intermedia */
+                $this->addGenresXMovies($movie->getGenres(),$movie->getTmdbId());
+            }
+            
+            return $result;
+
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
         }
     }
 
@@ -107,23 +119,26 @@ class MovieDAO implements IMovieDAO{
         {
             $movieList = array();
 
-            $query = "SELECT * FROM ".$this->tableName." ORDER BY voteAverage LIMIT 20";
+            $query = "SELECT * FROM ".$this->tableName;
 
-            $this->connection = Connection::GetInstance();
+            $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
             
-            foreach ($resultSet as $row)
-            {                
-                $movie = $this->map($row);
-                array_push($movieList, $movie);
-            }
+            #$movieList = $this->map($resultSet);
 
-            return $movieList;
+            #return $movieList;
         }
         catch(\PDOException $ex)
         {
             throw $ex;
+        }
+
+        if(!empty($resultSet)){
+            $movieList= $this->map($resultSet);
+            return $movieList;
+        }else{
+            return null;
         }
     }
 
@@ -136,15 +151,13 @@ class MovieDAO implements IMovieDAO{
 
             $query = "SELECT * FROM ".$this->tableName." ORDER BY popularity LIMIT 5";
 
-            $this->connection = Connection::GetInstance();
+
+            $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
+                              
+            $movieList = $this->map($resultSet);
             
-            foreach ($resultSet as $row)
-            {                
-                $movie = $this->map($row);
-                array_push($movieList, $movie);
-            }
 
             return $movieList;
         }
@@ -160,11 +173,12 @@ class MovieDAO implements IMovieDAO{
     public function search($tmdbId){
         try
         {
-            $query = "SELECT * FROM ".$this->tableName." WHERE idMovie= :$tmdbId";
+            $query = "SELECT * FROM ".$this->tableName." WHERE idMovie= :idMovie";
+            $parameters["idMovie"] = $tmdbId;
 
             $this->connection = Connection::getInstance();
 
-            $result = $this->connection->execute($query);
+            $result = $this->connection->execute($query, $parameters);
         }
         catch(\PDOException $ex)
         {
@@ -179,8 +193,30 @@ class MovieDAO implements IMovieDAO{
     }
 
       /* retorna las peliculas por genero*/
-      public function getByGenre($idGenre){
- 
+    public function getByGenre($idGenre){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN moviesxgenres on idGenre=:idGenre";
+            $parameters["idGenre"] = $idGenre;
+
+            $this->connection = Connection::getInstance();
+
+            $resultSet = $this->connection->execute($query, $parameters);
+            
+            foreach ($resultSet as $row)
+            {                
+                $movie = $this->map($row);
+                array_push($cinemaList, $movie);
+            }
+
+            return $movieList;
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
 
@@ -189,7 +225,7 @@ class MovieDAO implements IMovieDAO{
         
         $result= array_map(function ($p){
             $movie=new Movie();
-            $movie->setTmdbId($p["id"]);
+            $movie->setTmdbId($p["idMovie"]);
             $movie->setTitle($p["title"]);
             $movie->setOriginalTitle($p["originalTitle"]);
             $movie->setVoteAverage($p["voteAverage"]);
@@ -199,13 +235,14 @@ class MovieDAO implements IMovieDAO{
             $movie->setVideoPath($p["videoPath"]);
             $movie->setAdult($p["adult"]);
             $movie->setPoster($p["posterPath"]);
-            $movie->setBackdropPath($p["backdropPath"]);
+            $movie->setBackdropPath($p["backDropPath"]);
             $movie->setOriginalLanguage($p["originalLanguage"]);
             $movie->setRuntime($p["runtime"]);
             $movie->setHomepage($p["homepage"]);
             $movie->setDirector($p["director"]);
+            $movie->setReview($p["review"]);
 
-            $genres=$this->getMovieGenres($movie->getTmdbID());
+            $genres=$this->getMovieGenres($movie);
             $movie->setGenres($genres);
 
             return $movie;
@@ -215,17 +252,22 @@ class MovieDAO implements IMovieDAO{
     }
 
 
-    protected function getMovieGenres($idMovie){
+    protected function getMovieGenres($movie){
 
             $genreList= array();
 
-            $query = "SELECT * FROM "."moviesxgenres"."WHERE idMovie="."$idMovie";
-            
+            $query = "SELECT g.idGenre, g.name FROM genres AS g INNER JOIN moviesxgenres AS mxg ON mxg.idGenre=g.idGenre INNER JOIN movies AS m ON mxg.idMovie=:idMovie";
+
+            #$parameters["idGenre"] = $idGenre;
+            $parameters["idMovie"] = $movie->getTmdbId();
+
             $this->connection = Connection::getInstance();
 
-            $result= $this->connection->execute($query);
-
+            $result= $this->connection->execute($query, $parameters);
+            var_dump($result);
             $genreList= $this->mapGenre($result);
+
+            #var_dump($genreList);
 
             return $genreList;
     }
@@ -236,8 +278,8 @@ class MovieDAO implements IMovieDAO{
         
         $result=array_map(function($p){
             $genre=new Genre();
-            $genre->setId($p["id"]);
-            $genre->setName($p["title"]);
+            $genre->setId($p['idGenre']);
+            $genre->setName($p["name"]);
      
             return $genre;
         },$value);

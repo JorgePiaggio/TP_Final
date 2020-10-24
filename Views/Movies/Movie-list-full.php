@@ -2,7 +2,6 @@
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 
     <div class="content" > 
-
            <!-- ####################################### OPTION GENRES ######################################################### -->
            <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post" class= "genreselector">
               <select name="Genres" class=" selection" onchange="this.form.submit()" id="genre">
@@ -10,6 +9,7 @@
             <option value="selected" selected disabled> <?php echo $actualGenre->getName();?> </option>
             <?php } ?>
            <option value=<?php echo $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
+           
             <?php foreach($genreList as $genre) { ?>
            <option value="<?php echo $genre->getId();?>">
               <?php echo $genre->getName();?>
@@ -17,24 +17,6 @@
             <?php } ?> 
             </select>
         </form>
-
-           <!-- ##################################### ADMIN BUTTONS ########################################################### -->
-        <?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
-          
-          <form action="<?php echo FRONT_ROOT?>Movie/showMoviePage" method="post">
-                <div class="floating-label">
-                    <input type="number" name="pass" placeholder="# Page" value="<?php if($page){echo $page;} ?>" class="floating-input fl_left pageNumber" min="1" max="70" required>
-                   
-                </div>
-                    <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 
-          </form>
-
-          <form action="<?php echo FRONT_ROOT?>Genre/updateGenreList" method="post">
-            <button type="submit" name="id" class="btn fl_right up4" value="">Update Genre List</button>
-          </form>
-
-        <?php  } ?>
-        
          <!-- ####################################### MOVIE GALLERY ######################################################### -->
       <div id="gallery">
         <figure>
@@ -47,8 +29,8 @@
               <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
-                                                            $str .=" ".$genre." /";}
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenres() as $genre){
+                                                            $str .=" ".$genre->getName()." /";}
                                                             echo substr_replace($str,"", -1); ?></p>
             </li><?php $indice++;?>
             <?php }else{ ?>
@@ -57,8 +39,8 @@
               <img src="<?php echo $movie->getPoster()?>" alt=""></a>
               <p class="p-title"><?php echo $movie->getTitle()?></p>
               <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenreStrings() as $genre){
-                                                            $str .=" ".$genre." /";}
+              <p><i class="fa fa-tags"></i><?php $str=""; foreach($movie->getGenres() as $genre){
+                                                            $str .=" ".$genre->getName()." /";}
                                                             echo substr_replace($str,"", -1); ?></p>
             </li><?php $indice++;?>
             <?php }} ?>
