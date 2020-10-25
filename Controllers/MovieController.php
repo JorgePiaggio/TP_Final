@@ -106,8 +106,12 @@
             
             $trailer=null;
 
-            if($jsonTrailer['results'][0]['site'] == 'YouTube'){
-                $trailer = $jsonTrailer['results'][0]['key'];
+            if($jsonTrailer['results'] != null){
+                if($jsonTrailer['results'][0] != null){
+                    if($jsonTrailer['results'][0]['site'] == 'YouTube'){
+                        $trailer = $jsonTrailer['results'][0]['key'];
+                    }
+                }
             }
             return $trailer;
         }
