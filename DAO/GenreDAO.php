@@ -85,7 +85,7 @@
             }
 
             if(!empty($results)){
-                return $g;
+                return $genre;
             }else{
                 return null;
             }  

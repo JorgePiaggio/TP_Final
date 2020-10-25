@@ -261,6 +261,10 @@ td{border-width:0 1px;}
 .cardStyle2 h4, .cardStyle3 h4{
 	color: white;
 }
+.cardStyle.mrg_btm{
+	margin-bottom: 20px;
+	padding: 30px 20px 20px 30px;
+}
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
 #gallery{display:block; width:100%; margin-bottom:50px;}
@@ -364,7 +368,19 @@ svg{display: inline;}
 .fa-star{color:yellow;}
 .fa-tags{color:green;}
 
-/* ------------------------------------------------------------------------------------------------------------ */
+
+/* Cinema Gallery homepage
+ ------------------------------------------------------------------------------------------------------------ */
+.heading.font-x2.center{
+	color:#FF5723;
+	background-color:rgba(7, 7, 7, 0.687);
+	border-radius: 5%;
+	padding: 20px 20px;
+	overflow:hidden; text-overflow: ellipsis;  
+}
+
+
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -383,7 +399,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
 
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
-.btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
+.btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
 
 .gradient{
 	background: rgb(73,3,3); /* Old browsers */

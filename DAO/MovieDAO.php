@@ -123,7 +123,7 @@ class MovieDAO implements IMovieDAO{
         {
             $movieList = array();
 
-            $query = "SELECT * FROM movies ORDER BY movies.voteAverage DESC LIMIT 20";
+            $query = "SELECT * FROM movies WHERE posterPath IS NOT NULL ORDER BY movies.voteAverage DESC LIMIT 20";
 
             $this->connection = Connection::getInstance();
 
@@ -148,7 +148,7 @@ class MovieDAO implements IMovieDAO{
         {
             $movieList = array();
 
-            $query = "SELECT * FROM movies ORDER BY movies.popularity DESC LIMIT 5";
+            $query = "SELECT * FROM movies WHERE backDropPath IS NOT NULL ORDER BY movies.popularity DESC LIMIT 5";
 
 
             $this->connection = Connection::getInstance();

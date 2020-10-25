@@ -16,7 +16,7 @@
       <!----------------- MENU USUARIO -----------------------> 
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
         <?php }else{ ?>
-        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest.png"></a>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
         <?php }?>
           <ul>
           <?php if($_SESSION){   ?>
