@@ -28,6 +28,7 @@
             <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add Movies</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">User Reviews</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }else{ ?>
 

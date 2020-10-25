@@ -4,18 +4,20 @@ namespace Controllers;
 
 use Models\User as User;
 use DAO\UserDAO as UserDAO;
+use DAO\UsersReviewsDAO as UsersReviewsDAO;
 
 class UserController{
     private $userDAO;
+    private $userReviewsDAO;
     private $user;
     private $msg;
     
     public function __construct(){
         $this->userDAO = new UserDAO(); 
+        $this->userReviewsDAO = new UsersReviewsDAO(); 
         $this->user = null;
         $this->msg = null;
     }
-
 
     public function showLogin(){
         require_once(VIEWS_PATH."login.php");
@@ -161,6 +163,49 @@ class UserController{
             header("location:../Home/index");
         }
     }
+
+
+    /* lista de reviews que envian los users en el footer */
+    public function showUserReviews($idRemove = null){
+        
+        if($_SESSION["loggedUser"]!="admin@moviepass.com"){
+            header("location:../Home/index");
+        }else{
+            
+            if($idRemove){
+                $this->userReviewsDAO->remove($idRemove);
+            }
+            $messageList=$this->userReviewsDAO->getAll();
+            require_once(VIEWS_PATH."reviews.php");
+        }
+    }
+    
+    public function submitReview($mail=null, $message=null){
+        if($message != null){
+           
+            //lista de insultos
+            $censuradas=array('mamón', 'forro', 'hdp', 'chupachichi');
+            //contar los insultos
+            $partes=count($censuradas);
+            
+            //censura en proceso..
+            for ($i=0; $i < $partes; $i++) { 
+                if(strpos($message,$censuradas[$i]) !== false ){
+                    $message=str_replace($censuradas[$i],'****',$message);
+                }
+            }          
+
+            // guardar en JSON 
+            $msgArray = array();
+            $id=($this->userReviewsDAO->getLastId())+1;
+            array_push($msgArray,$id);
+            array_push($msgArray,$message);
+            array_push($msgArray,$mail);
+            $this->userReviewsDAO->add($msgArray);
+        }
+        header("location:../Home/index");
+    }
+
 
 }
 

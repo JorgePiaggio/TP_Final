@@ -1,15 +1,15 @@
     <!-- ########################################### LINKS ##################################################### -->
-    <div class="wrapper quicklinks">
-  <nav class="hoc clear"> 
-    <ul class="nospace center">
-      <li><a href="<?php echo FRONT_ROOT?>Home/index"><i class="fa fa-lg fa-home"></i></a></li>
-      <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-      <li><a href="#">Cinemas</a></li>
-      <li><a href="#footer">About</a></li>
-      <li><a href="#">FAQ</a></li>
-      <li><a href="#">Blog</a></li>
-    </ul>
-  </nav>
+  <div class="wrapper quicklinks">
+    <nav class="hoc clear"> 
+      <ul class="nospace center">
+        <li><a href="<?php echo FRONT_ROOT?>Home/index"><i class="fa fa-lg fa-home"></i></a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
+        <li><a href="#">Cinemas</a></li>
+        <li><a href="#footer">About</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </nav>
 </div>
     <!-- ########################################### ABOUT US ##################################################### -->
 <div class="wrapper row4">
@@ -41,15 +41,15 @@
      <!-- ########################################### SEND REVIEW FORM ##################################################### -->
     <div class="one_third">
       <h6 class="heading review">Send your review</h6>
-      <form action="<?php echo FRONT_ROOT?>" method="post">       <!-- ### completar ### -->
+      <form action="<?php echo FRONT_ROOT?>User/submitReview" method="post">       <!-- ### completar ### -->
           <div class="floating-label-form">
                 <div class="floating-label">
-                    <input type="email" name="mail" placeholder="" class="floating-input reviewMail" required>
+                    <input type="userEmail" name="mail" placeholder="" value="" class="floating-input reviewMail" required>
                     <span class="highlight"></span><label for="">Your Email</label>
                 </div><br>                      
 
                 <div class="floating-label">
-                <textarea name="message" cols="19" rows="5" placeholder="" class="floating-input reviewTextarea" required></textarea>
+                <textarea name="userMessage" cols="19" rows="5" placeholder="" value="" class="floating-input reviewTextarea" required></textarea>
                     <span class="highlight"></span><label for="">Your Message</label>
                 </div><br>
 
