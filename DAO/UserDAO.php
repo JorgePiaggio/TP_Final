@@ -4,12 +4,18 @@
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
     use Models\Role as Role;
+    use DAO\RoleDAO as RoleDAO;
     use DAO\Connection as Connection;
 
     class UserDAO implements IUserDAO{
         private $connection;
         private $tableName = "users";
+        private $roleDAO;
 
+        function __construct()
+        {
+            $this->roleDAO=new RoleDAO();
+        }
 
         public function add($user){
             $sql = "INSERT INTO " .$this->tableName." (idRole, dni, name, surname, street, number, email, password)
@@ -26,7 +32,6 @@
             $parameters['email']=$user->getEmail();
             $parameters['password']=$user->getPassword();
 
-            echo "PROBANDO" . $parameters['number'];
 
             try{
                 $this->connection = Connection::getInstance();
@@ -47,7 +52,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $user = new User();
-                    $user->setRole($row["idRole"]);
+                    $user->setRole($this->roleDAO->search($row["idRole"]));
                     $user->setDni($row["dni"]);
                     $user->setName($row["name"]);
                     $user->setSurname($row["surname"]);
@@ -88,7 +93,7 @@
 
         public function update($user){
             try{
-                $sql = "UPDATE $this->tableName set dni=:dni,name=:name,surname=:surname,
+                $sql = "UPDATE $this->tableName set idRole=:idRole, dni=:dni,name=:name,surname=:surname,
                                 street=:street,number=:number,password=:password";
                 
                 $this->connection = Connection::getInstance();
@@ -98,6 +103,8 @@
                 $parameters["street"]=$user->getStreet();
                 $parameters["number"]=$user->getNumber();
                 $parameters["password"] = $user->getPassword();
+                $parameters["idRole"]=$user->getRole()->getId();
+
 
                 $rowCant = $this->connection->executeNonQuery($sql, $parameters);
                 return $rowCant;
@@ -114,11 +121,7 @@
             $result = array_map(function ($p){
                 $user = new User();
                 $user->setIdUser($p["idUser"]);
-                
-                $role = new Role();
-                $role->setId($p["idRole"]);
-                $user->setRole($role);
-
+                $user->setRole($this->roleDAO->search($p["idRole"]));
                 $user->setDni($p["dni"]);
                 $user->setName($p["name"]);
                 $user->setSurname($p["surname"]);
