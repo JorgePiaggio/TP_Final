@@ -4,11 +4,13 @@
       <div class="content up">
         <h2 class="center page-title-variation cardStyle"><?php echo $movie->getTitle()?></h2>
       </div>
+      <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
       <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
         <div class="floating-label fl_right">
           <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2">Add</button>
         </div></form>
-          <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
+        <?php } ?>
+        <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
           <div class="one_half first cardStyle2">              
             <div class="one_half first">
