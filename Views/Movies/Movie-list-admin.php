@@ -15,10 +15,6 @@
                     <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 
           </form>
 
-          <form action="<?php echo FRONT_ROOT?>Movie/updateGenreList" method="post">
-            <button type="submit" name="id" class="btn fl_right up4" value="">Update Genre List</button>
-          </form>
-
         <?php  } ?>
          <!-- ####################################### MOVIE GALLERY ######################################################### -->
       <div id="gallery">

@@ -31,49 +31,36 @@
         public function getAll(){
             try{
                 $genreList= array();
-                $query = "SELECT * FROM ".$this->tableName;
+
+                $query = "SELECT idGenre, name FROM genres";
+
                 $this->connection = Connection::getInstance();
 
                 $result= $this->connection->execute($query);
-              
-                $genreList= $this->map($result);
-            
+
+                //$genreList= $this->map($result);
+                
+                foreach($result as $g){
+                    $genre= new Genre();
+                    $genre->SetId($g['idGenre']);
+                    $genre->SetName($g['name']);
+                    array_push($genreList,$genre);
+                }
+
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
 
             if(!empty($genreList)){
                 return $genreList;
             }else{
                 return null;
             }  
-                
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
         }
 
         
-          /* actualizar generos en BDD 
-        public function updateList($genreList){
-           try{
-               $query= "UPDATE ".$this->tableName." set idGenre=:id, name=:name WHERE idGenre=:id";
-               
-               $this->connection = Connection::getInstance();
-                
-               $rowCant = null;
-               foreach($genreList as $genre){
-                    $parameters['id']=$genre->getId();
-                    $parameters['name']=$genre->getName();
-
-                    $rowCant+=$this->connection->executeNonQuery($query,$parameters);
-               }
-               return $rowCant;
-
-           }catch(\PDOException $ex){
-               throw $ex;
-           }
-        }   
-        */
         
         public function search($idGenre){
             try
@@ -84,6 +71,13 @@
                 $this->connection = Connection::getInstance();
 
                 $results = $this->connection->execute($query,$parameters);
+
+               
+            foreach($results as $g){
+                $genre= new Genre();
+                $genre->SetId($g['idGenre']);
+                $genre->SetName($g['name']);
+            }
             }
             catch(\PDOException $ex)
             {
@@ -91,7 +85,7 @@
             }
 
             if(!empty($results)){
-                return $this->map($results);
+                return $g;
             }else{
                 return null;
             }  
@@ -100,7 +94,6 @@
 
         protected function map($value){
             $value=is_array($value) ? $value: array();
-            
 
             $result= array_map(function ($f){
                 $genre= new Genre();
@@ -109,12 +102,8 @@
                 return $genre;
             },$value);
  
-
-            if(!empty($results)){
-                return count($result) > 1 ? $result: $result["0"];
-            }else{
-                return null;
-            }  
+            return count($result) > 1 ? $result: $result["0"];
+      
         }
 
 }?>

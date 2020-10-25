@@ -111,7 +111,7 @@ class MovieDAO implements IMovieDAO{
 
         if(!empty($resultSet)){
      
-            return $movieList= $this->map($resultSet); 
+            return $movieList; 
         }else{
             return null;
         }

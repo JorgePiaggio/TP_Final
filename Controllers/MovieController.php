@@ -35,28 +35,22 @@
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
+
         /*Obtener pagina de pelicula directamente de la API*/
         public function showMoviePage($page=1,$language="en-US"){
             $allGenre=$this->getAllGenre();
             $actualGenre = null; 
-            $this->updateGenreList();                   /* si no hay generos en la BDD se piden a la API y se guardan */ 
-            $genreList=$this->genreDAO->getAll();               
-            var_dump($genreList);
+            $this->updateGenreList();                                 
+            $genreList=$this->genreDAO->getAll();
             $movieList=$this->getNowPlayingMovies($page,$language);
             require_once(VIEWS_PATH."Movies/Movie-list-admin.php");
         }
+
 
         public function showFilterMovies(){
             $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
-
-        /* acomodar - llamar funcion getActive */ 
-        /*
-        public function ShowNowPlayingView(){
-            $movieList=$this->getNowPlayingMovies();
-            require_once(VIEWS_PATH."");
-        } */
 
 
         public function filterByGenre($idGenre){
@@ -211,7 +205,7 @@
             $newMovie->setDescription($jsonObject["overview"]);
             $newMovie->setReleaseDate($jsonObject["release_date"]);
             $newMovie->setPopularity($jsonObject["popularity"]);
-            $newMovie->setAdult($jsonObject["adult"]);
+            //$newMovie->setAdult($jsonObject["adult"]);
             $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
             $newMovie->setOriginalLanguage($jsonObject["original_language"]);
             if(isset($jsonObject["homepage"])){
@@ -227,7 +221,7 @@
             }
 
             $genres=$this->genreDAO->getAll();
-
+            
             if(isset($jsonObject["genre_ids"])){
                 foreach($jsonObject["genre_ids"] as $genreId){  /* crea objeto Genre por cada id de genero q manda la API en getNowPlaying */ 
                     foreach($genres as $genre){
@@ -251,6 +245,15 @@
             return $newMovie;
         }
 
+
+        /* agregar generos al DAO  */
+        public function updateGenreList(){
+            $nowGenre=$this->getNowGenres();
+            foreach($nowGenre as $genre){
+                $this->genreDAO->add($genre);
+            }
+        }
+
     
         /* obtener de la API la lista de generos actuales    */ 
         public function getNowGenres($language="en"){
@@ -270,6 +273,7 @@
     
         }
 
+
         /*Genero ficticio para traer todas las películas con todos los géneros */
         public function getAllGenre(){
             $all= new Genre();
@@ -278,16 +282,7 @@
             return $all;
         }
 
-        /* agregar generos al DAO  */
-        public function updateGenreList(){
-            $nowGenre=$this->getNowGenres();
-            foreach($nowGenre as $genre){
-                $this->genreDAO->add($genre);
-            }
-        $this->showMoviePage();
-        }
 
-    
         public function validateSession(){
             if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
                 header("location:../Home/index");
