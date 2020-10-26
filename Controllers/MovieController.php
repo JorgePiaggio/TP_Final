@@ -171,6 +171,19 @@
             return $movies;
         }
 
+        /*agregar multiples peliculas a la BDD*/
+        public function addMultipleMovies($movies){
+            if($movies){
+                foreach($movies as $idMovie){
+                    $this->addMovieToDatabase($idMovie);
+                }
+                $this->msg="Added Correctly";
+            }else{
+                $this->msg="You must select a Movie";
+                
+            }
+            $this->showMoviePage();
+        }
 
         /* agregar peliculas a la BDD */
         public function addMovieToDatabase($tmdbId){

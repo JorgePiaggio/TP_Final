@@ -13,6 +13,8 @@
                    
                 </div>
                     <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 
+                    <h1 class="msg"><?php if($this->msg){ echo $this->msg;} ?></h1>
+                    
           </form>
 
         <?php  } ?>
@@ -20,10 +22,13 @@
       <div id="gallery">
         <figure>
           <ul class="nospace clear">
+          <form action="<?php echo FRONT_ROOT?>Movie/addMultipleMovies" method="POST" >
+          
               <?php $indice=0; ?>
               <?php foreach ($movieList as $movie){
                 if($indice % 4 == 0){?>
                   <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
+                  <input type="checkbox" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                       <img src="<?php echo $movie->getPoster()?>" alt=""> 
                     </a>         
@@ -40,6 +45,7 @@
                   </li>
                   <?php }else{ ?>
                   <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
+                    <input type="checkbox" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                       <img src="<?php echo $movie->getPoster()?>" alt="">
                     </a>
@@ -57,6 +63,8 @@
                   </li><?php } 
                 $indice++;
               }?>
+              <button type="submit" name="idadd" class="btn fl_left up5" value="">Add</button> 
+            </form>
           </ul>
         </figure>
       </div>
