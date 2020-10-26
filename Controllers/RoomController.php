@@ -30,7 +30,7 @@
         }  
 
         public function showRoomEdit($name="",$idCinema=""){
-            $this->checkParameter($idCinema);
+            $this->checkParameter($idCinema);       
             $editRoom=$this->roomDAO->search($idCinema,$name);
             require_once(VIEWS_PATH."Room-edit.php");
         }
@@ -48,10 +48,11 @@
             require_once(VIEWS_PATH."Select-cinema.php");
             }
 
+
         public function add($idCinema="",$name="",$capacity="",$type="",$price=""){
             $this->checkParameter($idCinema);
-            $wanted=$this->roomDAO->search($idCinema,$name);
-            $cinemaSearch = $this->cinemaDAO->search($idCinema);
+            $wanted=$this->roomDAO->search($idCinema,$name);    /* chequear si ya existe sala con ese id y nombre */
+            $cinemaSearch = $this->cinemaDAO->search($idCinema);    /*buscar cine al q agregar la sala */
 
             if(!$wanted){
                 $newRoom= new Room();
@@ -62,8 +63,6 @@
                 $newRoom->setCinema($cinemaSearch); 
             
                 $this->roomDAO->add($newRoom);        //Le pasa la sala al DA0 para que la agregue a la BD
-               
-                
                 $this->showRoomList($idCinema);
             }
             else{
@@ -78,7 +77,7 @@
             $this->checkParameter($idRoom);
             $wanted=$this->roomDAO->search($idCinema,$name);
             $cinema=$this->cinemaDAO->search($idCinema);
-            if(!$wanted){
+            if(!$wanted || $wanted->getCinema()->getIdCinema() == $cinema->getIdCinema()){
             $room=new Room();
             $room->setIdRoom($idRoom);
             $room->setName($name);
@@ -91,7 +90,7 @@
             }else{
                 $this->msg="Room: '$name' in cinema '" . $cinema->getName() ."' already exists"; 
             }
-            $this->showSelectCinema();
+            $this->showRoomList($idCinema);
         }
 
        

@@ -35,9 +35,9 @@
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button><br><br>
                                    
-                                   <h1 class="msg"><?php if($this->msg){  //Si ya existe una sala con ese número en el mismo cine muestro el mensaje
-                                        echo $this->msg;} 
-                                   ?></h1>
+                                   <?php if($this->msg){  //Si ya existe una sala con ese número en el mismo cine muestro el mensaje
+                                        ?><h4 class="msg"> <?php echo $this->msg;} 
+                                   ?></h4>
                               </div>
                          </div>            
                </form>

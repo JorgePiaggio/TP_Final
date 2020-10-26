@@ -45,9 +45,9 @@
                          </div>
                     </div>
                     <br>    
-                    <h1 class="msg"> <?php if($this->msg != null){ //Muestro un mensaje con el error en el registro
-                         echo $this->msg;
-                    } ?> </h1>               
+                    <?php if($this->msg != null){ //Muestro un mensaje con el error en el registro
+                         ?>  <h4 class="msg"><?php echo $this->msg;
+                    } ?> </h4>               
                </div>
           </form>
      </div>

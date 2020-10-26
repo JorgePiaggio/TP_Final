@@ -52,21 +52,7 @@
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
-
-        public function filterByGenre($idGenre){
-            $actualGenre = null;
-            if($idGenre!=-1){
-            $allGenre=$this->getAllGenre();
-            $movieList=$this->movieDAO->getByGenre($idGenre);
-            $genreList=$this->genreDAO->getAll();
-            $actualGenre=$this->genreDAO->search($idGenre);
-
-            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
-            }else{
-                $this->showAllMovies();
-            }
-        }
-
+        
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
 
@@ -87,6 +73,21 @@
             $movie->setReview($review);
             
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
+        }
+
+
+        public function filterByGenre($idGenre){
+            $actualGenre = null;
+            if($idGenre!=-1){
+            $allGenre=$this->getAllGenre();
+            $movieList=$this->movieDAO->getByGenre($idGenre);
+            $genreList=$this->genreDAO->getAll();
+            $actualGenre=$this->genreDAO->search($idGenre);
+
+            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
+            }else{
+                $this->showAllMovies();
+            }
         }
 
 

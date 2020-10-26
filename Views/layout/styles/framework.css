@@ -72,8 +72,9 @@ select.selection{color: black ; background-color: #FF5723; border-color:#df4516;
 select.selection option.selected:hover{color: black ; background-color: #FF5723; }
 
 .floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
-
-
+.margin1{margin: -60px 0;}
+.margin2{display: inline;top:-10%; left: 71%; margin-bottom:-200px;}
+.margin3{left: -5%;}
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
 

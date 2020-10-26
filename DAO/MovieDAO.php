@@ -270,10 +270,11 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $result= $this->connection->execute($query, $parameters);
-            #var_dump($result);
-            $genreList= $this->mapGenre($result);
-
-            #var_dump($genreList);
+            
+            if(count($result) > 0){
+                $genreList= $this->mapGenre($result);
+            }
+            
 
             return $genreList;
     }

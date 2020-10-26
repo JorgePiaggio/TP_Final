@@ -6,8 +6,8 @@
       </div>
       <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
       <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
-        <div class="floating-label fl_right">
-          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2">Add</button>
+        <div class="floating-label fl_right margin3">
+          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2 up2">Add</button>
         </div></form>
         <?php } ?>
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->

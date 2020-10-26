@@ -42,6 +42,10 @@
             require_once(VIEWS_PATH."Select-billboard.php");
         }
 
+        public function showEditView(){
+            require_once(VIEWS_PATH."Cinema-edit.php");
+        }
+
         public function showManageBillboard($idCinema=""){
             if($this->checkParameter($idCinema)){
             $cinema=$this->cinemaDAO->search($idCinema);
@@ -54,7 +58,9 @@
 
         }
 
-        public function addToBillboard($movies,$idCinema=""){
+        
+
+        public function addToBillboard($idCinema="",$movies){
             if($this->checkParameter($idCinema)){
                 foreach($movies as $value){
 
@@ -71,7 +77,7 @@
             $this->showManageBillboard($idCinema);
         }
 
-        public function removeFromBillboard($movies,$idCinema=""){
+        public function removeFromBillboard($idCinema="",$movies){
             if($this->checkParameter($idCinema)){
                 
                 foreach($movies as $value){
@@ -86,15 +92,12 @@
             $this->showManageBillboard($idCinema);
         }
         
-        public function showEditView(){
-            require_once(VIEWS_PATH."Cinema-edit.php");
-        }
-
+        
         public function add($name, $street, $number, $phone, $email){
             $this->checkParameter($name);
             $address = $street . $number;
 
-            if($this->validateCinema($name, $address)){ 
+            if($this->validateCinema($name, $address) == null){ 
                 $cinema = new Cinema();
                 $cinema->setName($name);
                 $cinema->setStreet($street);
@@ -106,7 +109,7 @@
                 $this->showListView();
             }   
             else{
-                $this->msg = "Already exists cinema: '$name' with address: '$address'.";
+                $this->msg = "Already exists cinema: '$name' with address: '$street $number'";
                 $this->showAddView();
                 
             }
@@ -116,15 +119,15 @@
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección
         public function validateCinema($name, $address){
-            $validate = true;
             $cinemaList = $this->cinemaDAO->getAll();
-            
+            $idFound=null;
+
             foreach($cinemaList as $cinema){
                 $addressAux = $cinema->getStreet() . $cinema->getNumber();
                 if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
-                    $validate = false;
+                    $idFound = $cinema->getIdCinema();
             }
-            return $validate; //Retorna true si se puede agregar el cine y false si ya existe
+            return $idFound; //Retorna el id del cine si ya existe
         }
 
         public function changeState($idRemove=""){
@@ -160,9 +163,9 @@
             $this->checkParameter($name);
             $aux = $this->cinemaDAO->search($idCinema);
             $address = $street . $number;
-
-            if($this->validateCinema($name, $address)){ 
-               $cinemaEdit= new Cinema();
+            $validate = $this->validateCinema($name, $address);
+            if(!$validate || $validate == $idCinema){ 
+                $cinemaEdit= new Cinema();
                 $cinemaEdit->setState($aux->getState());
                 $cinemaEdit->setName($name);
                 $cinemaEdit->setStreet($street);
@@ -176,7 +179,7 @@
                 $this->showListView();
             }
             else{
-                $this->msg = "Already exists cinema: '$name' with address: '$address'.";
+                $this->msg = "Already exists cinema: '$name' with address: '$street $number'";
                 $this->searchEdit($idCinema);
             }
             

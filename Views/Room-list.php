@@ -19,7 +19,7 @@
                                         <td><?php echo $room->getType(); ?> </td>
                                         <td><?php echo $room->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
-                                        <input type="hidden" name="name" value="<?php $room->getName(); ?>">
+                                        <input type="hidden" name="name" value="<?php echo $room->getName(); ?>">
                                         <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getCinema()->getIdCinema();?>"> Edit </button></td>
                                         </form>
                                    </tr>

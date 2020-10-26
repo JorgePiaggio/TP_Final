@@ -106,13 +106,15 @@
 
 
         }
+
+        
         public function search($idCinema,$name){
             try
             {
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and name=:name";
                 $parameters["idCinema"]=$idCinema;
                 $parameters["name"]=$name;
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);              
             }
@@ -132,15 +134,17 @@
         public function update($room){
             try
             {
-                $query = "UPDATE ".$this->tableName." set name=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
+                $query = "UPDATE rooms SET name=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
 
-                $this->connection = Connection::getInstance();
+                
                 $parameters["idRoom"]=$room->getIdRoom();
                 $parameters["name"]=$room->getName();
                 $parameters["capacity"]=$room->getCapacity();
                 $parameters["type"]=$room->getType();
                 $parameters["price"]=$room->getPrice();
-                $parameters["idCinema"]=$room->getCinema()->getIdCinema();
+               # $parameters["idCinema"]=$room->getCinema()->getIdCinema();
+
+                $this->connection = Connection::getInstance();
 
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
                 return $rowCant;

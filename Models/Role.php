@@ -19,6 +19,8 @@ class Role{
     function setDescription($id){ 
         if($id == 1){
             $this->description="admin";
+        }else{
+            $this->description="client";
         }
     }
 

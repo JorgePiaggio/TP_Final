@@ -44,7 +44,14 @@ class UserController{
 
     public function showUserView($emailUser=""){
         $user = $this->userDAO->search($emailUser);
-        require_once(VIEWS_PATH."User-view.php");
+        if(!$user){
+            $this->msg = "Email doesn't exist";
+            $this->showSelectUser();
+        }
+        else{
+            require_once(VIEWS_PATH."User-view.php");    
+        }
+        
     }
 /*
     public function showChangeRole(){
@@ -103,7 +110,7 @@ class UserController{
                 $this->user->setPassword($pass);
                 $this->userDAO->add($this->user);
                 $_SESSION["loggedUser"]=$email;
-                $_SESSION["role"]=0;
+                $_SESSION["role"]=$this->user->getRole()->getId();
                 header("location:../Home/index");
             }
             else{
@@ -199,7 +206,9 @@ class UserController{
         $this->showUserView($userEmail);
         
     }
-    
+
+
+    /* Guarda mensajes de users sobre la web en un json */    
     public function submitReview($mail=null, $message=null){
         if($message != null){
            

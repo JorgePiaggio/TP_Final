@@ -13,7 +13,7 @@
                               <br><br>
                               <div class="floating-label">
                                    <button type="submit" name="continue" class="btn btn-primary ml-auto d-block">Billboard</button><br><br>
-                                        <?php if($this->msg){ echo $this->msg;} ?>
+                                        <?php if($this->msg){?> <h4 class="msg"><?php echo $this->msg;} ?></h4>
                               </div>
                          </div>            
                </form>

@@ -25,15 +25,12 @@
                               <tr>
                               <td colspan="7"><button type="submit" name="idCinema" class="btn unique" value="<?php echo $editCinema->getIdCinema(); ?>"> Save </button></td>
                               </tr>
-                              <td colspan="7"><?php if($this->msg != null){ //Si el cine ya existe muestra el mensaje
-                                   echo $this->msg;
-                              } ?></td>
-                              
-
                          </form>
                          </tbody>
                     </table>
-           
+                    <div class="center"><h4 class="msg"><?php if($this->msg != null){ //Si el cine ya existe muestra el mensaje
+                                   echo $this->msg;
+                              } ?></h4></div>
                </div>    
           </div>
 </main>
