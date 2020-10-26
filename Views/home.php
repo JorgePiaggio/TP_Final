@@ -50,8 +50,8 @@
   <div class="background-pic-promo" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/alex-litvin-MAYsdoYpGuk-unsplash.jpg');">
     <h2 class="page-title page-title-special">Promos</h2> 
   </div> 
-  <img class="promo" src="<?php echo IMG_PATH?>promo25.jpg" alt="25% off promo poster">
-  <img class="promo" src="<?php echo IMG_PATH?>promo25.jpg" alt="25% off promo poster">
+  <img class="promo" src="<?php echo IMG_PATH?>promoAlt.jpg" alt="popcorn promo poster">
+  <img class="promo" src="<?php echo IMG_PATH?>25off.png" alt="25% off promo poster">
 </div>
 <!-- ########################################### TOP RATED MOVIES  ##################################################### -->
 <div class="background-pic gradient" >
