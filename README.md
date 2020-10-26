@@ -61,7 +61,9 @@ De alli usaremos los GET:
  - Consulta de películas actuales (C- Item a - get de la api)
 2. Revisión
  - Ingresar películas a la cartelera del cine junto con los días y horarios de exhibición (A - item a)
- – Agregar a 1.2 los filtros por categoría (temas) y fechas
+ - Agregar a 1.2 los filtros por categoría (temas) y fechas de la función​ . ​**De aquí en más, las
+películas que el cliente visualiza en la consulta serán aquellas que estén en cartelera (en funciones de cines, a partir del día de la consulta -now-)
+ - Los daos deben implementarse contra la BD.**
 3. Revisión
  - Seleccionar y comprar entradas para una proyección de película determinada (C – item b, sin
 pago ni descuentos)
