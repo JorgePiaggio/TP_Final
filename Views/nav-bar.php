@@ -26,7 +26,8 @@
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List Cinema</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">Room List</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>Cinema/showBillboard">Billboard</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add Movies</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">User Reviews</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>

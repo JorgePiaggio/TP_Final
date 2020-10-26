@@ -8,15 +8,21 @@
     use Models\Cinema as Cinema;
     #use DAO\CinemaDAO_JSON as CinemaDAO;
     use DAO\CinemaDAO as CinemaDAO;
+    use DAO\MovieDAO as MovieDAO;
+    use DAO\GenreDAO as GenreDAO;
  
 
     class CinemaController{
         private $cinemaDAO;
+        private $movieDAO;
+        private $genreDAO;
         private $msg;
     
     
         public function __construct(){
             $this->cinemaDAO = new CinemaDAO(); 
+            $this->movieDAO = new MovieDAO(); 
+            $this->genreDAO = new GenreDAO(); 
             $this->msg = null;
         }
 
@@ -29,6 +35,55 @@
             $cinemaList = $this->cinemaDAO->getAllActive();
             $cinemaListInactive = $this->cinemaDAO->getAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
+        }
+
+        public function showBillboard(){
+            $cinemaList = $this->cinemaDAO->getAllActive();
+            require_once(VIEWS_PATH."Select-billboard.php");
+        }
+
+        public function showManageBillboard($idCinema=""){
+            if($this->checkParameter($idCinema)){
+            $cinema=$this->cinemaDAO->search($idCinema);
+            $movieList=$this->movieDAO->getAll();
+            $genreList=$this->genreDAO->getAll();
+            $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
+            require_once(VIEWS_PATH."Manage-billboard.php");
+            }
+
+
+        }
+
+        public function addToBillboard($movies,$idCinema=""){
+            if($this->checkParameter($idCinema)){
+                foreach($movies as $value){
+
+                    if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
+                    $this->cinemaDAO->addMovie($idCinema,$value);
+                    }else{
+
+                     $this->cinemaDAO->stateMovie($idCinema,$value,"1");
+                       
+                    }
+                }
+                $this->msg="Added correctly"; 
+            }
+            $this->showManageBillboard($idCinema);
+        }
+
+        public function removeFromBillboard($movies,$idCinema=""){
+            if($this->checkParameter($idCinema)){
+                
+                foreach($movies as $value){
+                 
+                     $this->cinemaDAO->stateMovie($idCinema,$value,"0");   
+                    
+                    
+                }
+                $this->msg="Removed correctly"; 
+            }  
+
+            $this->showManageBillboard($idCinema);
         }
         
         public function showEditView(){

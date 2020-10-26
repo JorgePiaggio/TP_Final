@@ -1,8 +1,7 @@
 <?php
 namespace Models;
 
-use Models\Room as Room;
-
+use Models\Movie as Movie;
 class Cinema{ 
 
     private $idCinema;
@@ -12,11 +11,12 @@ class Cinema{
     private $number;
     private $phone;
     private $email;
+    private $billboard;
     
    
     function __construct(){
         $this->state = true;
-        $this->rooms = array();
+        $this->billboard=array();
     }
     
     function getIdCinema(){return $this->idCinema;}
@@ -26,6 +26,7 @@ class Cinema{
     function getPhone(){return $this->phone;}
     function getEmail(){return $this->email;}
     function getState(){return $this->state;}
+    function getBillboard(){return $this->billboard;}
 
     function setIdCinema($idCinema){$this->idCinema=$idCinema;}
     function setName($name){$this->name=$name;}
@@ -34,6 +35,9 @@ class Cinema{
     function setPhone($phone){$this->phone=$phone;}
     function setEmail($email){$this->email=$email;}
     function setState($state){$this->state=$state;}
+    function setBillboard($billboard){$this->billboard=$billboard;}
+
+    function addMovie(Movie $movie){if($movie){array_push($this->billboard,$movie);}} 
 
 }
 ?>
