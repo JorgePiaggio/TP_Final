@@ -144,13 +144,13 @@
         }
 
 
-        /* pedir peliculas nuevas y generos a la API  */
+        /* pedir peliculas nuevas y generos a la API  
         public function updateMovieList($pageNumber){
             $this->validateSession();
             $nowPlaying=$this->getNowPlayingMovies($pageNumber,"en");
             $this->movieDAO->updateList($nowPlaying);
             $this->showAllMovies();
-        }
+        }*/
 
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        

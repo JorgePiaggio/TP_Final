@@ -2,12 +2,19 @@
     namespace DAO;
 
     use DAO\ICinemaDAO as ICinemaDAO;
+    use DAO\MovieDAO as MovieDAO;
     use Models\Cinema as Cinema;
     use DAO\Connection as Connection;
 
     class CinemaDAO implements ICinemaDAO{
         private $connection;
         private $tableName="cinemas";
+        private $movieDAO;
+
+        function __construct()
+        {
+            $this->movieDAO= new MovieDAO();
+        }
 
 
         public function add($cinema){
@@ -54,7 +61,7 @@
                     $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
-
+                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
                     array_push($cinemaList, $cinema);
                 }
 
@@ -89,7 +96,7 @@
                     $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
-
+                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
                     array_push($cinemaList, $cinema);
                 }
 
@@ -124,7 +131,7 @@
                     $cinema->setNumber($row["number"]);
                     $cinema->setEmail($row["email"]);
                     $cinema->setPhone($row["phone"]);
-
+                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
                     array_push($cinemaList, $cinema);
                 }
 
@@ -210,6 +217,97 @@
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+        }
+        #Metodos de Cartelera
+        public function stateMovie($idCinema,$idMovie,$state){
+            try{
+                $query = "UPDATE cinemaxmovies set state=:state WHERE idCinema=:idCinema AND idMovie=:idMovie";  
+                $this->connection = Connection::getInstance();
+                $parameters["idCinema"]=$idCinema;
+                $parameters["idMovie"]=$idMovie;
+                $parameters["state"]=$state;
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                    return $rowCant;
+                }
+                catch(\PDOException $ex)
+                {
+                    throw $ex;
+                }
+
+        }
+        //Busca la pelicula dentro del cine
+        public function searchMovie($idCinema,$idMovie){
+            try
+            {
+
+                $query = "SELECT * FROM cinemaxmovies WHERE idCinema=:idCinema and idMovie=:idMovie";
+
+                $this->connection = Connection::GetInstance();
+                $parameters["idCinema"]=$idCinema;
+                $parameters["idMovie"]=$idMovie;
+
+                $results = $this->connection->execute($query,$parameters);
+                
+              
+            
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if(!empty($results)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function addMovie($idCinema,$idMovie){
+            try{
+            $query = "INSERT INTO cinemaxmovies (idCinema,idMovie,state) VALUES (:idCinema,:idMovie,:state)";  
+            $this->connection = Connection::getInstance();
+            $parameters["idCinema"]=$idCinema;
+            $parameters["idMovie"]=$idMovie;
+            $parameters["state"]="1";
+            $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                return $rowCant;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function getBillboard($idCinema){
+            try
+            {
+                $movieList = array();
+
+                $query = "SELECT idMovie FROM cinemaxmovies WHERE idCinema=:idCinema AND state=1";
+
+                $this->connection = Connection::GetInstance();
+                $parameters["idCinema"]=$idCinema;
+
+                $resultSet = $this->connection->execute($query,$parameters);
+               
+                foreach ($resultSet as $row)
+                {                
+                   
+                    $movie=$this->movieDAO->search($row["idMovie"]);
+                    
+                    array_push($movieList,$movie);
+            
+                }
+            
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if($resultSet){
+                return $movieList;
+            }else{
+                return null;
             }
         }
 

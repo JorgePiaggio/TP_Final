@@ -8,28 +8,45 @@
       </a>
     </div>
     <nav id="mainav" class="fl_right">
-      <!----------------- MENU GENERAL -----------------------> 
+        <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-        <?php if($_SESSION){?>
-      
-      <!----------------- MENU USUARIO -----------------------> 
-        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
-        <?php }else{ ?>
-        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
-        <?php }?>
+          <?php if($_SESSION){?>
+        
+          <!----------------- MENU USUARIO -----------------------> 
+          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
+          <?php }else{ ?>
+          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
+          <?php }?>
           <ul>
-          <?php if($_SESSION){   ?>
-          <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
-            
+
+            <?php if($_SESSION){   ?>
+            <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
+              
             <!---Admin-->
-            <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add Cinema</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List Cinema</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add Movies</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change role</a></li>
-            <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">User Reviews</a></li>
+            <li class="active"><a>Cinemas</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List / Edit</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Cinema/showBillboard">Billboard</a></li>
+              </ul>
+            </li>
+            <li class="active"><a>Rooms</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List / Edit</a></li>
+              </ul>
+            </li>
+            <li class="active"><a>Movies</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+              </ul>
+            </li>
+             <li class="active"><a>Users</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change role</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">Reviews</a></li>
+              </ul>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }else{ ?>
 
@@ -43,7 +60,9 @@
             <li><a href="<?php echo FRONT_ROOT?>User/showLogin">Login</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/showRegister">Register</a></li>
             <?php } ?>
-      </ul></ul>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </header>
 </div>
