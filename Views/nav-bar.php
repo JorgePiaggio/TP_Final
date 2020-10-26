@@ -19,8 +19,9 @@
           <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
           <?php }?>
           <ul>
+
             <?php if($_SESSION){   ?>
-            <?php if($_SESSION["loggedUser"]=="admin@moviepass.com")  { ?>
+            <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
               
             <!---Admin-->
             <li class="active"><a>Cinemas</a>
@@ -41,7 +42,11 @@
                 <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
               </ul>
             </li>
-            <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">User Reviews</a></li>
+             <li class="active"><a>Users</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change role</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">Reviews</a></li>
+              </ul>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }else{ ?>
 

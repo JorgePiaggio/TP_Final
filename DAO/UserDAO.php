@@ -115,6 +115,31 @@
 
         }
 
+        public function changeRole($userEmail){
+            try{
+                $sql = "SELECT * FROM users WHERE email= :email";
+                $parameters["email"] = $userEmail;
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($sql, $parameters);
+                if(!empty($result)){
+                    $user = $this->map($result);
+                    if($user->getRole()->getId() == 1){
+                   
+                        $sql = "UPDATE users set idRole = 0 WHERE email = :email";    
+                    }
+                    else{       
+                        $sql = "UPDATE users set idRole = 1 WHERE email = :email";
+                    }
+                    $rowCant = $this->connection->executeNonQuery($sql, $parameters);
+                }
+                return $rowCant;
+            }
+            catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
+
         protected function map($value){
             $value = is_array($value) ? $value : [];
             

@@ -26,7 +26,7 @@ class UserController{
     public function showProfile($msg = ""){
         $this->validateSession();
         $user = $this->userDAO->search($_SESSION['loggedUser']);
-        require_once(VIEWS_PATH."User-profile.php");
+        require_once(VIEWS_PATH."User-select.php");
     }
 
     public function showRegister(){
@@ -36,6 +36,35 @@ class UserController{
     public function showEditView(){
         $this->validateSession();
         require_once(VIEWS_PATH."User-profile.php");
+    }
+
+    public function showSelectUser(){
+        require_once(VIEWS_PATH."User-search.php");
+    }
+
+    public function showUserView($emailUser=""){
+        $user = $this->userDAO->search($emailUser);
+        require_once(VIEWS_PATH."User-view.php");
+    }
+/*
+    public function showChangeRole(){
+        require_once(VIEWS_PATH."User-view.php");
+    }
+*/
+    
+    /* lista de reviews que envian los users en el footer */
+    public function showUserReviews($idRemove = null){
+        
+        if($_SESSION["loggedUser"]!="admin@moviepass.com"){
+            header("location:../Home/index");
+        }else{
+            
+            if($idRemove){
+                $this->userReviewsDAO->remove($idRemove);
+            }
+            $messageList=$this->userReviewsDAO->getAll();
+            require_once(VIEWS_PATH."reviews.php");
+        }
     }
 
     public function login($email="",$pass=""){
@@ -164,20 +193,11 @@ class UserController{
         }
     }
 
-
-    /* lista de reviews que envian los users en el footer */
-    public function showUserReviews($idRemove = null){
+    public function changeRole($userEmail){
+        $this->userDAO->changeRole($userEmail);
+        $this->msg = "Change role with exit!";  
+        $this->showUserView($userEmail);
         
-        if($_SESSION["loggedUser"]!="admin@moviepass.com"){
-            header("location:../Home/index");
-        }else{
-            
-            if($idRemove){
-                $this->userReviewsDAO->remove($idRemove);
-            }
-            $messageList=$this->userReviewsDAO->getAll();
-            require_once(VIEWS_PATH."reviews.php");
-        }
     }
     
     public function submitReview($mail=null, $message=null){
