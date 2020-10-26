@@ -236,7 +236,7 @@
                 }
 
         }
-
+        //Busca la pelicula dentro del cine
         public function searchMovie($idCinema,$idMovie){
             try
             {

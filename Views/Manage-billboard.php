@@ -83,7 +83,7 @@
 <!------ My billboard----->
 <div class="wrapper row3 gradient">
   <h2 class="page-title"><?php echo $cinema->getName(); ?> Billboard</h2>
-  <center class="cardView"><?php if($this->msg){ echo $this->msg;} ?></center>
+  <h1 class="msg"><?php if($this->msg){ echo $this->msg;} ?></h1>
   <main class="hoc container clear" > 
     <div class="content" > 
          <!-- ####################################### MOVIE GALLERY ######################################################### -->
