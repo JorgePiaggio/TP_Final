@@ -147,7 +147,7 @@
 
                 $result = $this->connection->execute($query,$parameters);
                 if(!empty($result)){
-                $cinema=$this->map($result);
+                    $cinema=$this->map($result);
                     if($cinema->getState()){
                    
                     $query = "UPDATE ".$this->tableName." set state=0 WHERE idCinema= :idCinema";
@@ -157,8 +157,8 @@
                     $query = "UPDATE ".$this->tableName." set state=1 WHERE idCinema= :idCinema";
                     }
 
-                $rowCant=$this->connection->executeNonQuery($query,$parameters);
-            }
+                    $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                }
                 return $rowCant;
                 
             }

@@ -20,7 +20,7 @@
         <?php }?>
           <ul>
           <?php if($_SESSION){   ?>
-          <?php if($_SESSION["loggedUser"]=="admin@moviepass.com")  { ?>
+          <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
             
             <!---Admin-->
             <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add Cinema</a></li>
@@ -28,6 +28,7 @@
             <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List Room</a></li>
             <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add Movies</a></li>
+            <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change role</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">User Reviews</a></li>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
             <?php }else{ ?>
