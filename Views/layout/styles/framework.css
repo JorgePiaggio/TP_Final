@@ -12,7 +12,7 @@ html{overflow-y:scroll; overflow-x:hidden;}
 html, body{margin:0; padding:0; font-size:14px; line-height:1.6em;}
 body{height: 100%;   
 }
-hr.orangeHr{border:1px solid orangered !important;}
+hr.orangeHr{border:1px solid #FF5723 !important;}
 
 *, *::before, *::after{box-sizing:border-box;}
 
@@ -87,6 +87,10 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     margin-bottom: 20px;
     margin-left: 10px;
   }
+
+.floating-label.mrg_l{
+  margin-left: -34px;
+  }
  .floating-input  {
     font-size:14px;
     padding:4px 4px;
@@ -94,12 +98,12 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     height:30px;
     background-color: transparent;
     border:none;
-    border-bottom:1px solid orangered;
+    border-bottom:1px solid #FF5723;
   }
   
  .floating-input:focus {
        outline:none;
-       border-bottom:2px solid rgb(253, 117, 13); 
+       border-bottom:2px solid #FF5723; 
   }
  
   .floating-input ~ label {
@@ -140,8 +144,8 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   }
 
   /*footer form*/
-  .floating-label .floating-input.reviewTextarea{min-height: 80px; border-right: .5px solid orangered; background-color: #2e2e2e;}
-  .floating-label .floating-input.reviewMail{border-right: .5px solid orangered;background-color: #2e2e2e;}
+  .floating-label .floating-input.reviewTextarea{min-height: 80px; border-right: .5px solid #FF5723; background-color: #2e2e2e;}
+  .floating-label .floating-input.reviewMail{border-right: .5px solid #FF5723;background-color: #2e2e2e;}
   .floating-label .btn.btn-primary.send{ position: relative; margin-left:130px; margin-top:10px;}
 
   /* highlighter */

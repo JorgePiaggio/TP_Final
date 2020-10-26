@@ -4,11 +4,11 @@
     <div class="flexslider basicslider">
       <ul class="slides">
         <?php $cant=null; if(isset($movieListSlider)){$cant = count($movieListSlider);}
-        if($cant>0){
+        if($cant>0){ 
           for($i=0; $i<$cant; $i++){ ?>
             <li>
               <article>
-                <h2 class="heading headingcolor"><?php $str1=""; 
+                <h2 class="heading headingcolor"><?php $str1="";
                           if($movieListSlider[$i]->getBackdropPath()){
                             if(strlen($movieListSlider[$i]->getTitle()) > 33){
                               $str1 = substr($movieListSlider[$i]->getTitle(), 0, 30) . '...';

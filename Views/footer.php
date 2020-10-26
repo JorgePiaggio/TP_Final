@@ -49,11 +49,11 @@
                 </div><br>                      
 
                 <div class="floating-label">
-                <textarea name="userMessage" cols="19" rows="5" placeholder="" value="" class="floating-input reviewTextarea" required></textarea>
+                <textarea name="userMessage" cols="20" rows="5" placeholder="" value="" class="floating-input reviewTextarea" required></textarea>
                     <span class="highlight"></span><label for="">Your Message</label>
                 </div><br>
 
-                <div class="floating-label">
+                <div class="floating-label mrg_l">
                     <button type="submit" name="sendReview" class="btn btn-primary send">Send</button>
                 </div>
           </div>             

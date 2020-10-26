@@ -147,7 +147,7 @@ h1.logo{font-family: 'Faster One', cursive;}
 #mainav ul.clear{margin-top:-5px;}
 #mainav ul{text-transform:uppercase;}
 #mainav ul ul{z-index:9999; position:absolute; width:180px; text-transform:none;}
-#mainav ul ul ul{left:180px; top:0;}
+#mainav ul ul ul{left:-130px; top:0;}
 #mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
 #mainav li:last-child{margin-right:0;}
 #mainav li li{width:100%; margin:0;}
@@ -261,6 +261,10 @@ td{border-width:0 1px;}
 .cardStyle2 h4, .cardStyle3 h4{
 	color: white;
 }
+.cardStyle.mrg_btm{
+	margin-bottom: 20px;
+	padding: 30px 20px 20px 30px;
+}
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
 #gallery{display:block; width:100%; margin-bottom:50px;}
@@ -364,7 +368,19 @@ svg{display: inline;}
 .fa-star{color:yellow;}
 .fa-tags{color:green;}
 
-/* ------------------------------------------------------------------------------------------------------------ */
+
+/* Cinema Gallery homepage
+ ------------------------------------------------------------------------------------------------------------ */
+.heading.font-x2.center{
+	color:#FF5723;
+	background-color:rgba(7, 7, 7, 0.687);
+	border-radius: 5%;
+	padding: 20px 20px;
+	overflow:hidden; text-overflow: ellipsis;  
+}
+
+
+
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
@@ -383,7 +399,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
 
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
-.btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:inherit;}
+.btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
 
 .gradient{
 	background: rgb(73,3,3); /* Old browsers */
@@ -434,9 +450,10 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 /* Navigation */
 #mainav li a{color:#FF5723;}
 #mainav .active a, #mainav a:hover, #mainav li:hover > a{color:rgba(232, 85, 31, 0.776); background-color:inherit;}
-#mainav li li a, #mainav .active li a{color:black; background-color:rgba(250, 101, 46, 0.776);}
-#mainav li li:hover > a, #mainav .active .active > a{color:black; background-color:rgba(232, 85, 31, 0.776);}
+#mainav li li a, #mainav .active li a{color:black; background-color:rgba(232, 85, 31, 0.776);}
+#mainav li li:hover > a{color:black; background-color:rgba(232, 85, 31, 0.776);}
 #mainav form select{color:#FFFFFF; background-color:#000000; border-color:rgba(136,136,136,.5);/* #888888 */}
+#mainav li li:hover > a{color:black; background-color:rgba(239, 72, 11, 0.776);}
 
 #breadcrumb a{color:inherit; background-color:inherit;}
 #breadcrumb li:last-child a{color:#FF5723;}
@@ -481,7 +498,8 @@ table a, #comments a{background-color:inherit;}
 	text-align: center;
 	font-size:12px; 
 	letter-spacing:5px;
-} 
+} #mainav ul ul ul{left:-130px; top:0;}
+
 }
 
 
