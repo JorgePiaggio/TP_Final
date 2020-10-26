@@ -8,7 +8,7 @@
       <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
       <div class="cardStyle">
         <div class="floating-label fl_right margin3">
-          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2 up2">Add</button>
+          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2 up">Add</button>
         </div></form>
         <?php } ?>
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->

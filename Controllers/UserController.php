@@ -64,7 +64,6 @@ class UserController{
     
     /* lista de reviews que envian los users en el footer */
     public function showUserReviews($idRemove = ""){
-        Validate::checkParameter($idRemove);
         Validate::validateSession();
         
         if($idRemove){
@@ -205,6 +204,8 @@ class UserController{
     /* Guarda mensajes de users sobre la web en un json */    
     public function submitReview($mail=null, $message=null){
         Validate::validateSession();
+
+
         if($message != null){
            
             //lista de insultos

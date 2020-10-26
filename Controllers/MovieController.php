@@ -6,7 +6,6 @@
     use DAO\MovieDAO as MovieDAO;
     use DAO\GenreDAO as GenreDAO;
     use Config\Validate as Validate;
-    
 
 
     class MovieController{
@@ -156,7 +155,7 @@
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
         public function getNowPlayingMovies($page, $language){     
             Validate::validateSession();
-            Validate::checkParameters($page);
+            Validate::checkParameter($page);
 
             $movies= array();
             
@@ -175,7 +174,7 @@
         /*agregar multiples peliculas a la BDD*/
         public function addMultipleMovies($movies=""){
             Validate::validateSession();
-            Validate::checkParameters($tmdbId);
+            Validate::checkParameter($tmdbId);
 
             if($movies){
                 foreach($movies as $idMovie){
@@ -191,7 +190,7 @@
         /* agregar peliculas a la BDD */
         public function addMovieToDatabase($tmdbId=""){
             Validate::validateSession();
-            Validate::checkParameters($tmdbId);
+            Validate::checkParameter($tmdbId);
 
             /* solicitar detalles de la pelicula */
             $jsonMovie=$this->getMovieDetails($tmdbId);
@@ -220,7 +219,7 @@
         /* construir objeto pelicula a traves del json q manda la API */
         public function constructMovie($jsonObject=""){
             Validate::validateSession();
-            Validate::checkParameters($jsonObject);
+            Validate::checkParameter($jsonObject);
 
             $newMovie = new Movie();
             $newMovie->setTmdbId($jsonObject["id"]);

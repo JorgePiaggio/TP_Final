@@ -57,7 +57,7 @@
     
 
         public function addToBillboard($idCinema="",$movies=""){
-            Validate::checkParameters($idCinema);
+            Validate::checkParameter($idCinema);
 
             foreach($movies as $value){
                 if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
@@ -155,7 +155,7 @@
         */
 
         public function edit($name="", $street="", $number="", $phone="", $email="", $idCinema=""){
-            Validate::checkParameters($name);
+            Validate::checkParameter($name);
 
             $aux = $this->cinemaDAO->search($idCinema);
             $address = $street . $number;
