@@ -1,15 +1,13 @@
 <?php
     namespace Controllers;
 
-    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
-        header("location:../Home/index");
-    }
-
     use DAO\RoomDAO as RoomDAO;
     use Models\Room as Room;
     use DAO\CinemaDAO as CinemaDAO;
+    use Config\Validate as Validate;
+
+    Validate::validateSession();
    
-    //VALIDAR NOMBRE DE LA SALA EN EL MISMO CINE EN ADD Y EDIT
 
     class RoomController{
         private $cinemaDAO;
@@ -30,13 +28,13 @@
         }  
 
         public function showRoomEdit($name="",$idCinema=""){
-            $this->checkParameter($idCinema);       
+            Validate::checkParameter($idCinema);       
             $editRoom=$this->roomDAO->search($idCinema,$name);
             require_once(VIEWS_PATH."Room-edit.php");
         }
 
         public function showRoomList($idCinema=""){
-            $this->checkParameter($idCinema); 
+            Validate::checkParameter($idCinema); 
             $cinemaSearch=$this->cinemaDAO->search($idCinema);
             
             $roomList=$this->roomDAO->getCinemaRooms($idCinema);
@@ -50,7 +48,7 @@
 
 
         public function add($idCinema="",$name="",$capacity="",$type="",$price=""){
-            $this->checkParameter($idCinema);
+            Validate::checkParameter($idCinema);
             $wanted=$this->roomDAO->search($idCinema,$name);    /* chequear si ya existe sala con ese id y nombre */
             $cinemaSearch = $this->cinemaDAO->search($idCinema);    /*buscar cine al q agregar la sala */
 
@@ -74,7 +72,7 @@
 
 
         public function edit($idCinema="",$name="",$capacity="",$type="",$price="", $idRoom=""){
-            $this->checkParameter($idRoom);
+            Validate::checkParameter($idRoom);
             $wanted=$this->roomDAO->search($idCinema,$name);
             $cinema=$this->cinemaDAO->search($idCinema);
             if(!$wanted || $wanted->getCinema()->getIdCinema() == $cinema->getIdCinema()){
@@ -93,12 +91,6 @@
             $this->showRoomList($idCinema);
         }
 
-       
-        private function checkParameter($value=""){
-            if($value==""){
-                header("location:../Home/index");
-            }
-        }
     }
 
    

@@ -2,17 +2,18 @@
   <h2 class="page-title">Movie Overview</h2>
   <main class="hoc container clear"> 
       <div class="content up">
-        <h2 class="center page-title-variation cardStyle"><?php echo $movie->getTitle()?></h2>
+        <h2 class="center page-title-variation "><?php echo $movie->getTitle()?></h2>
       </div>
       <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
       <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
+      <div class="cardStyle">
         <div class="floating-label fl_right margin3">
           <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2 up2">Add</button>
         </div></form>
         <?php } ?>
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
-          <div class="one_half first cardStyle2">              
+          <div class="one_half first ">              
             <div class="one_half first">
               <div>
                 <p><h4>Release Date</h4><?php echo $movie->getReleaseDate()?></p>
@@ -38,7 +39,7 @@
             <div>
               <p><h4>Director/s</h4><?php  $str=""; foreach($movie->getDirector() as $director){ 
                                                           $str .=" ".$director." -";}
-                                                            echo substr_replace($str,"", -1); ?></p>
+                                                            echo substr_replace($str,"", -1); ?></p><br>
             </div>
             
             <div>                                           <!-- si hay trailer se muestra, si no en ese espacio se muestra la descripcion -->
@@ -51,19 +52,20 @@
             </div>
           </div>   
               <!-- ####################################### COLUMNA DERECHA - POSTER ######################################################### -->
-          <div class="one_half cardStyle">                 
-            <img src="<?php echo $movie->getPoster() ?>" alt="<?php echo $movie->getTitle()?> poster">
+          <div class="one_half up">                 
+            <img class="brd" src="<?php echo $movie->getPoster() ?>" alt="<?php echo $movie->getTitle()?> poster">
           </div>
         </div>
-        <div class="container clear up cardStyle3">
-            <div>
+        <div class="container clear up ">
+            <div class="up2">
               <?php if($movie->getVideoPath()){ ?>           <!-- si hay trailer, la descripcion se muestra debajo -->
-              <p><h4>Description</h4><?php echo $movie->getDescription()?></p>
+              <p><h4>Description</h4><?php echo $movie->getDescription()?></p><br>
               </div> <?php } ?>
             <p><h4>Review</h4><?php if($movie->getReview()){
                                     echo $movie->getReview()['content'];} else {echo "Not reviewed yet";} ?></p>
             <p class= "fl_right"><?php if($movie->getReview()){
                                        echo $movie->getReview()['author'];}?></p>
+        </div>
         </div>
   </main>
 </div>

@@ -41,14 +41,14 @@
                             <tr> 
                                 <td colspan="3"></td> 
                             </tr>
-                            <tr>
-                                <td class="message" colspan="2" ><?php if($this->msg != null){echo $this->msg;}?></td>     
-                                <td class="grey" colspan="1" ><button type="submit" name="submit" class="btn button-right" value="<?php $user->getEmail() ?>"> Change Role </button></td>
+                            <tr>    
+                                <td class="grey center" colspan="3" ><button type="submit" name="submit" class="btn button-right" value="<?php $user->getEmail() ?>"> Change Role </button></td>
                             </tr>
                             
                             </tbody>
                         </form>
                     </table>
+                    <div class="center"> <?php if($this->msg){ ?> <h4 class="msg"><?php echo $this->msg;} ?></h4></div> 
             </div>
         </div>
      </section>

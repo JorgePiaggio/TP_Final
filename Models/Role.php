@@ -13,11 +13,11 @@ class Role{
 
     function setId($id){
         $this->id=$id;
-        $this->setDescription($id);
+        $this->setDescription();
     }
     
-    function setDescription($id){ 
-        if($id == 1){
+    function setDescription(){ 
+        if($this->id == 1){
             $this->description="admin";
         }else{
             $this->description="client";

@@ -14,6 +14,11 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "moviepass");
 define("DB_USER", "root");
 define("DB_PASS", "");
+
+/*Constantes para conectar con la API */
+define("APIURL","http://api.themoviedb.org/3/");
+define("POSTERURL","https://image.tmdb.org/t/p/w500/");
+define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
 ?>
 
 

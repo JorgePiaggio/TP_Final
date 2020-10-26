@@ -73,7 +73,7 @@
                   }
                 } 
               }
-              else{ ?><h1 class="msg">No matching results</h1><?php
+              else{ ?><div class="center"><h4 class="msg">No matching results</h4></div><?php
               } ?>
           </ul>
         </figure>

@@ -48,14 +48,17 @@
                             <tr> 
                                 <td colspan="3"></td> 
                             </tr>
-                            <tr>
-                                <td class="message" colspan="2" ><?php if($this->msg != null){echo $this->msg;}?></td>     
-                                <td class="grey" colspan="1" ><button type="submit" name="submit" class="btn button-right" value=""> Save </button></td>
+                            <tr> 
+                                <td class="grey center" colspan="3" ><button type="submit" name="submit" class="btn button-right" value=""> Save </button></td>
                             </tr>
+                            
                             
                             </tbody>
                         </form>
                     </table>
+                    <?php if($this->msg != null){?>
+                    <div class="center">
+                    <h4 class="msg"><?php echo $this->msg;}?></h4></div>
             </div>
         </div>
      </section>

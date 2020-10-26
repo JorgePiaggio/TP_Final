@@ -223,7 +223,7 @@ td{border-width:0 1px;}
 .tabla-perfil{margin-top: 60px;}
 .tabla-perfil .button-right{margin: 1.5rem 1rem 1rem 0; float:inline-end;}
 .tabla-perfil .grey{background-color: rgba(136,136,136,.5); }
-.tabla-perfil .message{background-color: rgba(84, 83, 83, 0.5); color: #fa0a0a; text-align: center; padding-top:2rem;}
+.tabla-perfil .message{background-color: rgba(136,136,136,.5);  text-align: center; padding-top:0rem;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
 .unique{margin-top: 20px;margin-left: 48%;}
 
@@ -284,7 +284,7 @@ td{border-width:0 1px;}
 #gallery{display:block; width:100%; margin-bottom:50px;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
 #gallery li{margin-bottom:-50px;}
-
+.brd{border-radius: 5%;}
 
 /* Gallery Animations :v 
 --------------------------------------------------------------------------------------------------------------- */
@@ -512,10 +512,21 @@ table a, #comments a{background-color:inherit;}
 	text-align: center;
 	font-size:12px; 
 	letter-spacing:5px;
-} #mainav ul ul ul{left:-430px; top:0;}
-
+	}
+ 	#mainav ul ul ul{
+	 left:-430px; top:0;
+	}
 }
-
+@media screen and (min-width: 1400px) {
+#pageintro article p:first-of-type{
+	margin-top:14px;
+	margin-bottom:35px; 
+	margin-left:0px; 
+	text-align: center;
+	font-size:12px; 
+	letter-spacing:5px;
+	}
+}
 
 /* Max Wrapper Width - Laptop, Desktop etc.
 --------------------------------------------------------------------------------------------------------------- */

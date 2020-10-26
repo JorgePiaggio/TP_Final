@@ -10,11 +10,10 @@
           <form action="<?php echo FRONT_ROOT?>Movie/showMoviePage" method="post">
                 <div class="floating-label">
                     <input type="number" name="pass" placeholder="# Page" value="<?php if($page){echo $page;} ?>" class="floating-input fl_left pageNumber" min="1" max="70" required>
-                   
-                </div>
+                
                     <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 
-                    <h1 class="msg"><?php if($this->msg){ echo $this->msg;} ?></h1>
-                    
+                   <?php if($this->msg){ ?> <h1 class="msg"><?php echo $this->msg;} ?></h1>
+                </div>
           </form>
 
         <?php  } ?>
@@ -63,7 +62,9 @@
                   </li><?php } 
                 $indice++;
               }?>
-              <button type="submit" name="idadd" class="btn fl_left up5" value="">Add</button> 
+              <div class="margin4">
+                <button type="submit" name="idadd" class="btn fl_left up5" value="">Add movies</button> 
+              </div>
             </form>
           </ul>
         </figure>

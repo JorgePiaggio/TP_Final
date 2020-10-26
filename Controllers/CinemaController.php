@@ -1,17 +1,16 @@
 <?php
     namespace Controllers;
-
-    if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
-        header("location:../Home/index");
-    }
     
-    use Models\Cinema as Cinema;
     #use DAO\CinemaDAO_JSON as CinemaDAO;
+    use Models\Cinema as Cinema;
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\MovieDAO as MovieDAO;
     use DAO\GenreDAO as GenreDAO;
- 
+    use Config\Validate as Validate;
 
+ 
+    Validate::validateSession();
+ 
     class CinemaController{
         private $cinemaDAO;
         private $movieDAO;
@@ -54,28 +53,24 @@
             $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
             require_once(VIEWS_PATH."Manage-billboard.php");
             }
-
-
         }
+    
 
-        
+        public function addToBillboard($idCinema="",$movies=""){
+            Validate::checkParameters($idCinema);
 
-        public function addToBillboard($idCinema="",$movies){
-            if($this->checkParameter($idCinema)){
-                foreach($movies as $value){
-
-                    if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
+            foreach($movies as $value){
+                if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
                     $this->cinemaDAO->addMovie($idCinema,$value);
-                    }else{
-
-                     $this->cinemaDAO->stateMovie($idCinema,$value,"1");
-                       
-                    }
+                }
+                else{
+                    $this->cinemaDAO->stateMovie($idCinema,$value,"1"); 
                 }
                 $this->msg="Added correctly"; 
             }
             $this->showManageBillboard($idCinema);
         }
+
 
         public function removeFromBillboard($idCinema="",$movies){
             if($this->checkParameter($idCinema)){
@@ -160,7 +155,8 @@
         */
 
         public function edit($name="", $street="", $number="", $phone="", $email="", $idCinema=""){
-            $this->checkParameter($name);
+            Validate::checkParameters($name);
+
             $aux = $this->cinemaDAO->search($idCinema);
             $address = $street . $number;
             $validate = $this->validateCinema($name, $address);
@@ -184,16 +180,6 @@
             }
             
         }
-
-        private function checkParameter($value=""){
-            if($value==""){
-                header("location:../Home/index");
-                return false;
-            }
-
-            return true;
-        }
-
     
 
     }

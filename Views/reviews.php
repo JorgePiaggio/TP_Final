@@ -1,4 +1,3 @@
-
 <div class="container center background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/sonder-quest-pRh9RiynHGE-unsplash.jpg');background-repeat:no-repeat;background-size:cover;">
      <h2 class="page-title up2">User Reviews</h2>  
      <main class="hoc container clear" > 

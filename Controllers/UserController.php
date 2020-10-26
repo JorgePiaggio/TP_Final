@@ -5,6 +5,7 @@ namespace Controllers;
 use Models\User as User;
 use DAO\UserDAO as UserDAO;
 use DAO\UsersReviewsDAO as UsersReviewsDAO;
+use Config\Validate as Validate;
 
 class UserController{
     private $userDAO;
@@ -23,10 +24,9 @@ class UserController{
         require_once(VIEWS_PATH."login.php");
     }
 
-    public function showProfile($msg = ""){
-        $this->validateSession();
+    public function showProfile(){
         $user = $this->userDAO->search($_SESSION['loggedUser']);
-        require_once(VIEWS_PATH."User-select.php");
+        require_once(VIEWS_PATH."User-profile.php");
     }
 
     public function showRegister(){
@@ -34,15 +34,18 @@ class UserController{
     }
 
     public function showEditView(){
-        $this->validateSession();
         require_once(VIEWS_PATH."User-profile.php");
     }
 
     public function showSelectUser(){
+        Validate::validateSession();
+
         require_once(VIEWS_PATH."User-search.php");
     }
 
     public function showUserView($emailUser=""){
+        Validate::validateSession();
+
         $user = $this->userDAO->search($emailUser);
         if(!$user){
             $this->msg = "Email doesn't exist";
@@ -60,23 +63,21 @@ class UserController{
 */
     
     /* lista de reviews que envian los users en el footer */
-    public function showUserReviews($idRemove = null){
+    public function showUserReviews($idRemove = ""){
+        Validate::checkParameter($idRemove);
+        Validate::validateSession();
         
-        if($_SESSION["loggedUser"]!="admin@moviepass.com"){
-            header("location:../Home/index");
-        }else{
-            
-            if($idRemove){
-                $this->userReviewsDAO->remove($idRemove);
-            }
-            $messageList=$this->userReviewsDAO->getAll();
-            require_once(VIEWS_PATH."reviews.php");
+        if($idRemove){
+            $this->userReviewsDAO->remove($idRemove);
         }
+        $messageList=$this->userReviewsDAO->getAll();
+        require_once(VIEWS_PATH."reviews.php");
     }
 
     public function login($email="",$pass=""){
-        $this->checkParameter($email);
-        $user=$this->userDAO->search($email); //busco el usere a traves del email
+        Validate::checkParameter($email);
+
+        $user=$this->userDAO->search($email); //busco el user a traves del email
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
             $_SESSION["loggedUser"]=$email; 
             if(strcmp($email,"admin@moviepass.com")!=0){   
@@ -97,7 +98,8 @@ class UserController{
     }
     
     public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
-        $this->checkParameter($name);
+        Validate::checkParameter($name);
+
         if(!$this->validateEmail($email)){ 
             if($this->validatePass($pass, $repass)){
                 $this->user= new user();
@@ -124,8 +126,9 @@ class UserController{
     }
 
     public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
-        $this->checkParameter($name);
-        $this->validateSession();
+        Validate::checkParameter($name);
+        Validate::validateSession();
+
         $userAux = $this->userDAO->search($email);
             
         if($this->validatePass($pass, $repass)){
@@ -170,14 +173,15 @@ class UserController{
            $this->msg = "The password must have at least one numeric character";
            return false;
         }
-        if (strcmp($pass, $repass) == 0){     ///VERIFICAR QUE PASA SI COMPARA 2 PASS NUMERICAS
+        if (strcmp($pass, $repass) == 0){     
             $this->msg = "Passwords don't match";
             return false;*/
 
         return true;
     }
 
-    public function validateEmail($email){    //0 Register - 1 Edit
+    public function validateEmail($email=""){
+        Validate::checkParameter($email);
         $users = $this->userDAO->getAll(); 
         $answer = false;
         foreach($users as $value){
@@ -188,21 +192,11 @@ class UserController{
         return $answer;
     }
 
-    public function validateSession(){
-        if(!$_SESSION || $_SESSION["loggedUser"]=="admin@moviepass.com"){
-            header("location:../Home/index");
-        }
-    }
-
-    private function checkParameter($value=""){
-        if($value==""){
-            header("location:../Home/index");
-        }
-    }
 
     public function changeRole($userEmail){
+        Validate::validateSession();
         $this->userDAO->changeRole($userEmail);
-        $this->msg = "Change role with exit!";  
+        $this->msg = "Role changed succesfully!";  
         $this->showUserView($userEmail);
         
     }
@@ -210,6 +204,7 @@ class UserController{
 
     /* Guarda mensajes de users sobre la web en un json */    
     public function submitReview($mail=null, $message=null){
+        Validate::validateSession();
         if($message != null){
            
             //lista de insultos
@@ -234,7 +229,6 @@ class UserController{
         }
         header("location:../Home/index");
     }
-
 
 }
 

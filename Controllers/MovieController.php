@@ -5,12 +5,9 @@
     use Models\Genre as Genre;
     use DAO\MovieDAO as MovieDAO;
     use DAO\GenreDAO as GenreDAO;
-
-    define("APIURL","http://api.themoviedb.org/3/");
-    define("POSTERURL","https://image.tmdb.org/t/p/w500/");
-    define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
-    define("YOUTUBEURL","https://www.youtube.com/watch?v=");
+    use Config\Validate as Validate;
     
+
 
     class MovieController{
         private $movieDAO;
@@ -38,6 +35,8 @@
 
         /*Obtener pagina de pelicula directamente de la API*/
         public function showMoviePage($page=1,$language="en-US"){
+            Validate::validateSession();
+
             $allGenre=$this->getAllGenre();
             $actualGenre = null; 
             $this->updateGenreList();                                 
@@ -120,16 +119,16 @@
 
         /* solicitar director de la pelicula */
         public function getDirector($tmdbId){
-        $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
-        $jsonCredits = ($request_three) ? json_decode($request_three, true) : array();
-        $directors = array();
+            $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
+            $jsonCredits = ($request_three) ? json_decode($request_three, true) : array();
+            $directors = array();
 
-            foreach($jsonCredits['crew'] as $value){
-                if(strcmp($value['job'], 'Director') == 0){ 
-                    array_push($directors, $value['name']);
+                foreach($jsonCredits['crew'] as $value){
+                    if(strcmp($value['job'], 'Director') == 0){ 
+                        array_push($directors, $value['name']);
+                    }
                 }
-            }
-        return $directors;
+            return $directors;
         }
 
 
@@ -156,7 +155,8 @@
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
         public function getNowPlayingMovies($page, $language){     
-            $this->validateSession();
+            Validate::validateSession();
+            Validate::checkParameters($page);
 
             $movies= array();
             
@@ -173,7 +173,10 @@
         }
 
         /*agregar multiples peliculas a la BDD*/
-        public function addMultipleMovies($movies){
+        public function addMultipleMovies($movies=""){
+            Validate::validateSession();
+            Validate::checkParameters($tmdbId);
+
             if($movies){
                 foreach($movies as $idMovie){
                     $this->addMovieToDatabase($idMovie);
@@ -181,13 +184,14 @@
                 $this->msg="Added Correctly";
             }else{
                 $this->msg="You must select a Movie";
-                
             }
             $this->showMoviePage();
         }
 
         /* agregar peliculas a la BDD */
-        public function addMovieToDatabase($tmdbId){
+        public function addMovieToDatabase($tmdbId=""){
+            Validate::validateSession();
+            Validate::checkParameters($tmdbId);
 
             /* solicitar detalles de la pelicula */
             $jsonMovie=$this->getMovieDetails($tmdbId);
@@ -214,7 +218,10 @@
 
 
         /* construir objeto pelicula a traves del json q manda la API */
-        public function constructMovie($jsonObject){
+        public function constructMovie($jsonObject=""){
+            Validate::validateSession();
+            Validate::checkParameters($jsonObject);
+
             $newMovie = new Movie();
             $newMovie->setTmdbId($jsonObject["id"]);
             $newMovie->setTitle($jsonObject["title"]);
@@ -266,6 +273,7 @@
 
         /* agregar generos al DAO  */
         public function updateGenreList(){
+            Validate::validateSession();
             $nowGenre=$this->getNowGenres();
             foreach($nowGenre as $genre){
                 $this->genreDAO->add($genre);
@@ -274,7 +282,9 @@
 
     
         /* obtener de la API la lista de generos actuales    */ 
-        public function getNowGenres($language="en"){
+        private function getNowGenres($language="en"){
+            Validate::validateSession();
+            
             $genres= array();
 
             $request=file_get_contents(APIURL."genre/movie/list?api_key=".APIKEY."&language=".$language);
@@ -293,19 +303,13 @@
 
 
         /*Genero ficticio para traer todas las películas con todos los géneros */
-        public function getAllGenre(){
+        private function getAllGenre(){
             $all= new Genre();
             $all->setName("All");
             $all->setId(-1);
             return $all;
         }
 
-
-        public function validateSession(){
-            if(!$_SESSION || $_SESSION["loggedUser"]!="admin@moviepass.com" || $_SESSION['role'] == 0){
-                header("location:../Home/index");
-            }
-        }
-
       
-}?>
+}
+?>

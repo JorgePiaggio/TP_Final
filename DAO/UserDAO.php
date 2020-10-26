@@ -93,18 +93,19 @@
 
         public function update($user){
             try{
-                $sql = "UPDATE $this->tableName set idRole=:idRole, dni=:dni,name=:name,surname=:surname,
-                                street=:street,number=:number,password=:password";
-                
-                $this->connection = Connection::getInstance();
+                $sql = "UPDATE users SET idRole=:idRole, dni=:dni,name=:name,surname=:surname,
+                                street=:street,number=:number,password=:password WHERE idUser=:idUser";
+
+                $parameters["idUser"]=$user->getIdUser();
+                $parameters["idRole"]=$user->getRole()->getId();
                 $parameters["dni"] = $user->getDni();
                 $parameters["name"] = $user->getName();
                 $parameters["surname"] = $user->getSurname();
                 $parameters["street"]=$user->getStreet();
                 $parameters["number"]=$user->getNumber();
                 $parameters["password"] = $user->getPassword();
-                $parameters["idRole"]=$user->getRole()->getId();
 
+                $this->connection = Connection::getInstance();
 
                 $rowCant = $this->connection->executeNonQuery($sql, $parameters);
                 return $rowCant;

@@ -19,9 +19,9 @@
                               <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
                          </div>
                     </div>
-                    <h4 class="msg"> 
-                    <?php if($this->msg != null){      //Muestro un mensaje si no existe mail o no coincide pass
-                         echo $this->msg;
+                    <!-- Muestro un mensaje si no existe mail o no coincide pass -->
+                    <?php if($this->msg != null){?>      
+                         <h4 class="msg"><?php echo $this->msg;
                          } ?>
                     </h4>                  
                </form>
