@@ -4,17 +4,16 @@
     use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
     use Models\Role as Role;
-    use DAO\RoleDAO as RoleDAO;
     use DAO\Connection as Connection;
 
     class UserDAO implements IUserDAO{
         private $connection;
         private $tableName = "users";
-        private $roleDAO;
+
 
         function __construct()
         {
-            $this->roleDAO=new RoleDAO();
+           
         }
 
         public function add($user){
@@ -49,24 +48,18 @@
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->execute($sql);
                 
-                foreach ($resultSet as $row)
-                {                
-                    $user = new User();
-                    $user->setRole($this->roleDAO->search($row["idRole"]));
-                    $user->setDni($row["dni"]);
-                    $user->setName($row["name"]);
-                    $user->setSurname($row["surname"]);
-                    $user->setStreet($row["street"]);
-                    $user->setNumber($row["number"]);
-                    $user->setEmail($row["email"]);
-                    $user->setPassword($row["password"]);
-
-                    array_push($userList, $user);
+                if($resultSet){
+                    $userList=$this->map($resultSet);
                 }
-                return $userList;
             }
             catch(\PDOException $ex){
                 throw $ex;
+            }
+
+            if($resultSet){
+                return $userList;
+            }else{
+            return null;
             }
         }         
 
@@ -147,7 +140,7 @@
             $result = array_map(function ($p){
                 $user = new User();
                 $user->setIdUser($p["idUser"]);
-                $user->setRole($this->roleDAO->search($p["idRole"]));
+                $user->setRole($this->searchRole($p["idRole"]));
                 $user->setDni($p["dni"]);
                 $user->setName($p["name"]);
                 $user->setSurname($p["surname"]);
@@ -158,6 +151,42 @@
                 return $user;},$value);
  
             return count($result)>1 ? $result: $result["0"];
+        }
+
+        public function searchRole($idRole){
+            try
+            {
+                $query = "SELECT * FROM roles WHERE idRole= :idRole";
+                $parameters["idRole"]=$idRole;
+                $this->connection = Connection::getInstance();
+
+                $results = $this->connection->execute($query,$parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($results)){
+                return $this->mapRole($results);
+            }else{
+                return null;
+            }
+        }
+
+    protected function mapRole($value){
+        $value=is_array($value) ? $value: array();
+           
+           $result= array_map(function ($p){
+                $role=new Role();
+                $role->setId($p["idRole"]);
+                $role->setDescription($p["description"]);
+              
+
+               return $role;
+           },$value);
+
+           return count($result)>1 ? $result: $result["0"];
         }
 
     }             

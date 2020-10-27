@@ -15,6 +15,7 @@ class Validate{
     static public function checkParameter($value=""){
         if($value==""){
             header("location:../Home/index");
+            
         }
     }
 }

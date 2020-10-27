@@ -4,6 +4,8 @@ namespace Controllers;
 
 use Models\User as User;
 use DAO\UserDAO as UserDAO;
+use DAO\RoleDAO as RoleDAO;
+use Models\Role as Role;
 use DAO\UsersReviewsDAO as UsersReviewsDAO;
 use Config\Validate as Validate;
 
@@ -12,12 +14,16 @@ class UserController{
     private $userReviewsDAO;
     private $user;
     private $msg;
+    private $roleDAO;
     
     public function __construct(){
         $this->userDAO = new UserDAO(); 
         $this->userReviewsDAO = new UsersReviewsDAO(); 
         $this->user = null;
         $this->msg = null;
+        $this->roleDAO= new RoleDAO();
+        $this->createRoles();
+   
     }
 
     public function showLogin(){
@@ -229,6 +235,16 @@ class UserController{
             $this->userReviewsDAO->add($msgArray);
         }
         header("location:../Home/index");
+    }
+
+    private function createRoles(){
+        if($this->roleDAO->getAll()==null){
+            $roleUser=new Role();
+            $roleAdmin= new Role();
+            $roleAdmin->setId(1);
+            $this->roleDAO->add($roleUser);
+            $this->roleDAO->add($roleAdmin);
+        }
     }
 
 }

@@ -46,13 +46,14 @@
         }
 
         public function showManageBillboard($idCinema=""){
-            if(Validate::checkParameter($idCinema)){
+           
+            Validate::checkParameter($idCinema);
             $cinema=$this->cinemaDAO->search($idCinema);
             $movieList=$this->movieDAO->getAll();
             $genreList=$this->genreDAO->getAll();
             $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
             require_once(VIEWS_PATH."Manage-billboard.php");
-            }
+            
         }
     
 
@@ -73,7 +74,7 @@
 
 
         public function removeFromBillboard($idCinema="",$movies){
-            if(Validate::checkParameter($idCinema)){
+            Validate::checkParameter($idCinema);
                 
                 foreach($movies as $value){
                  
@@ -82,7 +83,7 @@
                     
                 }
                 $this->msg="Removed correctly"; 
-            }  
+             
 
             $this->showManageBillboard($idCinema);
         }

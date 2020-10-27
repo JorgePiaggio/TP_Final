@@ -52,8 +52,9 @@
 
                 $resultSet = $this->connection->execute($query);
                 
+                if($resultSet){  
                 $cinemaList=$this->map($resultSet);
-
+                }
                 
             }
             catch(\PDOException $ex)
@@ -81,8 +82,9 @@
 
                 $resultSet = $this->connection->execute($query);
                 
+                if($resultSet){  
                 $cinemaList=$this->map($resultSet);
-            
+                }
 
                 
             }
@@ -111,8 +113,9 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                                
+                if($resultSet){                
                 $cinemaList=$this->map($resultSet);
+                }
             
                 
 

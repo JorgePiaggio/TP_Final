@@ -12,18 +12,19 @@
                                    <th>Action</th>
                               </thead>
                               <tbody>
-                              <?php foreach($roomList as $room){ ?>
+                                   <?php if($roomList!=null){ ?>
+                              <?php for($i=0; $i<count($roomList); $i++){ ?>
                                    <tr>       
-                                        <td><?php echo $room->getName(); ?> </td>
-                                        <td><?php echo $room->getCapacity(); ?> </td>
-                                        <td><?php echo $room->getType(); ?> </td>
-                                        <td><?php echo $room->getPrice(); ?> </td>
+                                        <td><?php echo $roomList[$i]->getName(); ?> </td>
+                                        <td><?php echo $roomList[$i]->getCapacity(); ?> </td>
+                                        <td><?php echo $roomList[$i]->getType(); ?> </td>
+                                        <td><?php echo $roomList[$i]->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
-                                        <input type="hidden" name="name" value="<?php echo $room->getName(); ?>">
-                                        <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $room->getCinema()->getIdCinema();?>"> Edit </button></td>
+                                        <input type="hidden" name="name" value="<?php echo $roomList[$i]->getName(); ?>">
+                                        <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $roomList[$i]->getCinema()->getIdCinema();?>"> Edit </button></td>
                                         </form>
                                    </tr>
-                              <?php } ?>
+                              <?php } }?>
                               </tbody>
                          </table>
                     </div>

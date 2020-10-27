@@ -50,25 +50,20 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                foreach ($resultSet as $row)
-                {                
-                    $room = new Room();
-                    $room->setIdRoom($row["r.idRoom"]);
-                    $room->setName($row["r.name"]);
-                    $room->setType($row["r.type"]);
-                    $room->setCapacity($row["r.capacity"]);
-                    $room->setPrice($row["r.price"]);
-                    $room->setCinema($this->cinemaDAO->search($row["idCinema"]));
-                   
-
-                    array_push($roomList, $room);
+                if($resultSet){
+                    $roomList=$this->map($resultSet);
                 }
 
-                return $roomList;
+                
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+            if($resultSet){
+                return $roomList;
+            }else{
+                return null;
             }
         }
     
@@ -84,24 +79,20 @@
 
                 $resultSet = $this->connection->execute($query,$parameters);
                 
-                foreach ($resultSet as $row)
-                {                
-                    $room = new Room();
-                    $room->setIdRoom($row["idRoom"]);
-                    $room->setName($row["name"]);
-                    $room->setType($row["type"]);
-                    $room->setCapacity($row["capacity"]);
-                    $room->setPrice($row["price"]);
-                    $room->setCinema($this->cinemaDAO->search($row["idCinema"]));
-
-                    array_push($roomList, $room);
+                if($resultSet){
+                    $roomList=$this->map($resultSet);
                 }
 
-                return $roomList;
+                
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+            if($resultSet){
+                return $roomList;
+            }else{
+                return null;
             }
 
 
