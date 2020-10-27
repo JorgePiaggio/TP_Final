@@ -5,7 +5,6 @@ namespace DAO;
 use Models\Movie as Movie;
 use Models\Genre as Genre;
 use DAO\IMovieDAO as IMovieDAO;
-use DAO\GenreDAO as GenreDAO;
 use DAO\Connection as Connection;
 
 
@@ -264,7 +263,6 @@ class MovieDAO implements IMovieDAO{
 
             $query = "SELECT g.idGenre, g.name FROM moviesxgenres AS mxg JOIN genres AS g ON mxg.idGenre=g.idGenre WHERE mxg.idMovie=:idMovie";
 
-            #$parameters["idGenre"] = $idGenre;
             $parameters["idMovie"] = $movie->getTmdbId();
 
             $this->connection = Connection::getInstance();

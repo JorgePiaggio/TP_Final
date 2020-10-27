@@ -3,19 +3,21 @@
 
     use DAO\IRoomDAO as IRoomDAO;
     use Models\Room as Room;
+    use Models\Genre as Genre;
+    use Models\Movie as Movie;
     use DAO\Connection as Connection;
-    use DAO\CinemaDAO as CinemaDAO;
+    use Models\Cinema as Cinema;
 
    
 
     class RoomDAO implements IRoomDAO{
         private $connection;
         private $tableName="rooms";
-        private $cinemaDAO; 
+        
         
         function __construct()
         {
-            $this->cinemaDAO=new CinemaDAO();
+            
         }
         
         public function add($room){
@@ -156,12 +158,182 @@
                 $room->setCapacity($p["capacity"]);
                 $room->setPrice($p["price"]);
                 $room->setName($p["name"]);
-                $room->setCinema($this->cinemaDAO->search($p["idCinema"]));
+                $room->setCinema($this->searchCinema($p["idCinema"]));
+
                 return $room;
             },$value);
  
             return count($result)>1 ? $result: $result["0"];
         }
+
+        protected function mapCinema($value){
+            $value=is_array($value) ? $value: array();
+            
+            $result= array_map(function ($p){
+                 $cinema=new Cinema();
+                 $cinema->setIdCinema($p["idCinema"]);
+                 $cinema->setState($p["state"]);
+                 $cinema->setName($p["name"]);
+                 $cinema->setStreet($p["street"]);
+                 $cinema->setNumber($p["number"]);
+                 $cinema->setEmail($p["email"]);
+                 $cinema->setPhone($p["phone"]);
+                 $cinema->setPoster($p["poster"]);
+                 $cinema->setBillboard($this->getBillboard($p["idCinema"]));
+ 
+                return $cinema;
+            },$value);
+ 
+            return count($result)>1 ? $result: $result["0"];
+        }
+
+        public function getBillboard($idCinema){
+            try
+            {
+                $movieList = array();
+
+                $query = "SELECT idMovie FROM cinemaxmovies WHERE idCinema=:idCinema AND state=1";
+
+                $this->connection = Connection::GetInstance();
+                $parameters["idCinema"]=$idCinema;
+
+                $resultSet = $this->connection->execute($query,$parameters);
+               
+                foreach ($resultSet as $row)
+                {                
+                   
+                    $movie=$this->searchMovieId($row["idMovie"]);
+                    
+                    array_push($movieList,$movie);
+            
+                }
+            
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if($resultSet){
+                return $movieList;
+            }else{
+                return null;
+            }
+        }
+
+        protected function getMovieGenres($movie){
+
+            $genreList= array();
+
+            $query = "SELECT g.idGenre, g.name FROM moviesxgenres AS mxg JOIN genres AS g ON mxg.idGenre=g.idGenre WHERE mxg.idMovie=:idMovie";
+            
+            $parameters["idMovie"] = $movie->getTmdbId();
+
+            $this->connection = Connection::getInstance();
+
+            $result= $this->connection->execute($query, $parameters);
+            
+            if(count($result) > 0){
+                $genreList= $this->mapGenre($result);
+            }
+            
+
+            return $genreList;
+    }
+    
+    private function searchMovieId($tmdbId){
+        try
+        {
+            $query = "SELECT * FROM movies WHERE idMovie= :idMovie";
+            $parameters["idMovie"] = $tmdbId;
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query, $parameters);
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($result)){
+            return $this->mapMovie($result);
+        }else{
+            return null;
+        }
+    }
+
+    private function searchCinema($idCinema){
+        try
+        {
+            $query = "SELECT * FROM cinemas WHERE idCinema= :idCinema";
+            $parameters["idCinema"]=$idCinema;
+            $this->connection = Connection::getInstance();
+
+            $results = $this->connection->execute($query,$parameters);
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($results)){
+            return $this->mapCinema($results);
+        }else{
+            return null;
+        }
+    }
+
+    protected function mapMovie($value){
+        $value=is_array($value) ? $value: array();
+        
+        $result= array_map(function ($p){
+            $movie=new Movie();
+            $movie->setTmdbId($p["idMovie"]);
+            $movie->setTitle($p["title"]);
+            $movie->setOriginalTitle($p["originalTitle"]);
+            $movie->setVoteAverage($p["voteAverage"]);
+            $movie->setDescription($p["overview"]);
+            $movie->setReleaseDate($p["releaseDate"]);
+            $movie->setPopularity($p["popularity"]);
+            $movie->setVideoPath($p["videoPath"]);
+            $movie->setAdult($p["adult"]);
+            $movie->setPoster($p["posterPath"]);
+            $movie->setBackdropPath($p["backDropPath"]);
+            $movie->setOriginalLanguage($p["originalLanguage"]);
+            $movie->setRuntime($p["runtime"]);
+            $movie->setHomepage($p["homepage"]);
+            $movie->setDirector($p["director"]);
+            $movie->setReview($p["review"]);
+
+            $genres=$this->getMovieGenres($movie);
+            $movie->setGenres($genres);
+
+            return $movie;
+        },$value);
+
+        if(!empty($result)){
+            return count($result)>1 ? $result: $result["0"];        
+        }else{
+            return null;
+        }
+
+       }
+
+    
+    protected function mapGenre($value){
+
+        $value=is_array($value) ? $value: array();
+
+        $result= array_map(function ($f){
+            $genre= new Genre();
+            $genre->SetId($f['idGenre']);
+            $genre->SetName($f['name']);
+            return $genre;
+        },$value);
+
+        return count($result) > 1 ? $result: $result["0"];
+
+       }
 
         
     }             
