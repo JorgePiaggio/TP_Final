@@ -46,7 +46,7 @@
         }
 
         public function showManageBillboard($idCinema=""){
-            if($this->checkParameter($idCinema)){
+            if(Validate::checkParameter($idCinema)){
             $cinema=$this->cinemaDAO->search($idCinema);
             $movieList=$this->movieDAO->getAll();
             $genreList=$this->genreDAO->getAll();
@@ -56,7 +56,7 @@
         }
     
 
-        public function addToBillboard($idCinema="",$movies=""){
+        public function addToBillboard($idCinema="",$movies){
             Validate::checkParameter($idCinema);
 
             foreach($movies as $value){
@@ -73,7 +73,7 @@
 
 
         public function removeFromBillboard($idCinema="",$movies){
-            if($this->checkParameter($idCinema)){
+            if(Validate::checkParameter($idCinema)){
                 
                 foreach($movies as $value){
                  
@@ -88,8 +88,8 @@
         }
         
         
-        public function add($name, $street, $number, $phone, $email){
-            $this->checkParameter($name);
+        public function add($name="", $street="", $number="", $phone="", $email="",$poster=""){
+            Validate::checkParameter($name);
             $address = $street . $number;
 
             if($this->validateCinema($name, $address) == null){ 
@@ -99,6 +99,11 @@
                 $cinema->setNumber($number);
                 $cinema->setPhone($phone);
                 $cinema->setEmail($email);
+                if($poster){
+                    $cinema->setPoster($poster);
+                }else{
+                    $cinema->setPoster("url de imagen por defecto");
+                }
                 $this->cinemaDAO->add($cinema);
                 
                 $this->showListView();
@@ -126,14 +131,14 @@
         }
 
         public function changeState($idRemove=""){
-            $this->checkParameter($idRemove);
+            Validate::checkParameter($idRemove);
             $this->cinemaDAO->changeState($idRemove);
             
             $this->showListView();
         }
         
         public function searchEdit($idCinema=""){
-            $this->checkParameter($idCinema);
+            Validate::checkParameter($idCinema);
             $editCinema = $this->cinemaDAO->search($idCinema);
             #$this->convertAddress($editCinema->getAddress());
             
@@ -154,7 +159,7 @@
         }
         */
 
-        public function edit($name="", $street="", $number="", $phone="", $email="", $idCinema=""){
+        public function edit($name="", $street="", $number="", $phone="", $email="",$poster="", $idCinema=""){
             Validate::checkParameter($name);
 
             $aux = $this->cinemaDAO->search($idCinema);
@@ -169,6 +174,7 @@
                 $cinemaEdit->setPhone($phone);
                 $cinemaEdit->setEmail($email);
                 $cinemaEdit->setIdCinema($idCinema);
+                $cinemaEdit->setPoster($poster);
 
                 $this->cinemaDAO->update($cinemaEdit);
                 $this->msg = "Cinema modified successfully";

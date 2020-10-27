@@ -1,7 +1,6 @@
 <?php
 namespace Models;
 
-use Models\Movie as Movie;
 class Cinema{ 
 
     private $idCinema;
@@ -11,6 +10,7 @@ class Cinema{
     private $number;
     private $phone;
     private $email;
+    private $poster;
     private $billboard;
     
    
@@ -27,6 +27,7 @@ class Cinema{
     function getEmail(){return $this->email;}
     function getState(){return $this->state;}
     function getBillboard(){return $this->billboard;}
+    function getPoster(){return $this->poster;}
 
     function setIdCinema($idCinema){$this->idCinema=$idCinema;}
     function setName($name){$this->name=$name;}
@@ -35,9 +36,10 @@ class Cinema{
     function setPhone($phone){$this->phone=$phone;}
     function setEmail($email){$this->email=$email;}
     function setState($state){$this->state=$state;}
+    function setPoster($poster){$this->poster=$poster;}
     function setBillboard($billboard){$this->billboard=$billboard;}
 
-    function addMovie(Movie $movie){if($movie){array_push($this->billboard,$movie);}} 
+   
 
 }
 ?>

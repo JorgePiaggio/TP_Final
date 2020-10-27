@@ -9,6 +9,7 @@
                               <th>Number</th>
                               <th>Phone</th>
                               <th>Email</th>
+                              <th>Poster</th>
                               
 
                          </thead>
@@ -20,6 +21,7 @@
                               <td><input type="number" name="number" value= "<?php echo $editCinema->getNumber() ?>">  </td>
                               <td><input type="number" name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
                               <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
+                              <td><input type="text" name="img" value= "<?php echo $editCinema->getPoster(); ?>"> </td>
                               </tr>
 
                               <tr>

@@ -18,7 +18,7 @@
 
 
         public function add($cinema){
-            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email) VALUES (:state,:name,:street,:number,:phone,:email)";
+            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email,poster) VALUES (:state,:name,:street,:number,:phone,:email,:poster)";
 
             $parameters['name']=$cinema->getName();
             $parameters['street']=$cinema->getStreet();
@@ -26,6 +26,7 @@
             $parameters['email']=$cinema->getEmail();
             $parameters['phone']=$cinema->getPhone();
             $parameters['state']=$cinema->getState();
+            $parameters['poster']=$cinema->getPoster();
 
             try{
 
@@ -51,25 +52,19 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                foreach ($resultSet as $row)
-                {                
-                    $cinema = new Cinema();
-                    $cinema->setIdCinema($row["idCinema"]);
-                    $cinema->setState($row["state"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setStreet($row["street"]);
-                    $cinema->setNumber($row["number"]);
-                    $cinema->setEmail($row["email"]);
-                    $cinema->setPhone($row["phone"]);
-                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
-                    array_push($cinemaList, $cinema);
-                }
+                $cinemaList=$this->map($resultSet);
 
-                return $cinemaList;
+                
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+
+            if($resultSet){
+                return $cinemaList;
+            }else{
+                return null;
             }
         }
         
@@ -86,25 +81,20 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                foreach ($resultSet as $row)
-                {                
-                    $cinema = new Cinema();
-                    $cinema->setIdCinema($row["idCinema"]);
-                    $cinema->setState($row["state"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setStreet($row["street"]);
-                    $cinema->setNumber($row["number"]);
-                    $cinema->setEmail($row["email"]);
-                    $cinema->setPhone($row["phone"]);
-                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
-                    array_push($cinemaList, $cinema);
-                }
+                $cinemaList=$this->map($resultSet);
+            
 
-                return $cinemaList;
+                
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+
+            if($resultSet){
+                return $cinemaList;
+            }else{
+                return null;
             }
         }
                 
@@ -121,25 +111,21 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                foreach ($resultSet as $row)
-                {                  
-                    $cinema = new Cinema();
-                    $cinema->setIdCinema($row["idCinema"]);
-                    $cinema->setState($row["state"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setStreet($row["street"]);
-                    $cinema->setNumber($row["number"]);
-                    $cinema->setEmail($row["email"]);
-                    $cinema->setPhone($row["phone"]);
-                    $cinema->setBillboard($this->getBillboard($row["idCinema"]));
-                    array_push($cinemaList, $cinema);
-                }
+                                
+                $cinemaList=$this->map($resultSet);
+            
+                
 
-                return $cinemaList;
+                
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
+            }
+            if($resultSet){
+                return $cinemaList;
+            }else{
+                return null;
             }
         }
         
@@ -200,7 +186,7 @@
         public function update($cinema){
             try
             {
-                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email WHERE idCinema=:idCinema";
+                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email, poster=:poster WHERE idCinema=:idCinema";
 
                 $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$cinema->getIdCinema();
@@ -210,6 +196,7 @@
                 $parameters["number"]=$cinema->getNumber();
                 $parameters["email"]=$cinema->getEmail();
                 $parameters["phone"]=$cinema->getPhone();
+                $parameters["poster"]=$cinema->getPoster();
 
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
                 return $rowCant;
@@ -324,6 +311,8 @@
                 $cinema->setNumber($p["number"]);
                 $cinema->setEmail($p["email"]);
                 $cinema->setPhone($p["phone"]);
+                $cinema->setPoster($p["poster"]);
+                $cinema->setBillboard($this->getBillboard($p["idCinema"]));
 
                return $cinema;
            },$value);

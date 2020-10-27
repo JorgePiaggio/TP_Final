@@ -27,15 +27,18 @@
                                    <input type="email" name="email" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Email</label>
                               </div>
-                              
+                              <div class="floating-label">
+                                   <input type="text" name="img" placeholder=" " class="floating-input" >
+                                   <span class="highlight"></span><label for="">Image url (Optional)</label>
+                              </div>
                               <br><br>
                               <div class="floating-label">
                                    <span>&nbsp;</span>
                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button>
                               </div>
                               <br>
-                              <h4 class="msg"> <?php if($this->msg != null){ //Si el cine ya existe muestra el mensaje
-                                   echo $this->msg;
+                             <?php if($this->msg != null){?> //Si el cine ya existe muestra el mensaje
+                                   <h4 class="msg"><?php  echo $this->msg;
                               } ?> </h4>
                          </div>            
                </form>

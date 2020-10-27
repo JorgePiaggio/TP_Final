@@ -26,7 +26,7 @@ class Show{          /* funcion de cine */
 
     function setIdShow($idShow){$this->idShow=$idShow;}
     function setRoom($room){$this->room=$room;}
-    function setRoom($movie){$this->movie=$movie;}
+    function setMovie($movie){$this->movie=$movie;}
     function setDateTime($dateTime){$this->dateTime=$dateTime;}
     function setShift($shift){$this->shift=$shift;}
     function setRemainingTickets($remainingTickets){$this->remainingTickets=$remainingTickets;}
