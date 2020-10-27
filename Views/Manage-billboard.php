@@ -19,7 +19,10 @@
               if($cinemaBillboard != null){ 
                 if(!is_array($cinemaBillboard)){ ?>
                   <li class="one_quarter first anim1 slideDown">                                       <!--UNA SOLA PELICULA EN LISTA -->
-                  <input type="checkbox" name="moviess[]" value="<?php echo $cinemaBillboard->getTmdbID();?>">
+                    <div class="check fl_right">
+                      <input type="checkbox" id="<?php echo $movie->getTmdbID();?>" name="moviess[]" value="<?php echo $cinemaBillboard->getTmdbID();?>">
+                      <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                    </div>
                   <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $cinemaBillboard->getTmdbID()?>">
                   <img src="<?php echo $cinemaBillboard->getPoster()?>" alt=""></a>         
                   <p class="p-title"><?php echo $cinemaBillboard->getTitle()?></p>
@@ -32,11 +35,14 @@
                                                                 }
                                                                 echo substr_replace($str,"", -1); 
                                                               }?></p><?php
-                }else{
-                  foreach ($cinemaBillboard  as $movie){
-                    if($indice % 4 == 0){?>
+                      }else{
+                      foreach ($cinemaBillboard  as $movie){
+                      if($indice % 4 == 0){?>
                     <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
-                    <input type="checkbox" name="moviess[]" value="<?php echo $movie->getTmdbID();?>">
+                      <div class="check fl_right">
+                        <input type="checkbox" name="moviess[]" value="<?php echo $movie->getTmdbID();?>">
+                        <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                      </div>
                       <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                       <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
                       <p class="p-title"><?php echo $movie->getTitle()?></p>
@@ -50,21 +56,21 @@
                                                                     echo substr_replace($str,"", -1); 
                                                                   }?></p>
                     </li>
-                    <?php }else{ ?>
+                      <?php }else{ ?>
                     <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
-                    <input type="checkbox" name="moviess[]" value="<?php echo $movie->getTmdbID();?>">
-                      <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""></a>
-                      <p class="p-title"><?php echo $movie->getTitle()?></p>
-                      <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                      <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                                      echo $movie->getGenres()->getName();
-                                                                  }else{ 
-                                                                    foreach($movie->getGenres() as $genre){
-                                                                    $str .=" ".$genre->getName()." /";
-                                                                    }
-                                                                    echo substr_replace($str,"", -1); 
-                                                                  } ?></p>
+                      <input type="checkbox" name="moviess[]" value="<?php echo $movie->getTmdbID();?>">
+                        <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                        <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                        <p class="p-title"><?php echo $movie->getTitle()?></p>
+                        <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
+                        <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
+                                                                        echo $movie->getGenres()->getName();
+                                                                    }else{ 
+                                                                      foreach($movie->getGenres() as $genre){
+                                                                      $str .=" ".$genre->getName()." /";
+                                                                      }
+                                                                      echo substr_replace($str,"", -1); 
+                                                                    } ?></p>
                     </li><?php }
                     $indice++; 
                   }

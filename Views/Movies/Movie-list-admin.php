@@ -27,7 +27,10 @@
               <?php foreach ($movieList as $movie){
                 if($indice % 4 == 0){?>
                   <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
-                  <input type="checkbox" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
+                    <div class="check fl_right">
+                      <input type="checkbox" id="<?php echo $movie->getTmdbID();?>" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
+                      <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                    </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                       <img src="<?php echo $movie->getPoster()?>" alt=""> 
                     </a>         
@@ -44,7 +47,10 @@
                   </li>
                   <?php }else{ ?>
                   <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
-                    <input type="checkbox" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
+                    <div class="check fl_right">  
+                      <input type="checkbox" id="<?php echo $movie->getTmdbID();?>" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
+                      <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                    </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                       <img src="<?php echo $movie->getPoster()?>" alt="">
                     </a>
