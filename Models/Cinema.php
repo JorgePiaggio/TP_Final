@@ -17,6 +17,7 @@ class Cinema{
     function __construct(){
         $this->state = true;
         $this->billboard=array();
+        $this->poster = "../".IMG_PATH."/banner-not.png";
     }
     
     function getIdCinema(){return $this->idCinema;}

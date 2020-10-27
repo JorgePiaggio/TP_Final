@@ -25,7 +25,7 @@
             $this->msg = null;
         }
 
-
+        
         public function showAddView(){
             require_once(VIEWS_PATH."Cinema-add.php");
         }
@@ -55,7 +55,17 @@
             require_once(VIEWS_PATH."Manage-billboard.php");
             
         }
-    
+
+        public function showAllCinemas(){
+            $cinemaList = $this->cinemaDAO->getAllActive();
+            #var_dump($cinemaList);      
+            require_once(VIEWS_PATH."Cinemas/Cinema-list-full.php");
+        }
+        
+        public function showCinema($idCinema){
+            $cinema=$this->cinemaDAO->search($idCinema);      
+            require_once(VIEWS_PATH."Cinemas/Cinema-list-full.php");
+        }
 
         public function addToBillboard($idCinema="",$movies){
             Validate::checkParameter($idCinema);

@@ -10,6 +10,7 @@
     <nav id="mainav" class="fl_right">
         <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
+        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>  
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
           <?php if($_SESSION){?>
         
