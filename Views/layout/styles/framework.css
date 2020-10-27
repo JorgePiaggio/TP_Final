@@ -184,7 +184,52 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   
   /****  floating-Lable style end ****/
   
+.check{
+  display:inline;
+}
+  input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  
+  .check label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 30px;
+    height: 20px;
+    background: rgb(23, 22, 22);
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
+  
+  .check label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    width: 11px;
+    height: 11px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+  
+  .check input:checked + label {
+    background: #ff6817;
+  }
+  
+  .check input:checked + label:after {
+    left: calc(100% - 1px);
+    transform: translateX(-100%);
+  }
+  
+  .check label:active:after {
+    width: 10px;
+  }
 
+  
 /* Generalise
 --------------------------------------------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6, .heading{margin:0 0 20px 0; font-size:22px; line-height:normal; font-weight:normal; text-transform:uppercase;}
