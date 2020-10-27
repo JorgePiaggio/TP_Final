@@ -49,7 +49,7 @@
                 $resultSet = $this->connection->execute($sql);
                 
                 if($resultSet){
-                    $userList=$this->map($resultSet);
+                    array_push($userList,$this->map($resultSet));     
                 }
             }
             catch(\PDOException $ex){

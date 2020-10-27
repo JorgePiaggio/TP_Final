@@ -53,7 +53,7 @@
                 $resultSet = $this->connection->execute($query);
                 
                 if($resultSet){
-                    $roomList=$this->map($resultSet);
+                    array_push($roomList,$this->map($resultSet));     
                 }
 
                 
@@ -82,7 +82,7 @@
                 $resultSet = $this->connection->execute($query,$parameters);
                 
                 if($resultSet){
-                    $roomList=$this->map($resultSet);
+                    array_push($roomList,$this->map($resultSet));     
                 }
 
                 

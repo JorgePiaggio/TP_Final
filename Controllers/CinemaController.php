@@ -62,7 +62,6 @@
 
         public function addToBillboard($idCinema="",$movies){
             Validate::checkParameter($idCinema);
-
             foreach($movies as $value){
                 if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
                     $this->cinemaDAO->addMovie($idCinema,$value);

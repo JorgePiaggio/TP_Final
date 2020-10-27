@@ -90,7 +90,7 @@
     </div>
   </main>
 </div>
-
+         <!-- #######################################    DATABASE    MOVIE    GALLERY    ######################################################### -->
 <div class="wrapper row3 gradient"> 
   <h2 class="page-title">Database</h2>
   <main class="hoc container clear" > 
@@ -101,21 +101,17 @@
        <?php } ?>
       </div>
     <div class="content" > 
-      
-         <!-- #######################################    DATABASE    MOVIE    GALLERY    ######################################################### -->
       <div id="gallery">
         <figure>
           <ul class="nospace clear">
-
-         
             <?php $indice=0;
               if($movieList != null){ 
                 if(!is_array($movieList)){ ?>
                   <li class="one_quarter first anim1 slideDown"> 
                                                       <!--UNA SOLA PELICULA EN LISTA -->
                 <div class="check fl_right">
-                  <input type="checkbox" id="<?php echo $movie->getTmdbID();?>" name="movies[]" value="<?php echo $movieList->getTmdbID();?>">
-                  <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                  <input type="checkbox" id="<?php echo $movieList->getTmdbID();?>" name="movies[]" value="<?php echo $movieList->getTmdbID();?>">
+                  <label for="<?php echo $movieList->getTmdbID();?>">Toggle</label>
                 </div>
                   <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList->getTmdbID()?>">
                   <img src="<?php echo $movieList->getPoster()?>" alt=""></a>         
@@ -130,21 +126,21 @@
                                                                 echo substr_replace($str,"", -1); 
                                                               }?></p><?php
                 }else{
-                  foreach ($movieList as $movie){
-                    if($indice % 4 == 0){?>
+                  foreach ($movieList as $film){
+                    if($indice % 4 == 0){;?>
                     <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
                     <div class="check fl_right">
-                      <input type="checkbox" id="<?php echo $movie->getTmdbID();?>"  name="movies[]" value="<?php echo $movie->getTmdbID();?>">
-                      <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                      <input type="checkbox" id="<?php echo $film->getTmdbID();?>"  name="movies[]" value="<?php echo $film->getTmdbID();?>">
+                      <label for="<?php echo $film->getTmdbID();?>">Toggle</label>
                     </div>
-                      <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
-                      <p class="p-title"><?php echo $movie->getTitle()?></p>
-                      <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                      <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                                      echo $movie->getGenres()->getName();
+                      <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $film->getTmdbID()?>">
+                      <img src="<?php echo $film->getPoster()?>" alt=""></a>         
+                      <p class="p-title"><?php echo $film->getTitle()?></p>
+                      <p><i class="fa-spin fa fa-star"></i><?php echo " ".$film->getVoteAverage()?></p>
+                      <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($film->getGenres())){
+                                                                      echo $film->getGenres()->getName();
                                                                   }else{ 
-                                                                    foreach($movie->getGenres() as $genre){
+                                                                    foreach($film->getGenres() as $genre){
                                                                     $str .=" ".$genre->getName()." /";
                                                                     }
                                                                     echo substr_replace($str,"", -1); 
@@ -153,17 +149,17 @@
                     <?php }else{ ?>
                     <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
                     <div class="check fl_right">
-                      <input type="checkbox" id="<?php echo $movie->getTmdbID();?>" name="movies[]" value="<?php echo $movie->getTmdbID();?>">
-                      <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
+                      <input type="checkbox" id="<?php echo $film->getTmdbID();?>" name="movies[]" value="<?php echo $film->getTmdbID();?>">
+                      <label for="<?php echo $film->getTmdbID();?>">Toggle</label>
                     </div>
-                      <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""></a>
-                      <p class="p-title"><?php echo $movie->getTitle()?></p>
-                      <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                      <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                                      echo $movie->getGenres()->getName();
+                      <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $film->getTmdbID()?>">
+                      <img src="<?php echo $film->getPoster()?>" alt=""></a>
+                      <p class="p-title"><?php echo $film->getTitle()?></p>
+                      <p><i class="fa-spin fa fa-star"></i><?php echo " ".$film->getVoteAverage()?></p>
+                      <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($film->getGenres())){
+                                                                      echo $film->getGenres()->getName();
                                                                   }else{ 
-                                                                    foreach($movie->getGenres() as $genre){
+                                                                    foreach($film->getGenres() as $genre){
                                                                     $str .=" ".$genre->getName()." /";
                                                                     }
                                                                     echo substr_replace($str,"", -1); 

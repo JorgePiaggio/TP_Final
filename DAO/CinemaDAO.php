@@ -52,8 +52,8 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                if($resultSet){  
-                $cinemaList=$this->map($resultSet);
+                if($resultSet){ 
+                array_push($cinemaList,$this->map($resultSet));
                 }
                 
             }
@@ -83,7 +83,7 @@
                 $resultSet = $this->connection->execute($query);
                 
                 if($resultSet){  
-                $cinemaList=$this->map($resultSet);
+                array_push($cinemaList,$this->map($resultSet));
                 }
 
                 
@@ -113,8 +113,8 @@
 
                 $resultSet = $this->connection->execute($query);
                 
-                if($resultSet){                
-                $cinemaList=$this->map($resultSet);
+                if($resultSet){           
+                array_push($cinemaList,$this->map($resultSet));     
                 }
             
             }

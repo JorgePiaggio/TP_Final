@@ -106,38 +106,39 @@
 <h2 class="page-title">Our Cinemas</h2>  
   <section class="hoc container clear"> 
     <ul class="nospace group">
-      <li class="one_quarter first">
-        <h6 class="heading font-x2 center">Ambassador</h6>
-        <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo IMG_PATH?>cinema1.jpg" alt="cinema 1 photo"></a>
-          <div class="excerpttxt">
-            <footer><a class="btn" href="#">Read More &raquo;</a></footer>
-          </div>
-        </article>
-      </li>
-      <li class="one_quarter">
-        <h6 class="heading font-x2 center">Del Paseo</h6>
-        <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo IMG_PATH?>cinema2.jpg" alt="cinema 2 photo"></a>
-          <div class="excerpttxt">
-            <footer><a class="btn" href="#">Read More &raquo;</a></footer>
-          </div>
-        </article>
-      </li>
-        <li class="one_quarter">
-      <h6 class="heading font-x2 center">Cine Puerto</h6>
-        <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo IMG_PATH?>cinema3.jpg" alt="cinema 3 photo"></a>
-          <div class="excerpttxt">
-            <footer><a class="btn" href="#">Read More &raquo;</a></footer>
-          </div>
-        </article>
-      </li>
-      <li class="one_quarter">
-        <h6 class="heading font-x2 center">Atlas</h6>
-        <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo IMG_PATH?>cinema4.jpg" alt="cinema 4 photo"></a>
-          <div class="excerpttxt">
-            <footer><a class="btn" href="#">Read More &raquo;</a></footer>
-          </div>
-        </article>
-      </li>
+      <?php $indice=0;
+            if(is_array($cinemaList)){
+              foreach ($cinemaList as $cinema){
+                if($indice % 4 == 0){?>
+                  <li class="one_quarter first">
+                    <h6 class="heading font-x2 center"><?php echo $cinema->getName();?></h6>
+                    <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                      <div class="excerpttxt">
+                        <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
+                      </div>
+                    </article>
+                  </li><?php 
+                }else{?>
+                  <li class="one_quarter">
+                    <h6 class="heading font-x2 center"><?php echo $cinema->getName();?></h6>
+                    <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                      <div class="excerpttxt">
+                        <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
+                      </div>
+                    </article>
+                  </li><?php 
+                } $indice++;
+              }
+            }else{?>
+                <li class="one_quarter first">
+                <h6 class="heading font-x2 center"><?php echo $cinemaList->getName();?></h6>
+                <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
+                  <div class="excerpttxt">
+                    <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
+                  </div>
+                </article>
+              </li><?php 
+            }?>
     </ul>
   </section>
 </div>
