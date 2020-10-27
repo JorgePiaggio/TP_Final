@@ -189,6 +189,7 @@ class UserController{
         Validate::checkParameter($email);
         $users = $this->userDAO->getAll(); 
         $answer = false;
+        if($users){
         if(is_array($users)){
         foreach($users as $value){
             if($value->getEmail() == $email){
@@ -200,6 +201,8 @@ class UserController{
                 $answer = true;
             }
         }
+
+    }
         return $answer;
     }
 
