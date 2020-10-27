@@ -30,30 +30,33 @@
             require_once(VIEWS_PATH."Cinema-add.php");
         }
 
+
         public function showListView(){
             $cinemaList = $this->cinemaDAO->getAllActive();
             $cinemaListInactive = $this->cinemaDAO->getAllInactive(); 
             require_once(VIEWS_PATH."Cinema-list.php");
         }
 
+
         public function showBillboard(){
             $cinemaList = $this->cinemaDAO->getAllActive();
             require_once(VIEWS_PATH."Select-billboard.php");
         }
 
+
         public function showEditView(){
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
+
 
         public function showManageBillboard($idCinema=""){
            
             Validate::checkParameter($idCinema);
             $cinema=$this->cinemaDAO->search($idCinema);
-            $movieList=$this->movieDAO->getAll();
+            $movieList=$this->movieDAO->getAllNotInBillboard();
             $genreList=$this->genreDAO->getAll();
             $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
             require_once(VIEWS_PATH."Manage-billboard.php");
-            
         }
     
 
@@ -77,14 +80,10 @@
             Validate::checkParameter($idCinema);
                 
                 foreach($movies as $value){
-                 
                      $this->cinemaDAO->stateMovie($idCinema,$value,"0");   
-                    
-                    
                 }
                 $this->msg="Removed correctly"; 
              
-
             $this->showManageBillboard($idCinema);
         }
         
@@ -112,11 +111,9 @@
             else{
                 $this->msg = "Already exists cinema: '$name' with address: '$street $number'";
                 $this->showAddView();
-                
             }
-               
-            
         }
+
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección
         public function validateCinema($name, $address){
@@ -131,13 +128,14 @@
             return $idFound; //Retorna el id del cine si ya existe
         }
 
+
         public function changeState($idRemove=""){
             Validate::checkParameter($idRemove);
             $this->cinemaDAO->changeState($idRemove);
-            
             $this->showListView();
         }
         
+
         public function searchEdit($idCinema=""){
             Validate::checkParameter($idCinema);
             $editCinema = $this->cinemaDAO->search($idCinema);
@@ -147,6 +145,7 @@
             require_once(VIEWS_PATH."Cinema-edit.php");
         }
         
+
         /*
         public function convertAddress($address){
             $words = explode(" ", $address);

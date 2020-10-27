@@ -9,7 +9,7 @@
       <button type="submit" name="idcinemamanage" value="<?php echo $cinema->getIdCinema();?>" class="btn btn-primary ml-auto d-block">Remove movies</button><br><br>             
     </div><?php } ?>
 
-   <!-- ####################################### MOVIE GALLERY ######################################################### -->
+   <!-- #######################################   BILLBOARD   MOVIE   GALLERY   ######################################################### -->
   <main class="hoc container clear up4" > 
     <div class="content" > 
       <div id="gallery">
@@ -102,7 +102,7 @@
       </div>
     <div class="content" > 
       
-         <!-- ####################################### MOVIE GALLERY ######################################################### -->
+         <!-- #######################################    DATABASE    MOVIE    GALLERY    ######################################################### -->
       <div id="gallery">
         <figure>
           <ul class="nospace clear">

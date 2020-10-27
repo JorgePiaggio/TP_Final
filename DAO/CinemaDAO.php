@@ -117,9 +117,6 @@
                 $cinemaList=$this->map($resultSet);
                 }
             
-                
-
-                
             }
             catch(\PDOException $ex)
             {

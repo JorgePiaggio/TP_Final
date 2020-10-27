@@ -3,13 +3,15 @@
   <main class="hoc container clear"> 
       <div class="content up">
         <h2 class="center page-title-variation "><?php echo $movie->getTitle()?></h2>
+          <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
+            <div class="floating-label fl_right margin3 up2">
+              <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2">Add</button>
+            </div>
       </div>
       <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
-      <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
+      
       <div class="cardStyle">
-        <div class="floating-label fl_right margin3">
-          <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2 up">Add</button>
-        </div></form>
+        </form>
         <?php } ?>
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
@@ -42,7 +44,7 @@
                                                             echo substr_replace($str,"", -1); ?></p><br>
             </div>
             
-            <div>                                           <!-- si hay trailer se muestra, si no en ese espacio se muestra la descripcion -->
+            <div class="up">                                           <!-- si hay trailer se muestra, si no en ese espacio se muestra la descripcion -->
               <?php if(!$movie->getVideoPath()){ ?>     
                       <p><h4>Description</h4><?php echo $movie->getDescription()?></p>
                       <?php }else{ ?></p><p><h4>Trailer</h4>
@@ -52,7 +54,7 @@
             </div>
           </div>   
               <!-- ####################################### COLUMNA DERECHA - POSTER ######################################################### -->
-          <div class="one_half up">                 
+          <div class="one_half">                 
             <img class="brd" src="<?php echo $movie->getPoster() ?>" alt="<?php echo $movie->getTitle()?> poster">
           </div>
         </div>

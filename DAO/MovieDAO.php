@@ -98,7 +98,6 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->execute($query);
-            
                           
             $movieList = $this->map($resultSet);
             
@@ -115,6 +114,39 @@ class MovieDAO implements IMovieDAO{
             return null;
         }
     }
+
+
+
+
+    /* obtener todas las peliculas del DAO, activas o no */
+    public function getAllNotInBillboard(){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM movies as m LEFT JOIN cinemaxmovies as cxm on m.idMovie = cxm.idMovie WHERE cxm.state = 0";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+                          
+            $movieList = $this->map($resultSet);
+            
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($resultSet)){
+     
+            return $movieList; 
+        }else{
+            return null;
+        }
+    }
+
+
 
     /* Retorna las mejores 20 peliculas según valoración */
     public function getBestRated(){
@@ -194,6 +226,7 @@ class MovieDAO implements IMovieDAO{
         }
     }
 
+
       /* retorna las peliculas por genero*/
     public function getByGenre($idGenre){
         try
@@ -272,8 +305,6 @@ class MovieDAO implements IMovieDAO{
             if(count($result) > 0){
                 $genreList= $this->mapGenre($result);
             }
-            
-
             return $genreList;
     }
 
