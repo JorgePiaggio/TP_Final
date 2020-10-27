@@ -98,9 +98,14 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->execute($query);
-                          
+                        
             if($resultSet){
-            array_push($movieList,$this->map($resultSet));     
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
             }
             
         }
@@ -133,7 +138,12 @@ class MovieDAO implements IMovieDAO{
             $resultSet = $this->connection->execute($query);
                           
             if($resultSet){
-                array_push($movieList,$this->map($resultSet));     
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
             }
         }
         catch(\PDOException $ex)
@@ -163,17 +173,23 @@ class MovieDAO implements IMovieDAO{
 
             $resultSet = $this->connection->execute($query);
 
-            if($resultSet){
-                array_push($movieList,$this->map($resultSet));     
-            }
+    
         }    
         catch(\PDOException $ex){
             throw $ex;
         }
 
+        if($resultSet){
+            $mapping= $this->map($resultSet);
+            if(!is_array($mapping)){
+                array_push($movieList,$mapping);
+            }else{
+            $movieList=$mapping;
+            }
+        }
+
         if(!empty($resultSet)){
-     
-            return $movieList;
+            return $movieList; 
         }else{
             return null;
         }
@@ -193,9 +209,7 @@ class MovieDAO implements IMovieDAO{
 
             $resultSet = $this->connection->execute($query);
             
-            if($resultSet){
-                array_push($movieList,$this->map($resultSet));     
-            }
+            
          
         }
         catch(\PDOException $ex)
@@ -203,9 +217,17 @@ class MovieDAO implements IMovieDAO{
             throw $ex;
         }
 
+        if($resultSet){
+            $mapping= $this->map($resultSet);
+            if(!is_array($mapping)){
+                array_push($movieList,$mapping);
+            }else{
+            $movieList=$mapping;
+            }
+        }
+
         if(!empty($resultSet)){
-            
-            return $movieList;
+            return $movieList; 
         }else{
             return null;
         }
@@ -249,8 +271,14 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query, $parameters);
+
             if($resultSet){
-                array_push($movieList,$this->map($resultSet));     
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
             }
         }
         catch(\PDOException $ex)
@@ -315,9 +343,16 @@ class MovieDAO implements IMovieDAO{
 
             $result= $this->connection->execute($query, $parameters);
             
+       
             if($result){
-                array_push($genreList,$this->map($result));     
+                $mapping= $this->mapGenre($result);
+                if(!is_array($mapping)){
+                    array_push($genreList,$mapping);
+                }else{
+                $genreList=$mapping;
+                }
             }
+
         }
         catch(\PDOException $ex)
         {

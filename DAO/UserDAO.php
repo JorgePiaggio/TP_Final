@@ -47,9 +47,14 @@
                 $sql = "SELECT * FROM ".$this->tableName;
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->execute($sql);
-                
+
                 if($resultSet){
-                    array_push($userList,$this->map($resultSet));     
+                    $mapping= $this->map($resultSet);
+                    if(!is_array($mapping)){
+                        array_push($userList,$mapping);
+                    }else{
+                    $userList=$mapping;
+                    }
                 }
             }
             catch(\PDOException $ex){
