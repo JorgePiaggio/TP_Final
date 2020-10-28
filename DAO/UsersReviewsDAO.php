@@ -3,13 +3,9 @@
 use DAO\IUsersReviewsDAO as IUsersReviewsDAO;
 
 class UsersReviewsDAO implements IUsersReviewsDAO{
-
     private $messageList = array();
 
-    public function getAll(){
-        $this->retrieveData();
-        return $this->messageList;
-    }
+   
 
     public function add($newMessage){
         
@@ -20,7 +16,12 @@ class UsersReviewsDAO implements IUsersReviewsDAO{
         $this->saveData();
     }
 
-    function getLastId(){
+    public function getAll(){
+        $this->retrieveData();
+        return $this->messageList;
+    }
+
+    public function getLastId(){
         $this->retrieveData();
         return count($this->messageList);
     }

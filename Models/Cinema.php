@@ -17,6 +17,7 @@ class Cinema{
     function __construct(){
         $this->state = true;
         $this->billboard=array();
+        
     }
     
     function getIdCinema(){return $this->idCinema;}

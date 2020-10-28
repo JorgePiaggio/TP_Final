@@ -31,15 +31,20 @@
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showBillboard">Billboard</a></li>
               </ul>
             </li>
+            <li class="active"><a>Movies</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+              </ul>
+            </li>
             <li class="active"><a>Rooms</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List / Edit</a></li>
               </ul>
             </li>
-            <li class="active"><a>Movies</a>
+            <li class="active"><a>Shows</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Show/showAddView">Add</a></li>
               </ul>
             </li>
              <li class="active"><a>Users</a>

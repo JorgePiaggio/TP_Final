@@ -8,6 +8,7 @@
         function getAll();
         function search($emailUser);
         function update(User $user);
+        function changeRole($userEmail);
     }
 
 ?>

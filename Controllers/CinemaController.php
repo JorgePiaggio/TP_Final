@@ -101,7 +101,7 @@
                 if($poster){
                     $cinema->setPoster($poster);
                 }else{
-                    $cinema->setPoster("url de imagen por defecto");
+                    $cinema->setPoster(IMG_PATH."cinema1.jpg");
                 }
                 $this->cinemaDAO->add($cinema);
                 

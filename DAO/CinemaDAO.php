@@ -220,6 +220,7 @@
                 throw $ex;
             }
         }
+        
         #Metodos de Cartelera
         public function stateMovie($idCinema,$idMovie,$state){
             try{
@@ -336,7 +337,30 @@
             return $genreList;
         }
 
-    
+ 
+
+        private function searchMovieId($tmdbId){
+            try
+            {
+                $query = "SELECT * FROM movies WHERE idMovie= :idMovie";
+                $parameters["idMovie"] = $tmdbId;
+
+                $this->connection = Connection::getInstance();
+
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($result)){
+                return $this->mapMovie($result);
+            }else{
+                return null;
+            }
+        }
+
         protected function map($value){
             $value=is_array($value) ? $value: array();
             
@@ -357,6 +381,7 @@
 
             return count($result)>1 ? $result: $result["0"];
         }
+
 
         protected function mapMovie($value){
             $value=is_array($value) ? $value: array();
@@ -393,29 +418,6 @@
             }
 
         }
-
-        private function searchMovieId($tmdbId){
-            try
-            {
-                $query = "SELECT * FROM movies WHERE idMovie= :idMovie";
-                $parameters["idMovie"] = $tmdbId;
-
-                $this->connection = Connection::getInstance();
-
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            if(!empty($result)){
-                return $this->mapMovie($result);
-            }else{
-                return null;
-            }
-        }
-
 
         protected function mapGenre($value){
 

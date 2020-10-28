@@ -134,6 +134,28 @@
             }
         }
 
+        public function searchById($idRoom){
+            try
+            {
+                $query = "SELECT * FROM ".$this->tableName." WHERE idRoom=:idRoom";
+                $parameters["idRoom"]=$idRoom;
+                
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);              
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else{
+                return null;
+            }
+        }
+
         
         public function update($room){
             try
@@ -204,7 +226,7 @@
 
             $this->connection = Connection::getInstance();
 
-            $result= $this->connection->execute($query, $parameters);
+            $resultSet= $this->connection->execute($query, $parameters);
             
             if($resultSet){
                 $mapping= $this->mapGenre($resultSet);
@@ -357,9 +379,8 @@
 
         return count($result) > 1 ? $result: $result["0"];
 
-       }
-
+    }
         
-    }             
+}             
 
 ?>

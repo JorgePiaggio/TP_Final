@@ -118,9 +118,16 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     top:5px;
     transition:0.2s ease all; 
     -moz-transition:0.2s ease all; 
-    -webkit-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all; 
   }
-  
+  .floating-input ~ input[placeholder] {
+  opacity: 0;
+}
+
+.floating-input:focus ~ input[placeholder], .floating-input:not(:placeholder-shown) ~ input[placeholder] {
+  opacity: 1;
+}
+
   .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
     top:-18px;
     font-size:10px;

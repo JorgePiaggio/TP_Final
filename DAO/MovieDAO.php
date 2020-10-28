@@ -294,41 +294,7 @@ class MovieDAO implements IMovieDAO{
     }
 
 
-    protected function map($value){
-        $value=is_array($value) ? $value: array();
-        
-        $result= array_map(function ($p){
-            $movie=new Movie();
-            $movie->setTmdbId($p["idMovie"]);
-            $movie->setTitle($p["title"]);
-            $movie->setOriginalTitle($p["originalTitle"]);
-            $movie->setVoteAverage($p["voteAverage"]);
-            $movie->setDescription($p["overview"]);
-            $movie->setReleaseDate($p["releaseDate"]);
-            $movie->setPopularity($p["popularity"]);
-            $movie->setVideoPath($p["videoPath"]);
-            $movie->setAdult($p["adult"]);
-            $movie->setPoster($p["posterPath"]);
-            $movie->setBackdropPath($p["backDropPath"]);
-            $movie->setOriginalLanguage($p["originalLanguage"]);
-            $movie->setRuntime($p["runtime"]);
-            $movie->setHomepage($p["homepage"]);
-            $movie->setDirector($p["director"]);
-            $movie->setReview($p["review"]);
-
-            $genres=$this->getMovieGenres($movie);
-            $movie->setGenres($genres);
-
-            return $movie;
-        },$value);
-
-        if(!empty($result)){
-            return count($result)>1 ? $result: $result["0"];        
-        }else{
-            return null;
-        }
-        
-    }
+    
 
 
     protected function getMovieGenres($movie){
@@ -361,6 +327,42 @@ class MovieDAO implements IMovieDAO{
 
         if(!empty($result)){
             return $genreList;
+        }else{
+            return null;
+        }
+        
+    }
+
+    protected function map($value){
+        $value=is_array($value) ? $value: array();
+        
+        $result= array_map(function ($p){
+            $movie=new Movie();
+            $movie->setTmdbId($p["idMovie"]);
+            $movie->setTitle($p["title"]);
+            $movie->setOriginalTitle($p["originalTitle"]);
+            $movie->setVoteAverage($p["voteAverage"]);
+            $movie->setDescription($p["overview"]);
+            $movie->setReleaseDate($p["releaseDate"]);
+            $movie->setPopularity($p["popularity"]);
+            $movie->setVideoPath($p["videoPath"]);
+            $movie->setAdult($p["adult"]);
+            $movie->setPoster($p["posterPath"]);
+            $movie->setBackdropPath($p["backDropPath"]);
+            $movie->setOriginalLanguage($p["originalLanguage"]);
+            $movie->setRuntime($p["runtime"]);
+            $movie->setHomepage($p["homepage"]);
+            $movie->setDirector($p["director"]);
+            $movie->setReview($p["review"]);
+
+            $genres=$this->getMovieGenres($movie);
+            $movie->setGenres($genres);
+
+            return $movie;
+        },$value);
+
+        if(!empty($result)){
+            return count($result)>1 ? $result: $result["0"];        
         }else{
             return null;
         }
