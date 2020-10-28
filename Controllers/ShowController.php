@@ -30,33 +30,66 @@
 
     public function showAddView(){
         $cinemaList = $this->cinemaDAO->getAllActive();
-        $roomList = $this->roomDAO->getAll();
-        $movieList = $this->movieDAO->getAll();
+        $cinema=null;
+        if($cinemaList){
+        $idCinema=$cinemaList[0]->getIdCinema();
+        $roomList = $this->roomDAO->getCinemaRooms($idCinema);
+        $movieList = $this->cinemaDAO->getBillboard($idCinema);
+        }
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
 
-    public function ShowSelectCinema(){
-        require_once(VIEWS_PATH."Shows/Show-add.php");
-    }
 
-    public function add($idCinema, $idRoom, $idMovie, $date, $time){
-        $timeFormat = explode(":", $time);
-        
-        $dateTime = new DateTime($date,new DateTimeZone('America/Argentina/Buenos_Aires'));
-        $dateTime->setTime($timeFormat[0], $timeFormat[1]);
-        
+    public function add($idRoom, $idMovie, $date, $time){
+         date_default_timezone_set('America/Argentina/Buenos_Aires');
+       
+        $actualDate=date('Y-m-d H:i');
+        $dateTime=date($date." ".$time);
+        if(strtotime($actualDate)<strtotime($dateTime)){
+       
+
+        $timeFormat=explode(":",$time);
+        $dateShow = new DateTime($date);
+        $dateShow->setTime($timeFormat[0], $timeFormat[1]);
+
+       
+        if($this->validateShow($idRoom,$dateTime,$dateShow)){
         $show = new Show();
         $show->setRoom($this->roomDAO->searchById($idRoom)); 
         $show->setMovie($this->movieDAO->search($idMovie));
-        $show->setDateTime($dateTime);
+        $show->setDateTime($dateShow);
         $this->showDAO->add($show);
+        $this->msg="Added Correctly";
+        }else{
+            $this->msg="There is already a Show for this time";
+        }
+        }else{
+            $this->msg="Incorrect Date";
+        }
+        $this->showAddView();
     }
 
     public function selectCinema($idCinema){
-        $cinemaList = $this->cinemaDAO->search($idCinema);
+       
+        $cinema = $this->cinemaDAO->search($idCinema);
+        $cinemaList=$this->cinemaDAO->getAllActive();
         $roomList = $this->roomDAO->getCinemaRooms($idCinema);
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
-        $this->ShowSelectCinema();
+        require_once(VIEWS_PATH."Shows/Show-add.php");
+    }
+
+
+    private function validateShow($idRoom,$date){
+        $showList=$this->showDAO->getShowbyTimebyRoom($idRoom,$date);
+
+        foreach($showList as $show){
+            $showTime=strtotime($show->getDateTime());
+            if(abs($showTime-strtotime($date))>=900){
+                return true;
+            }
+        }
+
+        return false;
     }
         
 }

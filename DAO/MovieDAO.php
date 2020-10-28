@@ -65,7 +65,7 @@ class MovieDAO implements IMovieDAO{
 
 
 
-    private function addGenresXMovies($genres, $IdMovie){
+   public function addGenresXMovies($genres, $IdMovie){
        
         $sql = "INSERT INTO moviesxgenres (idMovie,idGenre) VALUES (:idMovie,:idGenre)";
         $result=null;

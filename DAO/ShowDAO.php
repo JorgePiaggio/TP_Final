@@ -241,7 +241,42 @@
         }
     }
 
+    public function getShowbyTimebyRoom($idRoom,$date){
+        $showList = array();
 
+        try
+        {       
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE s.idRoom= :idRoom AND DATEDIFF(:dateTime, s.dateTime) =0";
+            
+            $parameters["idRoom"]=$idRoom;
+            $parameters["dateTime"]=$date;
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query,$parameters);
+
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+
+    }
     public function getByCinema($idCinema){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
