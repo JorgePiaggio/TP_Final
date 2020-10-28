@@ -10,12 +10,16 @@
 	use Config\Autoload as Autoload;
 	use Config\Router 	as Router;
 	use Config\Request 	as Request;
-		
+	use DAO\CinemaDAO as CinemaDAO;
+
 	Autoload::start();
 
 	session_start();
 
+
 	require_once(VIEWS_PATH."header.php");
+	$cinemaDAO= new CinemaDAO();
+	$cinemaList=$cinemaDAO->getAllActive();
 	require_once(VIEWS_PATH."nav-bar.php");
 
 	Router::Route(new Request());
