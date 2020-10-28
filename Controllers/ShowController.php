@@ -53,7 +53,7 @@
         $dateShow->setTime($timeFormat[0], $timeFormat[1]);
 
        
-        if($this->validateShow($idRoom,$dateTime)){
+        if($this->validateShow($idRoom,$idMovie,$dateTime)){
         $show = new Show();
         $show->setRoom($this->roomDAO->searchById($idRoom)); 
         $show->setMovie($this->movieDAO->search($idMovie));
@@ -79,17 +79,32 @@
     }
 
 
-    private function validateShow($idRoom,$date){
+    private function validateShow($idRoom,$idMovie,$date){
         $showList=$this->showDAO->getShowbyTimebyRoom($idRoom,$date);
-
-        foreach($showList as $show){
+        //Runtime y horario de pelicula ingresada
+        $movie=$this->movieDAO->search($idMovie);
+        $runtimeInput=$movie->getRuntime()*60;
+        $showInput=strtotime($date);
+        
+        if($showList){
+         foreach($showList as $show){
+             //horario y runtime de pelicula en la BDD
             $showTime=strtotime($show->getDateTime());
-            if(abs($showTime-strtotime($date))>=900){
-                return true;
+            $runtime=$show->getMovie()->getRunTime()*60;
+              if($showTime>$showInput){
+                  if($showInput+$runtimeInput > $showTime-900){
+                    return false;
+                  }
+                
+                }else{
+                    if($showTime+$runtime >$showInput-900 ){
+                        return false;
+                    }
+                }
             }
         }
-
-        return false;
+        
+        return true;
     }
         
 }
