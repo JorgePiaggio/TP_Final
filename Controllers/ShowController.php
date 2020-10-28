@@ -45,29 +45,31 @@
        
         $actualDate=date('Y-m-d H:i');
         $dateTime=date($date." ".$time);
+
         if(strtotime($actualDate)<strtotime($dateTime)){
-       
 
-        $timeFormat=explode(":",$time);
-        $dateShow = new DateTime($date);
-        $dateShow->setTime($timeFormat[0], $timeFormat[1]);
+            $timeFormat=explode(":",$time);
+            $dateShow = new DateTime($date);
+            $dateShow->setTime($timeFormat[0], $timeFormat[1]);
 
-       
-        if($this->validateShow($idRoom,$dateTime)){
-        $show = new Show();
-        $show->setRoom($this->roomDAO->searchById($idRoom)); 
-        $show->setMovie($this->movieDAO->search($idMovie));
-        $show->setDateTime($dateShow);
-        $this->showDAO->add($show);
-        $this->msg="Added Correctly";
-        }else{
-            $this->msg="There is already a Show for this time";
-        }
+        
+            if($this->validateShow($idRoom,$dateTime)){
+                $show = new Show();
+                $show->setRoom($this->roomDAO->searchById($idRoom)); 
+                $show->setMovie($this->movieDAO->search($idMovie));
+                $show->setDateTime($dateShow);
+                $this->showDAO->add($show);
+                $this->msg="Added Correctly";
+            }else{
+                $this->msg="There is already a Show for this time";
+            }
         }else{
             $this->msg="Incorrect Date";
         }
+
         $this->showAddView();
     }
+
 
     public function selectCinema($idCinema){
        
@@ -81,15 +83,22 @@
 
     private function validateShow($idRoom,$date){
         $showList=$this->showDAO->getShowbyTimebyRoom($idRoom,$date);
-
-        foreach($showList as $show){
-            $showTime=strtotime($show->getDateTime());
-            if(abs($showTime-strtotime($date))>=900){
-                return true;
+        if($showList != null){
+            if(is_array($showList)){
+                foreach($showList as $show){
+                    $showTime=strtotime($show->getDateTime());
+                    if(abs($showTime-strtotime($date))<=900){
+                        return false;
+                    }
+                }
+            }else{
+                $showTime=strtotime($showList->getDateTime());
+                if(abs($showTime-strtotime($date))<=900){
+                        return false;
+                }
             }
         }
-
-        return false;
+        return true;
     }
         
 }
