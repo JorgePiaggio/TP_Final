@@ -3,23 +3,32 @@
     <div id="logo" class="fl_left">
       <a href="<?php echo FRONT_ROOT?>Home/index">
         <svg width="500" height="61" viewBox="400 0 500 61" >
-            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">MoviePass</text>
+            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">Fran boton</text>
         </svg>
       </a>
     </div>
-    <nav id="mainav" class="fl_right">
+    <nav id="mainav" class="hoc fl_right">
         <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
+        <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard (not ready)</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-          <?php if($_SESSION){?>
-        
-          <!----------------- MENU USUARIO -----------------------> 
-          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
-          <?php }else{ ?>
-          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
-          <?php }?>
+        <li class="drop"><a href="#">Cinemas</a>
           <ul>
+            <?php foreach($cinemaList as $cinema){?>
+            <li><a href="<?php echo FRONT_ROOT?>PaginaDeFran"><?php echo $cinema->getName();?></a></li>
+            <?php } ?>
+          </ul>
+        </li>
 
+        
+          <!----------------- MENU USUARIO (ICONO DEL CHABONCITO)-----------------------> 
+          <?php if($_SESSION){?>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
+          <?php }else{ ?>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
+          <?php }?>
+
+          <ul>
             <?php if($_SESSION){   ?>
             <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
               
@@ -67,6 +76,8 @@
             <?php } ?>
           </ul>
         </li>
+        <li><a class="" href="#"><img src=""></a></li>
+
       </ul>
     </nav>
   </header>
