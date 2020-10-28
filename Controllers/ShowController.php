@@ -53,7 +53,7 @@
         $dateShow->setTime($timeFormat[0], $timeFormat[1]);
 
        
-        if($this->validateShow($idRoom,$dateTime,$dateShow)){
+        if($this->validateShow($idRoom,$dateTime)){
         $show = new Show();
         $show->setRoom($this->roomDAO->searchById($idRoom)); 
         $show->setMovie($this->movieDAO->search($idMovie));
