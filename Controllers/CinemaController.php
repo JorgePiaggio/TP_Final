@@ -33,14 +33,14 @@
 
         
         public function showAddView(){
-            require_once(VIEWS_PATH."Cinema-add.php");
+            require_once(VIEWS_PATH."Cinemas/Cinema-add.php");
         }
 
 
         public function showListView(){
             $cinemaList = $this->cinemaDAO->getAllActive();
             $cinemaListInactive = $this->cinemaDAO->getAllInactive(); 
-            require_once(VIEWS_PATH."Cinema-list.php");
+            require_once(VIEWS_PATH."Cinemas/Cinema-list.php");
         }
 
 
@@ -51,7 +51,7 @@
 
 
         public function showEditView(){
-            require_once(VIEWS_PATH."Cinema-edit.php");
+            require_once(VIEWS_PATH."Cinemas/Cinema-edit.php");
         }
 
 
@@ -146,7 +146,7 @@
             #$this->convertAddress($editCinema->getAddress());
             
             #$this->showEditView();
-            require_once(VIEWS_PATH."Cinema-edit.php");
+            require_once(VIEWS_PATH."Cinemas/Cinema-edit.php");
         }
         
 
