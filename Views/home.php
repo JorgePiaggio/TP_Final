@@ -66,7 +66,7 @@
                     if($indice %4 == 0){ ?>                               
                   <li class="one_quarter first anim1 slideDown">                                            <!--- primer pelicula de la izquierda -->
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                    <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                    <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                     <p><i class="fa fa-tags"></i><?php $str=""; if($movie->getGenres()){ 
@@ -82,7 +82,7 @@
                   <?php }else{ ?>
                   <li class="one_quarter anim1 slideDown">                                                  <!--- las otras 3 peliculas de la fila -->
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                    <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                    <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                     <p><i class="fa fa-tags"></i><?php $str=""; if($movie->getGenres()){ 
@@ -113,7 +113,10 @@
               foreach ($cinemaList as $cinema){
                 if($indice % 4 == 0){?>
                   <li class="one_quarter first">
-                    <h6 class="heading font-x2 center"><?php echo $cinema->getName();?></h6>
+                    <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                                                              $str1 = substr($cinema->getName(), 0, 11) . '...';
+                                                              echo $str1; ?></h6><?php }else{
+                                                              echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt">
                         <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
@@ -122,7 +125,10 @@
                   </li><?php 
                 }else{?>
                   <li class="one_quarter">
-                    <h6 class="heading font-x2 center"><?php echo $cinema->getName();?></h6>
+                    <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                                                              $str1 = substr($cinema->getName(), 0, 11) . '...';
+                                                              echo $str1; ?></h6><?php }else{
+                                                              echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt">
                         <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
@@ -133,7 +139,10 @@
               }
             }else{?>
                 <li class="one_quarter first">
-                <h6 class="heading font-x2 center"><?php echo $cinemaList->getName();?></h6>
+                <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                                                              $str1 = substr($cinema->getName(), 0, 11) . '...';
+                                                              echo $str1;?></h6><?php }else{
+                                                              echo $cinema->getName();?></h6><?php } ?>
                 <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
                   <div class="excerpttxt">
                     <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
