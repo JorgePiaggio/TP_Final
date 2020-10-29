@@ -8,16 +8,15 @@
   <main class="hoc container clear"> 
       <div class="content up">
         <h2 class="center page-title-variation "><?php echo $movie->getTitle()?></h2>
+        <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
           <form action="<?php echo FRONT_ROOT?>Movie/addMovieToDatabase" method="post">
             <div class="floating-label fl_right margin3 up2">
               <button type="submit" name="btn" value="<?php echo $movie->getTmdbID() ?>" class="btn btn2">Add</button>
             </div>
       </div>
-      <?php if($_SESSION && $_SESSION["role"] == 1){ ?>
-      
-      <div class="cardStyle">
-        </form>
+          </form>
         <?php } ?>
+        <div class="cardStyle">
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
           <div class="one_half first ">              
