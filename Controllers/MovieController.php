@@ -173,6 +173,21 @@
         }
 
 
+
+
+        public function showManageCatalogue(){
+           
+            #Validate::checkParameter($idCinema);
+            #$cinema=$this->cinemaDAO->search($idCinema);
+            $movieListInactive=$this->movieDAO->getAllStateZero();
+            $movieListActive=$this->movieDAO->getAllStateOne();
+            $genreList=$this->genreDAO->getAll();
+            #$cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
+            require_once(VIEWS_PATH."Manage-catalogue.php");
+        }
+
+
+
         /*agregar multiples peliculas a la BDD*/
         public function addMultipleMovies($movies=""){
             Validate::validateSession();
@@ -217,6 +232,26 @@
         }
 
 
+
+        public function changeState(){
+            #Validate::checkParameter($idMovie);
+            if($_POST){
+                $movies=$_POST["movies"];
+                foreach($movies as $id){
+                    $movie= $this->movieDAO->search($id);   
+                    
+                    if($movie->getState() == true){
+                        $this->movieDAO->setState($movie->getTmdbId(), intval(false));
+                    }else{
+                        $this->movieDAO->setState($movie->getTmdbId(), intval(true));
+                    }
+                }
+            }
+            $this->showManageCatalogue();
+        }
+
+
+
         /* construir objeto pelicula a traves del json q manda la API */
         public function constructMovie($jsonObject=""){
             #Validate::validateSession(); se necesita para el anonimo
@@ -233,6 +268,7 @@
             //$newMovie->setAdult($jsonObject["adult"]);
             $newMovie->setBackdropPath($jsonObject["backdrop_path"]);
             $newMovie->setOriginalLanguage($jsonObject["original_language"]);
+            $newMovie->setState(true);
             if(isset($jsonObject["homepage"])){
                 $newMovie->setHomepage($jsonObject["homepage"]);
             }

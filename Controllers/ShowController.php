@@ -34,7 +34,7 @@
         if($cinemaList){
         $idCinema=$cinemaList[0]->getIdCinema();
         $roomList = $this->roomDAO->getCinemaRooms($idCinema);
-        $movieList = $this->cinemaDAO->getBillboard($idCinema);
+        $movieList = $this->movieDAO->getAllStateOne();
         }
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
@@ -84,7 +84,7 @@
         $cinema = $this->cinemaDAO->search($idCinema);
         $cinemaList=$this->cinemaDAO->getAllActive();
         $roomList = $this->roomDAO->getCinemaRooms($idCinema);
-        $movieList = $this->cinemaDAO->getBillboard($idCinema);
+        $movieList = $this->movieDAO->getAllStateOne();
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
 

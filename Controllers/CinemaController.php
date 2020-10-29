@@ -41,10 +41,10 @@
         }
 
 
-        public function showBillboard(){
+    /*    public function showCatalogue(){
             $cinemaList = $this->cinemaDAO->getAllActive();
             require_once(VIEWS_PATH."Select-billboard.php");
-        }
+        } */
 
 
         public function showEditView(){
@@ -52,15 +52,6 @@
         }
 
 
-        public function showManageBillboard($idCinema=""){
-           
-            Validate::checkParameter($idCinema);
-            $cinema=$this->cinemaDAO->search($idCinema);
-            $movieList=$this->movieDAO->getAllNotInBillboard();
-            $genreList=$this->genreDAO->getAll();
-            $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
-            require_once(VIEWS_PATH."Manage-billboard.php");
-        }
 
         public function showAllCinemas(){
             $cinemaList = $this->cinemaDAO->getAllActive();
@@ -90,16 +81,6 @@
         }
 
 
-        public function removeFromBillboard($idCinema="",$movies){
-            Validate::checkParameter($idCinema);
-                
-                foreach($movies as $value){
-                     $this->cinemaDAO->stateMovie($idCinema,$value,"0");   
-                }
-                $this->msg="Removed correctly"; 
-             
-            $this->showManageBillboard($idCinema);
-        }
         
         
         public function add($name="", $street="", $number="", $phone="", $email="",$poster=""){

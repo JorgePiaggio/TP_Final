@@ -410,6 +410,7 @@
                 $movie->setHomepage($p["homepage"]);
                 $movie->setDirector($p["director"]);
                 $movie->setReview($p["review"]);
+                $movie->setState($p["state"]);
 
                 $genres=$this->getMovieGenres($movie);
                 $movie->setGenres($genres);

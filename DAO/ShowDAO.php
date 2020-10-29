@@ -627,6 +627,7 @@
             $movie->setHomepage($p["homepage"]);
             $movie->setDirector($p["director"]);
             $movie->setReview($p["review"]);
+            $movie->setState($p["state"]);
 
             $movie->setGenres($this->getMovieGenres($movie));
 

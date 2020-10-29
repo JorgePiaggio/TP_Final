@@ -113,7 +113,7 @@
               foreach ($cinemaList as $cinema){
                 if($indice % 4 == 0){?>
                   <li class="one_quarter first">
-                    <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                    <h6 class="heading font-x1 center"><?php if(strlen($cinema->getName()) > 13){
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
@@ -125,7 +125,7 @@
                   </li><?php 
                 }else{?>
                   <li class="one_quarter">
-                    <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                    <h6 class="heading font-x1 center"><?php if(strlen($cinema->getName()) > 13){
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
@@ -139,7 +139,7 @@
               }
             }else{?>
                 <li class="one_quarter first">
-                <h6 class="heading font-x2 center"><?php if(strlen($cinema->getName()) > 13){
+                <h6 class="heading font-x1 center"><?php if(strlen($cinema->getName()) > 13){
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1;?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>

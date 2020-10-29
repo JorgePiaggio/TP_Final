@@ -23,13 +23,14 @@ class Movie{
     private $director; 
     private $review;
     private $genres;
+    private $state;
 
     public function __construct(){
         $this->director = array();
         $this->genres = array();
     }
 
-    public function getTmdbID() {return $this->tmdbId;}
+    public function getTmdbId() {return $this->tmdbId;}
     public function getTitle(){return $this->title;}
     public function getOriginalTitle(){return $this->originalTitle;}
     public function getVoteAverage() {return $this->voteAverage;}
@@ -46,6 +47,8 @@ class Movie{
     public function getDirector(){return $this->director;}
     public function getReview(){return $this->review;}
     public function getGenres(){return $this->genres;}
+    public function getState(){return $this->state;} /* disponible para agregar a un show o fuera de catalogo */
+
 
     public function setTmdbId($id){$this->tmdbId=$id;}
     public function setTitle($title){$this->title=$title;}
@@ -65,6 +68,8 @@ class Movie{
     public function setReview($review){$this->review = $review;}
     public function setGenres($genres){$this->genres = $genres;} 
     public function addGenre( $genre){array_push($this->genres, $genre);}
+    public function setState($state){$this->state = $state;}
+
 }
 
 

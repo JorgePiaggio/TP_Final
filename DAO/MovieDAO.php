@@ -22,8 +22,8 @@ class MovieDAO implements IMovieDAO{
         
        
         if(!$exists){
-            $sql = "INSERT INTO ".$this->tableName." (idMovie,title,originalTitle,voteAverage,overview,releaseDate,popularity,videoPath,adult,posterPath,backDropPath,originalLanguage,runtime,homepage,director,review) 
-                                            VALUES (:idMovie,:title,:originalTitle,:voteAverage,:overview,:releaseDate,:popularity,:videoPath,:adult,:posterPath,:backDropPath,:originalLanguage,:runtime,:homepage,:director,:review)";
+            $sql = "INSERT INTO ".$this->tableName." (idMovie,title,originalTitle,voteAverage,overview,releaseDate,popularity,videoPath,adult,posterPath,backDropPath,originalLanguage,runtime,homepage,director,review, state) 
+                                            VALUES (:idMovie,:title,:originalTitle,:voteAverage,:overview,:releaseDate,:popularity,:videoPath,:adult,:posterPath,:backDropPath,:originalLanguage,:runtime,:homepage,:director,:review, :state)";
 
 
             $parameters["idMovie"] = $movie->getTmdbId();
@@ -43,6 +43,7 @@ class MovieDAO implements IMovieDAO{
             $parameters["review"] = $movie->getReview();
             $directors = implode(" - ", $movie->getDirector());
             $parameters["director"] = $directors;
+            $parameters["state"] = $movie->getState();
 
             try{
 
@@ -84,6 +85,30 @@ class MovieDAO implements IMovieDAO{
     }
 
 
+    /* agregar o quitar del catalogo */
+    public function setState($idMovie, $state){
+        
+        $exists=$this->search($idMovie);
+      
+        if($exists){
+            $sql = "UPDATE ".$this->tableName." set state=:state WHERE idMovie=:idMovie";
+
+            $parameters["state"] = $state;
+            $parameters["idMovie"] = $idMovie;
+
+            try{
+
+            $this->connection=Connection::getInstance();
+
+            $result=$this->connection->executeNonQuery($sql,$parameters);
+            
+            return $result;
+
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
+    }
 
 
     /* obtener todas las peliculas del DAO, activas o no */
@@ -124,13 +149,49 @@ class MovieDAO implements IMovieDAO{
 
 
 
-    /* obtener todas las peliculas del DAO, activas o no */
-    public function getAllNotInBillboard(){
+    /* obtener todas las peliculas del DAO, disponibles para shows */
+    public function getAllStateOne(){
         try
         {
             $movieList = array();
 
-            $query = "SELECT m.* FROM movies as m LEFT JOIN cinemaxmovies as cxm on m.idMovie = cxm.idMovie WHERE cxm.idMovie IS NULL or cxm.state = 0";
+            $query = "SELECT * FROM movies WHERE state = 1";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+                          
+            if($resultSet){
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($resultSet)){
+     
+            return $movieList; 
+        }else{
+            return null;
+        }
+    }
+
+
+
+    /* obtener todas las peliculas del DAO, dadas de baja logica */
+    public function getAllStateZero(){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM movies WHERE state = 0";
 
             $this->connection = Connection::GetInstance();
 
@@ -353,6 +414,7 @@ class MovieDAO implements IMovieDAO{
             $movie->setHomepage($p["homepage"]);
             $movie->setDirector($p["director"]);
             $movie->setReview($p["review"]);
+            $movie->setState($p["state"]);
 
             $genres=$this->getMovieGenres($movie);
             $movie->setGenres($genres);
