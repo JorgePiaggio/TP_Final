@@ -27,26 +27,26 @@ class UserController{
     }
 
     public function showLogin(){
-        require_once(VIEWS_PATH."login.php");
+        require_once(VIEWS_PATH."Users/User-login.php");
     }
 
     public function showProfile(){
         $user = $this->userDAO->search($_SESSION['loggedUser']);
-        require_once(VIEWS_PATH."User-profile.php");
+        require_once(VIEWS_PATH."Users/User-profile.php");
     }
 
     public function showRegister(){
-        require_once(VIEWS_PATH."register.php");
+        require_once(VIEWS_PATH."Users/User-register.php");
     }
 
     public function showEditView(){
-        require_once(VIEWS_PATH."User-profile.php");
+        require_once(VIEWS_PATH."Users/User-profile.php");
     }
 
     public function showSelectUser(){
         Validate::validateSession();
 
-        require_once(VIEWS_PATH."User-search.php");
+        require_once(VIEWS_PATH."Users/User-search.php");
     }
 
     public function showUserView($emailUser=""){
@@ -58,7 +58,7 @@ class UserController{
             $this->showSelectUser();
         }
         else{
-            require_once(VIEWS_PATH."User-view.php");    
+            require_once(VIEWS_PATH."Users/User-view.php");    
         }
         
     }
@@ -76,7 +76,7 @@ class UserController{
             $this->userReviewsDAO->remove($idRemove);
         }
         $messageList=$this->userReviewsDAO->getAll();
-        require_once(VIEWS_PATH."reviews.php");
+        require_once(VIEWS_PATH."Users/User-reviews.php");
     }
 
     public function login($email="",$pass=""){
