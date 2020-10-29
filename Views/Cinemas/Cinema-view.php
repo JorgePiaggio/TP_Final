@@ -1,3 +1,4 @@
+
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/roll.jpg');">
     <h2 class="page-title"><?php echo $cinema->getName() ?></h2>
     <main class="hoc container clear"> 
@@ -5,16 +6,18 @@
             <div class="one_half first ">  
                 <div class="one_half first">
                     <div>
-                        <p><h4>Address</h4><?php echo $cinema->getStreet() . " " .$cinema->getNumber()?></p>
+                        <p><h4>Address</h4><?php echo $cinema->getStreet() . " " .$cinema->getNumber();?></p>
                     </div><br>
                     <div>
-                        <p><h4>Phone</h4><?php echo $cinema->getPhone() ?></p>
+                        <p><h4>Phone</h4><?php echo $cinema->getPhone(); ?></p>
                     </div><br>
                     <div>
-                        <p><h4>Rooms</h4> </p>
-                        <?php foreach($roomList as $room){ ?>
-                            <p> <?php echo $room->getName(); ?> </p>
-               <?php    }?>
+                        <?php if($roomList){ ?>
+                            <p><h4>Rooms</h4> </p>
+                            <?php foreach($roomList as $room){ ?>
+                                <p> <?php echo" ■ ".$room->getName()." $".$room->getPrice(); ?> </p>
+                        <?php }      
+                        }?>
                     </div>
                 </div>
 
@@ -23,17 +26,16 @@
                         <p><h4>City-Country</h4>Mar del Plata-Argentina</p>
                     </div><br>
                     <div>
-                        <p><h4>Email</h4><?php echo $cinema->getEmail()?></p>
+                        <p><h4>Email</h4><?php echo $cinema->getEmail();?></p>
                     </div>    
                 </div>
                                 
-                <div class="one_half up">                 
-                    <img src="<?php echo $cinema->getPoster()?>" alt="">
+                <div class="one_half right">                 
+                    <img class="cinemapic2 brd" src="<?php echo $cinema->getPoster();?>" alt="">
                 </div>
             </div>  
         </div>
-    </main> 
-
+    </main>     
     <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
 <div class="wrapper row3 gradient">
     <h2 class="page-title">Billboard</h2>
