@@ -28,6 +28,21 @@
     }
 
 
+
+    /* mostrar cartelera completa */
+    public function showBillboard(){
+        $showList = $this->showDAO->getAllActive();
+        $movieList=array();
+        foreach($showList as $show){
+            if(!in_array($show->getMovie(), $movieList)) {
+                array_push($movieList,$show->getMovie());
+            }
+        }
+        require_once(VIEWS_PATH."Shows/Show-billboard.php");
+    }
+
+
+    /* vista para agregar funciones */
     public function showAddView(){
         $cinemaList = $this->cinemaDAO->getAllActive();
         $cinema=null;
@@ -40,6 +55,7 @@
     }
 
 
+    /* agregar show */
     public function add($idRoom, $idMovie, $date, $time){
         
         if($this->checkAvailability($idMovie, $idRoom, $date)){
@@ -79,8 +95,9 @@
     }
 
 
+    /*elegir cine para agregar show */
     public function selectCinema($idCinema){
-       
+
         $cinema = $this->cinemaDAO->search($idCinema);
         $cinemaList=$this->cinemaDAO->getAllActive();
         $roomList = $this->roomDAO->getCinemaRooms($idCinema);
@@ -119,17 +136,17 @@
 
     }
         
-    /* chequea q la funcion no este en una funcion en la fecha solicitada */
+    /* chequea q la pelicula no este en una funcion en la fecha solicitada */
     private function checkAvailability($idMovie, $idRoom, $date){
 
         $s=$this->showDAO->getByMovieByDay($idMovie, $date); /* saber si hay funcion de esa peli ese dia */
         
         if($s != null){
             foreach($s as $show){
-                if($show->getRoom()->getIdRoom() != $idRoom){ 
+                if($show->getRoom()->getIdRoom() != $idRoom){  
                     return false;
                 }else{
-                    return true;
+                    return true;    /* si la funcion es en la misma sala, se permite */
                 }
             }
         }else{

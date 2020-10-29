@@ -39,62 +39,59 @@
         }
     }  
 
-        /* Setea el turno según el horario de la función */
-        private function setShift($dateTime){
+    /* Setea el turno según el horario de la función */
+    private function setShift($dateTime){
 
-            $dateTime =$dateTime->format('H');
-           
-            $midday = 12;
-            $afternoon = 19;            
-            $night = 6;
-            $midnight=24;
-    
-            if($dateTime < $midday && $dateTime >= $night ){
-                return "Morning";
+        $dateTime =$dateTime->format('H');
+        
+        $midday = 12;
+        $afternoon = 19;            
+        $night = 6;
+        $midnight=24;
+
+        if($dateTime < $midday && $dateTime >= $night ){
+            return "Morning";
+        }else{
+            if($dateTime >= $midday && $dateTime <= $afternoon)
+            {
+                return "Afternoon";
             }else{
-                if($dateTime >= $midday && $dateTime <= $afternoon)
-                {
-                    return "Afternoon";
-                }else{
-                    if($dateTime > $afternoon && $dateTime < $midnight || $dateTime < $night ){
-                        return "Night";
-                    }
+                if($dateTime > $afternoon && $dateTime < $midnight || $dateTime < $night ){
+                    return "Night";
                 }
             }
         }
+    }
 
-    public function getAll(){
+
+
+    public function search($idShow){
         try
-        {
-            $showList = array();
-
+        {   
             $query = "SELECT * FROM shows s 
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
-            INNER JOIN cinemas c ON r.idCinema = c.idCinema";
-
-            $this->connection = Connection::getInstance();
-
-            $result = $this->connection->execute($query);
-          
-            if($result){
-                foreach($result as $value){
-                    $mapping = $this->mapShow($value);  
-                    array_push($showList, $mapping);
-                }
-                return $showList;
-            }
-            else{
-                return null;
-            }
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE s.idShow= :idShow";
             
+            $parameters["idShow"]=$idShow;
+            
+            $this->connection = Connection::getInstance();
+            
+            $result = $this->connection->execute($query,$parameters);
         }
         catch(\PDOException $ex)
         {
             throw $ex;
         }
-        
+
+        if(!empty($result)){
+            return $this->mapShow($result[0]);
+        }else{
+            return null;
+        }
     }
+
 
     protected function getMovieGenres($movie){
         try{
@@ -131,6 +128,43 @@
         }
         
     }
+
+
+        
+    public function getAll(){
+        try
+        {
+            $showList = array();
+
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema";
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query);
+          
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
+            
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+        
+    }
+
+
 
     /* Retorna las funciones activas de la semana */
     public function getAllActive(){
@@ -171,6 +205,8 @@
 
     }
 
+
+    /* Retorna las funciones que ya pasaron */
     public function getAllInactive(){
         try
         {
@@ -213,33 +249,7 @@
      
     }
 
-    public function search($idShow){
-        try
-        {   
-            $query = "SELECT * FROM shows s 
-            INNER JOIN movies m ON s.idMovie = m.idMovie 
-            INNER JOIN rooms r ON s.idRoom = r.idRoom 
-            INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE s.idShow= :idShow";
-            
-            $parameters["idShow"]=$idShow;
-            
-            $this->connection = Connection::getInstance();
-            
-            $result = $this->connection->execute($query,$parameters);
-        }
-        catch(\PDOException $ex)
-        {
-            throw $ex;
-        }
-
-        if(!empty($result)){
-            return $this->mapShow($result[0]);
-        }else{
-            return null;
-        }
-    }
-
+    /* retorna peliculas por sala por fecha */
     public function getShowbyTimebyRoom($idRoom,$date){
         $showList = array();
 
@@ -273,12 +283,10 @@
         {
             throw $ex;
         }
-
-
     }
 
 
-
+    /* retorna peliculas por cine, max una semana */
     public function getByCinema($idCinema){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -317,6 +325,7 @@
     }
 
 
+    /* retorna funciones de una pelicula en un cine, max una semana */
     public function getByCinemaByMovie($idCinema, $idMovie){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -436,7 +445,7 @@
         }
 
 
-
+    /* por pelicula por cine por turno */
     public function getByCinemaByMovieByShift($idCinema, $idMovie, $shift){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -478,6 +487,7 @@
       
     }
 
+    
     protected function getBillboard($idCinema){
         try
         {

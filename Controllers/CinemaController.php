@@ -72,11 +72,11 @@
         public function addToBillboard($idCinema="",$movie){
             Validate::checkParameter($idCinema);
          
-                if(!$this->cinemaDAO->searchMovie($idCinema,$movie)){
-                    $this->cinemaDAO->addMovie($idCinema,$movie);
+                if(!$this->cinemaDAO->searchMovie($idCinema,$movie->getTmdbId())){
+                    $this->cinemaDAO->addMovie($idCinema,$movie->getTmdbId());
                 }
                 else{
-                    $this->cinemaDAO->stateMovie($idCinema,$movie,"1"); 
+                    $this->cinemaDAO->stateMovie($idCinema,$movie->getTmdbId(),"1"); 
                 }
                 
             }
@@ -84,8 +84,8 @@
 
         public function removeToBillboard($idCinema="",$movie){
             Validate::checkParameter($idCinema);
-            if($this->cinemaDAO->searchMovie($idCinema,$movie)){
-                $this->cinemaDAO->stateMovie($idCinema,$movie,"0"); 
+            if($this->cinemaDAO->searchMovie($idCinema,$movie->getTmdbId())){
+                $this->cinemaDAO->stateMovie($idCinema,$movie->getTmdbId(),"0"); 
             }
         }
 
@@ -196,7 +196,7 @@
             $cinemaList=$this->cinemaDAO->getAllActive();
            
             foreach($cinemaList as $cinema){
-                $shows=$this->showDAO->getShowbyCinema($cinema->getIdCinema());
+                $shows=$this->showDAO->getByCinema($cinema->getIdCinema());
                 if($shows){
                     
                     foreach($shows as $show){
@@ -211,12 +211,12 @@
             $movies=$this->movieDAO->getAll();
             $cinemaList=$this->cinemaDAO->getAllActive();
             if($movies){
-            foreach($cinemaList as $cinema){
-                foreach($movies as $movie){
-                $this->removeToBillboard($cinema->getIdCinema(),$movie);
+                foreach($cinemaList as $cinema){
+                    foreach($movies as $movie){
+                    $this->removeToBillboard($cinema->getIdCinema(),$movie);
+                    }
                 }
             }
-        }
         }
     
 
