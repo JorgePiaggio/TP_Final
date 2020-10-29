@@ -1,3 +1,4 @@
+<style></style>
 <div class="wrapper row3 gradient">
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 
@@ -26,7 +27,7 @@
                 if(!is_array($movieList)){ ?>
                   <li class="one_quarter first anim1 slideDown">                                       <!--UNA SOLA PELICULA EN LISTA -->
                   <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList->getTmdbID()?>">
-                  <img src="<?php echo $movieList->getPoster()?>" alt=""></a>         
+                  <img class="posterSmall" src="<?php echo $movieList->getPoster()?>" alt=""></a>         
                   <p class="p-title"><?php echo $movieList->getTitle()?></p>
                   <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movieList->getVoteAverage()?></p>
                   <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movieList->getGenres())){
@@ -42,7 +43,7 @@
                     if($indice % 4 == 0){?>
                     <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
                       <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
+                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>         
                       <p class="p-title"><?php echo $movie->getTitle()?></p>
                       <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                       <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
@@ -57,7 +58,7 @@
                     <?php }else{ ?>
                     <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
                       <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""></a>
+                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>
                       <p class="p-title"><?php echo $movie->getTitle()?></p>
                       <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                       <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){

@@ -13,7 +13,7 @@ class Validate{
 
     /* Si llegan parametros vacíoss, redirige al home */
     static public function checkParameter($value=""){
-        if($value==""){
+        if($value=="" || empty($value)){
             header("location:../Home/index");
             
         }

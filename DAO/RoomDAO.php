@@ -52,8 +52,14 @@
 
                 $resultSet = $this->connection->execute($query);
                 
+                            
                 if($resultSet){
-                    $roomList=$this->map($resultSet);
+                    $mapping= $this->map($resultSet);
+                    if(!is_array($mapping)){
+                        array_push($roomList,$mapping);
+                    }else{
+                    $roomList=$mapping;
+                    }
                 }
 
                 
@@ -82,7 +88,12 @@
                 $resultSet = $this->connection->execute($query,$parameters);
                 
                 if($resultSet){
-                    $roomList=$this->map($resultSet);
+                    $mapping= $this->map($resultSet);
+                    if(!is_array($mapping)){
+                        array_push($roomList,$mapping);
+                    }else{
+                    $roomList=$mapping;
+                    }
                 }
 
                 
@@ -107,6 +118,28 @@
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and name=:name";
                 $parameters["idCinema"]=$idCinema;
                 $parameters["name"]=$name;
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);              
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($resultSet)){
+                return $this->map($resultSet);
+            }else{
+                return null;
+            }
+        }
+
+        public function searchById($idRoom){
+            try
+            {
+                $query = "SELECT * FROM ".$this->tableName." WHERE idRoom=:idRoom";
+                $parameters["idRoom"]=$idRoom;
+                
                 $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);              
@@ -148,44 +181,7 @@
             }
         }
 
-        protected function map($value){
-            $value=is_array($value) ? $value: array();
-            
-            $result= array_map(function ($p){
-                 $room=new Room();
-                $room->setIdRoom($p["idRoom"]);
-                $room->setType($p["type"]);
-                $room->setCapacity($p["capacity"]);
-                $room->setPrice($p["price"]);
-                $room->setName($p["name"]);
-                $room->setCinema($this->searchCinema($p["idCinema"]));
-
-                return $room;
-            },$value);
- 
-            return count($result)>1 ? $result: $result["0"];
-        }
-
-        protected function mapCinema($value){
-            $value=is_array($value) ? $value: array();
-            
-            $result= array_map(function ($p){
-                 $cinema=new Cinema();
-                 $cinema->setIdCinema($p["idCinema"]);
-                 $cinema->setState($p["state"]);
-                 $cinema->setName($p["name"]);
-                 $cinema->setStreet($p["street"]);
-                 $cinema->setNumber($p["number"]);
-                 $cinema->setEmail($p["email"]);
-                 $cinema->setPhone($p["phone"]);
-                 $cinema->setPoster($p["poster"]);
-                 $cinema->setBillboard($this->getBillboard($p["idCinema"]));
- 
-                return $cinema;
-            },$value);
- 
-            return count($result)>1 ? $result: $result["0"];
-        }
+       
 
         public function getBillboard($idCinema){
             try
@@ -221,7 +217,7 @@
         }
 
         protected function getMovieGenres($movie){
-
+        try{
             $genreList= array();
 
             $query = "SELECT g.idGenre, g.name FROM moviesxgenres AS mxg JOIN genres AS g ON mxg.idGenre=g.idGenre WHERE mxg.idMovie=:idMovie";
@@ -230,12 +226,21 @@
 
             $this->connection = Connection::getInstance();
 
-            $result= $this->connection->execute($query, $parameters);
+            $resultSet= $this->connection->execute($query, $parameters);
             
-            if(count($result) > 0){
-                $genreList= $this->mapGenre($result);
+            if($resultSet){
+                $mapping= $this->mapGenre($resultSet);
+                if(!is_array($mapping)){
+                    array_push($genreList,$mapping);
+                }else{
+                $genreList=$mapping;
+                }
             }
-            
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
 
             return $genreList;
     }
@@ -283,6 +288,47 @@
         }
     }
 
+
+    protected function map($value){
+        $value=is_array($value) ? $value: array();
+        
+        $result= array_map(function ($p){
+             $room=new Room();
+            $room->setIdRoom($p["idRoom"]);
+            $room->setType($p["type"]);
+            $room->setCapacity($p["capacity"]);
+            $room->setPrice($p["price"]);
+            $room->setName($p["name"]);
+            $room->setCinema($this->searchCinema($p["idCinema"]));
+
+            return $room;
+        },$value);
+
+        return count($result)>1 ? $result: $result["0"];
+    }
+
+    protected function mapCinema($value){
+        $value=is_array($value) ? $value: array();
+        
+        $result= array_map(function ($p){
+             $cinema=new Cinema();
+             $cinema->setIdCinema($p["idCinema"]);
+             $cinema->setState($p["state"]);
+             $cinema->setName($p["name"]);
+             $cinema->setStreet($p["street"]);
+             $cinema->setNumber($p["number"]);
+             $cinema->setEmail($p["email"]);
+             $cinema->setPhone($p["phone"]);
+             $cinema->setPoster($p["poster"]);
+             $cinema->setBillboard($this->getBillboard($p["idCinema"]));
+
+            return $cinema;
+        },$value);
+
+        return count($result)>1 ? $result: $result["0"];
+    }
+
+
     protected function mapMovie($value){
         $value=is_array($value) ? $value: array();
         
@@ -317,7 +363,7 @@
             return null;
         }
 
-       }
+    }
 
     
     protected function mapGenre($value){
@@ -333,9 +379,8 @@
 
         return count($result) > 1 ? $result: $result["0"];
 
-       }
-
+    }
         
-    }             
+}             
 
 ?>

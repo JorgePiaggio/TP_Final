@@ -26,6 +26,7 @@ File: Layout CSS
 .up3{margin-top:-100px;}
 .up4{margin-top:-105px;}
 .up5{margin-top: -1587px; margin-right: -300px;}
+.up6{margin-top: -60px;}
 .down{margin-top:60px;}
 
 /* Page Intro
@@ -165,7 +166,7 @@ h1.logo{font-family: 'Faster One', cursive;}
 #mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
 #mainav li:last-child{margin-right:0;}
 #mainav li li{width:100%; margin:0;}
-#mainav li a{display:block; padding:30px 130px;}
+#mainav li a{display:block; padding:30px 30px;}
 /*#mainav li li a{border:solid; border-width:0 0 0.1px 0;}*/
 #mainav .drop{padding-left:0px;}
 #mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;border-radius: 25px; width:70%;} /*BOTONES MENU NAV*/
@@ -269,11 +270,11 @@ td{border-width:0 1px;}
 	padding: 20px 20px;
 	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
 }
-.cardStyle2 a{
+.cardStyle a{
 	font-style: none;
 	color:rgb(167, 164, 164); 
 }
-.cardStyle2 h4, .cardStyle3 h4{
+.cardStyle h4, .cardStyle3 h4{
 	color: white;
 }
 .cardStyle.mrg_btm{
@@ -466,11 +467,13 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 /* Navigation */
 #mainav li a{color:#FF5723;}
-#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:rgba(232, 85, 31, 0.776); background-color:inherit;}
-#mainav li li a, #mainav .active li a{color:black; background-color:rgba(232, 85, 31, 0.776);}
-#mainav li li:hover > a{color:black; background-color:rgba(232, 85, 31, 0.776);}
+#mainav .drop{color:rgba(232, 85, 31, 0.776);}
+
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:rgba(232, 85, 31, 0.833); background-color:inherit;}
+#mainav li li a, #mainav .active li a{color:black; background-color:rgba(232, 85, 31, 0.833);}
+#mainav li li:hover > a{color:black; background-color:rgba(232, 85, 31, 0.833);}
 #mainav form select{color:#FFFFFF; background-color:#000000; border-color:rgba(136,136,136,.5);/* #888888 */}
-#mainav li li:hover > a{color:black; background-color:rgba(239, 72, 11, 0.776);}
+#mainav li li:hover > a{color:black; background-color:rgba(231, 79, 24, 0.833);}
 
 #breadcrumb a{color:inherit; background-color:inherit;}
 #breadcrumb li:last-child a{color:#FF5723;}

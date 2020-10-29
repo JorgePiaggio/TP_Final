@@ -3,24 +3,27 @@
     <div id="logo" class="fl_left">
       <a href="<?php echo FRONT_ROOT?>Home/index">
         <svg width="500" height="61" viewBox="400 0 500 61" >
-            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">MoviePass</text>
+            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">Moviepass</text>
         </svg>
       </a>
     </div>
-    <nav id="mainav" class="fl_right">
+    <nav id="mainav" class="hoc fl_right">
         <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
-        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>  
+        <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard (not ready)</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-          <?php if($_SESSION){?>
-        
-          <!----------------- MENU USUARIO -----------------------> 
-          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
-          <?php }else{ ?>
-          <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
-          <?php }?>
-          <ul>
+        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
 
+
+        
+          <!----------------- MENU USUARIO (ICONO DEL CHABONCITO)-----------------------> 
+          <?php if($_SESSION){?>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
+          <?php }else{ ?>
+        <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
+          <?php }?>
+
+          <ul>
             <?php if($_SESSION){   ?>
             <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
               
@@ -32,15 +35,20 @@
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showBillboard">Billboard</a></li>
               </ul>
             </li>
+            <li class="active"><a>Movies</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+              </ul>
+            </li>
             <li class="active"><a>Rooms</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List / Edit</a></li>
               </ul>
             </li>
-            <li class="active"><a>Movies</a>
+            <li class="active"><a>Shows</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Show/showAddView">Add</a></li>
               </ul>
             </li>
              <li class="active"><a>Users</a>
@@ -63,6 +71,8 @@
             <?php } ?>
           </ul>
         </li>
+        <li><a class="" href="#"><img src=""></a></li>
+
       </ul>
     </nav>
   </header>

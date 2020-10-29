@@ -32,7 +32,7 @@
                       <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
                     </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt=""> 
+                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""> 
                     </a>         
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
@@ -52,7 +52,7 @@
                       <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
                     </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img src="<?php echo $movie->getPoster()?>" alt="">
+                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt="">
                     </a>
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>

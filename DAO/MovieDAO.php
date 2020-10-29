@@ -44,7 +44,6 @@ class MovieDAO implements IMovieDAO{
             $directors = implode(" - ", $movie->getDirector());
             $parameters["director"] = $directors;
 
-
             try{
 
             $this->connection=Connection::getInstance();
@@ -65,7 +64,7 @@ class MovieDAO implements IMovieDAO{
 
 
 
-    private function addGenresXMovies($genres, $IdMovie){
+   public function addGenresXMovies($genres, $IdMovie){
        
         $sql = "INSERT INTO moviesxgenres (idMovie,idGenre) VALUES (:idMovie,:idGenre)";
         $result=null;
@@ -98,9 +97,15 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
-            
-                          
-            $movieList = $this->map($resultSet);
+                        
+            if($resultSet){
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
+            }
             
         }
         catch(\PDOException $ex)
@@ -116,6 +121,45 @@ class MovieDAO implements IMovieDAO{
         }
     }
 
+
+
+
+    /* obtener todas las peliculas del DAO, activas o no */
+    public function getAllNotInBillboard(){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT m.* FROM movies as m LEFT JOIN cinemaxmovies as cxm on m.idMovie = cxm.idMovie WHERE cxm.idMovie IS NULL or cxm.state = 0";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query);
+                          
+            if($resultSet){
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($resultSet)){
+     
+            return $movieList; 
+        }else{
+            return null;
+        }
+    }
+
+
+
     /* Retorna las mejores 20 peliculas según valoración */
     public function getBestRated(){
         try
@@ -127,14 +171,24 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
+
+    
         }    
         catch(\PDOException $ex){
             throw $ex;
         }
 
+        if($resultSet){
+            $mapping= $this->map($resultSet);
+            if(!is_array($mapping)){
+                array_push($movieList,$mapping);
+            }else{
+            $movieList=$mapping;
+            }
+        }
+
         if(!empty($resultSet)){
-     
-            return $movieList= $this->map($resultSet); #??????? 
+            return $movieList; 
         }else{
             return null;
         }
@@ -153,17 +207,26 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
-
-            #var_dump($resultSet);
+            
+            
+         
         }
         catch(\PDOException $ex)
         {
             throw $ex;
         }
 
+        if($resultSet){
+            $mapping= $this->map($resultSet);
+            if(!is_array($mapping)){
+                array_push($movieList,$mapping);
+            }else{
+            $movieList=$mapping;
+            }
+        }
+
         if(!empty($resultSet)){
-            
-            return $movieList= $this->map($resultSet);
+            return $movieList; 
         }else{
             return null;
         }
@@ -194,6 +257,7 @@ class MovieDAO implements IMovieDAO{
         }
     }
 
+
       /* retorna las peliculas por genero*/
     public function getByGenre($idGenre){
         try
@@ -206,6 +270,15 @@ class MovieDAO implements IMovieDAO{
             $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query, $parameters);
+
+            if($resultSet){
+                $mapping= $this->map($resultSet);
+                if(!is_array($mapping)){
+                    array_push($movieList,$mapping);
+                }else{
+                $movieList=$mapping;
+                }
+            }
         }
         catch(\PDOException $ex)
         {
@@ -213,12 +286,51 @@ class MovieDAO implements IMovieDAO{
         }
         
         if(!empty($resultSet)){
-            return $this->map($resultSet);
+            return $movieList;
         }else{
             return null;
         }
     }
 
+
+    
+
+
+    protected function getMovieGenres($movie){
+        try{
+            $genreList= array();
+
+            $query = "SELECT g.idGenre, g.name FROM moviesxgenres AS mxg JOIN genres AS g ON mxg.idGenre=g.idGenre WHERE mxg.idMovie=:idMovie";
+
+            $parameters["idMovie"] = $movie->getTmdbId();
+
+            $this->connection = Connection::getInstance();
+
+            $result= $this->connection->execute($query, $parameters);
+            
+       
+            if($result){
+                $mapping= $this->mapGenre($result);
+                if(!is_array($mapping)){
+                    array_push($genreList,$mapping);
+                }else{
+                $genreList=$mapping;
+                }
+            }
+
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+
+        if(!empty($result)){
+            return $genreList;
+        }else{
+            return null;
+        }
+        
+    }
 
     protected function map($value){
         $value=is_array($value) ? $value: array();
@@ -254,27 +366,6 @@ class MovieDAO implements IMovieDAO{
             return null;
         }
         
-    }
-
-
-    protected function getMovieGenres($movie){
-
-            $genreList= array();
-
-            $query = "SELECT g.idGenre, g.name FROM moviesxgenres AS mxg JOIN genres AS g ON mxg.idGenre=g.idGenre WHERE mxg.idMovie=:idMovie";
-
-            $parameters["idMovie"] = $movie->getTmdbId();
-
-            $this->connection = Connection::getInstance();
-
-            $result= $this->connection->execute($query, $parameters);
-            
-            if(count($result) > 0){
-                $genreList= $this->mapGenre($result);
-            }
-            
-
-            return $genreList;
     }
 
 

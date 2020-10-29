@@ -10,10 +10,12 @@
 	use Config\Autoload as Autoload;
 	use Config\Router 	as Router;
 	use Config\Request 	as Request;
-		
+	use DAO\CinemaDAO as CinemaDAO;
+
 	Autoload::start();
 
 	session_start();
+
 
 	require_once(VIEWS_PATH."header.php");
 	require_once(VIEWS_PATH."nav-bar.php");

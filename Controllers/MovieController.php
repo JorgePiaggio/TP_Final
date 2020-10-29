@@ -17,6 +17,7 @@
             $this->movieDAO = new MovieDAO();
             $this->genreDAO = new GenreDAO();
             $this->msg = null;
+            $this->addNullGenre();
         }
 
 
@@ -32,25 +33,27 @@
         }
 
 
-        /*Obtener pagina de pelicula directamente de la API*/
-        public function showMoviePage($page=1,$language="en-US"){
-            Validate::validateSession();
-
-            $allGenre=$this->getAllGenre();
-            $actualGenre = null; 
-            $this->updateGenreList();                                 
-            $genreList=$this->genreDAO->getAll();
-            $movieList=$this->getNowPlayingMovies($page,$language);
-            require_once(VIEWS_PATH."Movies/Movie-list-admin.php");
-        }
-
-
         public function showFilterMovies(){
             $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
+    
 
-        
+        public function filterByGenre($idGenre){
+            $actualGenre = null;
+            if($idGenre!=-1){
+            $allGenre=$this->getAllGenre();
+            $movieList=$this->movieDAO->getByGenre($idGenre);
+            $genreList=$this->genreDAO->getAll();
+            $actualGenre=$this->genreDAO->search($idGenre);
+
+            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
+            }else{
+                $this->showAllMovies();
+            }
+        }
+    
+
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
 
@@ -74,18 +77,16 @@
         }
 
 
-        public function filterByGenre($idGenre){
-            $actualGenre = null;
-            if($idGenre!=-1){
-            $allGenre=$this->getAllGenre();
-            $movieList=$this->movieDAO->getByGenre($idGenre);
-            $genreList=$this->genreDAO->getAll();
-            $actualGenre=$this->genreDAO->search($idGenre);
+        /*Obtener pagina de pelicula directamente de la API*/
+        public function showMoviePage($page=1,$language="en-US"){
+            Validate::validateSession();
 
-            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
-            }else{
-                $this->showAllMovies();
-            }
+            $allGenre=$this->getAllGenre();
+            $actualGenre = null; 
+            $this->updateGenreList();                                 
+            $genreList=$this->genreDAO->getAll();
+            $movieList=$this->getNowPlayingMovies($page,$language);
+            require_once(VIEWS_PATH."Movies/Movie-list-admin.php");
         }
 
 
@@ -171,10 +172,11 @@
             return $movies;
         }
 
+
         /*agregar multiples peliculas a la BDD*/
         public function addMultipleMovies($movies=""){
             Validate::validateSession();
-            Validate::checkParameter($tmdbId);
+            Validate::checkParameter($movies);
 
             if($movies){
                 foreach($movies as $idMovie){
@@ -186,6 +188,7 @@
             }
             $this->showMoviePage();
         }
+
 
         /* agregar peliculas a la BDD */
         public function addMovieToDatabase($tmdbId=""){
@@ -214,11 +217,9 @@
         }
 
 
-
-
         /* construir objeto pelicula a traves del json q manda la API */
         public function constructMovie($jsonObject=""){
-            Validate::validateSession();
+            #Validate::validateSession(); se necesita para el anonimo
             Validate::checkParameter($jsonObject);
 
             $newMovie = new Movie();
@@ -266,6 +267,10 @@
                             $newMovie->addGenre($newGenre);
                 }    
             }
+            if(empty($newMovie->getGenres())){     /* si la pelicula no tiene genero se setea en null para q no rompa las pelotas */
+                $newMovie->addGenre($this->addNullGenre());
+            }
+
             return $newMovie;
         }
 
@@ -309,6 +314,13 @@
             return $all;
         }
 
-      
+        
+        private function addNullGenre(){
+            $null= new Genre();
+            $null->setName("Undefined");
+            $null->setId(-33);
+            $this->genreDAO->add($null);
+            return $null;
+        }
 }
 ?>

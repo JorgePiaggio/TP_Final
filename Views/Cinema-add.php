@@ -28,7 +28,7 @@
                                    <span class="highlight"></span><label for="">Email</label>
                               </div>
                               <div class="floating-label">
-                                   <input type="text" name="img" placeholder=" " class="floating-input" >
+                                   <input type="text" name="img" placeholder="http://www.example.com/image.jpg " class="floating-input" >
                                    <span class="highlight"></span><label for="">Image url (Optional)</label>
                               </div>
                               <br><br>

@@ -5,8 +5,8 @@
                          <div class="floating-label-form">
                          <div class="floating-label">
                                   <select name="selection cinema" class="selection">
-                                      <?php foreach($cinemaList as $cinema){ ?>
-                                      <option value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
+                                      <?php for($i=0; $i<count($cinemaList); $i++){ ?>
+                                      <option value="<?php echo $cinemaList[$i]->getIdCinema(); ?>"><?php echo $cinemaList[$i]->getName(); ?></option>
 
                                       <?php }?>
                                     </select>
@@ -20,3 +20,4 @@
                
           </div>
 </main>
+
