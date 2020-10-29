@@ -103,7 +103,7 @@
       </div>
   </main>
 </div>
-<!-- ###########################################   OUR CINEMAS  ##################################################### -->
+<!-- #########################################################   OUR CINEMAS  ##################################################### -->
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/christian-wiediger-AEeoY_aqvNk-unsplash.jpg');">
 <h2 class="page-title">Our Cinemas</h2>  
   <section class="hoc container clear"> 

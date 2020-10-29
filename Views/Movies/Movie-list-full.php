@@ -3,7 +3,7 @@
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 
     <div class="content" > 
-           <!-- ####################################### OPTION GENRES ######################################################### -->
+           <!-- ################################################ OPTION GENRES ###################################################### -->
            <form action="<?php echo FRONT_ROOT?>Movie/filterByGenre" method="post" class= "genreselector">
               <select name="Genres" class=" selection" onchange="this.form.submit()" id="genre">
           <?php if($actualGenre){?>
@@ -18,7 +18,7 @@
             <?php } ?> 
             </select>
         </form>
-         <!-- ####################################### MOVIE GALLERY ######################################################### -->
+         <!-- ################################################# MOVIE GALLERY ######################################################### -->
       <div id="gallery">
         <figure>
           <ul class="nospace clear">

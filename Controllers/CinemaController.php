@@ -6,15 +6,17 @@
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\MovieDAO as MovieDAO;
     use DAO\GenreDAO as GenreDAO;
+    use DAO\RoomDAO as RoomDAO;
     use Config\Validate as Validate;
 
  
-    Validate::validateSession();
+    #Validate::validateSession();
  
     class CinemaController{
         private $cinemaDAO;
         private $movieDAO;
         private $genreDAO;
+        private $roomDAO;
         private $msg;
     
     
@@ -22,10 +24,11 @@
             $this->cinemaDAO = new CinemaDAO(); 
             $this->movieDAO = new MovieDAO(); 
             $this->genreDAO = new GenreDAO(); 
+            $this->roomDAO = new RoomDAO();
             $this->msg = null;
         }
 
-
+        
         public function showAddView(){
             require_once(VIEWS_PATH."Cinema-add.php");
         }
@@ -58,7 +61,19 @@
             $cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
             require_once(VIEWS_PATH."Manage-billboard.php");
         }
-    
+
+        public function showAllCinemas(){
+            $cinemaList = $this->cinemaDAO->getAllActive();
+            #var_dump($cinemaList);      
+            require_once(VIEWS_PATH."Cinemas/Cinema-list-full.php");
+        }
+        
+        public function showCinema($idCinema){
+            $cinema = $this->cinemaDAO->search($idCinema);
+            $movieList = $this->cinemaDAO->getBillboard($idCinema);
+            $roomList = $this->roomDAO->getCinemaRooms($idCinema);      
+            require_once(VIEWS_PATH."Cinemas/Cinema-view.php");
+        }
 
         public function addToBillboard($idCinema="",$movies){
             Validate::checkParameter($idCinema);

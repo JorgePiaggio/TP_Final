@@ -235,6 +235,7 @@ td{border-width:0 1px;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
 .cinemapic{width:auto; height: 250px;}
+.cinemapic2{max-width: max-content; ; height: 260px;}
 
 /*Promo image
 --------------------------------------------------------------------------------------------------------------- */
@@ -393,6 +394,8 @@ svg{display: inline;}
 	padding: 20px 20px;
 	overflow:hidden; text-overflow: ellipsis;  
 }
+
+.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; }
 
 
 
@@ -587,5 +590,11 @@ table a, #comments a{background-color:inherit;}
 	#pageintro li article{max-width:none; width:100%;}
 	#pageintro li .heading{font-size:2rem;}
 }
+
+#map {
+	height: 500px;
+	width: 100%;
+}
+
 
 /*Selection */

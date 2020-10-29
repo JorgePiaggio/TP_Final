@@ -12,7 +12,7 @@
       <ul class="clear">         
         <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard (not ready)</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-        <li><a href="<?php echo FRONT_ROOT?>pagina de cines">Cinemas</a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
 
 
         

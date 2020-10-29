@@ -94,7 +94,7 @@ class MovieDAO implements IMovieDAO{
 
             $query = "SELECT * FROM ".$this->tableName;
 
-            $this->connection = Connection::GetInstance();
+            $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
                         

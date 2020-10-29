@@ -52,6 +52,7 @@
 
                 $resultSet = $this->connection->execute($query);
 
+
                 if($resultSet){
                     $mapping= $this->map($resultSet);
                     if(!is_array($mapping)){
@@ -202,7 +203,7 @@
             {
                 $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email, poster=:poster WHERE idCinema=:idCinema";
 
-                $this->connection = Connection::getInstance();
+                
                 $parameters["idCinema"]=$cinema->getIdCinema();
                 $parameters["state"]=$cinema->getState();
                 $parameters["name"]=$cinema->getName();
@@ -211,6 +212,8 @@
                 $parameters["email"]=$cinema->getEmail();
                 $parameters["phone"]=$cinema->getPhone();
                 $parameters["poster"]=$cinema->getPoster();
+
+                $this->connection = Connection::getInstance();
 
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
                 return $rowCant;
@@ -225,10 +228,13 @@
         public function stateMovie($idCinema,$idMovie,$state){
             try{
                 $query = "UPDATE cinemaxmovies set state=:state WHERE idCinema=:idCinema AND idMovie=:idMovie";  
-                $this->connection = Connection::getInstance();
+                
                 $parameters["idCinema"]=$idCinema;
                 $parameters["idMovie"]=$idMovie;
                 $parameters["state"]=$state;
+
+                $this->connection = Connection::getInstance();
+
                 $rowCant=$this->connection->executeNonQuery($query,$parameters);
                     return $rowCant;
                 }
