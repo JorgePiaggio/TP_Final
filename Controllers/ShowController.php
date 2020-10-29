@@ -38,6 +38,7 @@
                 array_push($movieList,$show->getMovie());
             }
         }
+        #var_dump($movieList);
         require_once(VIEWS_PATH."Shows/Show-billboard.php");
     }
 

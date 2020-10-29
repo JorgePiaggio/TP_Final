@@ -1,4 +1,4 @@
-<div class="container background-pic gradient">  
+<div class="container background-pic css-selector ">  
                        <!------------------------------------------------ CONTENT ------------------------------------------------>
   <h2 class="page-title up2">Billboard</h2>
     <main class="hoc container clear" > 
@@ -8,7 +8,7 @@
               <?php $indice=0;
                   foreach($movieList as $movie){
                       if($indice % 3 == 0){?>
-        
+                      
                         <!------------------------------------------------ PRIMER TERCIO ------------------------------------------->
         
                         <div class="one_third first">
@@ -16,7 +16,7 @@
                             
                           
                             <div class="">
-                              <img class="" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                              <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
                             </div>
           
                            <!-- <div class="one_half">
@@ -29,13 +29,24 @@
                             </div>-->
           
                             <div>
+                              <button type="" class="notCollapsible"><?php echo $movie->getGenres()[0]->getName()?></button>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
-                                <a href=""><p>Lorem ipsum...</p></a>
-                                <a href=""><p>Lorem ipsum...</p></a>
-                                <a href=""><p>Lorem ipsum...</p></a>
+                                <?php foreach($showList as $show){
+                                        if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                          <a href="">
+                                            <p class="p_orange">
+                                              <?php echo $show->getRoom()->getCinema()->getName()?>
+                                            </p> <hr>
+                                            <p class="p_white">
+                                              <?php echo $show->getDateTime();                        ?>
+                                            </p>
+                                          </a><?php 
+                                        }
+                                      }?> 
                               </div> 
                             </div>
+
                           </div>
                         </div>
         
@@ -48,7 +59,7 @@
                           <div class="cardStyle mrg_btm">
             
                             <div class="">
-                              <img class="" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                              <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
                             </div>
             
                              <!-- <div class="one_half">
@@ -61,11 +72,21 @@
                             </div>-->
             
                             <div>
+                              <button type="" class="notCollapsible"><?php echo $movie->getGenres()[0]->getName()?></button>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
-                                <a href=""><p>Lorem ipsum...</p></a>
-                                <a href=""><p>Lorem ipsum...</p></a>
-                                <a href=""><p>Lorem ipsum...</p></a>
+                              <?php foreach($showList as $show){
+                                        if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                          <a href="">
+                                            <p class="p_orange">
+                                              <?php echo $show->getRoom()->getCinema()->getName()?>
+                                            </p> <hr>
+                                            <p class="p_white">
+                                              <?php echo $show->getDateTime();                        ?>
+                                            </p>
+                                          </a><?php 
+                                        }
+                                      }?> 
                               </div> 
                             </div>
                             </div>
@@ -105,10 +126,22 @@ for (i = 0; i < coll.length; i++) {
 
 
 <style> 
+.notCollapsible {
+  background-color: black;
+  color: #FF5723;
+  cursor: normal;
+  padding: 18px;
+  width:100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+}
 
 .collapsible {
-  background-color: orange;
-  color: #444;
+  background-color: #FF5723;
+  color: black;
   cursor: pointer;
   padding: 18px;
   width:100%;
@@ -117,9 +150,8 @@ for (i = 0; i < coll.length; i++) {
   outline: none;
   font-size: 15px;
 }
-
 .collapsible .active, .collapsible:hover {
-  background-color: orangered;
+  background-color: #dc481a;
 }
 
 .collapsible:after {
@@ -136,20 +168,70 @@ for (i = 0; i < coll.length; i++) {
 
 .content1 {
   padding: 0 18px;
-  background-color: grey;
+  background-color: black;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
 
-.content1 a{style: none; color: black;}
-img {
+.content1 a{
+  style: none; 
+  color: black;
+}
+
+.posterBillboard {
   height:cover;
   width:cover;
-}
- h4{display:inline;
-margin-top:-30%;}
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
 
+}
+
+.p_orange{
+  color: #FF5723;
+  background:none;
+  font-weight: bold;
+  font-size: 20px;
+  text-align:center;
+}
+
+.p_white{
+  color:grey;
+  background:black;
+  text-align:center;
+  }
+
+
+.css-selector {
+    background: linear-gradient(115deg, #500e04, #a12806, #270a0a);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationName 50s ease infinite;
+    -moz-animation: AnimationName 50s ease infinite;
+    -o-animation: AnimationName 50s ease infinite;
+    animation: AnimationName 50s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 23%}
+    50%{background-position:100% 78%}
+    100%{background-position:0% 23%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 23%}
+    50%{background-position:100% 78%}
+    100%{background-position:0% 23%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 23%}
+    50%{background-position:100% 78%}
+    100%{background-position:0% 23%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 23%}
+    50%{background-position:100% 78%}
+    100%{background-position:0% 23%}
+}
 </style>
 
 
