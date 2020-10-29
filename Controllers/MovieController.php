@@ -183,7 +183,7 @@
             $movieListActive=$this->movieDAO->getAllStateOne();
             $genreList=$this->genreDAO->getAll();
             #$cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
-            require_once(VIEWS_PATH."Manage-catalogue.php");
+            require_once(VIEWS_PATH."Movies/Movie-catalogue.php");
         }
 
 
