@@ -7,6 +7,7 @@
     use DAO\MovieDAO as MovieDAO;
     use DAO\GenreDAO as GenreDAO;
     use DAO\RoomDAO as RoomDAO;
+    use DAO\ShowDAO as ShowDAO;
     use Config\Validate as Validate;
 
  
@@ -25,7 +26,9 @@
             $this->movieDAO = new MovieDAO(); 
             $this->genreDAO = new GenreDAO(); 
             $this->roomDAO = new RoomDAO();
+            $this->showDAO = new ShowDAO();
             $this->msg = null;
+            $this->refreshBillboard();
         }
 
         
@@ -66,18 +69,24 @@
             require_once(VIEWS_PATH."Cinemas/Cinema-view.php");
         }
 
-        public function addToBillboard($idCinema="",$movies){
+        public function addToBillboard($idCinema="",$movie){
             Validate::checkParameter($idCinema);
-            foreach($movies as $value){
-                if(!$this->cinemaDAO->searchMovie($idCinema,$value)){
-                    $this->cinemaDAO->addMovie($idCinema,$value);
+         
+                if(!$this->cinemaDAO->searchMovie($idCinema,$movie)){
+                    $this->cinemaDAO->addMovie($idCinema,$movie);
                 }
                 else{
-                    $this->cinemaDAO->stateMovie($idCinema,$value,"1"); 
+                    $this->cinemaDAO->stateMovie($idCinema,$movie,"1"); 
                 }
-                $this->msg="Added correctly"; 
+                
             }
-            $this->showManageBillboard($idCinema);
+
+
+        public function removeToBillboard($idCinema="",$movie){
+            Validate::checkParameter($idCinema);
+            if($this->cinemaDAO->searchMovie($idCinema,$movie)){
+                $this->cinemaDAO->stateMovie($idCinema,$movie,"0"); 
+            }
         }
 
 
@@ -180,6 +189,34 @@
                 $this->searchEdit($idCinema);
             }
             
+        }
+
+        private function refreshBillboard(){ // activa el estado de peliculas que esten en una funcion de la semana por cine y las pone en cartelera del cine
+            $this->initializeBillboard();
+            $cinemaList=$this->cinemaDAO->getAllActive();
+           
+            foreach($cinemaList as $cinema){
+                $shows=$this->showDAO->getShowbyCinema($cinema->getIdCinema());
+                if($shows){
+                    
+                    foreach($shows as $show){
+                        $this->addToBillboard($cinema->getIdCinema(),$show->getMovie());
+                    }
+                    
+                }
+            }
+        }
+
+        private function initializeBillboard(){ //inicializa poniendo en estado 0 las peliculas del catalago por cine
+            $movies=$this->movieDAO->getAll();
+            $cinemaList=$this->cinemaDAO->getAllActive();
+            if($movies){
+            foreach($cinemaList as $cinema){
+                foreach($movies as $movie){
+                $this->removeToBillboard($cinema->getIdCinema(),$movie);
+                }
+            }
+        }
         }
     
 
