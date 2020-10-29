@@ -3,7 +3,7 @@
     <h2 class="page-title"><?php echo $cinema->getName() ?></h2>
     <main class="hoc container clear"> 
         <div class="cardStyle">
-            <div class="one_half first ">  
+            <div class="one_half first">  
                 <div class="one_half first">
                     <div>
                         <p><h4>Address</h4><?php echo $cinema->getStreet() . " " .$cinema->getNumber();?></p>
@@ -29,7 +29,7 @@
             </div>  
         </div>
         <?php if($roomList){ ?>
-            <div class="cardStyle">
+            <div class="cardStyle mrg_top">
                 <div>                        
                     <p><h4>Rooms</h4> </p>
                     <?php foreach($roomList as $room){ ?>
@@ -40,7 +40,6 @@
         </div>
     </main>     
     <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
-<div class="wrapper row3 gradient">
     <h2 class="page-title">Billboard</h2>
     <main class="hoc container clear" > 
         <div class="content" > 

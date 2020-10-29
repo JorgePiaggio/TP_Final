@@ -1,5 +1,5 @@
 <main class="py-5">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
+          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/ethan-robertson-nwfuaYecNUs-unsplash.jpg');">  
           <h2 class="page-title up2">Search user</h2> 
                <form action="<?php echo FRONT_ROOT?>User/showUserView" class="center" method="post">
                          <div class="floating-label-form">

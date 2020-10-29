@@ -25,9 +25,12 @@ File: Layout CSS
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
 .up4{margin-top:-105px;}
-.up5{margin-top: -1587px; margin-right: -300px;}
+.up5{margin-top: -1587px; margin-right: -500px;}
 .up6{margin-top: -60px;}
 .down{margin-top:60px;}
+.mrg_top{
+	margin-top: 20px;
+}
 
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
@@ -235,8 +238,8 @@ td{border-width:0 1px;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
 .cinemapic{width:auto; height: 250px;}
-.cinemapic2{max-width: max-content; ; height: 260px;}
-.cinemapic3{width: 220px; ; height: 180px;}
+.cinemapic2{max-width: max-content; height: 260px; min-height: 260px;}
+.cinemapic3{width: 220px; height: 180px;}
 /*Promo image
 --------------------------------------------------------------------------------------------------------------- */
 .promo{width:50%; height: auto; float:left; display: inline;margin-bottom: 20px;}

@@ -1,6 +1,6 @@
 <main class="py-5">
      <section id="perfil" class="mb-5">
-          <div class="background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/justin-campbell-aP_hTfwXEkc-unsplash2.jpg');">
+          <div class="background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/agnieszka-kowalczyk-c0VRNWVEjOA-unsplash.jpg');">
                   <h2 class="page-title">Profile</h2>
 
                     <table class="tabla-perfil" style="width: 50%;">
