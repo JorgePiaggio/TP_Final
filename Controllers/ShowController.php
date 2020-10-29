@@ -45,12 +45,12 @@
        
         $actualDate=date('Y-m-d H:i');
         $dateTime=date($date." ".$time);
-        if(strtotime($actualDate)<strtotime($dateTime)){
-       
 
-        $timeFormat=explode(":",$time);
-        $dateShow = new DateTime($date);
-        $dateShow->setTime($timeFormat[0], $timeFormat[1]);
+        if(strtotime($actualDate)<strtotime($dateTime)){
+
+            $timeFormat=explode(":",$time);
+            $dateShow = new DateTime($date);
+            $dateShow->setTime($timeFormat[0], $timeFormat[1]);
 
        
         if($this->validateShow($idRoom,$idMovie,$dateTime)){
@@ -66,8 +66,10 @@
         }else{
             $this->msg="Incorrect Date";
         }
+
         $this->showAddView();
     }
+
 
     public function selectCinema($idCinema){
        
