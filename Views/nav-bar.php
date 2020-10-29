@@ -10,7 +10,7 @@
     <nav id="mainav" class="hoc fl_right">
         <!----------------- MENU GENERAL -----------------------> 
       <ul class="clear">         
-        <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard (not ready)</a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
 
@@ -32,7 +32,7 @@
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List / Edit</a></li>
-                <li><a href="<?php echo FRONT_ROOT?>Show/showAddView">Billboard</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard</a></li>
               </ul>
             </li>
             <li class="active"><a>Movies</a>

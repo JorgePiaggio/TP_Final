@@ -196,8 +196,7 @@
             $cinemaList=$this->cinemaDAO->getAllActive();
            
             foreach($cinemaList as $cinema){
-                $shows=$this->showDAO->getbyCinema($cinema->getIdCinema());
-                
+                $shows=$this->showDAO->getByCinema($cinema->getIdCinema());
                 if($shows){
                     
                     foreach($shows as $show){
@@ -212,12 +211,12 @@
             $movies=$this->movieDAO->getAll();
             $cinemaList=$this->cinemaDAO->getAll();
             if($movies){
-            foreach($cinemaList as $cinema){
-                foreach($movies as $movie){
-                $this->removeToBillboard($cinema->getIdCinema(),$movie);
+                foreach($cinemaList as $cinema){
+                    foreach($movies as $movie){
+                    $this->removeToBillboard($cinema->getIdCinema(),$movie);
+                    }
                 }
             }
-        }
         }
     
 
