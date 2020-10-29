@@ -76,7 +76,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 .margin2{display: inline;top:-10%; left: 71%; margin-bottom:-200px;}
 .margin3{left: -5%;}
 .margin4{left: -25%;}
-
+.span{display:inline;}
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
 
