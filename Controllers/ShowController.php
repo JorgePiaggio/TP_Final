@@ -90,7 +90,7 @@
          foreach($showList as $show){
              //horario y runtime de pelicula en la BDD
             $showTime=strtotime($show->getDateTime());
-            $runtime=$show->getMovie()->getRunTime()*60;
+            $runtime=$show->getMovie()->getRuntime()*60;
               if($showTime>$showInput){
                   if($showInput+$runtimeInput > $showTime-900){
                     return false;
