@@ -209,7 +209,7 @@
 
         private function initializeBillboard(){ //inicializa poniendo en estado 0 las peliculas del catalago por cine
             $movies=$this->movieDAO->getAll();
-            $cinemaList=$this->cinemaDAO->getAllActive();
+            $cinemaList=$this->cinemaDAO->getAll();
             if($movies){
                 foreach($cinemaList as $cinema){
                     foreach($movies as $movie){
