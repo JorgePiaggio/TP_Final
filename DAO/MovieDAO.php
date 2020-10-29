@@ -44,7 +44,6 @@ class MovieDAO implements IMovieDAO{
             $directors = implode(" - ", $movie->getDirector());
             $parameters["director"] = $directors;
 
-
             try{
 
             $this->connection=Connection::getInstance();

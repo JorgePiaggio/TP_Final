@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\IShowDAO as IShowDAO;
-    use Models\show as show;
+    use Models\Show as Show;
     use Models\Room as Room;
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
@@ -145,14 +145,13 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE DATEDIFF(:dateTime, s.dateTime) <= 7 AND day(:dateTime)<=day(s.dateTime)";
+            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0";
 
             $parameters["dateTime"] = $dateNow;
-
             $this->connection = Connection::getInstance();
 
             $result = $this->connection->execute($query, $parameters);
-            
+
             if($result){
                 foreach($result as $value){
                     $mapping = $this->mapShow($value);  
@@ -277,6 +276,9 @@
 
 
     }
+
+
+
     public function getByCinema($idCinema){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -288,7 +290,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(:dateTime, s.dateTime) <= 7 AND day(s.dateTime)>day(:dateTime)";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["dateTime"]=$dateNow;
@@ -314,6 +316,7 @@
         }
     }
 
+
     public function getByCinemaByMovie($idCinema, $idMovie){   
         /*Fecha actual*/
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -325,7 +328,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(:dateTime, s.dateTime) <= 7 AND day(s.dateTime)>day(:dateTime) AND s.idMovie = :idMovie";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["idMovie"]=$idMovie;
@@ -354,30 +357,85 @@
       
     }
 
-    
-    public function update($show){
+
+
+    /* funciones de una pelicula en todos los cines max 1 semana */
+    public function getByMovie($idMovie){   
+        /*Fecha actual*/
+        $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
+        $showList = array();
+
         try
         {   
-            $query = "UPDATE shows set idRoom=:idRoom , idMovie=:idMovie, dateTime=:dateTime , shift=:shift , remainingTickets=:remainingTickets WHERE idShow=:idShow";
-
-            $parameters['idShow']=$show->getIdShow();
-
-            $parameters['idRoom']=$show->getRoom()->getIdRoom();
-            $parameters['idMovie']=$show->getMovie()->getTmdbID();
-            $parameters['dateTime']=$show->getDateTime();
-            $parameters['shift']=$show->getShift();
-            $parameters['remainingTickets']=$show->getRoom()->getCapacity();
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
+            
+            $parameters["idMovie"]=$idMovie;
+            $parameters["dateTime"]=$dateNow;
 
             $this->connection = Connection::getInstance();
 
-            $rowCant=$this->connection->executeNonQuery($query,$parameters);
-            return $rowCant;
+            $result = $this->connection->execute($query,$parameters);
+
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
         }
         catch(\PDOException $ex)
         {
             throw $ex;
-        }
+        } 
     }
+
+
+
+        /* funciones de una pelicula en cualquier cine, en un dia determinado (REQUISITO PARA REVISION 3) */
+        public function getByMovieByDay($idMovie, $date){   
+
+            $showList = array();
+    
+            try{   
+                    $query = "SELECT * FROM shows s 
+                    INNER JOIN movies m ON s.idMovie = m.idMovie 
+                    INNER JOIN rooms r ON s.idRoom = r.idRoom 
+                    INNER JOIN cinemas c ON r.idCinema = c.idCinema
+                    WHERE DATEDIFF(s.dateTime, :dateTime) = 0 AND s.idMovie = :idMovie";
+                    
+                    $parameters["idMovie"]=$idMovie;
+                    $parameters["dateTime"]=$date;
+        
+                    $this->connection = Connection::getInstance();
+        
+                    $result = $this->connection->execute($query,$parameters);
+        
+                    if($result){
+                        foreach($result as $value){
+                            $mapping = $this->mapShow($value);  
+                            array_push($showList, $mapping);
+                        }
+                        return $showList;
+                    }
+                    else{
+                        return null;
+                    }
+                }
+                catch(\PDOException $ex)
+                {
+                    throw $ex;
+                } 
+        }
+
+
 
     public function getByCinemaByMovieByShift($idCinema, $idMovie, $shift){   
         /*Fecha actual*/
@@ -390,7 +448,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(:dateTime, s.dateTime) <= 7 AND day(s.dateTime)>day(:dateTime) AND s.idMovie = :idMovie AND s.shift=:shift";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie AND s.shift=:shift";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["idMovie"]=$idMovie;
@@ -450,6 +508,33 @@
         }
     }
 
+
+    public function update($show){
+        try
+        {   
+            $query = "UPDATE shows set idRoom=:idRoom , idMovie=:idMovie, dateTime=:dateTime , shift=:shift , remainingTickets=:remainingTickets WHERE idShow=:idShow";
+
+            $parameters['idShow']=$show->getIdShow();
+
+            $parameters['idRoom']=$show->getRoom()->getIdRoom();
+            $parameters['idMovie']=$show->getMovie()->getTmdbID();
+            $parameters['dateTime']=$show->getDateTime();
+            $parameters['shift']=$show->getShift();
+            $parameters['remainingTickets']=$show->getRoom()->getCapacity();
+
+            $this->connection = Connection::getInstance();
+
+            $rowCant=$this->connection->executeNonQuery($query,$parameters);
+            return $rowCant;
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+
+
+
     private function searchMovieId($tmdbId){
         try
         {
@@ -472,9 +557,11 @@
         }
     }
 
+
+    
     protected function mapShow($value){
         
-            $show=new show();
+            $show=new Show();
             $show->setIdShow($value["idShow"]);
             $show->setRoom($this->mapRoom($value));
             $show->setMovie($this->mapMovie($value));

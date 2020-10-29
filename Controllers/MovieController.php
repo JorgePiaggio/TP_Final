@@ -17,6 +17,7 @@
             $this->movieDAO = new MovieDAO();
             $this->genreDAO = new GenreDAO();
             $this->msg = null;
+            $this->addNullGenre();
         }
 
 
@@ -175,7 +176,7 @@
         /*agregar multiples peliculas a la BDD*/
         public function addMultipleMovies($movies=""){
             Validate::validateSession();
-            Validate::checkParameter($tmdbId);
+            Validate::checkParameter($movies);
 
             if($movies){
                 foreach($movies as $idMovie){
@@ -266,6 +267,10 @@
                             $newMovie->addGenre($newGenre);
                 }    
             }
+            if(empty($newMovie->getGenres())){     /* si la pelicula no tiene genero se setea en null para q no rompa las pelotas */
+                $newMovie->addGenre($this->addNullGenre());
+            }
+
             return $newMovie;
         }
 
@@ -309,6 +314,13 @@
             return $all;
         }
 
-      
+        
+        private function addNullGenre(){
+            $null= new Genre();
+            $null->setName("Undefined");
+            $null->setId(-33);
+            $this->genreDAO->add($null);
+            return $null;
+        }
 }
 ?>

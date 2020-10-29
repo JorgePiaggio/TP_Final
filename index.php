@@ -18,8 +18,10 @@
 
 
 	require_once(VIEWS_PATH."header.php");
+	
 	$cinemaDAO= new CinemaDAO();
 	$cinemaList=$cinemaDAO->getAllActive();
+
 	require_once(VIEWS_PATH."nav-bar.php");
 
 	Router::Route(new Request());

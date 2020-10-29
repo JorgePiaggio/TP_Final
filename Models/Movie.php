@@ -63,7 +63,7 @@ class Movie{
     public function setHomepage($homepage){$this->homepage=$homepage;}
     public function setDirector($director){$this->director = $director;}
     public function setReview($review){$this->review = $review;}
-    public function setGenres($genres){$this->genres = $genres;}
+    public function setGenres($genres){$this->genres = $genres;} 
     public function addGenre( $genre){array_push($this->genres, $genre);}
 }
 
