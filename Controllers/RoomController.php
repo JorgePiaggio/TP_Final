@@ -24,13 +24,13 @@
         public function showAddRoom()
         {
             $cinemaList=$this->cinemaDAO->getAllActive();
-            require_once(VIEWS_PATH."Room-add.php");
+            require_once(VIEWS_PATH."Rooms/Room-add.php");
         }  
 
         public function showRoomEdit($name="",$idCinema=""){
             Validate::checkParameter($idCinema);       
             $editRoom=$this->roomDAO->search($idCinema,$name);
-            require_once(VIEWS_PATH."Room-edit.php");
+            require_once(VIEWS_PATH."Rooms/Room-edit.php");
         }
 
         public function showRoomList($idCinema=""){
@@ -38,12 +38,12 @@
             $cinemaSearch=$this->cinemaDAO->search($idCinema);
             
             $roomList=$this->roomDAO->getCinemaRooms($idCinema);
-            require_once(VIEWS_PATH."Room-list.php");
+            require_once(VIEWS_PATH."Rooms/Room-list.php");
         }
 
         public function showSelectCinema(){
             $cinemaList=$this->cinemaDAO->getAll();
-            require_once(VIEWS_PATH."Select-cinema.php");
+            require_once(VIEWS_PATH."Rooms/Room-select-cinema.php");
             }
 
 
@@ -66,7 +66,7 @@
             else{
                 $cinemaList=$this->cinemaDAO->getAll();
                 $this->msg="Room: '$name' in cinema '" . $cinemaSearch->getName() ."' already exists";
-                require_once(VIEWS_PATH."Room-add.php");
+                require_once(VIEWS_PATH."Rooms/Room-add.php");
             }
         }
 
