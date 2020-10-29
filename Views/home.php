@@ -33,7 +33,7 @@
                 <footer>
                   <ul class="nospace inline pushright">
                     <li><a class="btn" href="#">Buy ticket</a></li>
-                    <li><a class="btn inverse" href="#">Movie description</a></li>
+                    <li><a class="btn inverse" href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieListSlider[$i]->getTmdbID()?>">Movie description</a></li>
                   </ul>
                 </footer>
               </article>

@@ -219,7 +219,7 @@
 
         /* construir objeto pelicula a traves del json q manda la API */
         public function constructMovie($jsonObject=""){
-            Validate::validateSession();
+            #Validate::validateSession(); se necesita para el anonimo
             Validate::checkParameter($jsonObject);
 
             $newMovie = new Movie();

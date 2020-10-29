@@ -3,7 +3,7 @@
     <div id="logo" class="fl_left">
       <a href="<?php echo FRONT_ROOT?>Home/index">
         <svg width="500" height="61" viewBox="400 0 500 61" >
-            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">Fran boton</text>
+            <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">Moviepass</text>
         </svg>
       </a>
     </div>
@@ -12,13 +12,8 @@
       <ul class="clear">         
         <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard (not ready)</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-        <li class="drop"><a href="#">Cinemas</a>
-          <ul>
-            <?php foreach($cinemaList as $cinema){?>
-            <li><a href="<?php echo FRONT_ROOT?>PaginaDeFran"><?php echo $cinema->getName();?></a></li>
-            <?php } ?>
-          </ul>
-        </li>
+        <li><a href="<?php echo FRONT_ROOT?>pagina de cines">Cinemas</a></li>
+
 
         
           <!----------------- MENU USUARIO (ICONO DEL CHABONCITO)-----------------------> 
