@@ -15,7 +15,7 @@
                           <div class="cardStyle mrg_btm">
                             
                           
-                            <div class="">
+                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
                               <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
                             </div>
           
@@ -57,8 +57,8 @@
 
                         <div class="one_third">
                           <div class="cardStyle mrg_btm">
-            
-                            <div class="">
+
+                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
                               <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
                             </div>
             
@@ -200,6 +200,23 @@ for (i = 0; i < coll.length; i++) {
   background:black;
   text-align:center;
   }
+
+.posterBillboard-hover-zoom {
+  overflow: hidden;
+}
+
+
+.posterBillboard-hover-zoom--slowmo .posterBillboard {
+  transform-origin: 50% 65%;
+  transition: transform 3s, filter 3s ease-in-out;
+  filter: brightness(150%);
+}
+
+.posterBillboard-hover-zoom--slowmo:hover .posterBillboard {
+  filter: brightness(100%);
+  transform: scale(1.5);
+
+}
 
 
 .css-selector {
