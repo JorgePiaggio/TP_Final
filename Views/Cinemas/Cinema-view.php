@@ -7,24 +7,17 @@
                 <div class="one_half first">
                     <div>
                         <p><h4>Address</h4><?php echo $cinema->getStreet() . " " .$cinema->getNumber();?></p>
-                    </div><br>
+                    </div><br><br>
                     <div>
                         <p><h4>Phone</h4><?php echo $cinema->getPhone(); ?></p>
                     </div><br>
-                    <div>
-                        <?php if($roomList){ ?>
-                            <p><h4>Rooms</h4> </p>
-                            <?php foreach($roomList as $room){ ?>
-                                <p> <?php echo" ■ ".$room->getName()." $".$room->getPrice(); ?> </p>
-                        <?php }      
-                        }?>
-                    </div>
+                    
                 </div>
 
                 <div class="one_half">
                     <div>
                         <p><h4>City-Country</h4>Mar del Plata-Argentina</p>
-                    </div><br>
+                    </div><br><br>
                     <div>
                         <p><h4>Email</h4><?php echo $cinema->getEmail();?></p>
                     </div>    
@@ -34,6 +27,16 @@
                     <img class="cinemapic2 brd" src="<?php echo $cinema->getPoster();?>" alt="">
                 </div>
             </div>  
+        </div>
+        <?php if($roomList){ ?>
+            <div class="cardStyle">
+                <div>                        
+                    <p><h4>Rooms</h4> </p>
+                    <?php foreach($roomList as $room){ ?>
+                        <p> <?php echo" ■ ".$room->getName()." $".$room->getPrice(); ?> </p>
+                    <?php } ?>     
+            </div>
+    <?php }?>
         </div>
     </main>     
     <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
