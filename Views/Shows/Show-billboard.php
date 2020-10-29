@@ -94,7 +94,12 @@
                         <?php 
                       } $indice++;
                     }  ?>
-          </div>
+                                <div class="hoc" margin-left="40%"><br>
+                                  <?php if($this->msg != null){?> 
+                                        <h4 class="msg"><?php  echo $this->msg;
+                                    } ?> </h4>
+                                </div>      
+
                                   <!----------------------------------------------------------------------------------------------------------->
                  
     </div>
@@ -200,6 +205,7 @@ for (i = 0; i < coll.length; i++) {
   background:black;
   text-align:center;
   }
+
 
 .posterBillboard-hover-zoom {
   overflow: hidden;

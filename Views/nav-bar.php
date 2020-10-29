@@ -32,7 +32,6 @@
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showAddView">Add</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List / Edit</a></li>
-                <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard</a></li>
               </ul>
             </li>
             <li class="active"><a>Movies</a>

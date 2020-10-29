@@ -33,13 +33,19 @@
     public function showBillboard(){
         $showList = $this->showDAO->getAllActive();
         $movieList=array();
-        foreach($showList as $show){
-            if(!in_array($show->getMovie(), $movieList)) {
-                array_push($movieList,$show->getMovie());
-            }
+        if($showList){ 
+            foreach($showList as $show){
+                if(!in_array($show->getMovie(), $movieList)) {
+                  array_push($movieList,$show->getMovie());
+                }
+            }       
         }
-        #var_dump($movieList);
+        else{
+            $this->msg = "No shows on schedule";
+        }
+        
         require_once(VIEWS_PATH."Shows/Show-billboard.php");
+        
     }
 
 
