@@ -34,8 +34,8 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 .bgded{background-position:top center; background-repeat:no-repeat; background-size:cover;}
 .circle{border-radius:50%; background-clip:padding-box;}
 
-.btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid;   border-radius:5%;}
-.btn2{margin-left:-60px; position: absolute; top:50%;   border-radius:5%;}
+.btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid; border-radius:9%;}
+.btn2{margin-left:-60px; position: absolute; top:50%; border-radius:9%;}
 .clear, .group{display:block;}
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}
 .clear, .clear::after, .group, .group::after{clear:both;}
@@ -52,6 +52,7 @@ a{outline:none; text-decoration:none;}
 
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
+.fl_right2 {padding: 10px;}
 
 
 .br{
@@ -153,6 +154,13 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 
   }
   
+  .floating-input.overf:focus ~ label,.floating-input.f:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+    top:5px;left:20px;
+    font-size:10px;
+    color:#e05505;  opacity: 1;
+
+  }
+
   /* active state */
   .floating-input:focus ~ .bar:before, .floating-input:focus ~ .bar:after{
     width:50%;

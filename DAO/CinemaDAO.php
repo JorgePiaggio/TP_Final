@@ -48,7 +48,7 @@
 
                 $query = "SELECT * FROM ".$this->tableName;
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
 
@@ -251,7 +251,7 @@
 
                 $query = "SELECT * FROM cinemaxmovies WHERE idCinema=:idCinema and idMovie=:idMovie";
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$idCinema;
                 $parameters["idMovie"]=$idMovie;
 
@@ -295,7 +295,7 @@
 
                 $query = "SELECT idMovie FROM cinemaxmovies WHERE idCinema=:idCinema AND state=1";
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$idCinema;
 
                 $resultSet = $this->connection->execute($query,$parameters);

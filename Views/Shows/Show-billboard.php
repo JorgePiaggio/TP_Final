@@ -1,4 +1,3 @@
-
 <div class="bordo">
   <div class="container ctr"> 
                        <!------------------------------------------------ CONTENT ------------------------------------------------>
@@ -33,8 +32,37 @@
                 <span></span>
                 <span></span>
                 <span></span>
-        <div class=" padSides">
+                <!------------------------------------------------ FORM - GENRE/DATE SELECTOR ------------------------------------------------>
+                <div class="hoc floating-label-form up mrg_btm">
+                  <div class="mrg_btm">
+                    <form action="<?php echo FRONT_ROOT?>Show/filterShow" class="center span hoc " method="post">
+                      <div class="floating-label cardStyle overf">
+                        <input type="date" name="date" value="" placeholder="" class="floating-input" min="<?php echo date('Y-m-d');?>">
+                        <span class="highlight"></span><label for="">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                      
+
+                      <select name="idGenre" class=" selection" id="genre">
+                        <?php if($actualGenre){?>
+                          <option value="<?php echo $actualGenre->getId();?>" selected> <?php echo $actualGenre->getName();?> </option>
+                        <?php } ?>
+                        <option value=<?php echo $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
+              
+                        <?php foreach($genreList as $genre) { ?>
+                          <option value="<?php echo $genre->getId();?>">
+                          <?php echo $genre->getName();?>
+                          </option>
+                        <?php } ?> 
+                      </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+                      
+                        <button type="submit" name="" class="btn">Filter</button>
+                      </div>
+                    </form>
+                  </div>
+                </div> 
+
                         <!------------------------------------------------ GALLERY ------------------------------------------------>
+        <div class=" padSides">
 
               <?php $indice=0;
                   foreach($movieList as $movie){
@@ -132,16 +160,18 @@
                         <?php 
                       } $indice++;
                     }  ?>
-                                <div class="hoc" margin-left="40%"><br>
-                                  <?php if($this->msg != null){?> 
-                                        <h4 class="msg"><?php  echo $this->msg;
-                                    } ?> </h4>
-                                </div>      
+                                 <!------------------------------------------- Error message ---------------------------------------------------------------->
+                    <div class="hoc" margin-left="40%"><br>
+                      <?php if($this->msg != null){?> 
+                            <h4 class="msg"><?php  echo $this->msg;
+                        } ?> </h4>
+                    </div>      
 
                                   <!----------------------------------------------------------------------------------------------------------->
-      </div>  </div>     
-    </div></div>
-  </main>
+        </div>     
+      </main>
+    </div>
+  </div>
 </div>
 
 
