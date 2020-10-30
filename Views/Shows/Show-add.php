@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="floating-label">
-                                  <input type="date" name="date2" value="" placeholder="" class="floating-input" required>
+                                  <input type="date" name="date2" value="" placeholder="" min="<?php echo date('Y-m-d');?>" class="floating-input" required>
                                   <span class="highlight"></span><label for="">Date</label>
                                 </div> 
 
