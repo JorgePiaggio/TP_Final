@@ -154,7 +154,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 
   }
   
-  .floating-input.overf:focus ~ label,.floating-input.f:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+  .floating-input.overf:focus ~ label {
     top:5px;left:20px;
     font-size:10px;
     color:#e05505;  opacity: 1;
