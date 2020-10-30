@@ -129,6 +129,7 @@
                 if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
                     $idFound = $cinema->getIdCinema();
             }
+
             return $idFound; //Retorna el id del cine si ya existe
         }
 
@@ -136,11 +137,13 @@
         public function changeState($idRemove=""){
             Validate::checkParameter($idRemove);
             $activeShows=$this->showDAO->getAllbyCinema($idRemove);
+            
             if(!$activeShows){ 
-            $this->cinemaDAO->changeState($idRemove);
+                $this->cinemaDAO->changeState($idRemove);
             }else{
                 $this->msg="Error: This Cinema has no active Shows";
             }
+
             $this->showListView();
         }
         
@@ -148,25 +151,9 @@
         public function searchEdit($idCinema=""){
             Validate::checkParameter($idCinema);
             $editCinema = $this->cinemaDAO->search($idCinema);
-            #$this->convertAddress($editCinema->getAddress());
-            
-            #$this->showEditView();
             require_once(VIEWS_PATH."Cinemas/Cinema-edit.php");
         }
         
-
-        /*
-        public function convertAddress($address){
-            $words = explode(" ", $address);
-            $numberOfWords = count($words);
-            
-            $street = "";
-            $number = $words[$numberOfWords-1];
-            for($i = 0;$i<$numberOfWords-1;$i++){ 
-                $street.=$words[$i]." ";
-            }
-        }
-        */
 
         public function edit($name="", $street="", $number="", $phone="", $email="",$poster="", $idCinema=""){
             Validate::checkParameter($name);
@@ -174,6 +161,7 @@
             $aux = $this->cinemaDAO->search($idCinema);
             $address = $street . $number;
             $validate = $this->validateCinema($name, $address);
+            
             if(!$validate || $validate == $idCinema){ 
                 $cinemaEdit= new Cinema();
                 $cinemaEdit->setState($aux->getState());
@@ -185,8 +173,14 @@
                 $cinemaEdit->setIdCinema($idCinema);
                 $cinemaEdit->setPoster($poster);
 
-                $this->cinemaDAO->update($cinemaEdit);
-                $this->msg = "Cinema modified successfully";
+                $result=$this->cinemaDAO->update($cinemaEdit);
+
+                if($result > 0){
+                    $this->msg = "Cinema modified successfully";
+                }else{
+                    $this->msg = "No rows updated. Please check your values";
+                }
+
                 $this->showListView();
             }
             else{
@@ -196,6 +190,7 @@
             
         }
 
+        
         private function refreshBillboard(){ // activa el estado de peliculas que esten en una funcion de la semana por cine y las pone en cartelera del cine
             $this->initializeBillboard();
             $cinemaList=$this->cinemaDAO->getAllActive();
@@ -211,6 +206,7 @@
                 }
             }
         }
+
 
         private function initializeBillboard(){ //inicializa poniendo en estado 0 las peliculas del catalago por cine
             $movies=$this->movieDAO->getAll();

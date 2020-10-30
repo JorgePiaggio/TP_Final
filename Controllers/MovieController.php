@@ -176,15 +176,12 @@
 
 
 
-
+        /* agregar o quitar peliculas al catalogo para que esten disponibles para shows -> cambia estado de movie en la bdd */
         public function showManageCatalogue(){
-           
-            #Validate::checkParameter($idCinema);
-            #$cinema=$this->cinemaDAO->search($idCinema);
+
             $movieListInactive=$this->movieDAO->getAllStateZero();
             $movieListActive=$this->movieDAO->getAllStateOne();
             $genreList=$this->genreDAO->getAll();
-            #$cinemaBillboard=$this->cinemaDAO->getBillboard($idCinema);
             require_once(VIEWS_PATH."Movies/Movie-catalogue.php");
         }
 
@@ -197,9 +194,13 @@
 
             if($movies){
                 foreach($movies as $idMovie){
-                    $this->addMovieToDatabase($idMovie);
+                    $result+= $this->addMovieToDatabase($idMovie);
                 }
-                $this->msg="Added Correctly";
+                if($result > 0){
+                    $this->msg="Movies Added Correctly";
+                }else{
+                    $this->msg="Internal error. Please try again later";
+                }
             }else{
                 $this->msg="You must select a Movie";
             }
@@ -228,6 +229,8 @@
         
             if($result > 0){
                 $this->msg= "Movie Added Succesfully";
+            }else{
+                $this->msg="Internal error. Please try again later";
             }
 
             $this->showMoviePage();
@@ -242,13 +245,14 @@
                 $movies=$_POST["movies"];
                 foreach($movies as $id){
                     $activeShows=$this->showDAO->getAllbyMovie($id); 
+                    
                     if(!$activeShows){
-                    $movie= $this->movieDAO->search($id);   
+                        $movie= $this->movieDAO->search($id);   
                     
                         if($movie->getState() == true){
-                        $this->movieDAO->setState($movie->getTmdbId(), intval(false));
+                            $this->movieDAO->setState($movie->getTmdbId(), intval(false));
                         }else{
-                        $this->movieDAO->setState($movie->getTmdbId(), intval(true));
+                            $this->movieDAO->setState($movie->getTmdbId(), intval(true));
                         }
                     }else{
                         $alert=true;

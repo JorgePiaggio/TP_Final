@@ -174,7 +174,7 @@
 <!-- #########################################################   OUR CINEMAS  ##################################################### -->
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/christian-wiediger-AEeoY_aqvNk-unsplash.jpg');">
 <h2 class="page-title">Our Cinemas</h2>  
-  <section class="hoc container clear"> 
+  <section class="hoc container clear up6 "> 
     <ul class="nospace group">
       <?php $indice=0;
             if(is_array($cinemaList)){
@@ -186,7 +186,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
-                      <div class="excerpttxt">
+                      <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
                       </div>
                     </article>
@@ -198,7 +198,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
-                      <div class="excerpttxt">
+                      <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
                       </div>
                     </article>
@@ -212,7 +212,7 @@
                                                               echo $str1;?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                 <article class="excerpt"><a href="#"><img class="cinemapic" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
-                  <div class="excerpttxt">
+                  <div class="excerpttxt up7 mrg_btm2">
                     <footer><a class="btn" href="#">Billboard &raquo;</a></footer>
                   </div>
                 </article>

@@ -25,6 +25,7 @@
             
             $showList = $this->showDAO->getAllActive();
             $movieShows=array();
+            
             if($showList){                                          
                 foreach($showList as $show){
                     if(!in_array($show->getMovie(), $movieShows)) {  // saco las 4 peliculas con funcion mas proxima y sus shows en dif cines
@@ -33,8 +34,7 @@
                         }
                     }
                 }       
-            }
-            else{
+            }else{
                 $this->msg = "No shows on schedule";
             }
             
