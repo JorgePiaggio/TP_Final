@@ -497,7 +497,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE DATEDIFF(s.dateTime, :dateTime) = 0";
+            WHERE DATEDIFF(s.dateTime, :date) = 0";
             
             $parameters["date"]=$date;
 

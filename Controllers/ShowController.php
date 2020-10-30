@@ -34,24 +34,27 @@
 
 
     /* mostrar cartelera de todos los cines completa o filtrada por fecha y/o género*/
-    public function showBillboard($date="", $genre=""){
-        $actualGenre = null;
+    public function showBillboard($showList="", $flag="", $actualGenre=""){
         $allGenre = $this->getAllGenre();                                     //Construyo el genero ficticio all
         $genreList = $this->genreDAO->getAll();                               //Pido todos los generos para el select
         
-        $showList = $this->showDAO->getAllActive();
-        $movieList=array();
+        if(!$showList && $flag != 1){
+            $showList = $this->showDAO->getAllActive();                       //Si todavía no hay filtro muestro todos los shows activos
+        }   
+    
+        $movieList=array();                                                   //Recorro los shows y agrego las movies una sola vez a una lista 
         if($showList){ 
             foreach($showList as $show){
                 if(!in_array($show->getMovie(), $movieList)) {
-                array_push($movieList,$show->getMovie());
+                    array_push($movieList,$show->getMovie());
                 }
             }       
         }
         else{
             $this->msg = "No shows on schedule";
         }
-    
+        
+       
         
         require_once(VIEWS_PATH."Shows/Show-billboard.php");
         
@@ -122,34 +125,46 @@
     }
 
     public function filterShow($date="", $idGenre=""){
-        echo $idGenre;
+        $showList = array();
         if($_POST){
-            $genre = $this->genreDAO->search($idGenre);                     //Busco el genero elegido
-            if($date != null && $genre->getId() == -1){                     //Si el filtro es por fecha y todos los generos
+            if($idGenre == -1){ 
+                $actualGenre = $this->getAllGenre();                              //Si eligió all construyo el genero ficticio all
+            }
+            else{
+                $actualGenre = $this->genreDAO->search($idGenre);                 //Busco el genero elegido    
+            }
+
+            if(!empty($date) && $actualGenre->getId() == -1){                     //Si el filtro es por fecha y todos los generos
                 $showList = $this->filterByDate($date);              
-            }else if($date == null && $genre->getId() != -1){                //Si el filtro es solo por genero                
-                $showList = $this->filterByGenre($genre);                                                   
-            }else{                                                          //Si el filtro es por fecha y un genero
-                $showList = $this->filterByDateByGenre($date, $genre);                 
+            }else if(empty($date) && $actualGenre->getId() != -1){                //Si el filtro es solo por genero                
+                $showList = $this->filterByGenre($actualGenre);                                                   
+            }else if(!empty($date) && $actualGenre->getId() != -1){               //Si el filtro es por fecha y un genero
+                $showList = $this->filterByDateByGenre($date, $actualGenre);                 
+            }else{
+                $showList = $this->showDAO->getAllActive();                       //Si no hay filtro pero se mandó igual el form
             }
         }
-        $this->showBillboard($date, $genre);
+        
+
+        $this->showBillboard($showList, 1, $actualGenre);
+        
     }
 
+
     /* Filtra shows por fecha */
-    public function filterShowByDate($date){
+    public function filterByDate($date){
         $showList = $this->showDAO->getByDate($date);
         return $showList;
     }
 
 
-    /* Filtra shows genero */
+    /* Filtra shows activos por genero */
     public function filterByGenre($genre){    
         $showList = array();
-        $shows = $this->showDAO->getAllActive();                     //Busco shows activos
-        foreach($showsByDate as $show){                              
-            if(in_array($genre, $show->getMovie()->getGenre())){     //Si el genero está en una movie de un show
-                array_push($showList, $show);                        //Lo agrego a la lista de shows final
+        $showsActives = $this->showDAO->getAllActive();                    //Busco shows activos
+        foreach($showsActives as $show){                              
+            if(in_array($genre, $show->getMovie()->getGenres())){          //Si el genero está en una movie de un show
+                array_push($showList, $show);                              //Lo agrego a la lista de shows final
             }
         } 
         return $showList;
@@ -159,12 +174,13 @@
       /* Filtra shows por fecha y genero */
     public function filterByDateByGenre($date, $genre){     
         $showList = array();
-        $showsByDate = $this->showDAO->getByDate($date);             //Busco shows por fecha 
-        foreach($showsByDate as $show){                              
-            if(in_array($genre, $show->getMovie()->getGenre())){     //Si el genero está en una movie de un show
-                array_push($showList, $show);                        //Lo agrego a la lista de shows final
-            }
-        } 
+        $showsByDate = $this->showDAO->getByDate($date);                  //Busco shows por fecha
+        if($showsByDate) 
+            foreach($showsByDate as $show){                              
+                if(in_array($genre, $show->getMovie()->getGenres())){     //Si el genero está en una movie de un show
+                    array_push($showList, $show);                         //Lo agrego a la lista de shows final
+                }
+            } 
         return $showList;
     }
 

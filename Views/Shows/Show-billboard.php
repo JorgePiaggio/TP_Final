@@ -2,30 +2,32 @@
                        <!------------------------------------------------ CONTENT ------------------------------------------------>
   <h2 class="page-title up2">Billboard</h2>
     <main class="hoc container clear" >
-      <div class="floating-label-form"> 
-        <form action="<?php echo FRONT_ROOT?>Show/filterShow" class="center span" method="post">
-          <div class="floating-label">
-            <input type="date" name="date" value="" placeholder="" class="floating-input">
-            <span class="highlight"></span><label for="">Date</label>
-          
+      <div class="floating-label-form">
+        <div class="cardStyle mrg_btm"> 
+          <form action="<?php echo FRONT_ROOT?>Show/filterShow" class="center span" method="post">
+            <div class="floating-label">
+              <input type="date" name="date" value="" placeholder="" class="floating-input" min="<?php echo date('Y-m-d');?>">
+              <span class="highlight"></span><label for="">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            
 
-          <select name="Genres" class=" selection" id="genre">
-            <?php if($actualGenre){?>
-              <option value="selected" selected disabled> <?php echo $actualGenre->getName();?> </option>
-            <?php } ?>
-            <option value=<?php $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
-  
-            <?php foreach($genreList as $genre) { ?>
-              <option value="<?php $genre->getId();?>">
-              <?php echo $genre->getName();?>
-              </option>
-            <?php } ?> 
-          </select>
+            <select name="idGenre" class=" selection" id="genre">
+              <?php if($actualGenre){?>
+                <option value="<?php echo $actualGenre->getId();?>" selected> <?php echo $actualGenre->getName();?> </option>
+              <?php } ?>
+              <option value=<?php echo $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
+    
+              <?php foreach($genreList as $genre) { ?>
+                <option value="<?php echo $genre->getId();?>">
+                <?php echo $genre->getName();?>
+                </option>
+              <?php } ?> 
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 
-          
-            <button type="submit" name="" class="btn btn-primary ml-auto d-block">Filter</button>
-          </div>
-        </form>
+            
+              <button type="submit" name="" class="btn">Filter</button>
+            </div>
+          </form>
+        </div>
       </div> 
                         <!------------------------------------------------ GALLERY ------------------------------------------------>
 

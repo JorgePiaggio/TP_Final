@@ -44,6 +44,7 @@ a{outline:none; text-decoration:none;}
 
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
+.fl_right2 {padding: 10px;}
 
 img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
 .imgl{margin:0 15px 10px 0; clear:left;}
