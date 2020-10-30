@@ -11,8 +11,9 @@
         function search($idShow);
         function getByCinema($idCinema);
         function getByCinemaByMovie($idCinema, $idMovie);
-        function update(Show $show);
+        function getByDate($date);
         function getByCinemaByMovieByShift($idCinema, $idMovie, $shift);
+        function update(Show $show);
     }
 
 ?>
