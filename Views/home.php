@@ -125,7 +125,7 @@
 </div>
 <!-- #########################################################   OUR CINEMAS  ##################################################### -->
 <div class="background-pic not" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/christian-wiediger-AEeoY_aqvNk-unsplash.jpg');">
-  <h2 class="page-title">Our Cinemas</h2>  
+  <h2 class="page-title backg">Our Cinemas</h2>  
   <section class="hoc container clear up6 "> 
     <ul class="nospace group">
       <?php $indice=0;
@@ -137,7 +137,8 @@
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
-                    <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
+                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -149,7 +150,8 @@
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
-                    <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>"><img class="cinemapic" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
+                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -163,7 +165,8 @@
                                                               $str1 = substr($cinema->getName(), 0, 11) . '...';
                                                               echo $str1;?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
-                <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>"><img class="cinemapic" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
+                <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
+                <img class="cinemapic br" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
                   <div class="excerpttxt up7 mrg_btm2">
                     <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                   </div>
@@ -174,7 +177,7 @@
   </section>
 </div>
 <!-- ########################################### TOP RATED MOVIES  ##################################################### -->
-<div class="bkg" >
+<div class="bkg up" >
               <span></span> <!-- no borrar ! -->
               <span></span>
               <span></span>
@@ -286,5 +289,6 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }</script>
+
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->

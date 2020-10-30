@@ -720,7 +720,7 @@
             $room->setType($value["type"]);
             $room->setCapacity($value["capacity"]);
             $room->setPrice($value["price"]);
-            $room->setName($value["nameroom"]);
+            $room->setName($value["name_room"]);
             $room->setCinema($this->mapCinema($value));
 
             return $room;
