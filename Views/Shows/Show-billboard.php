@@ -36,8 +36,8 @@
                 <div class="hoc floating-label-form up mrg_btm">
                   <div class="mrg_btm">
                     <form action="<?php echo FRONT_ROOT?>Show/filterShow" class="center span hoc " method="post">
-                      <div class="floating-label cardStyle overf">
-                        <input type="date" name="date" value="" placeholder="" class="floating-input" min="<?php echo date('Y-m-d');?>">
+                      <div class="floating-label cardStyle ">
+                        <input type="date" name="date" value="" placeholder="" class="floating-input overf" min="<?php echo date('Y-m-d');?>">
                         <span class="highlight"></span><label for="">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                       
 
