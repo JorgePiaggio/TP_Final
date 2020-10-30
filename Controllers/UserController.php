@@ -79,6 +79,7 @@ class UserController{
         require_once(VIEWS_PATH."Users/User-reviews.php");
     }
 
+
     public function login($email="",$pass=""){
         Validate::checkParameter($email);
 
@@ -97,11 +98,13 @@ class UserController{
         }
     }
 
+
     public function logout(){     
         session_destroy();
         header("location:../Home/index");
     }
     
+
     public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
 
@@ -130,6 +133,7 @@ class UserController{
         $this->showRegister();
     }
 
+
     public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
         Validate::validateSession();
@@ -146,16 +150,22 @@ class UserController{
             $user->setNumber($number);
             $user->setEmail($email);
             $user->setPassword($pass);
-            $this->userDAO->update($user);
-            $_SESSION["loggedUser"]=$email;
-            $_SESSION["role"]=$user->getRole()->getId();
-            $this->msg = "Profile updated";
+            $result = $this->userDAO->update($user);
+            
+            if($result > 0) {
+                $_SESSION["loggedUser"]=$email;
+                $_SESSION["role"]=$user->getRole()->getId();
+                $this->msg = "Profile updated";
+            }else{
+                $this->msg = "Internal error. Please try again later";
+            }
         }
         else{
             $this->msg = "Invalid password";  
         }
         $this->showProfile();
     }
+
 
     public function validatePass($pass, $repass){
         /*if(strlen($pass) < 8){
@@ -185,6 +195,7 @@ class UserController{
         return true;
     }
 
+
     public function validateEmail($email=""){
         Validate::checkParameter($email);
         $users = $this->userDAO->getAll(); 
@@ -209,10 +220,16 @@ class UserController{
 
     public function changeRole($userEmail){
         Validate::validateSession();
-        $this->userDAO->changeRole($userEmail);
-        $this->msg = "Role changed succesfully!";  
-        $this->showUserView($userEmail);
         
+        $result = $this->userDAO->changeRole($userEmail);
+        
+        if($result > 0){
+            $this->msg = "Role changed succesfully!";
+        }else{
+            $this->msg = "Internal error. Please try again later";
+        } 
+        
+        $this->showUserView($userEmail);
     }
 
 

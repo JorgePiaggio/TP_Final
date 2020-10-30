@@ -40,7 +40,7 @@
                                                 <option value="">No actives movies Found</option>
                                               <?php }?>
                                             <?php foreach($movieList as $movie){ ?>
-                                            <option value="<?php echo $movie->getTmdbId(); ?>"><?php echo $movie->getTitle(); ?></option>
+                                            <option value="<?php echo $movie->getTmdbId(); ?>"><?php if(strlen($movie->getTitle())>30){$title=substr($movie->getTitle(),0,30); echo $title."...";}else{echo $movie->getTitle();} ?></option>
                                             <?php }?>
                                         </select>                    
                                 </div>

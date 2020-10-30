@@ -3,11 +3,10 @@
     <nav class="hoc clear"> 
       <ul class="nospace center">
         <li><a href="<?php echo FRONT_ROOT?>Home/index"><i class="fa fa-lg fa-home"></i></a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Shows</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas"">Cinemas</a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
         <li><a href="#footer">About</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Blog</a></li>
       </ul>
     </nav>
 </div>

@@ -73,21 +73,30 @@
 
         public function edit($idCinema="",$name="",$capacity="",$type="",$price="", $idRoom=""){
             Validate::checkParameter($idRoom);
+            
             $wanted=$this->roomDAO->search($idCinema,$name);
             $cinema=$this->cinemaDAO->search($idCinema);
+
             if(!$wanted || $wanted->getCinema()->getIdCinema() == $cinema->getIdCinema()){
-            $room=new Room();
-            $room->setIdRoom($idRoom);
-            $room->setName($name);
-            $room->setCapacity($capacity);
-            $room->setType($type);
-            $room->setPrice($price);
-            $room->setCinema($cinema);
-            
-            $this->roomDAO->update($room);
+                $room=new Room();
+                $room->setIdRoom($idRoom);
+                $room->setName($name);
+                $room->setCapacity($capacity);
+                $room->setType($type);
+                $room->setPrice($price);
+                $room->setCinema($cinema);
+                
+                $result = $this->roomDAO->update($room);
+
+                if($result > 0){
+                    $this->msg = "Room modified successfully";
+                }else{
+                    $this->msg = "No rows updated. Please check your values";
+                }
             }else{
                 $this->msg="Room: '$name' in cinema '" . $cinema->getName() ."' already exists"; 
             }
+
             $this->showRoomList($idCinema);
         }
 

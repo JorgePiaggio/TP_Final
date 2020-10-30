@@ -115,10 +115,11 @@
         public function search($idCinema,$name){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and name=:name";
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema AND nameroom=:name";
+               
+                $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$idCinema;
                 $parameters["name"]=$name;
-                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);              
             }
@@ -160,7 +161,7 @@
         public function update($room){
             try
             {
-                $query = "UPDATE rooms SET name=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
+                $query = "UPDATE rooms SET nameroom=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
 
                 
                 $parameters["idRoom"]=$room->getIdRoom();

@@ -1,6 +1,11 @@
 <main class="list">
           <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/kilyan-sockalingum-nW1n9eNHOsc-unsplash.jpg');">
                <h2 class="page-title up2">Active Cinemas</h2>
+               <div class="hoc"><br>
+                                  <?php if($this->msg != null){?> 
+                                        <center><h4 class="msg"><?php  echo $this->msg;
+                                    } ?> </h4></center>
+                                </div> 
                     <div class="container2">
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
