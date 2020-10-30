@@ -1,5 +1,5 @@
 <main class="py-5">
-    <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
+    <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/nahuel-maretich-EeCQy8ZOmO0-unsplash.jpg');">  
         <h2 class="page-title up2">Edit Show</h2> <br>
           
           <div class="hoc">

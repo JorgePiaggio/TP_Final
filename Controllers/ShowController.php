@@ -93,8 +93,13 @@
                     $show->setRoom($this->roomDAO->searchById($idRoom)); 
                     $show->setMovie($this->movieDAO->search($idMovie));
                     $show->setDateTime($dateShow);
-                    $this->showDAO->add($show);
-                    $this->msg="Added Correctly";
+                    $result = $this->showDAO->add($show);
+
+                    if($result > 0){
+                        $this->msg = "Show Added Succesfully";
+                    }else{
+                        $this->msg = "Internal error. Please try again later";
+                    }
                 }else{
                     $this->msg="There is already a Show for this time";
                 }
@@ -105,12 +110,12 @@
          
 
         }else{
-            $this->msg="The film is already in a Show, please select another";
-            
+            $this->msg="The movie is already in a Show. Please select another movie or pick another date";
         }
 
         $this->showAddView();
     }
+
 
     public function edit($idRoom, $idMovie, $date, $time,$tickets,$idShow){
         if($this->checkAvailability($idMovie, $idRoom, $date)){
@@ -147,8 +152,13 @@
                     $show->setMovie($this->movieDAO->search($idMovie));
                     $show->setDateTime($dateShow);
                     $show->setRemainingTickets($tickets);
-                    $this->showDAO->update($show);
-                    $this->msg="Edited Correctly";
+                    $result = $this->showDAO->update($show);
+
+                    if($result > 0){
+                        $this->msg="Edited Correctly";
+                    }else{
+                        $this->msg = "Internal error. Please try again later";
+                    }
                     }else{
                         $this->msg="the capacity of the new room is not enough for the tickets sold";
                     }
@@ -159,34 +169,33 @@
             }else{
                 $this->msg="Incorrect Date";
             }
-
-           
-
         }else{
-            $this->msg="The film is already in a Show, please select another";
-            
+            $this->msg="The movie is already in a Show. Please select another movie or pick another date";            
         }
         $this->showEditView($idShow);
 
     }
 
+    /* eliminar show si no tiene entradas vendidas */
     public function remove($idShow=""){
 
         $editShow=$this->showDAO->search($idShow);
 
         if($editShow->getRoom()->getCapacity()==$editShow->getRemainingTickets()){
-            $this->showDAO->delete($idShow);
-            $this->msg="Removed Correctly";
+            $result= $this->showDAO->delete($idShow);
+            
+            if($result > 0){
+                $this->msg="Show Removed Correctly";
+            }else{
+                $this->msg = "Internal error. Please try again later";
+            }
+
         }else{
-            $this->msg="Error:this show has sold out tickets";            
+            $this->msg="Error: this show has sold tickets";            
 
         }
 
         $this->showListView($editShow->getRoom()->getCinema()->getIdCinema());
-
-
-
-
     }
 
 
@@ -226,18 +235,18 @@
         foreach($showList as $show){
             //horario y runtime de pelicula en la BDD
             if($show->getIdShow()!= $idShow){
-            $showTime=strtotime($show->getDateTime());
-            $runtime=$show->getMovie()->getRuntime()*60;
-            if($showTime>$showInput){
-                if($showInput+$runtimeInput > $showTime-900){
-                    return false;
-                }
-            }else{
-                    if($showTime+$runtime >$showInput-900 ){
-                    return false;
+                $showTime=strtotime($show->getDateTime());
+                $runtime=$show->getMovie()->getRuntime()*60;
+                if($showTime>$showInput){
+                    if($showInput+$runtimeInput > $showTime-900){
+                        return false;
+                    }
+                }else{
+                        if($showTime+$runtime >$showInput-900 ){
+                            return false;
+                        }
                     }
                 }
-            }
             }
         }
             
@@ -245,6 +254,7 @@
 
     }
         
+    
     /* chequea q la pelicula no este en una funcion en la fecha solicitada */
     private function checkAvailability($idMovie, $idRoom, $date){
 
@@ -262,9 +272,6 @@
             return true;
         }
     }
-  
-
-
 }
     
 ?>

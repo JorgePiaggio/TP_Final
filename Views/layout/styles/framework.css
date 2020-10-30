@@ -42,13 +42,33 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 
 a{outline:none; text-decoration:none;}
 
+.grid{
+  display: flex;
+  justify-content: space-between;
+}
+.marginAuto{
+  margin: 0 auto;
+}
+
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
 
+
+/* imagenes */
 img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
 .imgl{margin:0 15px 10px 0; clear:left;}
 .imgr{margin:0 0 10px 15px; clear:right;}
 img.posterSmall{min-height: 332px !important ;}
+
+
+/*imagen best rated en homepage */
+.xxx{  height: 482px !important;
+  z-index: 111;
+  width:auto; 
+  min-height: 482px !important;
+}
+
+  
 
 /* Fonts
 --------------------------------------------------------------------------------------------------------------- */
@@ -56,8 +76,10 @@ body, input, textarea, select{font-family:Verdana, Geneva, sans-serif;}
 h1, h2, h3, h4, h5, h6, .heading{font-family:Georgia, "Times New Roman", Times, serif;}
 .heading{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif};
 
+
 /* Forms
 --------------------------------------------------------------------------------------------------------------- */
+
 form, fieldset, legend{margin:100px;display:inline;  padding:0; border:none;}
 legend{display:none;}
 label, input, textarea, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
@@ -72,11 +94,14 @@ select.selection{color: black ; background-color: #FF5723; border-color:#df4516;
 select.selection option.selected:hover{color: black ; background-color: #FF5723; }
 
 .floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
+
 .margin1{margin: -60px 0;}
 .margin2{display: inline;top:-10%; left: 71%; margin-bottom:-200px;}
 .margin3{left: -5%;}
 .margin4{left: -25%;}
 .span{display:inline;}
+
+
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
 
@@ -109,6 +134,9 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
        border-bottom:2px solid #FF5723; 
   }
  
+  .floating-input.f ~ label {
+    opacity:0;
+  }
   .floating-input ~ label {
     color:#999; 
     font-size:14px;
@@ -129,10 +157,11 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   opacity: 1;
 }
 
-  .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+  .floating-input:focus ~ label,.floating-input.f:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
     top:-18px;
     font-size:10px;
-    color:#e05505;
+    color:#e05505;  opacity: 1;
+
   }
   
   /* active state */
@@ -190,8 +219,9 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     to 	{ width:0; background:transparent; }
   }
   
-  /****  floating-Lable style end ****/
   
+/* checkboxes for selecting movies 
+************************************************************************************************************************************/
 .check{
   display:inline;
 }
@@ -252,13 +282,14 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0;}
 .font-x3{font-size:2.8rem;}
 
 .wrapper{display:block; position:relative; width:100%; margin:0; padding:0; text-align:left; word-wrap:break-word;}
+.wrap1{height:auto;}
 /*
 The "hoc" class is a generic class used to centre a containing element horizontally
 It should be used in conjunction with a second class or ID
 */
 .hoc{display:block; margin:0 auto;}
 
-
+.hoc2{margin: 0 auto;}
 /* HTML 5 Overrides
 --------------------------------------------------------------------------------------------------------------- */
 address, article, aside, figcaption, figure, footer, header, main, nav, section{display:block; margin:0; padding:0;}

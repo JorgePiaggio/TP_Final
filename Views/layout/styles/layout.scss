@@ -27,9 +27,22 @@ File: Layout CSS
 .up4{margin-top:-105px;}
 .up5{margin-top: -1587px; margin-right: -500px;}
 .up6{margin-top: -60px;}
+.up7{margin-top: -45px;}
+
 .down{margin-top:60px;}
+
+.heightDef{min-height: 610px;}
+
 .mrg_top{
 	margin-top: 20px;
+}
+
+.mrg_btm2{
+    margin-bottom: -35px;
+}
+
+.mrg_btm3{
+    margin-bottom: 55px;
 }
 
 /* Page Intro
@@ -234,6 +247,7 @@ td{border-width:0 1px;}
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
+.background-pic.not{min-height: 400px; }
 .background-pic-promo{background-size: cover; height: auto; background-position: center; background-repeat: no-repeat;}
 .up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
@@ -243,7 +257,7 @@ td{border-width:0 1px;}
 
 /*Promo image
 --------------------------------------------------------------------------------------------------------------- */
-.promo{width:50%; height: auto; float:left; display: inline;margin-bottom: 20px;}
+.promo{width:45%; height: auto; display: inline;margin-bottom: 20px; opacity: .9;}
 
 
 /*Icons
@@ -261,10 +275,9 @@ td{border-width:0 1px;}
 }
 .cardStyle2{
 	background-color:rgba(7, 7, 7, 0.687);
-	border-top-left-radius: 5%;
-	border-top-right-radius: 5%;
+	border-radius: 5%;
 	padding: 20px 20px;
-	color: rgb(167, 164, 164); overflow:hidden; text-overflow: ellipsis;  
+	color: rgb(167, 164, 164); text-overflow: ellipsis;  
 }
 .cardStyle3{
 	background-color:rgba(7, 7, 7, 0.687);
@@ -290,6 +303,7 @@ td{border-width:0 1px;}
 #gallery{display:block; width:100%; margin-bottom:50px;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
 #gallery li{margin-bottom:-50px;}
+#gallery li.spec{margin-bottom:140px;}
 .brd{border-radius: 5%;}
 
 /* Gallery Animations :v 
@@ -314,9 +328,10 @@ td{border-width:0 1px;}
 .bkg {
     position: relative;
     width: cover;
-    height: cover;
+    height: auto;
     background: #6a0101;
     overflow: hidden;
+    min-height:700px;
 }
 
 .bkg span {
@@ -640,6 +655,8 @@ td{border-width:0 1px;}
 
 
 
+
+
 /******************/
 .slideDown{
 max-height: 420px;
@@ -650,7 +667,8 @@ max-height: 420px;
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
 	color:#dc481a; 
 	text-align: center;
-	text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px #000000;
+    padding: 20px 20px;
 }
 
 .slideDown .p-title{
@@ -670,6 +688,11 @@ max-height: 420px;
  .slideDown:hover p{
 	opacity:1;
 	transform: translateY(-300px);
+  }
+
+.slideDown.spec:hover p{
+	opacity:1;
+    transform: translateY(-500px);
   }
 
 svg{display: inline;}
@@ -737,6 +760,7 @@ svg{display: inline;}
 	overflow:hidden; text-overflow: ellipsis;  
 }
 
+
 .name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; }
 
 
@@ -745,7 +769,155 @@ svg{display: inline;}
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------ */
+/* BILLBOARD LIST PAGE
+***********************************************************************************************************************/
+@at-root
+.notCollapsible {
+    background-color: black;
+    color: #FF5723;
+    cursor: normal;
+    padding: 18px;
+    width:100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    
+  }
+  .notCollapsible.nc2{
+    color: grey;
+}
+ 
+  .collapsible {
+    background-color: #FF5723;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width:100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  .collapsible .active, .collapsible:hover {
+    background-color: #dc481a;
+  }
+  
+  .collapsible:after {
+    content: '\02795'; 
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .content1 .active:after {
+    content: "\2796"; 
+  }
+  
+  .content1 {
+    padding: 0 18px;
+    background-color: black;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .content1 a{
+    style: none; 
+    color: black;
+  }
+  
+  .posterBillboard {
+    height:cover;
+    width:cover;
+ 
+  
+  }
+  /* home */ 
+  .posterBillboardHome {
+    height:auto;
+    width:330px;
+    max-width:330px;
+  }
 
+  .p_orange{
+    color: #FF5723;
+    background:none;
+    font-weight: bold;
+    font-size: 20px;
+    text-align:center;
+  }
+  
+  .p_white{
+    color:grey;
+    background:black;
+    text-align:center;
+    }
+  
+  
+  .posterBillboard-hover-zoom {
+    overflow: hidden;
+  }
+  
+  
+  .posterBillboard-hover-zoom--slowmo .posterBillboard {
+    transform-origin: 50% 65%;
+    transition: transform 3s, filter 3s ease-in-out;
+    filter: brightness(150%);
+  }
+  
+  .posterBillboard-hover-zoom--slowmo:hover .posterBillboard {
+    filter: brightness(100%);
+    transform: scale(1.5);
+  
+  }
+  
+  
+  .css-selector {
+      background: linear-gradient(115deg, #500e04, #a12806, #270a0a);
+      background-size: 600% 600%;
+  
+      -webkit-animation: AnimationName 50s ease infinite;
+      -moz-animation: AnimationName 50s ease infinite;
+      -o-animation: AnimationName 50s ease infinite;
+      animation: AnimationName 50s ease infinite;
+  }
+  
+  @-webkit-keyframes AnimationName {
+      0%{background-position:0% 23%}
+      50%{background-position:100% 78%}
+      100%{background-position:0% 23%}
+  }
+  @-moz-keyframes AnimationName {
+      0%{background-position:0% 23%}
+      50%{background-position:100% 78%}
+      100%{background-position:0% 23%}
+  }
+  @-o-keyframes AnimationName {
+      0%{background-position:0% 23%}
+      50%{background-position:100% 78%}
+      100%{background-position:0% 23%}
+  }
+  @keyframes AnimationName {
+      0%{background-position:0% 23%}
+      50%{background-position:100% 78%}
+      100%{background-position:0% 23%}
+  }
+
+.notCollapsible {
+    background-color: black;
+    color: #FF5723;
+    cursor: normal;
+    padding: 18px;
+    width:100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+}
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */

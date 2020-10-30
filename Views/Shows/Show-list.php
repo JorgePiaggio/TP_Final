@@ -1,5 +1,5 @@
 <main class="list">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/kilyan-sockalingum-nW1n9eNHOsc-unsplash.jpg');">
+          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/1b2e-c_gaHvs4KgM-unsplash.jpg');">
          
                <h2 class="page-title up2">Active Shows</h2>
                <form action="<?php echo FRONT_ROOT?>Show/showListView" class="center span" method="post">

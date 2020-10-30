@@ -49,12 +49,12 @@
             <li class="active"><a>Shows</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Show/showAddView">Add</a></li>
-                <li><a href="<?php echo FRONT_ROOT?>Show/showListView">Edit/Remove</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Show/showListView">Edit / Remove</a></li>
               </ul>
             </li>
              <li class="active"><a>Users</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change role</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>User/showSelectUser">Change Role</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>User/showUserReviews">Reviews</a></li>
               </ul>
             <li><a href="<?php echo FRONT_ROOT?>User/logout">Sign out</a></li>
