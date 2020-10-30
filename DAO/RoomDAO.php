@@ -21,7 +21,7 @@
         }
         
         public function add($room){
-            $sql = "INSERT INTO ".$this->tableName." (idCinema,name,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
+            $sql = "INSERT INTO ".$this->tableName." (idCinema,nameroom,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
 
             $parameters["idCinema"]=$room->getCinema()->getIdCinema();
             $parameters["name"]=$room->getName();
@@ -115,10 +115,11 @@
         public function search($idCinema,$name){
             try
             {
-                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema and name=:name";
+                $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema AND nameroom=:name";
+               
+                $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$idCinema;
                 $parameters["name"]=$name;
-                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);              
             }
@@ -160,7 +161,7 @@
         public function update($room){
             try
             {
-                $query = "UPDATE rooms SET name=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
+                $query = "UPDATE rooms SET nameroom=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
 
                 
                 $parameters["idRoom"]=$room->getIdRoom();
@@ -298,7 +299,7 @@
             $room->setType($p["type"]);
             $room->setCapacity($p["capacity"]);
             $room->setPrice($p["price"]);
-            $room->setName($p["name"]);
+            $room->setName($p["nameroom"]);
             $room->setCinema($this->searchCinema($p["idCinema"]));
 
             return $room;

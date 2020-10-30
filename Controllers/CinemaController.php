@@ -135,7 +135,12 @@
 
         public function changeState($idRemove=""){
             Validate::checkParameter($idRemove);
+            $activeShows=$this->showDAO->getAllbyCinema($idRemove);
+            if(!$activeShows){ 
             $this->cinemaDAO->changeState($idRemove);
+            }else{
+                $this->msg="Error: This Cinema has active Shows";
+            }
             $this->showListView();
         }
         
@@ -209,7 +214,7 @@
 
         private function initializeBillboard(){ //inicializa poniendo en estado 0 las peliculas del catalago por cine
             $movies=$this->movieDAO->getAll();
-            $cinemaList=$this->cinemaDAO->getAll();
+            $cinemaList=$this->cinemaDAO->getAllActive();
             if($movies){
                 foreach($cinemaList as $cinema){
                     foreach($movies as $movie){

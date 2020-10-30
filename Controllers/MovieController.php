@@ -4,6 +4,7 @@
     use Models\Movie as Movie;
     use Models\Genre as Genre;
     use DAO\MovieDAO as MovieDAO;
+    use DAO\ShowDAO as ShowDAO;
     use DAO\GenreDAO as GenreDAO;
     use Config\Validate as Validate;
 
@@ -16,6 +17,7 @@
         public function __construct(){
             $this->movieDAO = new MovieDAO();
             $this->genreDAO = new GenreDAO();
+            $this->showDAO = new ShowDAO();
             $this->msg = null;
             $this->addNullGenre();
         }
@@ -234,17 +236,28 @@
 
 
         public function changeState(){
-            #Validate::checkParameter($idMovie);
+            $alert=false; // flag para activar el mensaje
+            $cant=0; // contador para peliculas que tengan funciones activas
             if($_POST){
                 $movies=$_POST["movies"];
                 foreach($movies as $id){
+                    $activeShows=$this->showDAO->getAllbyMovie($id); 
+                    if(!$activeShows){
                     $movie= $this->movieDAO->search($id);   
                     
-                    if($movie->getState() == true){
+                        if($movie->getState() == true){
                         $this->movieDAO->setState($movie->getTmdbId(), intval(false));
-                    }else{
+                        }else{
                         $this->movieDAO->setState($movie->getTmdbId(), intval(true));
+                        }
+                    }else{
+                        $alert=true;
+                        $cant++;
                     }
+                }
+
+                if($alert){
+                    $this->msg= $cant." "."movie/s can't be removed because have active shows";
                 }
             }
             $this->showManageCatalogue();

@@ -324,6 +324,44 @@
         }
     }
 
+    //devuelve todas las funciones actuales y futuras por cine sin limite de tiempo futuro
+    public function getAllByCinema($idCinema){   
+        /*Fecha actual*/
+        $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
+        $showList = array();
+
+        try
+        {       
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) >= 0";
+            
+            $parameters["idCinema"]=$idCinema;
+            $parameters["dateTime"]=$dateNow;
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query,$parameters);
+
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+
 
     /* retorna funciones de una pelicula en un cine, max una semana */
     public function getByCinemaByMovie($idCinema, $idMovie){   
@@ -405,6 +443,45 @@
             throw $ex;
         } 
     }
+
+
+        /* funciones de una pelicula en todos los cines sin limite de tiempo futuro */
+        public function getAllByMovie($idMovie){   
+            /*Fecha actual*/
+            $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
+            $showList = array();
+    
+            try
+            {   
+                $query = "SELECT * FROM shows s 
+                INNER JOIN movies m ON s.idMovie = m.idMovie 
+                INNER JOIN rooms r ON s.idRoom = r.idRoom 
+                INNER JOIN cinemas c ON r.idCinema = c.idCinema
+                WHERE DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
+                
+                $parameters["idMovie"]=$idMovie;
+                $parameters["dateTime"]=$dateNow;
+    
+                $this->connection = Connection::getInstance();
+    
+                $result = $this->connection->execute($query,$parameters);
+    
+                if($result){
+                    foreach($result as $value){
+                        $mapping = $this->mapShow($value);  
+                        array_push($showList, $mapping);
+                    }
+                    return $showList;
+                }
+                else{
+                    return null;
+                }
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            } 
+        }
 
 
 
@@ -524,15 +601,16 @@
         {   
             $query = "UPDATE shows set idRoom=:idRoom , idMovie=:idMovie, dateTime=:dateTime , shift=:shift , remainingTickets=:remainingTickets WHERE idShow=:idShow";
 
+            $this->connection = Connection::getInstance();
             $parameters['idShow']=$show->getIdShow();
 
             $parameters['idRoom']=$show->getRoom()->getIdRoom();
             $parameters['idMovie']=$show->getMovie()->getTmdbID();
-            $parameters['dateTime']=$show->getDateTime();
-            $parameters['shift']=$show->getShift();
-            $parameters['remainingTickets']=$show->getRoom()->getCapacity();
+            $parameters['dateTime']=$show->getDateTime()->format('Y-m-d H:i:s');
+            $parameters['shift']=$this->setShift($show->getDateTime());
+            $parameters['remainingTickets']=$show->getRemainingTickets();
 
-            $this->connection = Connection::getInstance();
+            
 
             $rowCant=$this->connection->executeNonQuery($query,$parameters);
             return $rowCant;
@@ -541,6 +619,20 @@
         {
             throw $ex;
         }
+    }
+
+    public function delete($idShow){
+        try{
+        $query="DELETE FROM shows WHERE idShow=:idShow";
+        $this->connection = Connection::getInstance();
+        $parameters['idShow']=$idShow;
+        $rowCant=$this->connection->executeNonQuery($query,$parameters);
+        return $rowCant;
+        }   
+        catch(\PDOException $ex)
+        {
+        throw $ex;
+        } 
     }
 
 
@@ -590,7 +682,7 @@
             $room->setType($value["type"]);
             $room->setCapacity($value["capacity"]);
             $room->setPrice($value["price"]);
-            $room->setName($value["name"]);
+            $room->setName($value["nameroom"]);
             $room->setCinema($this->mapCinema($value));
 
             return $room;

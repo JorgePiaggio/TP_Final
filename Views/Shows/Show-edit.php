@@ -1,27 +1,12 @@
 <main class="py-5">
     <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/karen-zhao-jLRIsfkWRGo-unsplash.jpg');">  
-        <h2 class="page-title up2">Add Show</h2> <br>
+        <h2 class="page-title up2">Edit Show</h2> <br>
           
           <div class="hoc">
 
               <div class="floating-label-form">
-                <form action="<?php echo FRONT_ROOT?>Show/selectCinema" class="center span" method="post">
-                                <div class="floating-label">
-                                        <select name="selection cinema" class="selection" onchange="this.form.submit()">
-                                            <?php if(!$cinemaList){?>
-                                          <option value="">No Cinemas Found</option>
-                                                <?php } if($cinema){?>
-                                          <option value="<?php echo $cinema->getIdCinema();?>" name="cinemasearch" selected disabled> <?php echo $cinema->getName(); ?></option>
-                                            <?php }?>
-                                              <?php foreach($cinemaList as $cinema){ ?>
-                                          <option value="<?php echo $cinema->getIdCinema(); ?>" name="cinema"><?php echo $cinema->getName(); ?></option>
-                                              <?php }?>
-                                        </select>                    
-                                </div>
-                </form>
-
-
-                <form action="<?php echo FRONT_ROOT?>Show/add" class="center span" method="post">                           
+    
+                <form action="<?php echo FRONT_ROOT?>Show/edit" class="center span" method="post">                           
                         
                                 <div class="floating-label">
                                         <select name="selection room" class="selection">
@@ -40,7 +25,7 @@
                                                 <option value="">No actives movies Found</option>
                                               <?php }?>
                                             <?php foreach($movieList as $movie){ ?>
-                                            <option value="<?php echo $movie->getTmdbId(); ?>"><?php if(strlen($movie->getTitle())>30){$title=substr($movie->getTitle(),0,30); echo $title."...";}else{echo $movie->getTitle();} ?></option>
+                                                <option value="<?php echo $movie->getTmdbId(); ?>"><?php if(strlen($movie->getTitle())>30){$title=substr($movie->getTitle(),0,30); echo $title."...";}else{echo $movie->getTitle();} ?></option>
                                             <?php }?>
                                         </select>                    
                                 </div>
@@ -51,13 +36,15 @@
                                 </div> 
 
                                 <div class="floating-label">
-                                  <input type="time" name="date" value="" placeholder="" class="floating-input" required>
+                                  <input type="time" name="time" value="" placeholder="" class="floating-input" required>
                                   <span class="highlight"></span><label for="">Time</label>
                                 </div>
 
+                                <input type="hidden" name="tickets" value="<?php echo $editShow->getRemainingTickets(); ?>">
+
                                 <div class="hoc"><br>
-                                    <?php if($cinemaList && $roomList && $movieList){?>
-                                    <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button>
+                                    <?php if($roomList && $movieList){?>
+                                    <button type="submit" name="save show" value="<?php echo $editShow->getIdShow();?>" class="btn btn-primary ml-auto d-block">Save</button>
                                     <?php 
                                   } ?>
                                 </div>
@@ -73,5 +60,3 @@
 
      </div>
 </main>
-
-

@@ -55,6 +55,15 @@
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
 
+    public function showEditView($idShow=""){
+        $editShow=$this->showDAO->search($idShow);
+        $roomList=$this->roomDAO->getCinemaRooms($editShow->getRoom()->getCinema()->getIdCinema());
+        $movieList=$this->movieDAO->getAllStateOne();
+        require_once(VIEWS_PATH."Shows/Show-edit.php");
+
+
+    }
+
 
     /* agregar show */
     public function add($idRoom, $idMovie, $date, $time){
@@ -73,7 +82,7 @@
                     $dateShow->setTime($timeFormat[0], $timeFormat[1]);
 
             
-                if($this->validateShow($idRoom,$idMovie,$dateTime)){
+                if($this->validateShow($idRoom,$idMovie,$dateTime,-1)){ //le envio un idshow negativo ya que estoy agregando y no editando
                     $show = new Show();
                     $show->setRoom($this->roomDAO->searchById($idRoom)); 
                     $show->setMovie($this->movieDAO->search($idMovie));
@@ -87,12 +96,91 @@
                 $this->msg="Incorrect Date";
             }
 
-            $this->showAddView();
+         
 
         }else{
             $this->msg="The film is already in a Show, please select another";
-            $this->showAddView();
+            
         }
+
+        $this->showAddView();
+    }
+
+    public function edit($idRoom, $idMovie, $date, $time,$tickets,$idShow){
+        if($this->checkAvailability($idMovie, $idRoom, $date)){
+
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
+        
+            $actualDate=date('Y-m-d H:i');
+            $dateTime=date($date." ".$time);
+
+            if(strtotime($actualDate)<strtotime($dateTime)){
+
+                    $timeFormat=explode(":",$time);
+                    $dateShow = new DateTime($date);
+                    $dateShow->setTime($timeFormat[0], $timeFormat[1]);
+
+            
+                if($this->validateShow($idRoom,$idMovie,$dateTime,$idShow)){
+                    $room=$this->roomDAO->searchById($idRoom);
+                    $previusRoom=$this->showDAO->search($idShow)->getRoom();
+                    if($previusRoom->getCapacity()==$tickets){//si no se vendio entrada 
+                        
+                        $sold=0;
+
+                    }else{ // si se vendieron entradas
+
+                    $sold=$previusRoom->getCapacity()-$tickets;
+                    }
+                    if($room->getCapacity()>=$sold){ // ajusto el nuevo valor de tickets , reviso si las entradas vendidas no sobrepasan la capacidad de la nueva sala
+                    
+                    $tickets=$room->getCapacity()-$sold;
+                    $show = new Show();
+                    $show->setIdShow($idShow);
+                    $show->setRoom($room); 
+                    $show->setMovie($this->movieDAO->search($idMovie));
+                    $show->setDateTime($dateShow);
+                    $show->setRemainingTickets($tickets);
+                    $this->showDAO->update($show);
+                    $this->msg="Edited Correctly";
+                    }else{
+                        $this->msg="the capacity of the new room is not enough for the tickets sold";
+                    }
+                    
+                }else{
+                    $this->msg="There is already a Show for this time";
+                }
+            }else{
+                $this->msg="Incorrect Date";
+            }
+
+           
+
+        }else{
+            $this->msg="The film is already in a Show, please select another";
+            
+        }
+        $this->showEditView($idShow);
+
+    }
+
+    public function remove($idShow=""){
+
+        $editShow=$this->showDAO->search($idShow);
+
+        if($editShow->getRoom()->getCapacity()==$editShow->getRemainingTickets()){
+            $this->showDAO->delete($idShow);
+            $this->msg="Removed Correctly";
+        }else{
+            $this->msg="Error:this show has sold out tickets";            
+
+        }
+
+        $this->showListView($editShow->getRoom()->getCinema()->getIdCinema());
+
+
+
+
     }
 
 
@@ -106,9 +194,21 @@
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
 
+    public function showListView($idCinema=1){
+        $cinema = $this->cinemaDAO->search($idCinema);
+        $cinemaList=$this->cinemaDAO->getAllActive();
+        $showList=null;
+        if($cinema){
+            $showList=$this->showDAO->getAllByCinema($idCinema);
+        }
+
+        require_once(VIEWS_PATH."Shows/Show-list.php");
+
+    }
+
 
     /* chequea que haya una diferencia de 15 minutos entre funcion y funcion */
-    private function validateShow($idRoom,$idMovie,$date){
+    private function validateShow($idRoom,$idMovie,$date,$idShow){ // le envio idShow para que no tenga en cuenta el tiempo previo en la misma funcion que estoy editando
 
         $showList=$this->showDAO->getShowbyTimebyRoom($idRoom,$date);
         //Runtime y horario de pelicula ingresada
@@ -119,6 +219,7 @@
         if($showList){
         foreach($showList as $show){
             //horario y runtime de pelicula en la BDD
+            if($show->getIdShow()!= $idShow){
             $showTime=strtotime($show->getDateTime());
             $runtime=$show->getMovie()->getRuntime()*60;
             if($showTime>$showInput){
@@ -126,8 +227,9 @@
                     return false;
                 }
             }else{
-                if($showTime+$runtime >$showInput-900 ){
+                    if($showTime+$runtime >$showInput-900 ){
                     return false;
+                    }
                 }
             }
             }
