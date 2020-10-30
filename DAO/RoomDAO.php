@@ -21,10 +21,10 @@
         }
         
         public function add($room){
-            $sql = "INSERT INTO ".$this->tableName." (idCinema,name,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
+            $sql = "INSERT INTO ".$this->tableName." (idCinema,nameroom,capacity,type,price) VALUES (:idCinema,:nameroom,:capacity,:type,:price)";
 
             $parameters["idCinema"]=$room->getCinema()->getIdCinema();
-            $parameters["name"]=$room->getName();
+            $parameters["nameroom"]=$room->getName();
             $parameters["type"]=$room->getType();
             $parameters["capacity"]=$room->getCapacity();
             $parameters["price"]=$room->getPrice();
@@ -48,7 +48,7 @@
 
                 $query = "SELECT * FROM ".$this->tableName;
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
                 
@@ -83,7 +83,7 @@
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema";
                 $parameters["idCinema"]=$idCinema;
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query,$parameters);
                 
@@ -190,7 +190,7 @@
 
                 $query = "SELECT idMovie FROM cinemaxmovies WHERE idCinema=:idCinema AND state=1";
 
-                $this->connection = Connection::GetInstance();
+                $this->connection = Connection::getInstance();
                 $parameters["idCinema"]=$idCinema;
 
                 $resultSet = $this->connection->execute($query,$parameters);
@@ -298,7 +298,7 @@
             $room->setType($p["type"]);
             $room->setCapacity($p["capacity"]);
             $room->setPrice($p["price"]);
-            $room->setName($p["name"]);
+            $room->setName($p["nameroom"]);
             $room->setCinema($this->searchCinema($p["idCinema"]));
 
             return $room;

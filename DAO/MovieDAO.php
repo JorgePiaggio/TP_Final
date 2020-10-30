@@ -157,7 +157,7 @@ class MovieDAO implements IMovieDAO{
 
             $query = "SELECT * FROM movies WHERE state = 1";
 
-            $this->connection = Connection::GetInstance();
+            $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
                           
@@ -193,7 +193,7 @@ class MovieDAO implements IMovieDAO{
 
             $query = "SELECT * FROM movies WHERE state = 0";
 
-            $this->connection = Connection::GetInstance();
+            $this->connection = Connection::getInstance();
 
             $resultSet = $this->connection->execute($query);
                           

@@ -2,10 +2,12 @@
     namespace Controllers;
 
     use Models\Show as Show;
+    use Models\Genre as Genre;
     use DAO\ShowDAO as ShowDAO;
     use DAO\RoomDAO as RoomDAO;
     use DAO\MovieDAO as MovieDAO;
     use DAO\CinemaDAO as CinemaDAO;
+    use DAO\GenreDAO as GenreDAO;
     use Config\Validate as Validate;
     use \DateTime;
     use \DateTimeZone;
@@ -16,6 +18,7 @@
         private $movieDAO;
         private $roomDAO;
         private $cinemaDAO;
+        private $genreDAO;
         private $msg;
 
     
@@ -24,25 +27,31 @@
         $this->showDAO = new ShowDAO();
         $this->movieDAO = new MovieDAO();
         $this->roomDAO = new RoomDAO();
+        $this->genreDAO = new GenreDAO();
         $this->msg = null;
     }
 
 
 
-    /* mostrar cartelera completa */
-    public function showBillboard(){
+    /* mostrar cartelera de todos los cines completa o filtrada por fecha y/o género*/
+    public function showBillboard($date="", $genre=""){
+        $actualGenre = null;
+        $allGenre = $this->getAllGenre();                                     //Construyo el genero ficticio all
+        $genreList = $this->genreDAO->getAll();                               //Pido todos los generos para el select
+        
         $showList = $this->showDAO->getAllActive();
         $movieList=array();
         if($showList){ 
             foreach($showList as $show){
                 if(!in_array($show->getMovie(), $movieList)) {
-                  array_push($movieList,$show->getMovie());
+                array_push($movieList,$show->getMovie());
                 }
             }       
         }
         else{
             $this->msg = "No shows on schedule";
         }
+    
         
         require_once(VIEWS_PATH."Shows/Show-billboard.php");
         
@@ -112,6 +121,53 @@
         require_once(VIEWS_PATH."Shows/Show-add.php");
     }
 
+    public function filterShow($date="", $idGenre=""){
+        echo $idGenre;
+        if($_POST){
+            $genre = $this->genreDAO->search($idGenre);                     //Busco el genero elegido
+            if($date != null && $genre->getId() == -1){                     //Si el filtro es por fecha y todos los generos
+                $showList = $this->filterByDate($date);              
+            }else if($date == null && $genre->getId() != -1){                //Si el filtro es solo por genero                
+                $showList = $this->filterByGenre($genre);                                                   
+            }else{                                                          //Si el filtro es por fecha y un genero
+                $showList = $this->filterByDateByGenre($date, $genre);                 
+            }
+        }
+        $this->showBillboard($date, $genre);
+    }
+
+    /* Filtra shows por fecha */
+    public function filterShowByDate($date){
+        $showList = $this->showDAO->getByDate($date);
+        return $showList;
+    }
+
+
+    /* Filtra shows genero */
+    public function filterByGenre($genre){    
+        $showList = array();
+        $shows = $this->showDAO->getAllActive();                     //Busco shows activos
+        foreach($showsByDate as $show){                              
+            if(in_array($genre, $show->getMovie()->getGenre())){     //Si el genero está en una movie de un show
+                array_push($showList, $show);                        //Lo agrego a la lista de shows final
+            }
+        } 
+        return $showList;
+    }
+
+
+      /* Filtra shows por fecha y genero */
+    public function filterByDateByGenre($date, $genre){     
+        $showList = array();
+        $showsByDate = $this->showDAO->getByDate($date);             //Busco shows por fecha 
+        foreach($showsByDate as $show){                              
+            if(in_array($genre, $show->getMovie()->getGenre())){     //Si el genero está en una movie de un show
+                array_push($showList, $show);                        //Lo agrego a la lista de shows final
+            }
+        } 
+        return $showList;
+    }
+
 
     /* chequea que haya una diferencia de 15 minutos entre funcion y funcion */
     private function validateShow($idRoom,$idMovie,$date){
@@ -160,6 +216,17 @@
             return true;
         }
     }
+    
+
+     /*Genero ficticio para traer todas las películas con todos los géneros */
+     private function getAllGenre(){
+        $all= new Genre();
+        $all->setName("All");
+        $all->setId(-1);
+        return $all;
+    }
+
+    
   
 
 

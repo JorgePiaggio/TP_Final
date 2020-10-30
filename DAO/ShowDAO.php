@@ -484,7 +484,42 @@
             throw $ex;
         }
 
-      
+
+    }
+
+    /*Retorna los shows por fecha */
+    public function getByDate($date){   
+        $showList = array();
+
+        try
+        {       
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE DATEDIFF(s.dateTime, :dateTime) = 0";
+            
+            $parameters["date"]=$date;
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query, $parameters);
+
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
     }
 
     
@@ -517,6 +552,8 @@
             return null;
         }
     }
+
+    
 
 
     public function update($show){
@@ -566,7 +603,7 @@
             return null;
         }
     }
-
+    
 
     
     protected function mapShow($value){
@@ -590,7 +627,7 @@
             $room->setType($value["type"]);
             $room->setCapacity($value["capacity"]);
             $room->setPrice($value["price"]);
-            $room->setName($value["name"]);
+            $room->setName($value["nameroom"]);
             $room->setCinema($this->mapCinema($value));
 
             return $room;

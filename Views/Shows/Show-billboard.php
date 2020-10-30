@@ -1,8 +1,32 @@
 <div class="container background-pic css-selector ">  
                        <!------------------------------------------------ CONTENT ------------------------------------------------>
   <h2 class="page-title up2">Billboard</h2>
-    <main class="hoc container clear" > 
+    <main class="hoc container clear" >
+      <div class="floating-label-form"> 
+        <form action="<?php echo FRONT_ROOT?>Show/filterShow" class="center span" method="post">
+          <div class="floating-label">
+            <input type="date" name="date" value="" placeholder="" class="floating-input">
+            <span class="highlight"></span><label for="">Date</label>
+          
 
+          <select name="Genres" class=" selection" id="genre">
+            <?php if($actualGenre){?>
+              <option value="selected" selected disabled> <?php echo $actualGenre->getName();?> </option>
+            <?php } ?>
+            <option value=<?php $allGenre->getId();?> class=" selected"> <?php echo $allGenre->getName();?> </option>
+  
+            <?php foreach($genreList as $genre) { ?>
+              <option value="<?php $genre->getId();?>">
+              <?php echo $genre->getName();?>
+              </option>
+            <?php } ?> 
+          </select>
+
+          
+            <button type="submit" name="" class="btn btn-primary ml-auto d-block">Filter</button>
+          </div>
+        </form>
+      </div> 
                         <!------------------------------------------------ GALLERY ------------------------------------------------>
 
               <?php $indice=0;
