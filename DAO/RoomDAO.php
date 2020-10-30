@@ -24,7 +24,7 @@
             $sql = "INSERT INTO ".$this->tableName." (idCinema,name_room,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
 
             $parameters["idCinema"]=$room->getCinema()->getIdCinema();
-            $parameters["nameroom"]=$room->getName();
+            $parameters["name"]=$room->getName();
             $parameters["type"]=$room->getType();
             $parameters["capacity"]=$room->getCapacity();
             $parameters["price"]=$room->getPrice();
