@@ -34,8 +34,8 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 .bgded{background-position:top center; background-repeat:no-repeat; background-size:cover;}
 .circle{border-radius:50%; background-clip:padding-box;}
 
-.btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid;}
-.btn2{margin-left:-60px; position: absolute; top:50%;}
+.btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid;   border-radius:5%;}
+.btn2{margin-left:-60px; position: absolute; top:50%;   border-radius:5%;}
 .clear, .group{display:block;}
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}
 .clear, .clear::after, .group, .group::after{clear:both;}
@@ -54,20 +54,9 @@ a{outline:none; text-decoration:none;}
 .fl_right, .imgr{float:right;}
 
 
-/* imagenes */
-img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
-.imgl{margin:0 15px 10px 0; clear:left;}
-.imgr{margin:0 0 10px 15px; clear:right;}
-img.posterSmall{min-height: 332px !important ;}
-
-
-/*imagen best rated en homepage */
-.xxx{  height: 482px !important;
-  z-index: 111;
-  width:auto; 
-  min-height: 482px !important;
+.br{
+  border-radius:5%;
 }
-
   
 
 /* Fonts
@@ -271,6 +260,9 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 /* Generalise
 --------------------------------------------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6, .heading{margin:0 0 20px 0; font-size:22px; line-height:normal; font-weight:normal; text-transform:uppercase;}
+h2.www{  margin-bottom:-10px;
+
+}
 .heading.nospace{margin-bottom:0;}
 
 address{font-style:normal; font-weight:normal;}

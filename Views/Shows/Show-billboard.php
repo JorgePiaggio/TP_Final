@@ -1,18 +1,49 @@
-<div class="container background-pic css-selector ">  
-                       <!------------------------------------------------ CONTENT ------------------------------------------------>
-  <h2 class="page-title up2">Billboard</h2>
-    <main class="hoc container clear" > 
 
+<div class="bordo">
+  <div class="container ctr"> 
+                       <!------------------------------------------------ CONTENT ------------------------------------------------>
+    <h2 class="page-title up2 www">Billboard</h2>
+    <div class="bkg">
+      <main class="container clear " >          
+                <span></span> <!-- no borrar ! -->
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+        <div class=" padSides">
                         <!------------------------------------------------ GALLERY ------------------------------------------------>
 
               <?php $indice=0;
                   foreach($movieList as $movie){
-                      if($indice % 3 == 0){?>
+                      if($indice % 4 == 0){?>
                       
-                        <!------------------------------------------------ PRIMER TERCIO ------------------------------------------->
+                        <!------------------------------------------------ PRIMER CUARTO ------------------------------------------->
         
-                        <div class="one_third first">
-                          <div class="cardStyle mrg_btm">
+                        <div class="one_quarter first mrg_btm up">
+                          <div class="cardStyle mrg_sides">
 
                           <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
                           
@@ -30,7 +61,6 @@
                             </div>-->
           
                             <div>
-                              <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
                                 <?php foreach($showList as $show){
@@ -57,10 +87,10 @@
                           <?php 
                       } else { ?>
         
-                              <!------------------------------------------------ LOS OTROS DOS TERCIOS ---------------------------------->
+                              <!------------------------------------------------ LOS OTROS CUARTOS ---------------------------------->
 
-                        <div class="one_third">
-                          <div class="cardStyle mrg_btm">
+                        <div class="one_quarter mrg_btm up">
+                          <div class="cardStyle mrg_sides">
                             
                           <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 
@@ -78,7 +108,6 @@
                             </div>-->
             
                             <div>
-                              <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
                               <?php foreach($showList as $show){
@@ -110,8 +139,8 @@
                                 </div>      
 
                                   <!----------------------------------------------------------------------------------------------------------->
-                 
-    </div>
+      </div>  </div>     
+    </div></div>
   </main>
 </div>
 
@@ -130,4 +159,3 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }</script>
-
