@@ -80,6 +80,7 @@ select.selection{color: black ; background-color: #FF5723; border-color:#df4516;
 select.selection option.selected:hover{color: black ; background-color: #FF5723; }
 
 .floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
+
 .margin1{margin: -60px 0;}
 .margin2{display: inline;top:-10%; left: 71%; margin-bottom:-200px;}
 .margin3{left: -5%;}
@@ -119,6 +120,9 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
        border-bottom:2px solid #FF5723; 
   }
  
+  .floating-input.f ~ label {
+    opacity:0;
+  }
   .floating-input ~ label {
     color:#999; 
     font-size:14px;
@@ -139,10 +143,11 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   opacity: 1;
 }
 
-  .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+  .floating-input:focus ~ label,.floating-input.f:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
     top:-18px;
     font-size:10px;
-    color:#e05505;
+    color:#e05505;  opacity: 1;
+
   }
   
   /* active state */
@@ -200,8 +205,9 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     to 	{ width:0; background:transparent; }
   }
   
-  /****  floating-Lable style end ****/
   
+/* checkboxes for selecting movies 
+************************************************************************************************************************************/
 .check{
   display:inline;
 }
