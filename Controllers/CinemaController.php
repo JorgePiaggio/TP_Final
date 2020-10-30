@@ -139,7 +139,7 @@
             if(!$activeShows){ 
             $this->cinemaDAO->changeState($idRemove);
             }else{
-                $this->msg="Error: This Cinema has active Shows";
+                $this->msg="Error: This Cinema has no active Shows";
             }
             $this->showListView();
         }

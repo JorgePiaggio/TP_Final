@@ -257,7 +257,7 @@
                 }
 
                 if($alert){
-                    $this->msg= $cant." "."movie/s can't be removed because have active shows";
+                    $this->msg= $cant." "."movie/s can't be removed because they are on a show";
                 }
             }
             $this->showManageCatalogue();
