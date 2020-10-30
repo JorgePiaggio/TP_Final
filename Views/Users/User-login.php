@@ -17,13 +17,22 @@
                          <div class="floating-label">
                               <span>&nbsp;</span>
                               <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
-                         </div>
+                         </div><br>
                     </div>
                     <!-- Muestro un mensaje si no existe mail o no coincide pass -->
                     <?php if($this->msg != null){?>      
                          <h4 class="msg"><?php echo $this->msg;
                          } ?>
-                    </h4>                  
+                    </h4>   <br><br>
+
+                    <div class="floating-label">
+                         <h4 class="msg">Not registered?</h4>            
+                    </div><br>
+
+                    <div class="floating-label">
+                         <span>&nbsp;</span>
+                         <a class="btn inverse" href="<?php echo FRONT_ROOT?>User/showRegister">Register</a>
+                    </div>              
                </form>
           </div>
      </section>

@@ -5,7 +5,7 @@
   <main class="hoc container clear" > 
     <div class="content" > 
            <!-- ##################################### ADMIN BUTTONS ########################################################### -->
-        <?php  if($_SESSION && $_SESSION["loggedUser"]=="admin@moviepass.com"){   ?>
+        <?php  if($_SESSION && $_SESSION["role"]== 1){   ?>
           
           <form action="<?php echo FRONT_ROOT?>Movie/showMoviePage" method="post">
                 <div class="floating-label">
