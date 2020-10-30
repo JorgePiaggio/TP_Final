@@ -42,18 +42,32 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 
 a{outline:none; text-decoration:none;}
 
+.grid{
+  display: flex;
+  justify-content: space-between;
+}
+.marginAuto{
+  margin: 0 auto;
+}
+
 .fl_left, .imgl{float:left;}
 .fl_right, .imgr{float:right;}
 
+
+/* imagenes */
 img{width:auto; max-width:100%; height:auto; margin:0; padding:0; border:none; line-height:normal; vertical-align:middle;}
 .imgl{margin:0 15px 10px 0; clear:left;}
 .imgr{margin:0 0 10px 15px; clear:right;}
 img.posterSmall{min-height: 332px !important ;}
 
-.grid{
-  display: flex;
-  justify-content: space-between;
+
+/*imagen best rated en homepage */
+.xxx{  height: 482px !important;
+  z-index: 111;
+  width:auto; 
+  min-height: 482px !important;
 }
+
   
 
 /* Fonts
@@ -275,7 +289,7 @@ It should be used in conjunction with a second class or ID
 */
 .hoc{display:block; margin:0 auto;}
 
-
+.hoc2{margin: 0 auto;}
 /* HTML 5 Overrides
 --------------------------------------------------------------------------------------------------------------- */
 address, article, aside, figcaption, figure, footer, header, main, nav, section{display:block; margin:0; padding:0;}
