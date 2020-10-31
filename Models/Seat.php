@@ -9,7 +9,9 @@ class Seat{
     private $row;
     private $state;
 
-    public function __construct(){}
+    public function __construct(){
+        $this->state=true;
+    }
 
     public function setIdSeat($idSeat){$this->idSeat=$idSeat;}
     public function setNumber($number){$this->number = $number;}
