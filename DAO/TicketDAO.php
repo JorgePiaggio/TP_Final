@@ -12,8 +12,7 @@
     use Models\Ticket as Ticket;
     use Models\User as User;
     use DAO\Connection as Connection;
-    use \DateTime;
-    use \DateTimeZone;
+  
 
 
 class TicketDAO implements ITicketDAO{
