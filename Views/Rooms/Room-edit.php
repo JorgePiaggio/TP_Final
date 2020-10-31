@@ -12,16 +12,16 @@
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Room/edit" method="post">
                               <tr>
-                                   <input type="hidden" name="idcinema" value= "<?php echo $editRoom->getCinema()->getIdCinema();  ?>" >
-                                   <td><input type="text" name="name" value= "<?php echo $editRoom->getName();  ?>" >  </td>
-                                   <td><input type="number" name="capacity" value= "<?php echo $editRoom->getCapacity(); ?>">  </td>
+                                   <input type="hidden"  name="idcinema" value= "<?php echo $editRoom->getCinema()->getIdCinema();  ?>" >
+                                   <td><input type="text" maxlength="50" name="name" value= "<?php echo $editRoom->getName();  ?>" >  </td>
+                                   <td><input type="number" max="100000" name="capacity" value= "<?php echo $editRoom->getCapacity(); ?>">  </td>
                                    <td><select name="typeRoom" >
                                         <option value="2D">2D</option>
                                         <option value="3D">3D</option>
                                    </select> </td>
                                    <div class="floating-label">
                                         <td>
-                                        <input type="number" name="price" value= "<?php echo $editRoom->getPrice(); ?>" placeholder=" " class="floating-input" required>
+                                        <input type="number" max="1000000" name="price" value= "<?php echo $editRoom->getPrice(); ?>" placeholder=" " class="floating-input" required>
                                         </td>                                  
                                    </div>
                               </tr>

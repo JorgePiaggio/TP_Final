@@ -11,7 +11,7 @@ class Ticket{
     private $show;
     private $seat;
     private $price;
-    private $qrCode; //???
+    private $qrCode; 
    
     function __construct(){
         $this->bill = new Bill();
@@ -22,11 +22,13 @@ class Ticket{
     function getIdTicket(){return $this->idTicket;}
     function getBill(){return $this->bill;}
     function getShow(){return $this->show;}
+    function getSeat(){return $this->seat;}
     function getPrice(){return $this->price;}
     function getQrCode(){return $this->qrCode;}
     function setIdTicket($idTicket){$this->idTicket=$idTicket;}
     function setBill($bill){$this->bill=$bill;}
     function setShow($show){$this->show=$show;}
+    function setSeat($seat){$this->seat=$seat;}
     function setPrice($price){$this->price=$price;}
     function setQrCode($qrCode){$this->qrCode=$qrCode;}
 

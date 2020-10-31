@@ -16,12 +16,12 @@
                          <tbody>
                          <form action="<?php echo FRONT_ROOT?>Cinema/edit" method="post">
                               <tr> 
-                              <td><input type="text" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
-                              <td><input type="text" name="street" value= "<?php echo $editCinema->getStreet() ?>">  </td>
-                              <td><input type="number" name="number" value= "<?php echo $editCinema->getNumber() ?>">  </td>
-                              <td><input type="number" name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
-                              <td><input type="email" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
-                              <td><input type="text" name="img" value= "<?php echo $editCinema->getPoster(); ?>"> </td>
+                              <td><input type="text" maxlength="50" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
+                              <td><input type="text" maxlength="50" name="street" value= "<?php echo $editCinema->getStreet() ?>">  </td>
+                              <td><input type="number" max="100000" name="number" value= "<?php echo $editCinema->getNumber() ?>">  </td>
+                              <td><input type="number" maxlength="12"name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
+                              <td><input type="email" maxlength="50" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
+                              <td><input type="text"  maxlength="1000" name="img" value= "<?php echo $editCinema->getPoster(); ?>"> </td>
                               </tr>
 
                               <tr>

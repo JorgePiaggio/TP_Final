@@ -10,12 +10,12 @@
                                       <?php }?>
                                   </select>
                               <div class="floating-label">
-                                   <input type="name" name="name" placeholder=" " class="floating-input" required>
+                                   <input type="name" maxlength="50" name="name" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Name</label>
                               </div>                         
 
                               <div class="floating-label">
-                                   <input type="number" name="size" placeholder=" " class="floating-input" required>
+                                   <input type="number" maxlength="100000" name="size" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Capacity</label>
                               </div>
 
@@ -27,7 +27,7 @@
                                    <span class="highlight"></span>
                               </div>
                               <div class="floating-label">
-                                   <input type="number" name="price" placeholder=" " class="floating-input" required>
+                                   <input type="number" max="1000000" name="price" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Price</label>
                               </div>
                               <br><br>

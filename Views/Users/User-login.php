@@ -5,12 +5,12 @@
                <form action="<?php echo FRONT_ROOT?>User/login" method="post">
                     <div class="floating-label-form">
                          <div class="floating-label">
-                              <input type="email" name="mail" placeholder="" class="floating-input" required>
+                              <input type="email" maxlength="50" name="mail" placeholder="" class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
                          </div> <br>                      
 
                          <div class="floating-label">
-                              <input type="password" name="pass" placeholder=" " class="floating-input" required>
+                              <input type="password" maxlength="16" name="pass" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Password</label>
                          </div><br>
 

@@ -4,31 +4,31 @@
                <form action="<?php echo FRONT_ROOT?>Cinema/add" class="center" method="post">
                          <div class="floating-label-form">
                               <div class="floating-label">
-                                   <input type="text" name="name" placeholder=" " class="floating-input" required>
+                                   <input type="text" maxlength="50" name="name" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Name</label>
                               </div>                         
 
                               <div class="floating-label">
-                                   <input type="text" name="street" placeholder=" " class="floating-input" required>
+                                   <input type="text" maxlength="50" name="street" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Street</label>
                               </div>
 
                               <div class="floating-label">
-                                   <input type="number" name="number" placeholder=" " class="floating-input" required>
+                                   <input type="number" max="100000" name="number" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Number</label>
                               </div>
                               <br>
                               <div class="floating-label">
-                                   <input type="number" name="phone" placeholder=" " class="floating-input" required>
+                                   <input type="number" maxlength="12"  name="phone" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Phone</label>
                               </div>
 
                               <div class="floating-label">
-                                   <input type="email" name="email" placeholder=" " class="floating-input" required>
+                                   <input type="email" maxlength="50" name="email" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Email</label>
                               </div>
                               <div class="floating-label">
-                                   <input type="text" name="img" placeholder="http://www.example.com/image.jpg " class="floating-input f" >
+                                   <input type="text" maxlength="1000" name="img" placeholder="http://www.example.com/image.jpg " class="floating-input f" >
                                    <span class="highlight"></span><label for="">Image url (Optional)</label>
                               </div>
                               <br><br>

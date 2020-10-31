@@ -29,6 +29,7 @@
         $this->roomDAO = new RoomDAO();
         $this->genreDAO = new GenreDAO();
         $this->msg = null;
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
     }
 
 
