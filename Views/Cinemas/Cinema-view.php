@@ -38,72 +38,71 @@
             </div>
     <?php }?>
         </div>
-    </main>     
-    <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
-    <h2 class="page-title">Billboard</h2>
-    <main class="hoc container clear" > 
-        <div class="content" > 
-            <div id="gallery">
-                <figure>
-                    <ul class="nospace clear">
-                    <?php $indice=0; 
-                        if($movieList != null){ 
-                        if(!is_array($movieList)){ ?>
-                            <li class="one_quarter first anim1 slideDown">                                       <!--UNA SOLA PELICULA EN LISTA -->
-                            <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList->getTmdbID()?>">
-                            <img src="<?php echo $movieList->getPoster()?>" alt=""></a>         
-                            <p class="p-title"><?php echo $movieList->getTitle()?></p>
-                            <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movieList->getVoteAverage()?></p>
-                            <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movieList->getGenres())){
-                                                                            echo $movieList->getGenres()->getName();
-                                                                        }else{ 
-                                                                        foreach($movieList->getGenres() as $genre){
-                                                                        $str .=" ".$genre->getName()." /";
-                                                                        }
-                                                                        echo substr_replace($str,"", -1); 
-                                                                        }?></p><?php
-                        }else{
-                            foreach ($movieList as $movie){
-                            if($indice % 4 == 0){?>
-                            <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
-                                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                                <img src="<?php echo $movie->getPoster()?>" alt=""></a>         
-                                <p class="p-title"><?php echo $movie->getTitle()?></p>
-                                <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                                <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                                                echo $movie->getGenres()->getName();
-                                                                            }else{ 
-                                                                            foreach($movie->getGenres() as $genre){
-                                                                            $str .=" ".$genre->getName()." /";
-                                                                            }
-                                                                            echo substr_replace($str,"", -1); 
-                                                                            }?></p>
-                            </li>
-                            <?php }else{ ?>
-                            <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
-                                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                                <img src="<?php echo $movie->getPoster()?>" alt=""></a>
-                                <p class="p-title"><?php echo $movie->getTitle()?></p>
-                                <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                                <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
-                                                                                echo $movie->getGenres()->getName();
-                                                                            }else{ 
-                                                                            foreach($movie->getGenres() as $genre){
-                                                                            $str .=" ".$genre->getName()." /";
-                                                                            }
-                                                                            echo substr_replace($str,"", -1); 
-                                                                            } ?></p>
-                            </li><?php }
-                            $indice++; 
-                            }
-                        } 
-                        }
-                        else{ ?><div class="center"><h4 class="msg">No matching results</h4></div><?php
-                        } ?>
-                    </ul>
-                </figure>
-            </div>
-        </div>
-    </main>
+    </main>  
 </div>  
+   
+    <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
+ <div class="gradient">
+    <h2 class="page-title mrg_btm3">Billboard</h2>
+    <div class="clear grid" > 
+        <div class="hoc "></div>
+            <?php if($movieList){
+                    foreach($movieList as $movie){?>
+                    
+                        <div class="cardStyle mrg_btm3  mrg_sides">
+                            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 
+                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
+                            <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                            </div>
+
+                            <div>
+                            <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
+                            <button type="button" class="collapsible">Show List</button>
+                                <div class="content1">
+                                    <?php foreach($showList as $show){
+                                            if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                            <a href="">
+                                                <p class="p_orange">
+                                                <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                        $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                        echo "Room: ".$str1; ?></h6><?php }else{
+                                                        echo "Room: ".$show->getRoom()->getName();}?>
+                                                </p> <hr>
+                                                <p class="p_white">
+                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                                                </p>
+                                            </a><?php 
+                                            }
+                                        }?> 
+                                </div> 
+                            </div>
+
+                        </div><?php
+                    }
+                }?>
+                                <div class="hoc" margin-left="40%"><br>
+                                            <?php if($this->msg != null){?> 
+                                                    <h4 class="msg"><?php  echo $this->msg;
+                                                } ?> </h4><br><br><br>
+                                </div>  
+    </div><br><br><br>
+</div>
+<!-- ################################################################################################ -->
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}</script>
+
+<!-- ################################################################################################ -->

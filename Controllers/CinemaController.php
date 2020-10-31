@@ -65,7 +65,11 @@
         public function showCinema($idCinema){
             $cinema = $this->cinemaDAO->search($idCinema);
             $movieList = $this->cinemaDAO->getBillboard($idCinema);
-            $roomList = $this->roomDAO->getCinemaRooms($idCinema);      
+            $roomList = $this->roomDAO->getCinemaRooms($idCinema);
+            $showList=$this->showDAO->getAllbyCinema($idCinema);    
+            if(!$movieList){ 
+                $this->msg="This Cinema has no active Shows";
+            } 
             require_once(VIEWS_PATH."Cinemas/Cinema-view.php");
         }
 
