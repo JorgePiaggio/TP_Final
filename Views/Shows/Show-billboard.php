@@ -144,7 +144,7 @@
                                             <p class="p_orange">
                                               <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                                     $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
-                                                    echo $str1; ?></h6><?php }else{
+                                                    echo $str1; ?><?php }else{
                                                     echo $show->getRoom()->getCinema()->getName();}?>
                                             </p> <hr>
                                             <p class="p_white">

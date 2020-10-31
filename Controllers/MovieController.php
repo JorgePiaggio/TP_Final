@@ -75,6 +75,9 @@
             $review=$this->getReview($tmdbId);
             $movie->setReview($review);
             
+             /* solicitar funciones de la muvi */
+            $showList=$this->showDAO->getAllByMovie($tmdbId);
+            
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }
 

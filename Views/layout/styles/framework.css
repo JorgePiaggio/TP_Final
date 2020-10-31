@@ -35,6 +35,7 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 .circle{border-radius:50%; background-clip:padding-box;}
 
 .btn{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid; border-radius:9%;}
+.btn.wweeww{display:inline-block; padding:8px 18px 10px; text-transform:uppercase; border:1px solid; border-radius:9%; left:-20% !important;}
 .btn2{margin-left:-60px; position: absolute; top:50%; border-radius:9%;}
 .clear, .group{display:block;}
 .clear::before, .clear::after, .group::before, .group::after{display:table; content:"";}

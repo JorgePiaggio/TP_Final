@@ -31,9 +31,9 @@
                   }?>
                 </p> 
                 <footer>
-                  <ul class="nospace inline pushright">
-                    <li><a class="btn" href="#">Buy ticket</a></li>
-                    <li><a class="btn inverse" href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieListSlider[$i]->getTmdbID()?>">Movie description</a></li>
+                  <ul class="nospace inline pushright">                    
+                    <li><a class="btn inverse invisible" href="">LOL!</a></li> <!--- BOTON INVISIBLE, LA UNICA FORMA DE CENTRAR AL BOTON Q SIGUE -->
+                    <li><a class="btn" href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieListSlider[$i]->getTmdbID()?>">SHOWS</a></li>
                   </ul>
                 </footer>
               </article>

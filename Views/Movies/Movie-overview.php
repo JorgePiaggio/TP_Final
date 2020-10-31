@@ -51,27 +51,76 @@
             <div class="up">                                           <!-- si hay trailer se muestra, si no en ese espacio se muestra la descripcion -->
               <?php if(!$movie->getVideoPath()){ ?>     
                       <p><h4>Description</h4><?php echo $movie->getDescription()?></p>
-                      <?php }else{ ?></p><p><h4>Trailer</h4>
-                      <iframe width="440" height="300" src="https://www.youtube.com/embed/<?php echo $movie->getVideoPath();?>" 
+                      <?php }else{ ?></p><h4>Trailer</h4>
+                      <iframe class="" width="440" height="300" src="https://www.youtube.com/embed/<?php echo $movie->getVideoPath();?>" 
                       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                       </iframe> <?php } ?>
             </div>
           </div>   
               <!-- ####################################### COLUMNA DERECHA - POSTER ######################################################### -->
           <div class="one_half">                 
-            <img class="brd" src="<?php echo $movie->getPoster() ?>" alt="<?php echo $movie->getTitle()?> poster">
+            <img class="brd2" src="<?php echo $movie->getPoster() ?>" alt="<?php echo $movie->getTitle()?> poster">
           </div>
+              <!-- ####################################### MITAD INFERIOR - FUNCIONES, DESCRIPCION Y REVIEW ######################################################### -->
+
+          <div class="mrg_btm">
+              <button type="button" class="collapsible"><span class="">Show List<span></button>
+              <div class="content1">
+              <?php if(!$showList){ ?>
+                        <p class="p_orange">No shows on schedule</p> <hr><?php
+                    }else{
+                        foreach($showList as $show){
+                          if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                            <a href="">
+                              <p class="p_orange">
+                                <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
+                                      $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
+                                      echo $str1; ?></h6><?php }else{
+                                      echo $show->getRoom()->getCinema()->getName();}?>
+                              </p> <hr>
+                              <p class="p_white">
+                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                              </p>
+                            </a><?php 
+                          }
+                        }
+                    }?> 
+              </div> 
+            </div>
         </div>
         <div class="container clear up ">
             <div class="up2">
               <?php if($movie->getVideoPath()){ ?>           <!-- si hay trailer, la descripcion se muestra debajo -->
               <p><h4>Description</h4><?php echo $movie->getDescription()?></p><br>
-              </div> <?php } ?>
+            </div> <?php } ?>
             <p><h4>Review</h4><?php if($movie->getReview()){
                                     echo $movie->getReview()['content'];} else {echo "Not reviewed yet";} ?></p>
             <p class= "fl_right"><?php if($movie->getReview()){
-                                       echo $movie->getReview()['author'];}?></p>
-        </div>
+                                        echo $movie->getReview()['author'];}?></p>
+          </div>
         </div>
   </main>
 </div>
+
+
+
+
+
+
+
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}</script>

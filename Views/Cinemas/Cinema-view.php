@@ -57,35 +57,35 @@
                             </div>
 
                             <div>
-                            <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
-                            <button type="button" class="collapsible">Show List</button>
-                                <div class="content1">
-                                    <?php foreach($showList as $show){
-                                            if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                            <a href="">
-                                                <p class="p_orange">
-                                                <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                        $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                        echo "Room: ".$str1; ?></h6><?php }else{
-                                                        echo "Room: ".$show->getRoom()->getName();}?>
-                                                </p> <hr>
-                                                <p class="p_white">
-                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
-                                                </p>
-                                            </a><?php 
-                                            }
-                                        }?> 
-                                </div> 
+                                <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
+                                <button type="button" class="collapsible">Show List</button>
+                                    <div class="content1">
+                                        <?php foreach($showList as $show){
+                                                if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                                <a href="">
+                                                    <p class="p_orange">
+                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                            echo "Room: ".$str1; ?></h6><?php }else{
+                                                            echo "Room: ".$show->getRoom()->getName();}?>
+                                                    </p> <hr>
+                                                    <p class="p_white">
+                                                    <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                                                    </p>
+                                                </a><?php 
+                                                }
+                                            }?> 
+                                    </div> 
                             </div>
 
                         </div><?php
                     }
                 }?>
-                                <div class="hoc" margin-left="40%"><br>
-                                            <?php if($this->msg != null){?> 
-                                                    <h4 class="msg"><?php  echo $this->msg;
-                                                } ?> </h4><br><br><br>
-                                </div>  
+                <div class="hoc"><br>
+                            <?php if($this->msg != null){?> 
+                                    <h4 class="msg"><?php  echo $this->msg;
+                                } ?> </h4><br><br><br>
+                </div>  
     </div><br><br><br>
 </div>
 <!-- ################################################################################################ -->

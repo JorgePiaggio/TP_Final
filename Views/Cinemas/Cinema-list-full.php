@@ -37,7 +37,7 @@
                   }
                 } 
               else{ ?>
-                <div class="center"><h4 class="msg">No matching results</h4></div>
+               <h4 class="msg">No matching results</h4>
         <?php } ?>
             </ul>
         </figure>

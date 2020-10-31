@@ -23,6 +23,7 @@ File: Layout CSS
 .page-title.v2{font-size: 55px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
 .page-title-special{margin: auto;}
 .page-title.backg{background-color: rgba(85, 84, 84, 0.689);}
+.up{margin-top:-20px;}
 .up2{margin-top:-80px;}
 .up3{margin-top:-100px;}
 .up4{margin-top:-105px;}
@@ -37,7 +38,6 @@ File: Layout CSS
 .mrg_btm{
     margin-bottom: 60px;
 }
-
 
 .mrg_top{
 	margin-top: 20px;
@@ -263,7 +263,6 @@ td{border-width:0 1px;}
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
 .background-pic.not{min-height: 400px; }
 .background-pic-promo{background-size: cover; height: auto; background-position: center; background-repeat: no-repeat;}
-.up{margin-top:-20px;}
 .back{height:680px;} /*fondo slide*/
 .cinemapic{width:auto; height: 250px;}
 .cinemapic2{max-width: max-content; height: 260px; min-height: 260px;}
@@ -343,7 +342,17 @@ img.posterSmall{min-height: 332px !important ;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
 #gallery li{margin-bottom:-50px;}
 #gallery li.spec{margin-bottom:140px;}
-.brd{border-radius: 5%;}
+
+.brd{
+    border-radius: 5%;
+}
+.brd2{
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+max-height: 678px;
+ min-height: 678px;
+}
+
 
 /* Gallery Animations :v 
 --------------------------------------------------------------------------------------------------------------- */
@@ -972,7 +981,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
-
+.invisible{opacity:0;}
 .gradient{
 	background: rgb(73,3,3); /* Old browsers */
 	background: -moz-linear-gradient(-45deg,  rgba(73,3,3,1) 0%, rgba(96,4,4,1) 36%, rgba(128,6,6,1) 42%, rgba(155,7,7,1) 44%, rgba(96,4,4,1) 48%, rgba(96,4,4,1) 51%, rgba(96,4,4,1) 62%, rgba(160,8,8,1) 75%, rgba(96,4,4,1) 88%, rgba(96,4,4,1) 100%); /* FF3.6-15 */
