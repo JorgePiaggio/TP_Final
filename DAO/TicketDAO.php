@@ -1,6 +1,5 @@
 <?php
     namespace DAO;
-
     
     use DAO\ITicketDAO as ITicketDAO;
     use Models\Show as Show;
@@ -15,9 +14,12 @@
   
 
 
-class TicketDAO implements ITicketDAO{
+    class TicketDAO implements ITicketDAO{
         private $connection;
         
+
+        function __construct(){}
+
 
         public function add($ticket){
             $sql = "INSERT INTO tickets (idBill, idShow, seat, priceTicket, qrCode)
@@ -155,32 +157,351 @@ class TicketDAO implements ITicketDAO{
 
 
         
-    public function update($ticket){
-        try
-        {   
-            $query = "UPDATE tickets set idBill=:idBill , seat=:seat, idShow=:idShow , priceTicket=:priceTicket , qrCode=:qrCode WHERE idTicket=:idTicket";
+        public function update($ticket){
+            try
+            {   
+                $query = "UPDATE tickets set idBill=:idBill , seat=:seat, idShow=:idShow , priceTicket=:priceTicket , qrCode=:qrCode WHERE idTicket=:idTicket";
 
-            $this->connection = Connection::getInstance();
-            $parameters['idShow']=$ticket->getShow()->getIdShow();
+                $this->connection = Connection::getInstance();
+                $parameters['idShow']=$ticket->getShow()->getIdShow();
 
-            $parameters['seat']=$ticket->getSeat();
-            $parameters['idBill']=$ticket->getBill()->getIdBill();
-            $parameters['priceTicket']=$ticket->getPrice();
-            $parameters['qrCode']=$ticket->getQrCode();
-            $parameters['idTicket']=$ticket->getIdTicket();
+                $parameters['seat']=$ticket->getSeat();
+                $parameters['idBill']=$ticket->getBill()->getIdBill();
+                $parameters['priceTicket']=$ticket->getPrice();
+                $parameters['qrCode']=$ticket->getQrCode();
+                $parameters['idTicket']=$ticket->getIdTicket();
+
+                
+
+                $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                return $rowCant;
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
+
+
+        /* Retorna el total de tickets vendidos para una fecha en un cine */
+        public function ticketsByCinemaByDate($idCinema, $dateTime){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom 
+                            HAVING DATEDIFF(s.dateTime, :dateTime) = 0 AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+                $parameters["dateTime"] = $dateTime;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
+        }    
+        
+        
+        /* Retorna el total de tickets vendidos para el mes actual en un cine*/
+        public function ticketsByCinemaByThisMonth($idCinema){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            HAVING DATEPART(month, s.dateTime) = DATEPART(month, GETDATE()) AND DATEPART(year, s.dateTime) =  DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;
+        }
+
+
+        /* Retorna el total de tickets vendidos para un año en un cine*/
+        public function ticketsByCinemaByYear($idCinema, $year){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            HAVING DATEPART(year, s.dateTime) = :year AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+                $parameters["year"] = $year;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;
+        }
+
+
+        /* Retorna el total de tickets vendidos para este año en un cine */
+        public function ticketsByCinemayThisYear($idCinema){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBil.
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            HAVING DATEPART(year, s.dateTime) = DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
+        }
+
+
+        /* Retorna el total de tickets vendidos para una función */
+        public function ticketsByshow($idShow){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBil.
+                            WHERE t.idShow = :idShow";
+
+                $parameters["idShow"] = $idShow;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
+        }
+
+
+        
+        /* Retorna el total de tickets vendidos para una película en un cine */
+        public function ticketsByCinemaByMovie($idCinema, $idMovie){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBil.
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["idMovie"] = $idMovie;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
+        }
+
 
             
+        /* Retorna el total de tickets vendidos para un pelicula para un turno en un cine */
+        public function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            WHERE s.idMovie = :idMovie  AND r.idCinema = :idCinema AND s.shift = :shift";
 
-            $rowCant=$this->connection->executeNonQuery($query,$parameters);
-            return $rowCant;
+                $parameters["idCinema"] = $idCinema;
+                $parameters["idMovie"] = $idMovie;
+                $parameters["shift"] = $shift;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
         }
-        catch(\PDOException $ex)
-        {
-            throw $ex;
+
+
+
+
+
+
+
+
+
+        
+        /* Retorna el total de dinero recaudado en una fecha en un cine*/
+        public function cashByCinemaByDate($idCinema, $date){
+            try
+            {   
+                $query = "SELECT sum(totalPrice) FROM bills 
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom
+                            HAVING DATEDIFF(date, :date) = 0 AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+                $parameters["date"] = $date;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;        
+        }        
+
+
+        /* Retorna el total de dinero recaudado en el mes actual en un cine*/
+        public function cashByCinemaByMonth($idCinema){
+            try
+            {   
+                $query = "SELECT sum(totalPrice) FROM bills
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom 
+                            HAVING DATEPART(month, date) = DATEPART(month, GETDATE()) AND DATEPART(year, date) =  DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+
+                $parameters["idCinema"] = $idCinema;
+
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;
         }
-    }
 
 
+        /* Retorna el total de dinero recaudado en un año en un cine*/
+        public function cashByCinemaByYear($idCinema, $year){
+            try
+            {   
+                $query = "SELECT sum(totalPrice) FROM bills
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom 
+                            HAVING DATEPART(year, date) = :year AND r.idCinema = :idCinema";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["year"] = $year;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;
+        }
+
+
+        /* Retorna el total de dinero recaudado este año en un cine*/
+        public function cashByCinemaByThisYear($idCinema){
+            try
+            {   
+                $query = "SELECT sum(totalPrice) FROM bills
+                            JOIN tickets AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON t.idRoom = r.idRoom 
+                            HAVING DATEPART(year, date) = DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+                
+                $parameters["idCinema"] = $idCinema;
+
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $result;
+        }
 
 
         protected function mapTicket($value){
@@ -207,46 +528,41 @@ class TicketDAO implements ITicketDAO{
             $show->setRemainingTickets($value["remainingTickets"]);
             
             return $show;
-      
-    }
+        
+        }
 
-    protected function mapRoom($value){
-        
-            $room=new Room();
-            $room->setIdRoom($value["idRoom"]);
-            $room->setType($value["type"]);
-            $room->setCapacity($value["capacity"]);
-            $room->setPrice($value["price"]);
-            $room->setName($value["name_room"]);
-            $room->setCinema($this->mapCinema($value));
+        protected function mapRoom($value){
+            
+                $room=new Room();
+                $room->setIdRoom($value["idRoom"]);
+                $room->setType($value["type"]);
+                $room->setCapacity($value["capacity"]);
+                $room->setPrice($value["price"]);
+                $room->setName($value["name_room"]);
+                $room->setCinema($this->mapCinema($value));
 
-            return $room;
+                return $room;
 
-        
-    }
+            
+        }
 
-    protected function mapCinema($value){
-        
-        
-        
-             $cinema=new Cinema();
-             $cinema->setIdCinema($value["idCinema"]);
-             $cinema->setState($value["state"]);
-             $cinema->setName($value["name"]);
-             $cinema->setStreet($value["street"]);
-             $cinema->setNumber($value["number"]);
-             $cinema->setEmail($value["email"]);
-             $cinema->setPhone($value["phone"]);
-             $cinema->setPoster($value["poster"]);
-             
+        protected function mapCinema($value){
+            
+            $cinema=new Cinema();
+            $cinema->setIdCinema($value["idCinema"]);
+            $cinema->setState($value["state"]);
+            $cinema->setName($value["name"]);
+            $cinema->setStreet($value["street"]);
+            $cinema->setNumber($value["number"]);
+            $cinema->setEmail($value["email"]);
+            $cinema->setPhone($value["phone"]);
+            $cinema->setPoster($value["poster"]);   
 
             return $cinema;
-    }
+        }
 
-    protected function mapMovie($p){
-       
+        protected function mapMovie($p){
         
-       
             $movie=new Movie();
             $movie->setTmdbId($p["idMovie"]);
             $movie->setTitle($p["title"]);
@@ -266,40 +582,34 @@ class TicketDAO implements ITicketDAO{
             $movie->setReview($p["review"]);
             $movie->setState($p["state"]);
 
-
             return $movie;
-       
+        }
 
-       
-    }
+        protected function mapSeat($value){
+            $seat=new Seat();
+            $seat->setIdSeat($value["idSeat"]);
+            $seat->setRow($value["rowSeat"]);
+            $seat->setNumber($value["numberSeat"]);
+            $seat->setState($value["stateSeat"]);
 
-    protected function mapSeat($value){
-        $seat=new Seat();
-        $seat->setIdSeat($value["idSeat"]);
-        $seat->setRow($value["rowSeat"]);
-        $seat->setNumber($value["numberSeat"]);
-        $seat->setState($value["stateSeat"]);
+            return $seat;
+        }
 
-        return $seat;
-    }
+        protected function mapBill($value){
+            $bill= new Bill();
+            $bill->setIdBill($value["idBill"]);
+            $bill->setUser($this->mapUser($value));
+            $bill->setTickets($value["tickets"]);
+            $bill->setDate($value["date"]);
+            $bill->setTotalPrice($value["totalPrice"]);
+            $bill->setDiscount($value["discount"]);
+            
+            return $bill;
 
-    protected function mapBill($value){
-        $bill= new Bill();
-        $bill->setIdBill($value["idBill"]);
-        $bill->setUser($this->mapUser($value));
-        $bill->setTickets($value["tickets"]);
-        $bill->setDate($value["date"]);
-        $bill->setTotalPrice($value["totalPrice"]);
-        $bill->setDiscount($value["discount"]);
-        
-        return $bill;
+        }
 
-    }
-
-    protected function mapUser($p){
-      
-        
-        
+        protected function mapUser($p){        
+            
             $user = new User();
             $user->setIdUser($p["idUser"]);
             $user->setDni($p["dni"]);
@@ -309,11 +619,10 @@ class TicketDAO implements ITicketDAO{
             $user->setNumber($p["number"]);
             $user->setEmail($p["email"]);
             $user->setPassword($p["password"]);
+
             return $user;
+        }
 
-    
-    }
-
-        
+            
 
     }
