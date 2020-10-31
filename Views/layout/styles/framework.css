@@ -59,7 +59,11 @@ a{outline:none; text-decoration:none;}
 .br{
   border-radius:5%;
 }
-  
+.map{  
+  margin-top: 15px; 
+  border-radius:5%;
+  box-shadow: 2px 2px 2px 1px #FF5723;
+}
 
 /* Fonts
 --------------------------------------------------------------------------------------------------------------- */
