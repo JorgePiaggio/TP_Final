@@ -1,4 +1,3 @@
-
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/roll.jpg');">
     <h2 class="page-title"><?php echo $cinema->getName() ?></h2>
     <main class="hoc container clear"> 
@@ -24,7 +23,13 @@
                 </div>
                                 
                 <div class="one_half right">                 
-                    <img class="cinemapic2 brd" src="<?php echo $cinema->getPoster();?>" alt="">
+                    <?php $address= $cinema->getNumber().$cinema->getStreet()." Mar del Plata";
+                    if (isset($address))
+                    {
+                    $address = str_replace(" ", "+", $address);
+                    ?>
+                    <iframe class="map" width="200%" height="400" src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+                    <?php } ?>
                 </div>
             </div>  
         </div>
@@ -75,7 +80,8 @@
                                                 </a><?php 
                                                 }
                                             }?> 
-                                    </div> 
+                                    </div>
+
                             </div>
 
                         </div><?php
@@ -86,7 +92,7 @@
                                     <h4 class="msg"><?php  echo $this->msg;
                                 } ?> </h4><br><br><br>
                 </div>  
-    </div><br><br><br>
+    </div><br><br><br><div id =”my-map” style = “width:800px; height:600px;”></div>
 </div>
 <!-- ################################################################################################ -->
 
@@ -106,3 +112,5 @@ for (i = 0; i < coll.length; i++) {
 }</script>
 
 <!-- ################################################################################################ -->
+
+
