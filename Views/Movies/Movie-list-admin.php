@@ -36,7 +36,7 @@
                     </a>         
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
-                    <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
+                    <p><i class="fa fa-tags" ></i><?php $str=""; if(!is_array($movie->getGenres())){
                                                                   echo $movie->getGenres()->getName();
                                                                 }else{ 
                                                                   foreach($movie->getGenres() as $genre){

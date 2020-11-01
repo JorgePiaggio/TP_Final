@@ -5,29 +5,29 @@
                <div class="container up2">
                     <div class="floating-label-form">
                          <div class="floating-label">
-                              <input type="text" maxlength="50" name="name" value="<?php if($this->user != null){echo $this->user->getName();}  ?>" placeholder="" class="floating-input" required>
+                              <input type="text" maxlength="50" name="name" value="<?php if($this->user != null){echo $this->user->getName();}  ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Name</label>
                          </div>  <br>
 
                          <div class="floating-label">
-                              <input type="text" maxlength="50" name="surname" value="<?php if($this->user != null){echo $this->user->getSurname();}  ?>" placeholder="" class="floating-input" required>
+                              <input type="text" maxlength="50" name="surname" value="<?php if($this->user != null){echo $this->user->getSurname();}  ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Surname</label>
                          </div>  <br>
                          <div class="floating-label">
-                              <input type="text" maxlength="10" name="dni" value="<?php if($this->user != null){echo $this->user->getDni();}  ?>" placeholder="" class="floating-input" required>
+                              <input type="text" maxlength="10" name="dni" value="<?php if($this->user != null){echo $this->user->getDni();}  ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">DNI</label>
                          </div>  <br>
                          <div class="floating-label">
-                              <input type="text" maxlength="50" name="street" value="<?php if($this->user != null){echo $this->user->getStreet();} ?>" placeholder="" class="floating-input" required>
+                              <input type="text" maxlength="50" name="street" value="<?php if($this->user != null){echo $this->user->getStreet();} ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Street</label>
                          </div> 
                          <div class="floating-label">
-                              <input type="number" max="100000" name="number" value="<?php if($this->user != null){echo $this->user->getNumber();}  ?>" placeholder="" class="floating-input" required>
+                              <input type="number" max="100000" name="number" value="<?php if($this->user != null){echo $this->user->getNumber();}  ?>" placeholder=""  class="floating-input" required>
                               <span class="highlight"></span><label for="">Number</label>
                          </div> <br> 
                          
                          <div class="floating-label">
-                              <input type="email" maxlength="50" name="mail" maxvalue="<?php if($this->user != null){echo $this->user->geEmail();}  ?>" placeholder="" class="floating-input" required>
+                              <input type="email" maxlength="50" name="mail" maxvalue="<?php if($this->user != null){echo $this->user->geEmail();}  ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
                          </div>   <br>                      
 

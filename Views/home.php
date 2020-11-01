@@ -1,8 +1,8 @@
-<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');">   <div class="hoc" margin-left="40%"><br>
+<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');">   
                       <?php if($this->msg != null){?> 
-                            <h4 class="msg"><?php  echo $this->msg;
-                        } ?> </h4>
-                    </div>  
+                            <h4 class="msg"><?php  echo $this->msg;?> </h4> <?php
+                        } ?> 
+                     
   <!-- ###################################### FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
@@ -98,7 +98,7 @@
               <div class="content1">
                 <?php foreach($showList as $show){
                         if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                          <a href="">
+                          <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
                             <p class="p_orange">
                               <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                     $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';

@@ -44,6 +44,13 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
+    public function showPurchaseView($idShow){
+        $show = $this->showDAO->search($idShow);
+        $seats=$this->seatDAO->getbyShow($idShow);
+        require_once(VIEWS_PATH."Tickets/purchase-view.php");
+    }
+
+
     public function add($idShow, $seatNumber, $seatRow, $idUser, $creditCardCompany, $creditCardNumber, $creditCardPropietary, $creditCardExpiration){
         Validate::checkParameter($idShow);
 

@@ -3,7 +3,7 @@
     
     use Models\CreditCardPayment as CreditCardPayment;
 
-    interface ICreditCardPayment{
+    interface ICreditCardPaymentDAO{
         function add(CreditCardPayment $CreditCardPayment);
     }
 

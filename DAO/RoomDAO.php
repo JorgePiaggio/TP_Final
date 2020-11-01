@@ -21,11 +21,13 @@
         }
         
         public function add($room){
-            $sql = "INSERT INTO ".$this->tableName." (idCinema,name_room,capacity,type,price) VALUES (:idCinema,:name,:capacity,:type,:price)";
+            $sql = "INSERT INTO ".$this->tableName." (idCinema,name_room,capacity,roomrows,roomcolumns,type,price) VALUES (:idCinema,:name,:capacity,:rows,:columns,:type,:price)";
 
             $parameters["idCinema"]=$room->getCinema()->getIdCinema();
             $parameters["name"]=$room->getName();
             $parameters["type"]=$room->getType();
+            $parameters["rows"]=$room->getRows();
+            $parameters["columns"]=$room->getColumns();
             $parameters["capacity"]=$room->getCapacity();
             $parameters["price"]=$room->getPrice();
             
@@ -161,12 +163,14 @@
         public function update($room){
             try
             {
-                $query = "UPDATE rooms SET name_room=:name, capacity=:capacity , type=:type, price=:price  WHERE idRoom=:idRoom";
+                $query = "UPDATE rooms SET name_room=:name, capacity=:capacity, roomrows=:rows, roomcolumns=:columns , type=:type, price=:price  WHERE idRoom=:idRoom";
 
                 
                 $parameters["idRoom"]=$room->getIdRoom();
                 $parameters["name"]=$room->getName();
                 $parameters["capacity"]=$room->getCapacity();
+                $parameters["rows"]=$room->getRows();
+                $parameters["columns"]=$room->getColumns();
                 $parameters["type"]=$room->getType();
                 $parameters["price"]=$room->getPrice();
                # $parameters["idCinema"]=$room->getCinema()->getIdCinema();
@@ -298,6 +302,8 @@
             $room->setIdRoom($p["idRoom"]);
             $room->setType($p["type"]);
             $room->setCapacity($p["capacity"]);
+            $room->setColumns($p["roomcolumns"]);
+            $room->setRows($p["roomrows"]);
             $room->setPrice($p["price"]);
             $room->setName($p["name_room"]);
             $room->setCinema($this->searchCinema($p["idCinema"]));

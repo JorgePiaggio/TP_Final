@@ -47,7 +47,7 @@
             }
 
 
-        public function add($idCinema="",$name="",$capacity="",$type="",$price=""){
+        public function add($idCinema="",$name="",$rows="",$columns="",$type="",$price=""){
             Validate::checkParameter($idCinema);
             $wanted=$this->roomDAO->search($idCinema,$name);    /* chequear si ya existe sala con ese id y nombre */
             $cinemaSearch = $this->cinemaDAO->search($idCinema);    /*buscar cine al q agregar la sala */
@@ -55,7 +55,9 @@
             if(!$wanted){
                 $newRoom= new Room();
                 $newRoom->setName($name);
-                $newRoom->setCapacity($capacity);
+                $newRoom->setCapacity($rows*$columns);
+                $newRoom->setRows($rows);
+                $newRoom->setColumns($columns);
                 $newRoom->setType($type);
                 $newRoom->setPrice($price);
                 $newRoom->setCinema($cinemaSearch); 
@@ -71,7 +73,7 @@
         }
 
 
-        public function edit($idCinema="",$name="",$capacity="",$type="",$price="", $idRoom=""){
+        public function edit($idCinema="",$name="",$rows="",$columns="",$type="",$price="", $idRoom=""){
             Validate::checkParameter($idRoom);
             
             $wanted=$this->roomDAO->search($idCinema,$name);
@@ -81,7 +83,9 @@
                 $room=new Room();
                 $room->setIdRoom($idRoom);
                 $room->setName($name);
-                $room->setCapacity($capacity);
+                $room->setCapacity($rows*$columns);
+                $room->setRows($rows);
+                $room->setColumns($columns);
                 $room->setType($type);
                 $room->setPrice($price);
                 $room->setCinema($cinema);
