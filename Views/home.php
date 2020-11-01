@@ -87,7 +87,9 @@
             <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 
             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-              <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+              </a>
             </div>
 
             <div>
@@ -142,7 +144,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <img class="cinemapic br shadow2" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -155,7 +157,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <img class="cinemapic br shadow2" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -170,7 +172,7 @@
                                                               echo $str1;?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                 <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                <img class="cinemapic br" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
+                <img class="cinemapic br shadow2" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
                   <div class="excerpttxt up7 mrg_btm2">
                     <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                   </div>

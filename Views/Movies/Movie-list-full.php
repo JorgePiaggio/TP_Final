@@ -25,9 +25,9 @@
             <?php $indice=0; 
               if($movieList != null){ 
                 if(!is_array($movieList)){ ?>
-                  <li class="one_quarter first anim1 slideDown">                                       <!--UNA SOLA PELICULA EN LISTA -->
+                  <li class="one_quarter first anim1 slideDown mlist">                                       <!--UNA SOLA PELICULA EN LISTA -->
                   <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movieList->getTmdbID()?>">
-                  <img class="posterSmall" src="<?php echo $movieList->getPoster()?>" alt=""></a>         
+                  <img class="posterSmall shadow" src="<?php echo $movieList->getPoster()?>" alt=""></a>         
                   <p class="p-title"><?php echo $movieList->getTitle()?></p>
                   <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movieList->getVoteAverage()?></p>
                   <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movieList->getGenres())){
@@ -41,9 +41,9 @@
                 }else{
                   foreach ($movieList as $movie){
                     if($indice % 4 == 0){?>
-                    <li class="one_quarter first anim1 slideDown">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
+                    <li class="one_quarter first anim1 slideDown mlist">                                       <!-- PRIMERA IMAGEN DE LA FILA -->
                       <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>         
+                      <img class="posterSmall shadow" src="<?php echo $movie->getPoster()?>" alt=""></a>         
                       <p class="p-title"><?php echo $movie->getTitle()?></p>
                       <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                       <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){
@@ -56,9 +56,9 @@
                                                                   }?></p>
                     </li>
                     <?php }else{ ?>
-                    <li class="one_quarter anim1 slideDown">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
+                    <li class="one_quarter anim1 slideDown mlist">                                             <!-- LAS OTRAS TRES IMAGENES DE LA FILA -->
                       <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""></a>
+                      <img class="posterSmall shadow" src="<?php echo $movie->getPoster()?>" alt=""></a>
                       <p class="p-title"><?php echo $movie->getTitle()?></p>
                       <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
                       <p><i class="fa fa-tags"></i><?php $str=""; if(!is_array($movie->getGenres())){

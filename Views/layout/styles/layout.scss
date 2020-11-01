@@ -285,7 +285,7 @@ img.posterSmall{min-height: 332px !important ;}
 .xxx{  
   height: 482px !important;
   z-index: 111;
-  width:auto; 
+  width:fit-content; 
   min-height: 482px !important;
   border-radius: 5%;
 }
@@ -343,9 +343,22 @@ img.posterSmall{min-height: 332px !important ;}
 #gallery li{margin-bottom:-50px;}
 #gallery li.spec{margin-bottom:140px;}
 
+.posterSmall.shadow{
+    border-radius: 5%;
+    box-shadow: 2px 2px 2px 1px #000000;
+}
+
+.shadow2{
+    box-shadow: 0px 1px .7px .7px#3a3939; // imagenes en cinemalistfull
+}
+.shadow3{
+    box-shadow: 0px 1px 3px 3px #414040; // nombrecine en cinemalistfull
+}
+
 .brd{
     border-radius: 5%;
 }
+
 .brd2{
     border-top-left-radius: 5%;
     border-top-right-radius: 5%;
@@ -737,7 +750,15 @@ max-height: 420px;
 	opacity:1;
 	transform: translateY(-300px);
   }
-
+  .slideDown.mlist p{
+	opacity:0;
+    transform: translateY(-400px);
+    transition: all .3s linear;
+}
+ .slideDown.mlist:hover p{
+	opacity:1;
+	transform: translateY(-350px);
+  }
 .slideDown.spec:hover p{
 	opacity:1;
     transform: translateY(-500px);
@@ -809,7 +830,7 @@ svg{display: inline;}
 }
 
 
-.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; }
+.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; padding: 6px 6px; }
 
 
 

@@ -76,7 +76,9 @@
                           <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
                           
                             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-                              <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                                <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                              </a>
                             </div>
           
                            <!-- <div class="one_half">
@@ -123,7 +125,9 @@
                           <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 
                             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
+                            <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                               <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                            </a>
                             </div>
             
                              <!-- <div class="one_half">
