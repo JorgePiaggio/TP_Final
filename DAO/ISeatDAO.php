@@ -4,12 +4,11 @@
     use Models\Seat as Seat;
 
     interface ISeatDAO{
-        function add(Seat $seat,$idRoom);
+        function add(Seat $seat,$idShow);
         function getAll();
-        function getbyRoom($idRoom);
-        function search($idRoom,$row,$number);
+        function getbyShow($idShow);
+        function search($idShow,$row,$number);
         function remove($idSeat);
-        function changeState(Seat $seat);
     }
 
 ?>

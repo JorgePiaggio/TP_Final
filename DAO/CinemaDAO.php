@@ -31,15 +31,12 @@
             $parameters['poster']=$cinema->getPoster();
 
             try{
-
-            $this->connection=Connection::getInstance();
-
-            return $this->connection->executeNonQuery($sql, $parameters);
-
+                $this->connection=Connection::getInstance();
             }catch(\PDOException $ex){
                 throw $ex;
             }
 
+            return $this->connection->executeNonQuery($sql, $parameters);
             
         }
 
@@ -90,6 +87,9 @@
 
                 $resultSet = $this->connection->execute($query);
                 
+                #throw new \Exception("la mierda");
+                #throw new \PDOException("la mierda 2");
+
                 if($resultSet){
                     $mapping= $this->map($resultSet);
                     if(!is_array($mapping)){
@@ -100,9 +100,13 @@
                 }
 
             }
-            catch(\PDOException $ex)
+            catch(\PDOException $ex) //PDO Exception
             {
                 throw $ex;
+            }
+            catch(\Exception $e)    //Generic Exception
+            {
+                throw $e;
             }
 
             if($resultSet){

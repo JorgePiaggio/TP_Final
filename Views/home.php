@@ -1,4 +1,8 @@
-<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');"> 
+<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');">   <div class="hoc" margin-left="40%"><br>
+                      <?php if($this->msg != null){?> 
+                            <h4 class="msg"><?php  echo $this->msg;
+                        } ?> </h4>
+                    </div>  
   <!-- ###################################### FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">

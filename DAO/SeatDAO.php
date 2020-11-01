@@ -13,14 +13,13 @@ class SeatDAO implements ISeatDAO{
         private $connection;
         
 
-        public function add($seat,$idRoom){
-            $sql = "INSERT INTO seats ( rowSeat, numberSeat, stateSeat, idRoom)
-                            VALUES (:rowSeat, :numberSeat, :stateSeat, :idRoom)";
+        public function add($seat, $idShow){
+            $sql = "INSERT INTO seats ( rowSeat, numberSeat, idShow)
+                            VALUES (:rowSeat, :numberSeat, :idShow)";
             
             $parameters['rowSeat']=$seat->getRow();
             $parameters['numberSeat']=$seat->getNumber();
-            $parameters['stateSeat']=$seat->getState();
-            $parameters['idRoom']=$idRoom; 
+            $parameters['idShow']=$idShow;
     
             try{
                 $this->connection = Connection::getInstance();
@@ -31,39 +30,6 @@ class SeatDAO implements ISeatDAO{
             }
         }
 
-        public function changeState($seat)
-        {
-          
-            try
-            {
-
-                $query = "SELECT * FROM seats WHERE idSeat= :idSeat";
-                $parameters["idSeat"]=$seat->getIdSeat();
-                $this->connection = Connection::getInstance();
-
-                $result = $this->connection->execute($query,$parameters);
-                if(!empty($result)){
-                   
-                    if($seat->getState()){
-                   
-                    $query = "UPDATE seats set state=0 WHERE idSeat= :idSeat";
-
-                    }else{
-                    
-                    $query = "UPDATE seats set state=1 WHERE idSeat= :idSeat";
-                    }
-
-                    $rowCant=$this->connection->executeNonQuery($query,$parameters);
-                }
-                return $rowCant;
-                
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-         
-        }
 
         public function remove($idSeat){
             try{
@@ -80,11 +46,11 @@ class SeatDAO implements ISeatDAO{
         }
 
 
-        function search($idRoom,$row,$number){
+        function search($idShow,$row,$number){
             try
             {
-                $query = "SELECT * FROM seats WHERE rowSeat= :row AND numberSeat=:number AND idRoom=:idRoom";
-                $parameters["idRoom"] = $idRoom;
+                $query = "SELECT * FROM seats WHERE rowSeat= :row AND numberSeat=:number AND idShow=:idShow";
+                $parameters["idShow"] = $idShow;
                 $parameters["row"] = $row;
                 $parameters["number"] = $number;
                 
@@ -137,16 +103,16 @@ class SeatDAO implements ISeatDAO{
 
         }
 
-        public function getbyRoom($idRoom){
+        public function getbyShow($idShow){
 
             try
             {
                 $seatList = array();
     
-                $query = "SELECT * FROM seats WHERE idRoom=:idRoom";
+                $query = "SELECT * FROM seats WHERE idShow=:idShow";
     
                 $this->connection = Connection::getInstance();
-                $parameters["idRoom"]=$idRoom;
+                $parameters["idShow"]=$idShow;
                 $result = $this->connection->execute($query,$parameters);
               
                 if($result){
@@ -174,7 +140,6 @@ class SeatDAO implements ISeatDAO{
             $seat->setIdSeat($value["idSeat"]);
             $seat->setRow($value["rowSeat"]);
             $seat->setNumber($value["numberSeat"]);
-            $seat->setState($value["stateSeat"]);
     
             return $seat;
         }

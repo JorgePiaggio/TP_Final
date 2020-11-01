@@ -38,16 +38,14 @@
 
 
         public function showListView(){
-            $cinemaList = $this->cinemaDAO->getAllActive();
-            $cinemaListInactive = $this->cinemaDAO->getAllInactive(); 
+            try{
+                $cinemaList = $this->cinemaDAO->getAllActive();
+                $cinemaListInactive = $this->cinemaDAO->getAllInactive();
+            }catch(\Exception $e){
+                $this->msg= "Caught exception: ".$e->getMessage();
+            }
             require_once(VIEWS_PATH."Cinemas/Cinema-list.php");
         }
-
-
-    /*    public function showCatalogue(){
-            $cinemaList = $this->cinemaDAO->getAllActive();
-            require_once(VIEWS_PATH."Select-billboard.php");
-        } */
 
 
         public function showEditView(){
@@ -55,13 +53,18 @@
         }
 
 
-
         public function showAllCinemas(){
-            $cinemaList = $this->cinemaDAO->getAllActive();
-            #var_dump($cinemaList);      
+        
+            try{
+                $cinemaList = $this->cinemaDAO->getAllActive();
+            }catch(\Exception $e){
+                var_dump($e->getMessage());
+            }
+
             require_once(VIEWS_PATH."Cinemas/Cinema-list-full.php");
         }
         
+
         public function showCinema($idCinema){
             $cinema = $this->cinemaDAO->search($idCinema);
             $movieList = $this->cinemaDAO->getBillboard($idCinema);
@@ -72,6 +75,8 @@
             } 
             require_once(VIEWS_PATH."Cinemas/Cinema-view.php");
         }
+
+
 
         public function addToBillboard($idCinema="",$movie){
             Validate::checkParameter($idCinema);

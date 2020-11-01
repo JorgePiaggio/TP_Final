@@ -23,7 +23,7 @@
                 </div>
                                 
                 <div class="one_half right">                 
-                    <?php $address= $cinema->getNumber().$cinema->getStreet()." Mar del Plata";
+                    <?php $address= $cinema->getNumber().$cinema->getStreet().$cinema->getCity().$cinema->getCountry();
                     if (isset($address))
                     {
                     $address = str_replace(" ", "+", $address);
