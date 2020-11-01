@@ -382,13 +382,6 @@
         }
 
 
-
-
-
-
-
-
-
         
         /* Retorna el total de dinero recaudado en una fecha en un cine*/
         public function cashByCinemaByDate($idCinema, $date){

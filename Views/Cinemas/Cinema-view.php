@@ -15,7 +15,7 @@
 
                 <div class="one_half">
                     <div>
-                        <p><h4>City-Country</h4>Mar del Plata-Argentina</p>
+                        <p><h4>City-Country</h4> <?php echo $cinema->getCity() . " - " . $cinema->getCountry();?></p>
                     </div><br><br>
                     <div>
                         <p><h4>Email</h4><?php echo $cinema->getEmail();?></p>

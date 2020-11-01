@@ -96,7 +96,7 @@
 
         
         
-        public function add($name="", $street="", $number="", $phone="", $email="",$poster=""){
+        public function add($name="", $street="", $number="", $city="", $country="", $phone="", $email="", $poster=""){
             Validate::checkParameter($name);
             $address = $street . $number;
 
@@ -105,6 +105,8 @@
                 $cinema->setName($name);
                 $cinema->setStreet($street);
                 $cinema->setNumber($number);
+                $cinema->setCity($city);
+                $cinema->setCountry($country);
                 $cinema->setPhone($phone);
                 $cinema->setEmail($email);
                 if($poster){
@@ -159,7 +161,7 @@
         }
         
 
-        public function edit($name="", $street="", $number="", $phone="", $email="",$poster="", $idCinema=""){
+        public function edit($name="", $street="", $number="", $city="", $country="", $phone="", $email="",$poster="", $idCinema=""){
             Validate::checkParameter($name);
 
             $aux = $this->cinemaDAO->search($idCinema);
@@ -172,6 +174,8 @@
                 $cinemaEdit->setName($name);
                 $cinemaEdit->setStreet($street);
                 $cinemaEdit->setNumber($number);
+                $cinemaEdit->setCity($city);
+                $cinemaEdit->setCountry($country);
                 $cinemaEdit->setPhone($phone);
                 $cinemaEdit->setEmail($email);
                 $cinemaEdit->setIdCinema($idCinema);
