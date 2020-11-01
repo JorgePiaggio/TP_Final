@@ -113,6 +113,8 @@
                 $valuesArray["state"] = $cinema->getState();
                 $valuesArray["name"] = $cinema->getName();
                 $valuesArray["street"] = $cinema->getStreet();
+                $valuesArray["city"] = $cinema->getCity();
+                $valuesArray["country"] = $cinema->getCountry();
                 $valuesArray["phone"] = $cinema->getPhone();
                 $valuesArray["email"] = $cinema->getEmail();
                 $valuesArray["number"] = $cinema->getNumber();
@@ -137,6 +139,8 @@
                     $cinema->setState($valuesArray["state"]);
                     $cinema->setName($valuesArray["name"]);
                     $cinema->setStreet($valuesArray["street"]);
+                    $cinema->setCity($valuesArray["city"]);
+                    $cinema->setCountry($valuesArray["country"]);
                     $cinema->setNumber($valuesArray["number"]);
                     $cinema->setPhone($valuesArray["phone"]);
                     $cinema->setEmail($valuesArray["email"]);

@@ -12,6 +12,8 @@
                                    <th>Name</th>
                                    <th>Street</th>
                                    <th>Number</th>
+                                   <th>City</th>
+                                   <th>Country</th>
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
@@ -24,6 +26,8 @@
                                         <td><?php echo $cinemaList->getName(); ?> </td>     
                                         <td><?php echo $cinemaList->getStreet(); ?> </td>
                                         <td><?php echo $cinemaList->getNumber(); ?> </td>
+                                        <td><?php echo $cinemaList->getCity(); ?> </td>
+                                        <td><?php echo $cinemaList->getCountry(); ?> </td>
                                         <td><?php echo $cinemaList->getPhone(); ?> </td>
                                         <td><?php echo $cinemaList->getEmail(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
@@ -39,8 +43,11 @@
                                         <td><?php echo $cinema->getName(); ?> </td>     
                                         <td><?php echo $cinema->getStreet(); ?> </td>
                                         <td><?php echo $cinema->getNumber(); ?> </td>
+                                        <td><?php echo $cinema->getCity(); ?> </td>
+                                        <td><?php echo $cinema->getCountry(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
+
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Edit </button></td>
                                         </form>
@@ -59,6 +66,8 @@
                                    <th>Name</th>
                                    <th>Street</th>
                                    <th>Number</th>
+                                   <th>City</th>
+                                   <th>Country</th>
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
@@ -71,8 +80,11 @@
                                         <td><?php echo $cinemaListInactive->getName(); ?> </td>     
                                         <td><?php echo $cinemaListInactive->getStreet(); ?> </td>
                                         <td><?php echo $cinemaListInactive->getNumber(); ?> </td>
+                                        <td><?php echo $cinemaListInactive->getCity(); ?> </td>
+                                        <td><?php echo $cinemaListInactive->getCountry(); ?> </td>
                                         <td><?php echo $cinemaListInactive->getPhone(); ?> </td>
                                         <td><?php echo $cinemaListInactive->getEmail(); ?> </td>
+
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinemaListInactive->getIdCinema()?>"> Edit </button></td>
                                         </form>
@@ -86,8 +98,11 @@
                                         <td><?php echo $cinema->getName(); ?> </td>     
                                         <td><?php echo $cinema->getStreet(); ?> </td>
                                         <td><?php echo $cinema->getNumber(); ?> </td>
+                                        <td><?php echo $cinema->getCity(); ?> </td>
+                                        <td><?php echo $cinema->getCountry(); ?> </td>
                                         <td><?php echo $cinema->getPhone(); ?> </td>
                                         <td><?php echo $cinema->getEmail(); ?> </td>
+                                        
                                         <form action="<?php echo FRONT_ROOT?>Cinema/searchEdit" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Edit </button></td>
                                         </form>

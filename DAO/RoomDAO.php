@@ -318,6 +318,8 @@
              $cinema->setName($p["name"]);
              $cinema->setStreet($p["street"]);
              $cinema->setNumber($p["number"]);
+             $cinema->setCity($p["city"]);
+             $cinema->setCountry($p["country"]);
              $cinema->setEmail($p["email"]);
              $cinema->setPhone($p["phone"]);
              $cinema->setPoster($p["poster"]);

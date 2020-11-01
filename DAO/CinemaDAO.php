@@ -18,11 +18,13 @@
 
 
         public function add($cinema){
-            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,phone,email,poster) VALUES (:state,:name,:street,:number,:phone,:email,:poster)";
+            $sql = "INSERT INTO ".$this->tableName." (state,name,street,number,city,country,phone,email,poster) VALUES (:state,:name,:street,:number,:city,:country,:phone,:email,:poster)";
 
             $parameters['name']=$cinema->getName();
             $parameters['street']=$cinema->getStreet();
             $parameters['number']=$cinema->getNumber();
+            $parameters['city']=$cinema->getCity();
+            $parameters['country']=$cinema->getCountry();
             $parameters['email']=$cinema->getEmail();
             $parameters['phone']=$cinema->getPhone();
             $parameters['state']=$cinema->getState();
@@ -32,7 +34,7 @@
 
             $this->connection=Connection::getInstance();
 
-            return $this->connection->executeNonQuery($sql,$parameters);
+            return $this->connection->executeNonQuery($sql, $parameters);
 
             }catch(\PDOException $ex){
                 throw $ex;
@@ -201,13 +203,15 @@
         public function update($cinema){
             try
             {
-                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number , phone=:phone , state=:state , email=:email, poster=:poster WHERE idCinema=:idCinema";
+                $query = "UPDATE ".$this->tableName." set name=:name , street=:street, number=:number, city=:city, country=:country, phone=:phone , state=:state , email=:email, poster=:poster WHERE idCinema=:idCinema";
 
                 
                 $parameters["idCinema"]=$cinema->getIdCinema();
                 $parameters["state"]=$cinema->getState();
                 $parameters["name"]=$cinema->getName();
                 $parameters["street"]=$cinema->getStreet();
+                $parameters["city"]=$cinema->getCity();
+                $parameters["country"]=$cinema->getCountry();
                 $parameters["number"]=$cinema->getNumber();
                 $parameters["email"]=$cinema->getEmail();
                 $parameters["phone"]=$cinema->getPhone();
@@ -377,6 +381,8 @@
                     $cinema->setName($p["name"]);
                     $cinema->setStreet($p["street"]);
                     $cinema->setNumber($p["number"]);
+                    $cinema->setCity($p["city"]);
+                    $cinema->setCountry($p["country"]);
                     $cinema->setEmail($p["email"]);
                     $cinema->setPhone($p["phone"]);
                     $cinema->setPoster($p["poster"]);

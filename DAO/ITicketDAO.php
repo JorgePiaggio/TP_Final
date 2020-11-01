@@ -20,7 +20,6 @@
         function ticketsByCinemaByMovie($idCinema, $idMovie);
         function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift);
 
-
         /* gets cash by cinema */
         function cashByCinemaByDate($idCinema, $date);
         function cashByCinemaByMonth($idCinema);

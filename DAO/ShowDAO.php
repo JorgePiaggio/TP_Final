@@ -738,6 +738,8 @@
              $cinema->setName($value["name"]);
              $cinema->setStreet($value["street"]);
              $cinema->setNumber($value["number"]);
+             $cinema->setCity($value["city"]);
+             $cinema->setCountry($value["country"]);
              $cinema->setEmail($value["email"]);
              $cinema->setPhone($value["phone"]);
              $cinema->setPoster($value["poster"]);

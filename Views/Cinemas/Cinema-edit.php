@@ -7,6 +7,8 @@
                               <th>Name</th>
                               <th>Street</th>
                               <th>Number</th>
+                              <th>City</th>
+                              <th>Country</th>
                               <th>Phone</th>
                               <th>Email</th>
                               <th>Poster</th>
@@ -19,6 +21,8 @@
                               <td><input type="text" maxlength="50" name="name" value="<?php echo $editCinema->getName(); ?>" > </td>     
                               <td><input type="text" maxlength="50" name="street" value= "<?php echo $editCinema->getStreet() ?>">  </td>
                               <td><input type="number" max="100000" name="number" value= "<?php echo $editCinema->getNumber() ?>">  </td>
+                              <td><input type="text" maxlength="50" name="city" value= "<?php echo $editCinema->getCity() ?>">  </td>
+                              <td><input type="text" maxlength="50" name="country" value= "<?php echo $editCinema->getCountry() ?>">  </td>
                               <td><input type="number" maxlength="12"name="phone" value= "<?php echo $editCinema->getPhone(); ?>"> </td>
                               <td><input type="email" maxlength="50" name="email" value= "<?php echo $editCinema->getEmail(); ?>"> </td>
                               <td><input type="text"  maxlength="1000" name="img" value= "<?php echo $editCinema->getPoster(); ?>"> </td>

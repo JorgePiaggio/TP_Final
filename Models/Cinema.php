@@ -8,6 +8,8 @@ class Cinema{
     private $name;
     private $street;
     private $number;
+    private $city;
+    private $country;
     private $phone;
     private $email;
     private $poster;
@@ -24,6 +26,8 @@ class Cinema{
     function getName(){return $this->name;}
     function getStreet(){return $this->street;}
     function getNumber(){return $this->number;}
+    function getCity(){return $this->city;}
+    function getCountry(){return $this->country;}
     function getPhone(){return $this->phone;}
     function getEmail(){return $this->email;}
     function getState(){return $this->state;}
@@ -34,6 +38,8 @@ class Cinema{
     function setName($name){$this->name=$name;}
     function setStreet($street){$this->street=$street;}
     function setNumber($number){$this->number=$number;}
+    function setCity($city){$this->city=$city;}
+    function setCountry($country){$this->country=$country;}
     function setPhone($phone){$this->phone=$phone;}
     function setEmail($email){$this->email=$email;}
     function setState($state){$this->state=$state;}

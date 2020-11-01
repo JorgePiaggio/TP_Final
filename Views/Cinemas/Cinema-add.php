@@ -17,7 +17,16 @@
                                    <input type="number" max="100000" name="number" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Number</label>
                               </div>
+
+                              <div class="floating-label">
+                                   <input type="text" maxlength="50" name="city" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">City</label>
+                              </div>
                               <br>
+                              <div class="floating-label">
+                                   <input type="text" maxlength="50" name="country" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Country</label>
+                              </div>
                               <div class="floating-label">
                                    <input type="number" maxlength="12"  name="phone" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Phone</label>
