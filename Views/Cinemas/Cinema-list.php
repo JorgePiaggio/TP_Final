@@ -17,7 +17,7 @@
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
-                                   <th  colspan="2">Action</th>
+                                   <th  colspan="3">Action</th>
                               </thead>
                               <tbody>
                                    <?php if($cinemaList!=null){ 
@@ -35,6 +35,9 @@
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinemaList->getIdCinema()?>"> Remove </button></td>
+                                        </form>
+                                        <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinemaList->getIdCinema()?>"> Statistics </button></td>
                                         </form>
                                    </tr> 
                                        <?php }else{ ?>
@@ -54,6 +57,9 @@
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Remove </button></td>
                                         </form>
+                                        <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Statistics </button></td>
+                                        </form>
                                    </tr>
                               <?php }}} ?>
                               </tbody>
@@ -71,7 +77,7 @@
                                    <th>Phone</th>
                                    <th>Email</th>
                                    
-                                   <th  colspan="2">Action</th>
+                                   <th  colspan="3">Action</th>
                               </thead>
                               <tbody>
                               <?php if($cinemaListInactive!=null){ 
@@ -91,6 +97,10 @@
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinemaListInactive->getIdCinema()?>"> Restore </button></td>
                                         </form>
+                                        </form>
+                                        <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinemaListInactive->getIdCinema()?>"> Statistics </button></td>
+                                        </form>
                                    </tr>
                               <?php }else{ ?>          
                               <?php foreach($cinemaListInactive as $cinema){ ?>
@@ -108,6 +118,10 @@
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Restore </button></td>
+                                        </form>
+                                        </form>
+                                        <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
+                                        <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Statistics </button></td>
                                         </form>
                                    </tr>
                               <?php }}}?>

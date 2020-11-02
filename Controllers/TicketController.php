@@ -9,6 +9,7 @@ use Models\CreditCardPayment as CreditCardPayment;
 use Models\User as User;
 use Models\Show as Show;
 use Models\Seat as Seat;
+use Models\Cinema as Cinema;
 
 use DAO\ShowDAO as ShowDAO;
 use DAO\SeatDAO as SeatDAO;
@@ -17,6 +18,7 @@ use DAO\BillDAO as BillDAO;
 use DAO\CreditCardDAO as CreditCardDAO;
 use DAO\CreditCardPaymentDAO as CreditCardPaymentDAO;
 use DAO\UserDAO as UserDAO;
+use DAO\CinemaDAO as CinemaDAO;
 use Config\Validate as Validate;
 
 define("DISCOUNT", 25);
@@ -30,6 +32,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         private $seatDAO;
         private $creditCardDAO;
         private $creditCardPaymentDAO;
+        private $cinemaDAO;
         private $msg;
       
 
@@ -41,6 +44,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->seatDAO = new SeatDAO();
         $this->creditCardDAO = new CreditCardDAO();
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
+        $this->cinemDAO = new CinemaDAO();
         $this->msg=null;
      
     }
@@ -80,6 +84,18 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         }
         require_once(VIEWS_PATH."Tickets/purchase-result.php");  
 
+    }
+
+    public function showStatistics($idCinema=""){
+        echo $idCinema;
+        $cinema = $this->cinemaDAO->search($idCinema);
+        var_dump($cinema);
+        #require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+    }
+
+
+    public function showCash($idCinema, $date=""){
+        $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
     }
 
     public function add($creditCardCompany,$creditCardNumber, $creditCardPropietary, $creditCardExpiration,$total,$seats,$idShow){
@@ -143,8 +159,8 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 /* crear asientos y tickets */
                 for($indice=0; $indice< count($seatNumber); $indice++){
                     $seat= new Seat();
-                    $seat->setRow($seatRow[$indice]);
-                    $seat->setNumber($seatNumber[$indice]);
+                    $seat->setRow($seatRow[$indice]+1);
+                    $seat->setNumber($seatNumber[$indice+1]);
                     $this->seatDAO->add($seat, $idShow);
                     $billList=$this->billDAO->getAll();
                     $ticket = new Ticket();
@@ -184,6 +200,8 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
         }
 
+        
+
         //poner vista
 
     }
@@ -203,6 +221,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         return false;
         }
     }
-}
 
+}
+    
 ?>
