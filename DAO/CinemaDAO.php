@@ -198,7 +198,7 @@
             }
 
             if(!empty($results)){
-                return $this->map($results[0]);
+                return $this->map($results);
             }else{
                 return null;
             }

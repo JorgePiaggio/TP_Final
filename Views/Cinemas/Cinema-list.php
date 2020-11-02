@@ -97,7 +97,6 @@
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinemaListInactive->getIdCinema()?>"> Restore </button></td>
                                         </form>
-                                        </form>
                                         <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinemaListInactive->getIdCinema()?>"> Statistics </button></td>
                                         </form>
@@ -118,7 +117,6 @@
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Cinema/changeState" method="post">
                                         <td><button type="submit" name="id" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Restore </button></td>
-                                        </form>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT?>Ticket/showStatistics" method="post">
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Statistics </button></td>
