@@ -72,7 +72,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     public function showPurchaseResult($tickets){
 
-
         if($tickets){
             $this->msg="Purchase completed successfully, enjoy the show";
         }else{
@@ -143,8 +142,8 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 /* crear asientos y tickets */
                 for($indice=0; $indice< count($seatNumber); $indice++){
                     $seat= new Seat();
-                    $seat->setRow($seatRow[$indice]);
-                    $seat->setNumber($seatNumber[$indice]);
+                    $seat->setRow($seatRow[$indice]+1);
+                    $seat->setNumber($seatNumber[$indice]+1);
                     $this->seatDAO->add($seat, $idShow);
                     $billList=$this->billDAO->getAll();
                     $ticket = new Ticket();
@@ -154,19 +153,22 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                     $ticket->setShow($show);
                     $ticket->setSeat($this->seatDAO->search($idShow,$seat->getRow(),$seat->getNumber()));
                     $ticket->setPrice($show->getRoom()->getPrice());
-                    $qrCode=APIQRCODE.$creditCardNumber.date('Y-m-d H:i:s');
+                    $qrCode=APIQRCODE.$creditCardNumber.$seat->getRow().$seat->getNumber().$show->getIdShow();
                     $ticket->setQrCode($qrCode);
-
-                    //var_dump($ticket);
-
-                    
-                   
 
                     $this->ticketDAO->add($ticket);
                     array_push($ticketList,$ticket);
 
-
-
+                    $imageUrl = $qrCode.".png";
+                    @$rawImage = file_get_contents($imageUrl);
+                    if($rawImage)
+                    {
+                    file_put_contents(VIEWS_PATH.'layout/images/tickets/'.$seat->getRow().$seat->getNumber().$show->getIdShow().'.png',$rawImage);
+                    }
+                    else
+                    {
+                    echo 'Error Occured';
+                    }
 
                 }
                 //actualizo las entradas 

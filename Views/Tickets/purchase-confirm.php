@@ -6,7 +6,7 @@
 
             <div class=""><br>
 
-                <table class="table bg-light">
+                <table class="tablePurchase ">
                     <thead class="bg-dark text-white">
                         <th>Room</th>
                         <th>Movie</th>
@@ -19,7 +19,7 @@
                         <tr>    
                             <td><?php echo $show->getRoom()->getName(); ?> </td>   
                             <td><?php echo $show->getMovie()->getTitle(); ?></td>  
-                            <td><?php echo $show->getDateTime(); ?></td>  
+                            <td><?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs " ?></td>  
                             <td><?php echo $show->getShift(); ?></td>  
                             <td><?php echo $show->getRoom()->getPrice(); ?></td>  
                         
@@ -28,11 +28,11 @@
                     </tbody>
                 </table>
 
-            </div><br><br>
+            </div>
 
             <div class="">
 
-                <table class="table bg-light">
+                <table class="tablePurchase">
                     <thead class="bg-dark text-white">
                         <th>Tickets</th>
                         <th>Company</th>
@@ -61,7 +61,7 @@
                     </tbody>
                 </table>
 
-            </div><br><br>
+            </div><br><br><br>
 
             <div>
 

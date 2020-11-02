@@ -266,6 +266,45 @@ td{border-width:0 1px;}
 .tabla-perfil .thead-orange {color:#FF5723; margin-top:1rem;}
 .unique{margin-top: 20px;margin-left: 48%;}
 
+.tablePurchase{ 
+    font-size: 18px;
+    margin-top: 60px;
+    text-align: center;    
+    border: none;
+}
+.tablePurchase tr, .tablePurchase td{
+    color:#FF5723;
+    background-color:rgba(0, 0, 0, 0.176);
+}
+.tablePurchase td{
+    font-size: 14px;
+    font-weight: bold;
+}
+.tablePurchase {
+    border-collapse: collapse;
+  }
+.tablePurchase td, .tablePurchase th {
+    border: 1px solid black;
+  }
+.tablePurchase tr:first-child th {
+    border-top: none;
+  }
+.tablePurchase tr:last-child td {
+    border-bottom: none;
+  }
+.tablePurchase tr td:first-child,
+.tablePurchase tr th:first-child {
+    border-left: none;
+  }
+.tablePurchase tr td:last-child,
+.tablePurchase tr th:last-child {
+    border-right: none;
+  }
+  .tablePurchase.tt tr, .tablePurchase.tt td{
+    color:#FF5723;
+    background-color:rgba(0, 0, 0, 0.765);
+}
+
 /*Background images 
 --------------------------------------------------------------------------------------------------------------- */
 .background-pic{background-size: cover; height: auto;min-height: 800px; background-position: center; background-repeat: no-repeat;}
@@ -341,8 +380,9 @@ img.posterSmall{min-height: 332px !important ;}
 .cardStyle.overf{
 	overflow: visible;
 }
-
-
+.cardStyle.fit{
+	width: fit-content;
+}
 
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
@@ -395,9 +435,15 @@ max-height: 678px;
 }
 
 .iconScreen{
-    width: 80px ; height: 80px;
+    width: 80px ; height: 80px; 
 }
-
+.grey{    
+    width:fit-content; 
+    min-width: 70%;
+    padding: 20px 20px;
+    padding-right: 40px;
+    background-color: rgb(0, 0, 0);
+}
 
 /* Gallery Animations :v 
 --------------------------------------------------------------------------------------------------------------- */

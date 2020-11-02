@@ -14,7 +14,7 @@
 
             <div class="">
 
-                <table class="table bg-light">
+                <table class="tablePurchase">
                     <thead class="bg-dark text-white">
                         <th>Room</th>
                         <th>Movie</th>
@@ -27,7 +27,7 @@
                         <tr>    
                             <td><?php echo $show->getRoom()->getName(); ?> </td>   
                             <td><?php echo $show->getMovie()->getTitle(); ?></td>  
-                            <td><?php echo $show->getDateTime(); ?></td>  
+                            <td><?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs "?></td>  
                             <td><?php echo $show->getShift(); ?></td>  
                             <td><?php echo $show->getRoom()->getPrice(); ?></td>  
                         
@@ -40,45 +40,48 @@
 
             <form action="<?php echo FRONT_ROOT?>Ticket/showConfirm" id="form" class="center" method="post">        <!-- ELEGIR ASIENTO -->
 
-            <div ><br> <br><h2 class="orange">Pick Your Seats</h2>
+            <div ><br> <br><h2 class="orange hoc cardStyle fit">Pick Your Seats</h2><br>
             
-            <ul class="room cardStyle">
-                <div class="backscreen"><div class="screen"><img src="<?php echo IMG_PATH?>/icons/logo.png" alt="screen logo" class="iconScreen"></i></div></div>
-                <?php
+                <ul class="room cardStyle">
+                    <div class="backscreen">
+                        <div class="screen"><img src="<?php echo IMG_PATH?>/icons/logo.png" alt="screen logo" class="iconScreen"></i></div>
+                    </div>
+                    <?php
 
-                        for($cant = 0; $cant < $show->getRoom()->getRows(); $cant++){ 
-                            for($cantidad = 0; $cantidad < $show->getRoom()->getColumns(); $cantidad++){
-                                $flag = true;   //disponible
+                            for($cant = 0; $cant < $show->getRoom()->getRows(); $cant++){ 
+                                for($cantidad = 0; $cantidad < $show->getRoom()->getColumns(); $cantidad++){
+                                    $flag = true;   //disponible
 
-                                if($seats){
-                                    foreach($seats as $seat){
-                                        if($seat->getNumber() == $cantidad && $seat->getRow() == $cant){
-                                            $flag=false;
-                                         
+                                    if($seats){
+                                        foreach($seats as $seat){
+                                            if($seat->getNumber() == $cantidad && $seat->getRow() == $cant){
+                                                $flag=false;
+                                            
+                                            }
                                         }
                                     }
-                                }
-                                if($flag){?>
-                                <li class="seatTrue check">
-                                    <input type="checkbox" class="seat"  name="seat[]" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>"/>
-                                    <label for="<?php echo $cant."-".$cantidad?>"></label>
-                                </li>
-                                <?php }else{ ?>
-                                <li class="seatFalse check">
-                                    <input type="checkbox" class="seat" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>" disabled />
-                                    <label for="<?php echo $cant."-".$cantidad?>"></label>
-                                </li>
-                                
-                                <?php  
-                                }
-                            }?><br><?php
-                        }?>
-            </ul>
-            </div><br><br>
+                                    if($flag){?>
+                                    <li class="seatTrue check">
+                                        <input type="checkbox" class="seat"  name="seat[]" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>"/>
+                                        <label for="<?php echo $cant."-".$cantidad?>"></label>
+                                    </li>
+                                    <?php }else{ ?>
+                                    <li class="seatFalse check">
+                                        <input type="checkbox" class="seat" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>" disabled />
+                                        <label for="<?php echo $cant."-".$cantidad?>"></label>
+                                    </li>
+                                    
+                                    <?php  
+                                    }
+                                }?><br><?php
+                            }?>
+                </ul>
+
+            </div><br><br><br><br>
 
 
             
-                <div class="container up2"><h2 class="orange">Credit Card</h2>                                     <!-- DATOS TARJETA DE CREDITO -->
+                <div class="container up2 hoc cardStyle fit"><h2 class="orange">Credit Card</h2>                                     <!-- DATOS TARJETA DE CREDITO -->
                         <div class="floating-label-form">
                             <div class="floating-label">
                                     <select name="company" class="selection" required>
