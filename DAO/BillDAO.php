@@ -16,13 +16,12 @@
         
         /* Agrega una factura a la BD */
         public function add($bill){
-            $query = "INSERT INTO bills (idBill, idUser, idCreditCardPayment, tickets, date, totalPrice, discount)
-                        VALUES (:idBill, :idUser, :idCreditCardPayment, :tickets, :date, :totalPrice, :discount)";
+            $query = "INSERT INTO bills (idBill, idUser, codePayment, tickets, date, totalPrice, discount)
+                        VALUES (:idBill, :idUser, :codePayment, :tickets, :date, :totalPrice, :discount)";
 
-            $stringDate = $bill->getDate()->format('Y/m/d H:i:s');
             $parameters['idBill'] = $bill->getIdBill();
             $parameters['idUser'] = $bill->getUser()->getIdUser();
-            $parameters['idCreditCardPayment'] = $bill->getCreditCardPayment()->getIdCreditCardPayment();
+            $parameters['codePayment'] = $bill->getCreditCardPayment()->getCode();
             $parameters['tickets'] = $bill->getTickets();
             $parameters['date'] = $bill->getDate();
             $parameters['totalPrice'] = $bill->getTotalPrice();
@@ -31,7 +30,7 @@
             try
             {
                 $this->connection = Connection::getInstance();
-                return $this->connection->executeNonQuery($sql, $parameters);
+                return $this->connection->executeNonQuery($query, $parameters);
             }
             catch(\PDOException $ex)
             {

@@ -13,7 +13,7 @@
 
 
         public function add($creditCard){
-            $sql = "INSERT INTO creditCards (company, number, propietary, expiration)
+            $sql = "INSERT INTO creditcards (company, numberCard, propietary, expiration)
                             VALUES (:company, :number, :propietary, :expiration)";
             
             $parameters['company']=$creditCard->getCompany();

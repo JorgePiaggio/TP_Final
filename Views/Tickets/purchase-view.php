@@ -7,8 +7,6 @@
     <h2 class="page-title">Purchase</h2>
     <main class="hoc container clear"> 
 
-
-
         
         <div class="hoc cardStyle">
 
@@ -38,7 +36,7 @@
 
             </div>
 
-            <form action="<?php echo FRONT_ROOT?>Ticket/add" class="center" method="post">
+            <form action="<?php echo FRONT_ROOT?>Ticket/showConfirm" id="form" class="center" method="post">
 
             <div ><br> <br><h2 class="orange">Pick Your Seats</h2>
             <ul class="room cardStyle">
@@ -57,7 +55,7 @@
                                 }
                                 if($flag){?>
                                 <li class="seatTrue check">
-                                    <input type="checkbox" class="seat" name="seat[]" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>"/>
+                                    <input type="checkbox" class="seat"  name="seat[]" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>"/>
                                     <label for="<?php echo $cant."-".$cantidad?>"></label>
                                 </li>
                                 <?php }else{ ?>
@@ -78,7 +76,7 @@
                 <div class="container up2"><h2 class="orange">Credit Card</h2>
                         <div class="floating-label-form">
                             <div class="floating-label">
-                                    <select name="credit card company" class="selection" required>
+                                    <select name="company" class="selection" required>
                                             <?php ?>
                                             <option value="" selected disabled>Select Company</option>                                        
                                             <option value="Visa">Visa</option>
@@ -92,7 +90,7 @@
 
 
                             <div class="floating-label">
-                                <input type="text" maxlength="100" name="street" value="" placeholder=" " class="floating-input" required>
+                                <input type="text" maxlength="100" name="propietary" value="" placeholder=" " class="floating-input" required>
                                 <span class="highlight"></span><label for="">Propietary</label>
                             </div> 
                             
@@ -110,7 +108,9 @@
                             </div> <br> 
                         </span>
                     
-                                <button type="submit" name="" class="btn btn-primary ml-auto d-block">Confirm</button>
+
+
+                                <button type="submit" name="confirm" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
 
                         </div>
                         <br>    
@@ -122,22 +122,8 @@
 
         </div>
 
-
-
-
-
-
-
-
-
-
-
   </main>
 </div>
-
-
-
-
 
 
 
