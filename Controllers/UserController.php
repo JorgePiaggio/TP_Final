@@ -8,6 +8,7 @@ use DAO\RoleDAO as RoleDAO;
 use Models\Role as Role;
 use DAO\UsersReviewsDAO as UsersReviewsDAO;
 use Config\Validate as Validate;
+use \Exception as Exception;
 
 class UserController{
     private $userDAO;
@@ -52,7 +53,12 @@ class UserController{
     public function showUserView($emailUser=""){
         Validate::validateSession();
 
-        $user = $this->userDAO->search($emailUser);
+        try{
+            $user = $this->userDAO->search($emailUser);
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+        }
+
         if(!$user){
             $this->msg = "Email doesn't exist";
             $this->showSelectUser();
@@ -62,20 +68,22 @@ class UserController{
         }
         
     }
-/*
-    public function showChangeRole(){
-        require_once(VIEWS_PATH."User-view.php");
-    }
-*/
     
+
     /* lista de reviews que envian los users en el footer */
     public function showUserReviews($idRemove = ""){
         Validate::validateSession();
-        
-        if($idRemove){
-            $this->userReviewsDAO->remove($idRemove);
+
+        try{
+            if($idRemove){
+                $this->userReviewsDAO->remove($idRemove);
+            }
+
+            $messageList=$this->userReviewsDAO->getAll();
+
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
-        $messageList=$this->userReviewsDAO->getAll();
         require_once(VIEWS_PATH."Users/User-reviews.php");
     }
 
@@ -83,7 +91,12 @@ class UserController{
     public function login($email="",$pass=""){
         Validate::checkParameter($email);
 
-        $user=$this->userDAO->search($email); //busco el user a traves del email
+        try{
+            $user=$this->userDAO->search($email); //busco el user a traves del email
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+        }
+
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
             $_SESSION["loggedUser"]=$email; 
             if(strcmp($email,"admin@moviepass.com")!=0){   
@@ -118,7 +131,11 @@ class UserController{
                 $this->user->setNumber($number);
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
-                $this->userDAO->add($this->user);
+                try{
+                    $this->userDAO->add($this->user);
+                }catch(\Exception $e){
+                    echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+                }
                 $_SESSION["loggedUser"]=$email;
                 $_SESSION["role"]=$this->user->getRole()->getId();
                 header("location:../Home/index");
@@ -137,31 +154,34 @@ class UserController{
     public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
         Validate::validateSession();
-
-        $userAux = $this->userDAO->search($email);
-            
-        if($this->validatePass($pass, $repass)){
-            $user= new user();
-            $user->setIdUser($userAux->getIdUser());
-            $user->setName($name);
-            $user->setSurname($surname);
-            $user->setDni($dni);
-            $user->setStreet($street);
-            $user->setNumber($number);
-            $user->setEmail($email);
-            $user->setPassword($pass);
-            $result = $this->userDAO->update($user);
-            
-            if($result > 0) {
-                $_SESSION["loggedUser"]=$email;
-                $_SESSION["role"]=$user->getRole()->getId();
-                $this->msg = "Profile updated";
-            }else{
-                $this->msg = "Internal error. Please try again later";
+        try{
+            $userAux = $this->userDAO->search($email);
+                
+            if($this->validatePass($pass, $repass)){
+                $user= new user();
+                $user->setIdUser($userAux->getIdUser());
+                $user->setName($name);
+                $user->setSurname($surname);
+                $user->setDni($dni);
+                $user->setStreet($street);
+                $user->setNumber($number);
+                $user->setEmail($email);
+                $user->setPassword($pass);
+                $result = $this->userDAO->update($user);
+                
+                if($result > 0) {
+                    $_SESSION["loggedUser"]=$email;
+                    $_SESSION["role"]=$user->getRole()->getId();
+                    $this->msg = "Profile updated";
+                }else{
+                    $this->msg = "Internal error. Please try again later";
+                }
             }
-        }
-        else{
-            $this->msg = "Invalid password";  
+            else{
+                $this->msg = "Invalid password";  
+            }
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
         $this->showProfile();
     }
@@ -198,7 +218,12 @@ class UserController{
 
     public function validateEmail($email=""){
         Validate::checkParameter($email);
-        $users = $this->userDAO->getAll(); 
+        try{
+            $users = $this->userDAO->getAll(); 
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+        }
+
         $answer = false;
         if($users){
         if(is_array($users)){
@@ -221,8 +246,12 @@ class UserController{
     public function changeRole($userEmail){
         Validate::validateSession();
         
-        $result = $this->userDAO->changeRole($userEmail);
-        
+        try{
+            $result = $this->userDAO->changeRole($userEmail);
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+        }
+
         if($result > 0){
             $this->msg = "Role changed succesfully!";
         }else{
@@ -236,7 +265,6 @@ class UserController{
     /* Guarda mensajes de users sobre la web en un json */    
     public function submitReview($mail=null, $message=null){
         Validate::validateSession();
-
 
         if($message != null){
            
@@ -252,24 +280,32 @@ class UserController{
                 }
             }          
 
-            // guardar en JSON 
-            $msgArray = array();
-            $id=($this->userReviewsDAO->getLastId())+1;
-            array_push($msgArray,$id);
-            array_push($msgArray,$message);
-            array_push($msgArray,$mail);
-            $this->userReviewsDAO->add($msgArray);
+            try{
+                // guardar en JSON 
+                $msgArray = array();
+                $id=($this->userReviewsDAO->getLastId())+1;
+                array_push($msgArray,$id);
+                array_push($msgArray,$message);
+                array_push($msgArray,$mail);
+                $this->userReviewsDAO->add($msgArray);
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
         }
         header("location:../Home/index");
     }
 
     private function createRoles(){
-        if($this->roleDAO->getAll()==null){
-            $roleUser=new Role();
-            $roleAdmin= new Role();
-            $roleAdmin->setId(1);
-            $this->roleDAO->add($roleUser);
-            $this->roleDAO->add($roleAdmin);
+        try{
+            if($this->roleDAO->getAll()==null){
+                $roleUser=new Role();
+                $roleAdmin= new Role();
+                $roleAdmin->setId(1);
+                $this->roleDAO->add($roleUser);
+                $this->roleDAO->add($roleAdmin);
+            }
+        }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
     }
 

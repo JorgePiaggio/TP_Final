@@ -170,6 +170,8 @@
     public function getAllActive(){
         try
         {
+            # throw new \PDOException("testing catch on upper level");
+
             $showList = array();
      
             /*Fecha actual*/

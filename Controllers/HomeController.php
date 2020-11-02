@@ -5,6 +5,7 @@
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\ShowDAO as ShowDAO;
     use \DateTime;
+    use \Exception as Exception;
 
     class HomeController
     {
@@ -19,25 +20,37 @@
 
         public function index($message = "")
         {
-            $cinemaList=$this->cinemaDAO->getAllActive();
-            $movieList= $this->movieDAO->getBestRated();            // 20 peliculas mejor rankeadas
-            $movieListSlider= $this->movieDAO->getMostPopular();    // 5 peliculas mas populares
-            
-            $showList = $this->showDAO->getAllActive();
+
+            $cinemaList=array();        /* se crean antes para evitar mostrar errores en las vistas si hay una excepcion */
+            $movieList=array();
+            $movieListSlider=array();
+            $showList=array();
             $movieShows=array();
-            
-            if($showList){                                          
-                foreach($showList as $show){
-                    if(!in_array($show->getMovie(), $movieShows)) {  // saco las 4 peliculas con funcion mas proxima y sus shows en dif cines
-                        if(count($movieShows) <= 3){
-                            array_push($movieShows,$show->getMovie());
+
+            try{
+                $cinemaList=$this->cinemaDAO->getAllActive();
+                $movieList= $this->movieDAO->getBestRated();            // 20 peliculas mejor rankeadas
+                $movieListSlider= $this->movieDAO->getMostPopular();    // 5 peliculas mas populares
+                
+                $showList = $this->showDAO->getAllActive();
+                $movieShows=array();
+                
+                if($showList){                                          
+                    foreach($showList as $show){
+                        if(!in_array($show->getMovie(), $movieShows)) {  // saco las 4 peliculas con funcion mas proxima y sus shows en dif cines
+                            if(count($movieShows) <= 3){
+                                array_push($movieShows,$show->getMovie());
+                            }
                         }
-                    }
-                }       
-            }else{
-                $this->msg = "No shows on schedule";
+                    }       
+                }else{
+                    $this->msg = "No shows on schedule";
+                }
+                
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
-            
+
             require_once(VIEWS_PATH."home.php");
         }  
 
