@@ -11,12 +11,15 @@ class Room{         /* sala */
     private $capacity;
     private $type;      /* 2d, 3d */
     private $ticketPrice;
+    private $rows;
+    private $columns;
     private $cinema;
     #private $seats;
 
     function __construct(){
         #$this->seats = new Seat();
         $this->cinema = new Cinema();
+    
     }
 
     function getIdRoom(){return $this->idRoom;}
@@ -25,6 +28,9 @@ class Room{         /* sala */
     function getType(){return $this->type;}
     function getPrice(){return $this->ticketPrice;}
     function getCinema(){return $this->cinema;}
+    function getRows(){return $this->rows;}
+    function getColumns(){return $this->columns;}
+
     #function getSeats(){return $this->seats;}
 
     function setIdRoom($idRoom){$this->idRoom=$idRoom;}
@@ -33,6 +39,8 @@ class Room{         /* sala */
     function setType($type){$this->type=$type;}
     function setPrice($ticketPrice){$this->ticketPrice=$ticketPrice;}
     function setCinema($cinema){$this->cinema=$cinema;}
+    function setRows($rows){$this->rows=$rows;}
+    function setColumns($columns){$this->columns=$columns;}
     #function setSeats($seats){$this->seats=$seats;}
 
 }

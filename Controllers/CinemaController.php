@@ -39,9 +39,6 @@
 
 
         public function showListView(){
-        
-            $cinemaList=array();
-            $cinemaListInactive=array();
 
             try{
                 $cinemaList = $this->cinemaDAO->getAllActive();
@@ -52,12 +49,6 @@
 
             require_once(VIEWS_PATH."Cinemas/Cinema-list.php");
         }
-
-
-    /*    public function showCatalogue(){
-            $cinemaList = $this->cinemaDAO->getAllActive();
-            require_once(VIEWS_PATH."Select-billboard.php");
-        } */
 
 
         public function showEditView(){
@@ -71,6 +62,7 @@
                 $cinemaList = $this->cinemaDAO->getAllActive();
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+
             }
 
             require_once(VIEWS_PATH."Cinemas/Cinema-list-full.php");

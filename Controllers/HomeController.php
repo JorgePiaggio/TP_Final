@@ -10,12 +10,13 @@
     class HomeController
     {
         private $movieDAO;
-
+        private $msg;
+        
         public function __construct(){
             $this->movieDAO = new MovieDAO();
             $this->cinemaDAO = new CinemaDAO();
             $this->showDAO = new ShowDAO();
-
+            $this->msg= null;
         }
 
         public function index($message = "")
@@ -26,6 +27,7 @@
             $movieListSlider=array();
             $showList=array();
             $movieShows=array();
+
 
             try{
                 $cinemaList=$this->cinemaDAO->getAllActive();
@@ -46,9 +48,9 @@
                 }else{
                     $this->msg = "No shows on schedule";
                 }
-                
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+
             }
 
             require_once(VIEWS_PATH."home.php");

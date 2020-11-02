@@ -1,4 +1,8 @@
-<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');"> 
+<div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');">   
+                      <?php if($this->msg != null){?> 
+                            <h4 class="msg"><?php  echo $this->msg;?> </h4> <?php
+                        } ?> 
+                     
   <!-- ###################################### FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
@@ -83,16 +87,19 @@
             <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 
             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-              <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+              <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+              </a>
             </div>
 
             <div>
               <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
               <button type="button" class="collapsible">Show List</button>
               <div class="content1">
-                <?php foreach($showList as $show){
+              <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                      foreach($showList as $show){
                         if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                          <a href="">
+                          <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
                             <p class="p_orange">
                               <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                     $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
@@ -100,11 +107,31 @@
                                     echo $show->getRoom()->getCinema()->getName();}?>
                             </p> <hr>
                             <p class="p_white">
-                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                              <i class="fa fa-ticket" style="font-size: 1.73em"></i>
                             </p>
                           </a><?php 
                         }
-                      }?> 
+                      }
+                    }
+                    else{
+                      foreach($showList as $show){
+                        if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                            <p class="p_orange">
+                              <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
+                                    $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
+                                    echo $str1; ?></h6><?php }else{
+                                    echo $show->getRoom()->getCinema()->getName();}?>
+                            </p> <hr>
+                            <p class="p_white">
+                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                              <i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                              <?php echo "Login" ?>
+                            </p>
+                          <?php 
+                        }
+                      } 
+                    }?> 
               </div> 
             </div>
 
@@ -138,7 +165,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <img class="cinemapic br shadow2" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -151,7 +178,7 @@
                                                               echo $str1; ?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                     <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                    <img class="cinemapic br" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
+                    <img class="cinemapic br shadow2" src="<?php echo $cinema->getPoster();?>" alt="cinema <?php echo $cinema->getName();?> photo"></a>
                       <div class="excerpttxt up7 mrg_btm2">
                         <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                       </div>
@@ -166,7 +193,7 @@
                                                               echo $str1;?></h6><?php }else{
                                                               echo $cinema->getName();?></h6><?php } ?>
                 <article class="excerpt"><a href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">
-                <img class="cinemapic br" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
+                <img class="cinemapic br shadow2" src="<?php echo $cinemaList->getPoster();?>" alt="cinema <?php echo $cinemaList->getName();?> photo"></a>
                   <div class="excerpttxt up7 mrg_btm2">
                     <footer><a class="btn" href="<?php echo FRONT_ROOT?>Cinema/showCinema/<?php echo $cinema->getIdCinema();?>">About &raquo;</a></footer>
                   </div>

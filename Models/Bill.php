@@ -34,6 +34,7 @@ class Bill {
     public function setDate($date){$this->date=$date;}
     public function setDiscount($discount){$this->discount=$discount;}
     public function setTotalPrice($totalPrice){$this->totalPrice=$totalPrice;}
+
     
 }
 ?>

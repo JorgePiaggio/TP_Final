@@ -16,13 +16,12 @@
         
         /* Agrega una factura a la BD */
         public function add($bill){
-            $query = "INSERT INTO bills (idBill, idUser, idCreditCardPayment, tickets, date, totalPrice, discount)
-                        VALUES (:idBill, :idUser, :idCreditCardPayment, :tickets, :date, :totalPrice, :discount)";
+            $query = "INSERT INTO bills (idBill, idUser, codePayment, tickets, date, totalPrice, discount)
+                        VALUES (:idBill, :idUser, :codePayment, :tickets, :date, :totalPrice, :discount)";
 
-            $stringDate = $bill->getDate()->format('Y/m/d H:i:s');
             $parameters['idBill'] = $bill->getIdBill();
             $parameters['idUser'] = $bill->getUser()->getIdUser();
-            $parameters['idCreditCardPayment'] = $bill->getCreditCardPayment()->getIdCreditCardPayment();
+            $parameters['codePayment'] = $bill->getCreditCardPayment()->getCode();
             $parameters['tickets'] = $bill->getTickets();
             $parameters['date'] = $bill->getDate();
             $parameters['totalPrice'] = $bill->getTotalPrice();
@@ -31,13 +30,46 @@
             try
             {
                 $this->connection = Connection::getInstance();
-                return $this->connection->executeNonQuery($sql, $parameters);
+                return $this->connection->executeNonQuery($query, $parameters);
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
             }
         }
+
+        public function getAll(){
+            try
+            {
+                $billList = array();
+
+                $query = "SELECT * FROM bills as b INNER JOIN users as u on b.idUser=u.idUser";
+
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->execute($query);
+
+                foreach($resultSet as $row){
+                    array_push($billList,$this->mapBill($row));
+
+                }
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($resultSet){
+                return $billList;
+            }else{
+                return null;
+            }
+        }
+        
+        
+
+
 
 
         /* Retorna una factura buscada por id o null si no existe*/
@@ -197,6 +229,7 @@
         public function cashByYear($year){
             try
             {   
+
                 $query = "SELECT sum(totalPrice) FROM bills
                             HAVING DATEPART(year, date) = :year";
                 
@@ -205,13 +238,14 @@
                 $this->connection = Connection::getInstance();
                 
                 $result = $this->connection->execute($query, $parameters);
+
+               
             }
             catch(\PDOException $ex)
             {
                 throw $ex;
             }
-
-            return $result;
+           return $result;
         }
 
 
@@ -242,9 +276,29 @@
             $bill->setDate($value["date"]);
             $bill->setTotalPrice($value["totalPrice"]);
             $bill->setDiscount($value["discount"]);
+            $bill->setUser($this->mapUser($value));
             
             return $bill;
         }
+
+        protected function mapUser($p){
+        
+            
+    
+                $user = new User();
+                $user->setIdUser($p["idUser"]);
+                $user->setDni($p["dni"]);
+                $user->setName($p["name"]);
+                $user->setSurname($p["surname"]);
+                $user->setStreet($p["street"]);
+                $user->setNumber($p["number"]);
+                $user->setEmail($p["email"]);
+                $user->setPassword($p["password"]);
+                return $user;
+ 
+        }
+
+
 
 
     }

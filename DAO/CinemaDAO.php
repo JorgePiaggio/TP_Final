@@ -31,15 +31,12 @@
             $parameters['poster']=$cinema->getPoster();
 
             try{
-
                 $this->connection=Connection::getInstance();
-
-            return $this->connection->executeNonQuery($sql, $parameters);
-
             }catch(\PDOException $ex){
                 throw $ex;
             }
 
+            return $this->connection->executeNonQuery($sql, $parameters);
             
         }
 
@@ -91,7 +88,7 @@
                 $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
-                
+               
 
                 if($resultSet){
                     $mapping= $this->map($resultSet);
@@ -105,9 +102,13 @@
                 # throw new \PDOException("testing catch on upper level");
 
             }
-            catch(\PDOException $ex)
+            catch(\PDOException $ex) //PDO Exception
             {
                 throw $ex;
+            }
+            catch(\Exception $e)    //Generic Exception
+            {
+                throw $e;
             }
 
             if($resultSet){

@@ -42,7 +42,8 @@
     /* Setea el turno según el horario de la función */
     private function setShift($dateTime){
 
-        $dateTime =$dateTime->format('H');
+        $dt= DateTime::createFromFormat("Y-m-d H:i:s", $dateTime);
+        $dateTime=$dt->format('H');
         
         $midday = 12;
         $afternoon = 19;            
@@ -173,6 +174,7 @@
             # throw new \PDOException("testing catch on upper level");
 
             $showList = array();
+
      
             /*Fecha actual*/
             $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
@@ -181,7 +183,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0
+            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >=0  AND s.dateTime >= :dateTime
             ORDER BY s.dateTime ASC";
 
             $parameters["dateTime"] = $dateNow;
@@ -646,7 +648,7 @@
 
             $parameters['idRoom']=$show->getRoom()->getIdRoom();
             $parameters['idMovie']=$show->getMovie()->getTmdbID();
-            $parameters['dateTime']=$show->getDateTime()->format('Y-m-d H:i:s');
+            $parameters['dateTime']=$show->getDateTime();
             $parameters['shift']=$this->setShift($show->getDateTime());
             $parameters['remainingTickets']=$show->getRemainingTickets();
 
@@ -721,6 +723,8 @@
             $room->setIdRoom($value["idRoom"]);
             $room->setType($value["type"]);
             $room->setCapacity($value["capacity"]);
+            $room->setColumns($value["roomcolumns"]);
+            $room->setRows($value["roomrows"]);
             $room->setPrice($value["price"]);
             $room->setName($value["name_room"]);
             $room->setCinema($this->mapCinema($value));

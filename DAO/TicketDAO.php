@@ -27,7 +27,7 @@
             
             $parameters['idBill']=$ticket->getBill()->getIdBill();
             $parameters['idShow']=$ticket->getShow()->getIdShow();
-            $parameters['seat']=$ticket->getSeat();
+            $parameters['seat']=$ticket->getSeat()->getIdSeat();
             $parameters['price']=$ticket->getPrice(); 
             $parameters['qrCode']=$ticket->getQrCode(); 
     
@@ -530,6 +530,8 @@
                 $room->setIdRoom($value["idRoom"]);
                 $room->setType($value["type"]);
                 $room->setCapacity($value["capacity"]);
+                $room->setColumns($value["roomcolumns"]);
+                $room->setRows($value["roomrows"]);
                 $room->setPrice($value["price"]);
                 $room->setName($value["name_room"]);
                 $room->setCinema($this->mapCinema($value));

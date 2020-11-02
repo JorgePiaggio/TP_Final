@@ -268,8 +268,122 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   .check label:active:after {
     width: 10px;
   }
-
+/*****************************************************************/
+  input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
   
+  .check label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 30px;
+    height: 20px;
+    background: rgb(23, 22, 22);
+    display: block;
+    border-radius: 0px;
+    position: relative;
+  }
+  
+  .check label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    width: 11px;
+    height: 11px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+  
+  .check input:checked + label {
+    background: #ff6817;
+  }
+  
+  .check input:checked + label:after {
+    left: calc(100% - 1px);
+    transform: translateX(-100%);
+  }
+  
+  .check label:active:after {
+    width: 10px;
+  }
+
+
+  /******** checkbox seats ************************/
+  
+.room li{ margin-bottom: 124px;}
+
+  .seatTrue,  .seatFalse{
+    margin: 14px 14px;
+  }
+ 
+ /* .seatTrue.check label:before{
+    content: "\f0c8";
+    font-family: "FontAwesome";
+  }*/
+  .seatTrue.check label , .seatFalse.check label{
+    cursor: pointer;  
+    text-indent: -9999px;
+    width: 16px;
+    height: 16px;
+    background: rgb(23, 22, 22);
+    display: inline;
+    border-radius: 0px;
+    position: relative; padding:0px 2px;
+  }
+
+  .seatTrue.check label:after {
+    content: '\f0c8';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    background: rgb(35, 131, 1);
+    border-radius: 0px;
+    transition: 0.3s;
+  }
+  
+  .seatTrue.check input:checked + label, .seatFalse.check input:checked + label {
+    background: #ff6817;
+  }
+  
+  .seatTrue.check input:checked + label:after, .seatFalse.check input:checked + label:after  {
+    left: 0;    
+    background:#f66336;
+    transform: translateX(0%);
+  }
+  
+  .seatTrue.check label:active:after , .seatFalse.check label:active:after{
+    width: 20px;
+  }
+
+  .seatFalse.check label:after  {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    background: rgb(183, 0, 0);
+    border-radius: 0px;
+    transition: 0.3s;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 /* Generalise
 --------------------------------------------------------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6, .heading{margin:0 0 20px 0; font-size:22px; line-height:normal; font-weight:normal; text-transform:uppercase;}

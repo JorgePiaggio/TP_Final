@@ -5,7 +5,8 @@
                     <table class="table bg-light down">
                          <thead class="bg-dark text-white">
                               <th>Name</th>
-                              <th>Capacity</th>
+                              <th>Rows</th>
+                              <th>Columns</th>
                               <th>Type</th>
                               <th>Price</th>
                              </thead>
@@ -14,7 +15,8 @@
                               <tr>
                                    <input type="hidden"  name="idcinema" value= "<?php echo $editRoom->getCinema()->getIdCinema();  ?>" >
                                    <td><input type="text" maxlength="50" name="name" value= "<?php echo $editRoom->getName();  ?>" >  </td>
-                                   <td><input type="number" max="100000" name="capacity" value= "<?php echo $editRoom->getCapacity(); ?>">  </td>
+                                   <td><input type="number" max="20" min="1" name="rows" value= "<?php echo $editRoom->getRows(); ?>">  </td>
+                                   <td><input type="number" max="20" min="1" name="columns" value= "<?php echo $editRoom->getColumns(); ?>">  </td>
                                    <td><select name="typeRoom" >
                                         <option value="2D">2D</option>
                                         <option value="3D">3D</option>

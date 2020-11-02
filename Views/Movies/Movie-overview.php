@@ -69,21 +69,42 @@
               <?php if(!$showList){ ?>
                         <p class="p_orange">No shows on schedule</p> <hr><?php
                     }else{
+                        if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                          foreach($showList as $show){
+                            if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                              <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
+                                <p class="p_orange">
+                                  <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
+                                        $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
+                                        echo $str1." "; ?><?php }else{
+                                        echo $show->getRoom()->getCinema()->getName();} ?>
+                                </p> <hr>
+                                <p class="p_white">
+                                  <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                                  <i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                </p>
+                              </a><?php 
+                            }
+                          }
+                       }
+                       else{
                         foreach($showList as $show){
                           if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                            <a href="">
+                            
                               <p class="p_orange">
                                 <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                       $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
-                                      echo $str1; ?></h6><?php }else{
-                                      echo $show->getRoom()->getCinema()->getName();}?>
+                                      echo $str1." "; ?><?php }else{
+                                      echo $show->getRoom()->getCinema()->getName();} ?>
                               </p> <hr>
                               <p class="p_white">
-                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                <?php echo "Login to buy tickets" ?>
                               </p>
-                            </a><?php 
+                            <?php 
                           }
                         }
+                       }
                     }?> 
               </div> 
             </div>

@@ -74,27 +74,30 @@
         }
 
 
-        public function add($idCinema="",$name="",$capacity="",$type="",$price=""){
+        public function add($idCinema="",$name="",$rows="",$columns="",$type="",$price=""){
             Validate::checkParameter($idCinema);
-            try{
-                $wanted=$this->roomDAO->search($idCinema,$name);    /* chequear si ya existe sala con ese id y nombre */
-                $cinemaSearch = $this->cinemaDAO->search($idCinema);    /*buscar cine al q agregar la sala */
 
-                if(!$wanted){
-                    $newRoom= new Room();
-                    $newRoom->setName($name);
-                    $newRoom->setCapacity($capacity);
-                    $newRoom->setType($type);
-                    $newRoom->setPrice($price);
-                    $newRoom->setCinema($cinemaSearch); 
-                
-                    $this->roomDAO->add($newRoom);        //Le pasa la sala al DA0 para que la agregue a la BD
-                    $this->showRoomList($idCinema);
-                }
-                else{
-                    $cinemaList=$this->cinemaDAO->getAll();
-                    $this->msg="Room: '$name' in cinema '" . $cinemaSearch->getName() ."' already exists";
-                    require_once(VIEWS_PATH."Rooms/Room-add.php");
+            try{
+                  $wanted=$this->roomDAO->search($idCinema,$name);    /* chequear si ya existe sala con ese id y nombre */
+                  $cinemaSearch = $this->cinemaDAO->search($idCinema);    /*buscar cine al q agregar la sala */
+
+                  if(!$wanted){
+                      $newRoom= new Room();
+                      $newRoom->setName($name);
+                      $newRoom->setCapacity($rows*$columns);
+                      $newRoom->setRows($rows);
+                      $newRoom->setColumns($columns);
+                      $newRoom->setType($type);
+                      $newRoom->setPrice($price);
+                      $newRoom->setCinema($cinemaSearch); 
+
+                      $this->roomDAO->add($newRoom);        //Le pasa la sala al DA0 para que la agregue a la BD
+                      $this->showRoomList($idCinema);
+                  }
+                  else{
+                      $cinemaList=$this->cinemaDAO->getAll();
+                      $this->msg="Room: '$name' in cinema '" . $cinemaSearch->getName() ."' already exists";
+                      require_once(VIEWS_PATH."Rooms/Room-add.php");
                 }
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
@@ -102,7 +105,7 @@
         }
 
 
-        public function edit($idCinema="",$name="",$capacity="",$type="",$price="", $idRoom=""){
+        public function edit($idCinema="",$name="",$rows="",$columns="",$type="",$price="", $idRoom=""){
             Validate::checkParameter($idRoom);
             try{
                 $wanted=$this->roomDAO->search($idCinema,$name);
@@ -112,18 +115,20 @@
                     $room=new Room();
                     $room->setIdRoom($idRoom);
                     $room->setName($name);
-                    $room->setCapacity($capacity);
+                    $room->setCapacity($rows*$columns);
+                    $room->setRows($rows);
+                    $room->setColumns($columns);
                     $room->setType($type);
                     $room->setPrice($price);
                     $room->setCinema($cinema);
-                    
+
                     $result = $this->roomDAO->update($room);
 
                     if($result > 0){
                         $this->msg = "Room modified successfully";
-                    }else{
-                        $this->msg = "No rows updated. Please check your values";
-                    }
+                        }else{
+                            $this->msg = "No rows updated. Please check your values";
+                        }
                 }else{
                     $this->msg="Room: '$name' in cinema '" . $cinema->getName() ."' already exists"; 
                 }

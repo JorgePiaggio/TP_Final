@@ -15,8 +15,12 @@
                               </div>                         
 
                               <div class="floating-label">
-                                   <input type="number" maxlength="100000" name="size" placeholder=" " class="floating-input" required>
-                                   <span class="highlight"></span><label for="">Capacity</label>
+                                   <input type="number" max="20" min="1" name="rows" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Rows</label>
+                              </div>
+                              <div class="floating-label">
+                                   <input type="number" max="20" min="1" name="columns" placeholder=" " class="floating-input" required>
+                                   <span class="highlight"></span><label for="">Columns</label>
                               </div>
 
                               <div class="floating-label"><label for="" class="orange">Type</label>
