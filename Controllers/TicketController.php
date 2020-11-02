@@ -42,7 +42,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->creditCardDAO = new CreditCardDAO();
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
         $this->msg=null;
-        $this->seats=array();
+     
     }
 
 
@@ -55,9 +55,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     public function showConfirm($seats, $company, $cardNumber, $propietary, $monthExp, $yearExp, $idShow){
         
-        $this->seats=$seats;
-        
-
+   
         if($seats){
           $show = $this->showDAO->search($idShow);
           $total=0;
@@ -72,18 +70,33 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     }
 
-    public function add($creditCardCompany,$creditCardNumber, $creditCardPropietary, $creditCardExpiration, $idShow){
-        //Validate::checkParameter($idShow);
+    public function showPurchaseResult($tickets){
+
+
+        if($tickets){
+            $this->msg="Purchase complete successfully, enjoy the show";
+        }else{
+            $this->msg="A problem has occurred with your purchase, please try again later";
+        }
+        require_once(VIEWS_PATH."Tickets/purchase-result.php");  
+
+    }
+
+    public function add($creditCardCompany,$creditCardNumber, $creditCardPropietary, $creditCardExpiration,$total,$seats,$idShow){
+        Validate::checkParameter($idShow);
 
         $show=$this->showDAO->search($idShow);
         $user=$this->userDAO->search($_SESSION["loggedUser"]);
+        $seatsArray=explode("/",$seats);
         $seatNumber=array();
         $seatRow=array();
-        foreach($this->seats as $seat){
+        foreach($seatsArray as $seat){
         $value=explode("-",$seat);
         array_push($seatNumber,$value[1]);
         array_push($seatRow,$value[0]);
         }
+
+        //var_dump($seatNumber);
 
         $expiration=explode("/",$creditCardExpiration);
         $date = date("Y-m-d", mktime($expiration[1],$expiration[0],1));
@@ -117,10 +130,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $bill->setTickets(count($seatNumber));
                 $bill->setDate($actualDate);
                 $bill->setCreditCardPayment($payment);
-                $this->calculateDiscount(count($seatNumber), $show->getDateTime(), $show->getRoom()->getPrice(),$totalBill);
-                $bill->setTotalPrice($totalBill);
+                $bill->setTotalPrice($total);
                 $bill->setDiscount(DISCOUNT);
                 $this->billDAO->add($bill);
+
+                $ticketList=array();
 
                 /* crear asientos y tickets */
                 for($indice=0; $indice< count($seatNumber); $indice++){
@@ -128,23 +142,29 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                     $seat->setRow($seatRow[$indice]);
                     $seat->setNumber($seatNumber[$indice]);
                     $this->seatDAO->add($seat, $idShow);
-
+                    $billList=$this->billDAO->getAll();
                     $ticket = new Ticket();
-                    $ticket->setBill($bill);
+                    if($billList){
+                    $ticket->setBill($billList[count($billList)-1]);
+                    }
                     $ticket->setShow($show);
-                    $ticket->setSeat($seat);
+                    $ticket->setSeat($this->seatDAO->search($idShow,$seat->getRow(),$seat->getNumber()));
                     $ticket->setPrice($show->getRoom()->getPrice());
-                    $qrCode=APIQRCODE.$creditCardNumber.$actualDate;
+                    $qrCode=APIQRCODE.$creditCardNumber.date('Y-m-d H:i:s');
                     $ticket->setQrCode($qrCode);
 
-                    var_dump($ticket);
+                    //var_dump($ticket);
                    
 
                     $this->ticketDAO->add($ticket);
+                    array_push($ticketList,$ticket);
                 }
+
+                $this->showPurchaseResult($ticketList);
 
             }else{
                 $this->msg="Not available tickets for this show";
+            
                 }
             
 

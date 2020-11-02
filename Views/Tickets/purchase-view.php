@@ -59,9 +59,9 @@
                                     <label for="<?php echo $cant."-".$cantidad?>"></label>
                                 </li>
                                 <?php }else{ ?>
-                                <li class="seatFalse">
-                                    <input type="checkbox" class="seat" id="" value="" disabled/>
-                                    <label for=""></label>
+                                <li class="seatFalse check">
+                                    <input type="checkbox" class="seat" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>" disabled />
+                                    <label for="<?php echo $cant."-".$cantidad?>"></label>
                                 </li>
                                 
                                 <?php  

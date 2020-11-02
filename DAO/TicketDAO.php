@@ -27,7 +27,7 @@
             
             $parameters['idBill']=$ticket->getBill()->getIdBill();
             $parameters['idShow']=$ticket->getShow()->getIdShow();
-            $parameters['seat']=$ticket->getSeat();
+            $parameters['seat']=$ticket->getSeat()->getIdSeat();
             $parameters['price']=$ticket->getPrice(); 
             $parameters['qrCode']=$ticket->getQrCode(); 
     

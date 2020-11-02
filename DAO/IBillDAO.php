@@ -6,6 +6,7 @@
     interface IBillDAO{
         function add(Bill $bill);
         function search($idBill);
+        public function getAll();
 
         /* gets bills */
         function billsByDate($date);

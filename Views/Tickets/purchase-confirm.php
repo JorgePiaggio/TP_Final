@@ -70,6 +70,10 @@
          
             <input type="hidden" name="propietary" value="<?php echo $propietary;?>">
             <input type="hidden" name="expiration" value="<?php echo $exp;?>">
+            <input type="hidden" name="total" value="<?php echo $total;?>">
+            <input type="hidden" name="seats" value="<?php echo implode("/",$seats);?>">
+
+
 
             <button type="submit" name="confirm" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
       
