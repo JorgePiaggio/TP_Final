@@ -69,6 +69,7 @@ class MovieDAO implements IMovieDAO{
        
         $sql = "INSERT INTO moviesxgenres (idMovie,idGenre) VALUES (:idMovie,:idGenre)";
         $result=null;
+
         foreach($genres as $genre){
 
             $parameters["idMovie"] = $IdMovie;
@@ -81,6 +82,7 @@ class MovieDAO implements IMovieDAO{
                 throw $ex;
             }
         }
+        
         return $result;
     }
 
@@ -115,6 +117,9 @@ class MovieDAO implements IMovieDAO{
     public function getAll(){
         try
         {
+
+            # throw new \PDOException("testing catch on upper level");
+
             $movieList = array();
 
             $query = "SELECT * FROM ".$this->tableName;
@@ -132,8 +137,7 @@ class MovieDAO implements IMovieDAO{
                 }
             }
             
-        }
-        catch(\PDOException $ex)
+        }catch(\PDOException $ex)
         {
             throw $ex;
         }
@@ -153,6 +157,8 @@ class MovieDAO implements IMovieDAO{
     public function getAllStateOne(){
         try
         {
+            # throw new \PDOException("testing catch on upper level");
+
             $movieList = array();
 
             $query = "SELECT * FROM movies WHERE state = 1";
