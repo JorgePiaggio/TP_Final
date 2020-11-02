@@ -375,6 +375,19 @@ max-height: 678px;
 }
 
 
+.screen{
+    width:70%;
+    height:100px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background-color: white;
+    box-shadow: -22px -6px 2px 2px #b80000, 22px -6px 2px 2px #b80000, 22px 0px 2px 2px #b80000, -22px 0px 2px 2px #b80000; 
+}
+
+
+
+
+
 /* Gallery Animations :v 
 --------------------------------------------------------------------------------------------------------------- */
 .anim1 a{
@@ -1010,6 +1023,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
+.cancel{margin-left: 5%; margin-right: 20%;}
 .invisible{opacity:0;}
 .gradient{
 	background: rgb(73,3,3); /* Old browsers */

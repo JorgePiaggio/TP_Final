@@ -1,3 +1,5 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
 <?php if($show->getMovie()->getBackdropPath() != null) { ?>
 <div class="bgded overlay gradient" style="background-image:url('https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $show->getMovie()->getBackdropPath() ?>');background-repeat:no-repeat;background-size:cover;"> 
     <?php }else { ?>
@@ -36,10 +38,11 @@
 
             </div>
 
-            <form action="<?php echo FRONT_ROOT?>Ticket/showConfirm" id="form" class="center" method="post">
+            <form action="<?php echo FRONT_ROOT?>Ticket/showConfirm" id="form" class="center" method="post">        <!-- ELEGIR ASIENTO -->
 
             <div ><br> <br><h2 class="orange">Pick Your Seats</h2>
-            <ul class="room cardStyle">
+            
+            <ul class="room cardStyle"><div class="screen"></div>
                 <?php
 
                         for($cant = 0; $cant < $show->getRoom()->getRows(); $cant++){ 
@@ -74,7 +77,7 @@
 
 
             
-                <div class="container up2"><h2 class="orange">Credit Card</h2>
+                <div class="container up2"><h2 class="orange">Credit Card</h2>                                     <!-- DATOS TARJETA DE CREDITO -->
                         <div class="floating-label-form">
                             <div class="floating-label">
                                     <select name="company" class="selection" required>
@@ -110,9 +113,9 @@
                         </span>
                     
 
-
-                                <button type="submit" name="confirm" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
-
+                                <div>
+                                <button type="submit" name="confirm" id="checkBtn" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
+                                </div>
                         </div>
                         <br>    
                         <?php if($this->msg != null){ //Muestro un mensaje con el error en el registro
@@ -128,4 +131,19 @@
 
 
 
+<!-- VALIDAR AL MENOS UN CHECKBOX SELECCIONADO -->
 
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#checkBtn').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+
+</script>

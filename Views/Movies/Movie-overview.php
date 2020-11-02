@@ -71,7 +71,7 @@
                     }else{
                         foreach($showList as $show){
                           if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                            <a href="">
+                            <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
                               <p class="p_orange">
                                 <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                       $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';

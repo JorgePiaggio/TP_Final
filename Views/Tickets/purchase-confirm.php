@@ -2,9 +2,9 @@
     <h2 class="page-title">Purchase</h2>
     <main class="hoc container clear"> 
 
-        <div class="hoc cardStyle">
+        <div class="hoc cardStyle up">
 
-            <div class="">
+            <div class=""><br>
 
                 <table class="table bg-light">
                     <thead class="bg-dark text-white">
@@ -28,7 +28,7 @@
                     </tbody>
                 </table>
 
-            </div>
+            </div><br><br>
 
             <div class="">
 
@@ -61,23 +61,28 @@
                     </tbody>
                 </table>
 
-            </div>
+            </div><br><br>
+
+            <div>
+
+                <form action="<?php echo FRONT_ROOT?>Ticket/add" class="center" method="post"><?php $exp=$monthExp."/".$yearExp;?>
+                    <div>
+                        <input type="hidden" name="company" value="<?php echo $company;?>">
+                        <input type="hidden" name="cardNumber" value="<?php echo $cardNumber;?>">
+                        <input type="hidden" name="propietary" value="<?php echo $propietary;?>">
+                        <input type="hidden" name="expiration" value="<?php echo $exp;?>">
+                        <input type="hidden" name="total" value="<?php echo $total;?>">
+                        <input type="hidden" name="seats" value="<?php echo implode("/",$seats);?>">
+                    </div>
 
 
-            <form action="<?php echo FRONT_ROOT?>Ticket/add" class="center" method="post"><?php $exp=$monthExp."/".$yearExp;?>
-            <input type="hidden" name="company" value="<?php echo $company;?>">
-            <input type="hidden" name="cardNumber" value="<?php echo $cardNumber;?>">
-         
-            <input type="hidden" name="propietary" value="<?php echo $propietary;?>">
-            <input type="hidden" name="expiration" value="<?php echo $exp;?>">
-            <input type="hidden" name="total" value="<?php echo $total;?>">
-            <input type="hidden" name="seats" value="<?php echo implode("/",$seats);?>">
+                    <div>
+                        <a href="<?php echo FRONT_ROOT?>Home/index"><button type="submit" class="btn inverse ml-auto d-block cancel" name="cancel" id="cancel" value="">Cancel</button> </a>
+                        <button type="submit" name="confirm" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
+                    </div>
+                </form>
 
-
-
-            <button type="submit" name="confirm" value="<?php echo $show->getIdShow()?>" class="btn btn-primary ml-auto d-block">Confirm</button>
-      
-            </form>
+            </div><br><br>
 
         </div>
 

@@ -74,7 +74,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
 
         if($tickets){
-            $this->msg="Purchase complete successfully, enjoy the show";
+            $this->msg="Purchase completed successfully, enjoy the show";
         }else{
             $this->msg="A problem has occurred with your purchase, please try again later";
         }

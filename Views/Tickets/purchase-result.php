@@ -4,7 +4,7 @@
 
         <div class="hoc cardStyle">
 
-            <div class="">
+            <div class="down">
 
                 <table class="table bg-light">
                     <thead class="bg-dark text-white">
@@ -30,12 +30,19 @@
                         }?>
                         
                     </tbody>
-                </table>
-                    <center><h2><?php echo "Total Price (With discounts): ".$ticket->getBill()->getTotalPrice(); ?></h2> </center>
-                    <center><h2><?php echo "User: ".$ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname(); ?></h2> </center>
-                    <div class="hoc"><br>
+                </table><br><br>
+
+                    <div class="cardStyle">
+                    <center><h2 class="orange"><?php echo "Total Price (With discount): $ ".$ticket->getBill()->getTotalPrice(); ?></h2> </center>
+                    <center><h2 class="orange"><?php echo "User: ".$ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname(); ?></h2> </center>
+                    </div>         
+                                <div class="hoc"><br>
                                   <?php if($this->msg != null){?> 
                                         <center><h4 class="msg"><?php  echo $this->msg;
                                     } ?> </h4></center>
-                                </div> 
+                                </div> <br><br>
             </div>
+        </div>
+    </main>
+</div>
+    
