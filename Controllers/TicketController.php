@@ -31,7 +31,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         private $creditCardDAO;
         private $creditCardPaymentDAO;
         private $msg;
-        private $seats;
+      
 
     function __construct(){
         $this->ticketDAO = new TicketDAO();
@@ -111,9 +111,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $creditCard->setNumber($creditCardNumber);
                 $creditCard->setExpiration($date);
              
-
+                $card=$this->creditCardDAO->search($creditCardNumber,$creditCardCompany);
+                if(!$card){
                 $this->creditCardDAO->add($creditCard);
-
+                }
                 /* crear transaccion */
                 $actualDate=date('Y-m-d H:i:s');
                 $creditCardPayment = new CreditCardPayment();
@@ -133,6 +134,9 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $bill->setTotalPrice($total);
                 $bill->setDiscount(DISCOUNT);
                 $this->billDAO->add($bill);
+
+                //Tomo las entradas faltantes
+                $remainingTickets= $show->getRemainingTickets();
 
                 $ticketList=array();
 
@@ -154,16 +158,26 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                     $ticket->setQrCode($qrCode);
 
                     //var_dump($ticket);
+
+                    
                    
 
                     $this->ticketDAO->add($ticket);
                     array_push($ticketList,$ticket);
+
+
+
+
                 }
+                //actualizo las entradas 
+                $show->setRemainingTickets($remainingTickets-count($seatNumber));
+                $this->showDAO->update($show);
 
                 $this->showPurchaseResult($ticketList);
 
             }else{
                 $this->msg="Not available tickets for this show";
+                $this->showPurchaseView($idShow);
             
                 }
             

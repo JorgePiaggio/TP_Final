@@ -58,6 +58,36 @@
         }
 
 
+        public function getAll(){
+            try
+            {
+                $payList = array();
+    
+                $query = "SELECT * FROM creditcardpayments";
+    
+                $this->connection = Connection::getInstance();
+    
+                $result = $this->connection->execute($query);
+              
+                if($result){
+                    foreach($result as $value){
+                        $mapping = $this->map($value);  
+                        array_push($payList, $mapping);
+                    }
+                    return $payList;
+                }
+                else{
+                    return null;
+                }
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }  
+        }
+
+
 
         protected function map($value){
             

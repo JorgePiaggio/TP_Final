@@ -5,6 +5,8 @@
 
     interface ICreditCardPaymentDAO{
         function add(CreditCardPayment $CreditCardPayment);
+        function search($number,$company,$date);
+        function getAll();
     }
 
 ?>

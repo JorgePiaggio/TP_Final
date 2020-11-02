@@ -28,7 +28,80 @@
             catch(\PDOException $ex){
                 throw $ex;
             }
-        }  
+        }
+        
+        
+        public function search($numberCard,$company){
+
+            try
+            {
+                $query = "SELECT * FROM creditcards WHERE numberCard= :numberCard AND company=:company";
+                $parameters["numberCard"] =$numberCard ;
+                $parameters["company"] =$company ;
+    
+                $this->connection = Connection::getInstance();
+    
+                $result = $this->connection->execute($query, $parameters);
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+    
+            if(!empty($result)){
+                return $this->mapCard($result[0]);
+            }else{
+                return null;
+            }
+
+
+        }
+
+        public function getAll(){
+            try
+            {
+                $cardList = array();
+    
+                $query = "SELECT * FROM creditcards";
+    
+                $this->connection = Connection::getInstance();
+    
+                $result = $this->connection->execute($query);
+              
+                if($result){
+                    foreach($result as $value){
+                        $mapping = $this->mapCard($value);  
+                        array_push($cardList, $mapping);
+                    }
+                    return $cardList;
+                }
+                else{
+                    return null;
+                }
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }  
+        }
+
+
+
+        protected function mapCard($value){
+        $card=new CreditCard();
+        $card->setNumber($value["numberCard"]);
+        $card->setCompany($value["company"]);
+        $card->setPropietary($value["propietary"]);
+        $card->setExpiration($value["expiration"]);
+
+        return $card;
+
+
+
+
+        }
 
 
 

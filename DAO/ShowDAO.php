@@ -42,7 +42,8 @@
     /* Setea el turno según el horario de la función */
     private function setShift($dateTime){
 
-        $dateTime =$dateTime->format('H');
+        $dt= DateTime::createFromFormat("Y-m-d H:i:s", $dateTime);
+        $dateTime=$dt->format('H');
         
         $midday = 12;
         $afternoon = 19;            
@@ -645,7 +646,7 @@
 
             $parameters['idRoom']=$show->getRoom()->getIdRoom();
             $parameters['idMovie']=$show->getMovie()->getTmdbID();
-            $parameters['dateTime']=$show->getDateTime()->format('Y-m-d H:i:s');
+            $parameters['dateTime']=$show->getDateTime();
             $parameters['shift']=$this->setShift($show->getDateTime());
             $parameters['remainingTickets']=$show->getRemainingTickets();
 

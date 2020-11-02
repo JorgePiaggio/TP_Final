@@ -50,6 +50,7 @@
                                     foreach($seats as $seat){
                                         if($seat->getNumber() == $cantidad && $seat->getRow() == $cant){
                                             $flag=false;
+                                         
                                         }
                                     }
                                 }
