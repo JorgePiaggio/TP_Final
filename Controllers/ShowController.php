@@ -87,12 +87,12 @@
     /* agregar show */
     public function add($idRoom, $idMovie, $date, $time){
         
-        if($this->checkAvailability($idMovie, $idRoom, $date)){
+        if($this->checkAvailability($idMovie, $idRoom, $date,-1)){//para agregar pongo un idshow no existente
 
             date_default_timezone_set('America/Argentina/Buenos_Aires');
         
             $actualDate=date('Y-m-d H:i');
-            $dateTime=date($date." ".$time);
+            $dateTime=date($date." ".$time.":00");
 
             if(strtotime($actualDate)<strtotime($dateTime)){
 
@@ -130,13 +130,13 @@
     }
 
 
-    public function edit($idRoom, $idMovie, $date, $time,$tickets,$idShow){
-        if($this->checkAvailability($idMovie, $idRoom, $date)){
+    public function edit($idRoom, $idMovie, $date, $time,$tickets,$idShow){//para editar idshow cuenta
+        if($this->checkAvailability($idMovie, $idRoom, $date,$idShow)){
 
             date_default_timezone_set('America/Argentina/Buenos_Aires');
         
             $actualDate=date('Y-m-d H:i');
-            $dateTime=date($date." ".$time);
+            $dateTime=date($date." ".$time.":00");
 
             if(strtotime($actualDate)<strtotime($dateTime)){
 
@@ -147,35 +147,57 @@
             
                 if($this->validateShow($idRoom,$idMovie,$dateTime,$idShow)){
                     $room=$this->roomDAO->searchById($idRoom);
-                    $previusRoom=$this->showDAO->search($idShow)->getRoom();
+                   
+                    $previusShow=$this->showDAO->search($idShow);
+                    $previusRoom=$previusShow->getRoom();
+
                     if($previusRoom->getCapacity()==$tickets){//si no se vendio entrada 
                         
                         $sold=0;
+                        
 
                     }else{ // si se vendieron entradas
 
                     $sold=$previusRoom->getCapacity()-$tickets;
                     }
-                    if($room->getCapacity()>=$sold){ // ajusto el nuevo valor de tickets , reviso si las entradas vendidas no sobrepasan la capacidad de la nueva sala
-                    
-                    $tickets=$room->getCapacity()-$sold;
-                    $show = new Show();
-                    $show->setIdShow($idShow);
-                    $show->setRoom($room); 
-                    $show->setMovie($this->movieDAO->search($idMovie));
-                    $show->setDateTime($dateShow);
-                    $show->setRemainingTickets($tickets);
-                    $result = $this->showDAO->update($show);
 
-                    if($result > 0){
-                        $this->msg="Edited Correctly";
+
+                    if($previusShow->getMovie()->getTmdbId()!=$idMovie && $sold>0){
+                        $this->msg="This show has tickets solded,the movie must be the same";
+
                     }else{
-                        $this->msg = "Internal error. Please try again later";
-                    }
-                    }else{
-                        $this->msg="the capacity of the new room is not enough for the tickets sold";
-                    }
-                    
+                        if($previusShow->getDateTime()!=$dateTime && $sold>0){ 
+                            $this->msg="This show has tickets solded,the time must be the same";
+                            
+                        }else{
+
+                            if($room->getCapacity()>=$sold){ // ajusto el nuevo valor de tickets , reviso si las entradas vendidas no sobrepasan la capacidad de la nueva sala
+                   
+                                $tickets=$room->getCapacity()-$sold;
+                                $show = new Show();
+                                $show->setIdShow($idShow);
+                                $show->setRoom($room); 
+                                $show->setMovie($this->movieDAO->search($idMovie));
+                                $show->setDateTime($dateTime);
+                                $show->setRemainingTickets($tickets);
+                                $result = $this->showDAO->update($show);
+            
+                                
+            
+                                if($result > 0){
+                                    $this->msg="Edited Correctly";
+                                }else{
+                                    $this->msg = "Internal error. Please try again later";
+                                }
+                                }else{
+                                    $this->msg="the capacity of the new room is not enough for the tickets sold";
+                                }
+
+
+
+                        }
+
+                    }         
                 }else{
                     $this->msg="There is already a Show for this time";
                 }
@@ -332,13 +354,13 @@
         
     
     /* chequea q la pelicula no este en una funcion en la fecha solicitada */
-    private function checkAvailability($idMovie, $idRoom, $date){
+    private function checkAvailability($idMovie, $idRoom, $date,$idShow){
 
         $s=$this->showDAO->getByMovieByDay($idMovie, $date); /* saber si hay funcion de esa peli ese dia */
         
         if($s != null){
             foreach($s as $show){
-                if($show->getRoom()->getIdRoom() != $idRoom){  
+                if($show->getRoom()->getIdRoom() != $idRoom && $idShow!=$show->getIdShow()){  
                     return false;
                 }else{
                     return true;    /* si la funcion es en la misma sala, se permite */
