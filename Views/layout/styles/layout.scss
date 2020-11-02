@@ -374,18 +374,29 @@ max-height: 678px;
  min-height: 678px;
 }
 
-
-.screen{
+/*dibujo de pantalla en comprar ticket */
+.backscreen{
+    display:flex;align-items: center; justify-content: center;
     width:70%;
-    height:100px;
+    height:120px;
     margin: 0 auto;
     margin-bottom: 20px;
-    background-color: white;
-    box-shadow: -22px -6px 2px 2px #b80000, 22px -6px 2px 2px #b80000, 22px 0px 2px 2px #b80000, -22px 0px 2px 2px #b80000; 
+    background-color: rgb(189, 0, 0);
+
 }
 
+.screen{
+    display:flex;align-items: center; justify-content: center;
+    width:80%;
+    height:90%;
+    margin: 0 auto;
+    
+    background-color: white;
+}
 
-
+.iconScreen{
+    width: 80px ; height: 80px;
+}
 
 
 /* Gallery Animations :v 

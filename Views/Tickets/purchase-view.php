@@ -42,7 +42,8 @@
 
             <div ><br> <br><h2 class="orange">Pick Your Seats</h2>
             
-            <ul class="room cardStyle"><div class="screen"></div>
+            <ul class="room cardStyle">
+                <div class="backscreen"><div class="screen"><img src="<?php echo IMG_PATH?>/icons/logo.png" alt="screen logo" class="iconScreen"></i></div></div>
                 <?php
 
                         for($cant = 0; $cant < $show->getRoom()->getRows(); $cant++){ 
