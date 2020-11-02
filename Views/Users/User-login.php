@@ -4,20 +4,23 @@
                <h2 class="page-title">Login</h2><br>
                <form action="<?php echo FRONT_ROOT?>User/login" method="post">
                     <div class="floating-label-form">
-                         <div class="floating-label">
-                              <input type="email" maxlength="50" name="mail" placeholder="" class="floating-input" required>
-                              <span class="highlight"></span><label for="">Email</label>
-                         </div> <br>                      
+                        <i class="fa fa-envelope" style="font-size: 1.73em"></i>
+                        <div class="floating-label">  
+                            <input type="email" maxlength="50" name="mail" placeholder="" class="floating-input" required>
+                            <span class="highlight"></span><label for="">Email</label>
+                        </div> <br>                      
 
-                         <div class="floating-label">
-                              <input type="password" maxlength="16" name="pass" placeholder=" " class="floating-input" required>
-                              <span class="highlight"></span><label for="">Password</label>
-                         </div><br>
+                        <i class="fa fa-lock" style="font-size: 1.73em"></i>
+                        <div class="floating-label">
+                            
+                            <input type="password" maxlength="16" name="pass" placeholder=" " class="floating-input" required>
+                            <span class="highlight"></span><label for="">Password</label>
+                        </div><br>
 
-                         <div class="floating-label">
-                              <span>&nbsp;</span>
-                              <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
-                         </div><br>
+                        <div class="floating-label">
+                            <span>&nbsp;</span>
+                            <button type="submit" name="btn" class="btn btn-primary ml-auto d-block">Confirm</button>
+                        </div><br>
                     </div>
 
                     <!-- The JS SDK Login Button -->

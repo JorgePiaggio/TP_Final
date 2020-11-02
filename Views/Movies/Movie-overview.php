@@ -80,7 +80,8 @@
                                         echo $show->getRoom()->getCinema()->getName();} ?>
                                 </p> <hr>
                                 <p class="p_white">
-                                  <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                  <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                                  <i class="fa fa-ticket" style="font-size: 1.73em"></i>
                                 </p>
                               </a><?php 
                             }
@@ -98,7 +99,7 @@
                               </p> <hr>
                               <p class="p_white">
                                 <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
-                                <?php echo "Registered to buy tickets" ?>
+                                <?php echo "Login to buy tickets" ?>
                               </p>
                             <?php 
                           }

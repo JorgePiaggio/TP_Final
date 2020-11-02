@@ -13,10 +13,11 @@
                                               <?php if(!$roomList){?>
                                                 <option value="">No Rooms Found</option>
                                               <?php }?>
-                                              <option value="<?php echo $editShow->getRoom()->getIdRoom(); ?>" selected disabled><?php echo $editShow->getRoom()->getName(); ?></option>
+                                              <option value="<?php echo $editShow->getRoom()->getIdRoom(); ?>"><?php echo $editShow->getRoom()->getName(); ?></option>
                                             <?php foreach($roomList as $room){ ?>
-                                                
+                                              <?php if($room->getIdRoom()!=$editShow->getRoom()->getIdRoom()){?>
                                             <option value="<?php echo $room->getIdRoom(); ?>"><?php echo $room->getName(); ?></option>
+                                            <?php }?>
                                             <?php }?>
                                         </select>                    
                                 </div>
@@ -26,10 +27,11 @@
                                         <?php if(!$movieList){?>
                                                 <option value="">No actives movies Found</option>
                                               <?php }?>
-                                              <option value="<?php echo $editShow->getMovie()->getTmdbId(); ?>" selected disabled><?php if(strlen($editShow->getMovie()->getTitle())>30){$title=substr($editShow->getMovie()->getTitle(),0,30); echo $title."...";}else{echo $editShow->getMovie()->getTitle();} ?></option>
+                                              <option value="<?php echo $editShow->getMovie()->getTmdbId(); ?>"><?php if(strlen($editShow->getMovie()->getTitle())>30){$title=substr($editShow->getMovie()->getTitle(),0,30); echo $title."...";}else{echo $editShow->getMovie()->getTitle();} ?></option>
                                             <?php foreach($movieList as $movie){ ?>
-                                                
+                                                <?php if($movie->getTmdbId()!=$editShow->getMovie()->getTmdbId()){?>
                                                 <option value="<?php echo $movie->getTmdbId(); ?>"><?php if(strlen($movie->getTitle())>30){$title=substr($movie->getTitle(),0,30); echo $title."...";}else{echo $movie->getTitle();} ?></option>
+                                                <?php }?>
                                             <?php }?>
                                         </select>                    
                                 </div>
