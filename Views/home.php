@@ -96,7 +96,8 @@
               <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
               <button type="button" class="collapsible">Show List</button>
               <div class="content1">
-                <?php foreach($showList as $show){
+              <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                      foreach($showList as $show){
                         if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
                           <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
                             <p class="p_orange">
@@ -106,11 +107,31 @@
                                     echo $show->getRoom()->getCinema()->getName();}?>
                             </p> <hr>
                             <p class="p_white">
-                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                              <i class="fa fa-ticket" style="font-size: 1.73em"></i>
                             </p>
                           </a><?php 
                         }
-                      }?> 
+                      }
+                    }
+                    else{
+                      foreach($showList as $show){
+                        if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                            <p class="p_orange">
+                              <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
+                                    $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';
+                                    echo $str1; ?></h6><?php }else{
+                                    echo $show->getRoom()->getCinema()->getName();}?>
+                            </p> <hr>
+                            <p class="p_white">
+                              <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                              <i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                              <?php echo "Login" ?>
+                            </p>
+                          <?php 
+                        }
+                      } 
+                    }?> 
               </div> 
             </div>
 
