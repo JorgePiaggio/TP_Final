@@ -60,7 +60,7 @@
                     $cinemaList=$mapping;
                     }
                 }
-                
+
             }
             catch(\PDOException $ex)
             {
@@ -79,6 +79,8 @@
         public function getAllActive(){
             try
             {
+                # throw new \PDOException("testing catch on upper level");
+
                 $cinemaList = array();
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE state=1";
@@ -86,9 +88,7 @@
                 $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
-                
-                #throw new \Exception("la mierda");
-                #throw new \PDOException("la mierda 2");
+               
 
                 if($resultSet){
                     $mapping= $this->map($resultSet);
@@ -98,6 +98,8 @@
                     $cinemaList=$mapping;
                     }
                 }
+
+                # throw new \PDOException("testing catch on upper level");
 
             }
             catch(\PDOException $ex) //PDO Exception
@@ -185,7 +187,7 @@
         
         public function search($idCinema){
             try
-            {
+            {   #throw new \PDOException("testing catch on upper level");
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
                 $parameters["idCinema"]=$idCinema;
                 $this->connection = Connection::getInstance();

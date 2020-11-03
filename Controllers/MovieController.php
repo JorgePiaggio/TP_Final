@@ -7,11 +7,13 @@
     use DAO\ShowDAO as ShowDAO;
     use DAO\GenreDAO as GenreDAO;
     use Config\Validate as Validate;
+    use \Exception as Exception;
 
 
     class MovieController{
         private $movieDAO;
         private $genreDAO;
+        private $showDAO;
         private $msg;
     
         public function __construct(){
@@ -28,15 +30,34 @@
             $page = null;
             $actualGenre = null;
             $allGenre=$this->getAllGenre();
-            $movieList=$this->movieDAO->getAll();
-            $genreList=$this->genreDAO->getAll();
-            
+            $movieList=array();
+
+            try{
+                $shows=$this->showDAO->getAll();
+                if($shows){                                          
+                    foreach($shows as $show){
+                        if(!in_array($show->getMovie(), $movieList)) { 
+                                array_push($movieList,$show->getMovie());
+                        }
+                    }       
+                }
+
+                $genreList=$this->genreDAO->getAll();
+                
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
 
 
         public function showFilterMovies(){
-            $genreList=$this->genreDAO->getAll();
+            try{
+                $genreList=$this->genreDAO->getAll();
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");
         }
     
@@ -44,40 +65,47 @@
         public function filterByGenre($idGenre){
             $actualGenre = null;
             if($idGenre!=-1){
-            $allGenre=$this->getAllGenre();
-            $movieList=$this->movieDAO->getByGenre($idGenre);
-            $genreList=$this->genreDAO->getAll();
-            $actualGenre=$this->genreDAO->search($idGenre);
-
-            require_once(VIEWS_PATH."Movies/Movie-list-full.php");
+                $allGenre=$this->getAllGenre();
+                try{
+                    $movieList=$this->movieDAO->getByGenre($idGenre);
+                    $genreList=$this->genreDAO->getAll();
+                    $actualGenre=$this->genreDAO->search($idGenre);
+                }catch(\Exception $e){
+                    echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+                }
+                
+                require_once(VIEWS_PATH."Movies/Movie-list-full.php");
             }else{
                 $this->showAllMovies();
             }
+            
         }
     
 
         /* vista de una pelicula en particular */
         public function showMovie($tmdbId){
+            try{
+                /* solicitar detalles de la pelicula */
+                $jsonMovie=$this->getMovieDetails($tmdbId);
+                $movie=$this->constructMovie($jsonMovie);
 
-            /* solicitar detalles de la pelicula */
-            $jsonMovie=$this->getMovieDetails($tmdbId);
-            $movie=$this->constructMovie($jsonMovie);
+                /* solicitar trailer de la pelicula */
+                $trailer=$this->getVideoTrailer($tmdbId);
+                $movie->setVideoPath($trailer);
+                
+                /*Solicitar director/es de la pelicula*/
+                $directors = $this->getDirector($tmdbId);
+                $movie->setDirector($directors);
 
-            /* solicitar trailer de la pelicula */
-            $trailer=$this->getVideoTrailer($tmdbId);
-            $movie->setVideoPath($trailer);
-            
-            /*Solicitar director/es de la pelicula*/
-            $directors = $this->getDirector($tmdbId);
-            $movie->setDirector($directors);
-
-            /* solicitar review */
-            $review=$this->getReview($tmdbId);
-            $movie->setReview($review);
-            
-             /* solicitar funciones de la muvi */
-            $showList=$this->showDAO->getAllByMovie($tmdbId);
-            
+                /* solicitar review */
+                $review=$this->getReview($tmdbId);
+                $movie->setReview($review);
+                
+                /* solicitar funciones de la muvi */
+                $showList=$this->showDAO->getAllByMovie($tmdbId);
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
             require_once(VIEWS_PATH."Movies/Movie-overview.php");
         }
 
@@ -88,62 +116,106 @@
 
             $allGenre=$this->getAllGenre();
             $actualGenre = null; 
-            $this->updateGenreList();                                 
-            $genreList=$this->genreDAO->getAll();
-            $movieList=$this->getNowPlayingMovies($page,$language);
+            try{
+                $this->updateGenreList();                                 
+                $genreList=$this->genreDAO->getAll();
+                $movieList=$this->getNowPlayingMovies($page,$language);
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
             require_once(VIEWS_PATH."Movies/Movie-list-admin.php");
         }
 
 
         /* solicitar detalles de la pelicula */
         public function getMovieDetails($tmdbId){
-            $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
-            $jsonMovie=($request) ? json_decode($request, true) : array();
-            
+            try{
+                $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
+                #$request=false; /* testing exceptions */ 
+                if($request === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                    $jsonMovie=($request) ? json_decode($request, true) : array();
+                }
+            }catch(\Exception $e){
+            #  echo "Caught Exception: ".get_class($e)." - ".;     
+                header("location:../../Home/index?alert=".$e->getMessage()); 
+            }
+
             return $jsonMovie;
         }
 
         
         /* solicitar trailer de la pelicula */
         public function getVideoTrailer($tmdbId){  
-            $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
-            $jsonTrailer=json_decode($request_two, true);
-            
-            $trailer=null;
+            try{
+                $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
+                if($request_two === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                    $jsonTrailer=json_decode($request_two, true);
+                }
+          
 
-            if($jsonTrailer['results'] != null){
-                if($jsonTrailer['results'][0] != null){
-                    if($jsonTrailer['results'][0]['site'] == 'YouTube'){
-                        $trailer = $jsonTrailer['results'][0]['key'];
+                $trailer=null;
+
+                if($jsonTrailer['results'] != null){
+                    if($jsonTrailer['results'][0] != null){
+                        if($jsonTrailer['results'][0]['site'] == 'YouTube'){
+                            $trailer = $jsonTrailer['results'][0]['key'];
+                        }
                     }
                 }
+                return $trailer;
+
+            }catch(\Exception $e){
+                header("location:../../Home/index?alert=".$e->getMessage()); 
             }
-            return $trailer;
         }
 
 
         /* solicitar director de la pelicula */
         public function getDirector($tmdbId){
-            $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
-            $jsonCredits = ($request_three) ? json_decode($request_three, true) : array();
-            $directors = array();
+
+            try{
+                $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
+                if($request_three === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                $jsonCredits = ($request_three) ? json_decode($request_three, true) : array();
+                }
+
+                $directors = array();
 
                 foreach($jsonCredits['crew'] as $value){
                     if(strcmp($value['job'], 'Director') == 0){ 
                         array_push($directors, $value['name']);
                     }
                 }
+            }catch(\Exception $e){
+                header("location:../../Home/index?alert=".$e->getMessage()); 
+            }
+
             return $directors;
         }
 
 
          /* solicitar review */
         public function getReview($tmdbId){
-            $request_four = file_get_contents(APIURL."movie/".$tmdbId."/reviews?api_key=".APIKEY."&language=en-US&page=1");
-            $jsonCredits = ($request_four) ? json_decode($request_four, true) : array();
-            $json=null;
-            if($jsonCredits['results']){
-                $json=($jsonCredits['results'][0]);
+            try{
+                $request_four = file_get_contents(APIURL."movie/".$tmdbId."/reviews?api_key=".APIKEY."&language=en-US&page=1");
+
+                if($request_four === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                    $jsonCredits = ($request_four) ? json_decode($request_four, true) : array();
+                }
+                $json=null;
+                if($jsonCredits['results']){
+                    $json=($jsonCredits['results'][0]);
+                }
+            }catch(\Exception $e){
+                header("location:../../Home/index?alert=".$e->getMessage()); 
             }
             return $json;
         }
@@ -164,16 +236,22 @@
             Validate::checkParameter($page);
 
             $movies= array();
-            
-            $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);
 
-            $jsonNowPlaying=($request) ? json_decode($request, true) : array();
-            
-            foreach($jsonNowPlaying['results'] as $valuesArray){  
-                $newMovie = $this->constructMovie($valuesArray);
-                array_unshift($movies, $newMovie);
+            try{
+                $request=file_get_contents(APIURL."movie/now_playing?api_key=".APIKEY."&language=".$language."&page=".$page);
+                if($request === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                    $jsonNowPlaying=($request) ? json_decode($request, true) : array();
+                }
+                
+                foreach($jsonNowPlaying['results'] as $valuesArray){  
+                    $newMovie = $this->constructMovie($valuesArray);
+                    array_unshift($movies, $newMovie);
+                }
+            }catch(\Exception $e){
+                header("location:../../Home/index?alert=".$e->getMessage()); 
             }
-
             return $movies;
         }
 
@@ -181,10 +259,13 @@
 
         /* agregar o quitar peliculas al catalogo para que esten disponibles para shows -> cambia estado de movie en la bdd */
         public function showManageCatalogue(){
-
-            $movieListInactive=$this->movieDAO->getAllStateZero();
-            $movieListActive=$this->movieDAO->getAllStateOne();
-            $genreList=$this->genreDAO->getAll();
+            try{
+                $movieListInactive=$this->movieDAO->getAllStateZero();
+                $movieListActive=$this->movieDAO->getAllStateOne();
+                $genreList=$this->genreDAO->getAll();
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
             require_once(VIEWS_PATH."Movies/Movie-catalogue.php");
         }
 
@@ -228,12 +309,15 @@
             $directors = $this->getDirector($tmdbId);
             $movie->setDirector($directors);
 
-            $result=$this->movieDAO->add($movie);
-        
-            if($result > 0){
-                $this->msg= "Movie Added Succesfully";
-            }else{
-                $this->msg="Internal error. Please try again later";
+            try{
+                $result=$this->movieDAO->add($movie);
+                if($result > 0){
+                    $this->msg= "Movie Added Succesfully";
+                }else{
+                    $this->msg="Internal error. Please try again later";
+                }
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
 
             $this->showMoviePage();
@@ -246,27 +330,32 @@
             $cant=0; // contador para peliculas que tengan funciones activas
             if($_POST){
                 $movies=$_POST["movies"];
-                foreach($movies as $id){
-                    $activeShows=$this->showDAO->getAllbyMovie($id); 
-                    
-                    if(!$activeShows){
-                        $movie= $this->movieDAO->search($id);   
-                    
-                        if($movie->getState() == true){
-                            $this->movieDAO->setState($movie->getTmdbId(), intval(false));
+                try{
+                    foreach($movies as $id){
+                        $activeShows=$this->showDAO->getAllbyMovie($id); 
+                        
+                        if(!$activeShows){
+                            $movie= $this->movieDAO->search($id);   
+                        
+                            if($movie->getState() == true){
+                                $this->movieDAO->setState($movie->getTmdbId(), intval(false));
+                            }else{
+                                $this->movieDAO->setState($movie->getTmdbId(), intval(true));
+                            }
                         }else{
-                            $this->movieDAO->setState($movie->getTmdbId(), intval(true));
+                            $alert=true;
+                            $cant++;
                         }
-                    }else{
-                        $alert=true;
-                        $cant++;
                     }
-                }
 
-                if($alert){
-                    $this->msg= $cant." "."movie/s can't be removed because they are on a show";
+                    if($alert){
+                        $this->msg= $cant." "."movie/s can't be removed because they are on a show";
+                    }
+                }catch(\Exception $e){
+                    echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
                 }
             }
+            
             $this->showManageCatalogue();
         }
 
@@ -301,8 +390,12 @@
                 $newMovie->setPoster(POSTERURL.$jsonObject["poster_path"]);
             }
 
-            $genres=$this->genreDAO->getAll();
-            
+            try{
+                $genres=$this->genreDAO->getAll();
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+
             if(isset($jsonObject["genre_ids"])){
                 foreach($jsonObject["genre_ids"] as $genreId){  /* crea objeto Genre por cada id de genero q manda la API en getNowPlaying */ 
                     foreach($genres as $genre){
@@ -335,8 +428,12 @@
         public function updateGenreList(){
             Validate::validateSession();
             $nowGenre=$this->getNowGenres();
-            foreach($nowGenre as $genre){
-                $this->genreDAO->add($genre);
+            try{
+                foreach($nowGenre as $genre){
+                    $this->genreDAO->add($genre);
+                }
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
         }
 
@@ -347,16 +444,25 @@
             
             $genres= array();
 
-            $request=file_get_contents(APIURL."genre/movie/list?api_key=".APIKEY."&language=".$language);
+            try{
+                $request=file_get_contents(APIURL."genre/movie/list?api_key=".APIKEY."&language=".$language);
 
-            $jsonNowPlaying=($request) ? json_decode($request, true) : array();
-        
-            foreach($jsonNowPlaying['genres'] as $valuesArray){
-                $newGenre = new Genre();
-                $newGenre->setId($valuesArray["id"]);
-                $newGenre->setName($valuesArray["name"]);
-                array_push($genres, $newGenre);
+                if($request === FALSE){
+                    throw new Exception("Cannot access API to read contents.");
+                }else{
+                    $jsonNowPlaying=($request) ? json_decode($request, true) : array();
+                
+                    foreach($jsonNowPlaying['genres'] as $valuesArray){
+                        $newGenre = new Genre();
+                        $newGenre->setId($valuesArray["id"]);
+                        $newGenre->setName($valuesArray["name"]);
+                        array_push($genres, $newGenre);
+                    }
+                }
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
+            
             return $genres;
     
         }
@@ -375,7 +481,13 @@
             $null= new Genre();
             $null->setName("Undefined");
             $null->setId(-33);
-            $this->genreDAO->add($null);
+
+            try{
+                $this->genreDAO->add($null);
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+
             return $null;
         }
 }

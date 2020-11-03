@@ -34,7 +34,7 @@
         public function search($number,$company,$date){
             try
             {
-                $query = "SELECT * FROM creditCardPayments  WHERE idCreditCard=:number and idCreditCardCompany=:company and DATEDIFF(datePayment, :date) = 0";
+                $query = "SELECT * FROM creditCardPayments  WHERE idCreditCard=:number and idCreditCardCompany=:company and datePayment = :date";
                 $parameters["number"]=$number;
                 $parameters["company"]=$company;
                 $parameters["date"]=$date;

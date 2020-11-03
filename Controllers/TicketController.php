@@ -37,7 +37,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
       
 
     function __construct(){
-        $this->ticketDAO = new TicketDAO();
+        $this->ticketDAO = new TicketDAO(); 
         $this->billDAO = new BillDAO();
         $this->userDAO = new UserDAO();
         $this->showDAO = new ShowDAO();
@@ -46,6 +46,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
         $this->cinemaDAO = new CinemaDAO();
         $this->msg=null;
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
      
     }
 
@@ -90,8 +91,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showData($idCinema, $date=""){
-        $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+    public function showData($idCinema, $date="", $flag){
+        if($flag == 1){
+            $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+        }
     }
 
     public function add($creditCardCompany,$creditCardNumber, $creditCardPropietary, $creditCardExpiration,$total,$seats,$idShow){
@@ -134,7 +137,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $creditCardPayment->setDate($actualDate);
                 $creditCardPayment->setCreditCard($creditCard);
                 $this->creditCardPaymentDAO->add($creditCardPayment);
-                $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d'));//agregar hora y min
+                $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d H:i:s'));
                 
                 /* crear boleta */
                 $bill = new Bill();

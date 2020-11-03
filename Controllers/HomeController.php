@@ -5,6 +5,7 @@
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\ShowDAO as ShowDAO;
     use \DateTime;
+    use \Exception as Exception;
 
     class HomeController
     {
@@ -20,6 +21,15 @@
 
         public function index($message = "")
         {
+            if($_GET){
+                $this->msg=$_GET['alert'];
+            }
+            $cinemaList=array();        /* se crean antes para evitar mostrar errores en las vistas si hay una excepcion */
+            $movieList=array();
+            $movieListSlider=array();
+            $showList=array();
+            $movieShows=array();
+
 
             try{
                 $cinemaList=$this->cinemaDAO->getAllActive();
@@ -41,11 +51,8 @@
                     $this->msg = "No shows on schedule";
                 }
             }catch(\Exception $e){
-                $this->msg = "Caught Exception: ".$e->getMessage();
-            
-            }
-            catch(\PDOException $e){
-                $this->msg = "Caught PDOException: ".$e->getMessage();
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+
             }
 
             require_once(VIEWS_PATH."home.php");
