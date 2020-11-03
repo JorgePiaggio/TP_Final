@@ -166,8 +166,6 @@
                     $sold= $previusRoom->getCapacity() - $previusShow->getRemainingTickets();
                     }
 
-            
-
 
                     if($previusShow->getMovie()->getTmdbId()!=$idMovie && $sold>0){
                         $this->msg="This show has sold tickets, the movie must be the same";
