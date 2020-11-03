@@ -93,7 +93,7 @@
  <div class="gradient">
     <h2 class="page-title mrg_btm3">Billboard</h2>
     <div class="clear grid" > 
-        <div class="hoc "></div>
+        <div class="hoc"></div>
             <?php if($movieList){
                     foreach($movieList as $movie){?>
                     
@@ -149,16 +149,20 @@
 
                             </div>
 
-                        </div><?php
-                    }
-                }?>
-                <div class="hoc"><br>
-                            <?php if($this->msg != null){?> 
-                                    <h4 class="msg"><?php  echo $this->msg;
-                                } ?> </h4><br><br><br>
-                </div>  
-    </div><br><br><br><div id =”my-map” style = “width:800px; height:600px;”></div>
+                                    </div><?php }
+                    }?>
+                        
+        </div> 
+               
+    </div>
+
+    <div class="center noBack"><br><br>
+        <?php if($this->msg != null){?> 
+        <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br>
+    </div>
+
 </div>
+
 <!-- ################################################################################################ -->
 
 <script>

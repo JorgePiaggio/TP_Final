@@ -1,7 +1,8 @@
-<main class="list">
-          <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/serena-wong-SdjA-_Xzuxg-unsplash.jpg');">
-               <h2 class="page-title v2"> Cinema: <?php echo $cinemaSearch->getName()?> <br></h2>
+<div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/serena-wong-SdjA-_Xzuxg-unsplash.jpg');">
+     <main class="list">
+               <h2 class="page-title v2 up2"> Cinema: <?php echo $cinemaSearch->getName()?> <br></h2>
                <h2 class="page-title"> Rooms<br></h2>
+               <div class="hoc">
                     <div class="container2">
                          <table class="table bg-light small">
                               <thead class="bg-dark text-white" width="60%">
@@ -20,7 +21,7 @@
                                         <td><?php echo $roomList[$i]->getType(); ?> </td>
                                         <td><?php echo $roomList[$i]->getPrice(); ?> </td>
                                         <form action="<?php echo FRONT_ROOT?>Room/showRoomEdit" method="post">
-                                        <input type="hidden" name="name" value="<?php echo $roomList[$i]->getName(); ?>">
+                                             <input type="hidden" name="name" value="<?php echo $roomList[$i]->getName(); ?>">
                                         <td style="width: 10%;"><button type="submit" name="id" class="btn" value="<?php echo $roomList[$i]->getCinema()->getIdCinema();?>"> Edit </button></td>
                                         </form>
                                    </tr>
@@ -28,5 +29,9 @@
                               </tbody>
                          </table>
                     </div>
-          </div>
-</main>
+                                   <?php if($this->msg){ ?> <!-- Si ya existe una sala con ese nombre en el mismo cine muestro el mensaje -->
+                                         <h4 class="msg"> <?php echo $this->msg;?></h4> 
+                              <?php }?>
+               </div>
+     </main>
+</div>

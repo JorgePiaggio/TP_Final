@@ -1,4 +1,6 @@
-    <?php if($movie->getBackdropPath() != null) { ?>
+<!-- ##################################### VISTA DETALLADA DE UNA PELICULA ########################################################### -->
+
+<?php if($movie->getBackdropPath() != null) { ?>
 <div class="bgded overlay gradient" style="background-image:url('https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movie->getBackdropPath() ?>');background-repeat:no-repeat;background-size:cover;"> 
     <?php }else { ?>
   <div class="bgded overlay gradient"> 

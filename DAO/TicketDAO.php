@@ -390,7 +390,7 @@
                 $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
@@ -429,7 +429,7 @@
                 $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
@@ -465,7 +465,7 @@
                 $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow

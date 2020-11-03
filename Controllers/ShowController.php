@@ -166,6 +166,7 @@
                    
                     $previusShow=$this->showDAO->search($idShow);
                     $previusRoom=$previusShow->getRoom();
+                    $sold=0;
 
                     if($previusRoom->getCapacity()==$tickets){//si no se vendio entrada 
                         $sold=0;
@@ -187,7 +188,7 @@
                                 $this->msg = "Internal error. Please try again later";
                             }
                             }else{
-                                $this->msg="the capacity of the new room is not enough for the tickets sold";
+                                $this->msg="The capacity of the new room is not big enough for the tickets sold";
                             }
                         }
                     }catch(\Exception $e){
@@ -196,11 +197,11 @@
 
 
                     if($previusShow->getMovie()->getTmdbId()!=$idMovie && $sold>0){
-                        $this->msg="This show has tickets solded,the movie must be the same";
+                        $this->msg="This show has sold tickets, the movie must be the same";
 
                     }else{
                         if($previusShow->getDateTime()!=$dateTime && $sold>0){ 
-                            $this->msg="This show has tickets solded,the time must be the same";
+                            $this->msg="This show has sold tickets, the time must be the same";
                             
                         }else{
 
@@ -223,7 +224,7 @@
                                     $this->msg = "Internal error. Please try again later";
                                 }
                                 }else{
-                                    $this->msg="the capacity of the new room is not enough for the tickets sold";
+                                    $this->msg="The capacity of the new room is not big enough for the tickets sold";
                                 }
 
 
@@ -264,7 +265,8 @@
             }
 
         }else{
-            $this->msg="Error: this show has sold tickets";            
+            $this->msg="Error: T
+            his show has sold tickets";            
 
         }
 

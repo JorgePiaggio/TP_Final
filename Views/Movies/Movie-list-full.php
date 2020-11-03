@@ -1,4 +1,5 @@
-<style></style>
+<!-- ##################################### LISTA QUE VE EL USUARIO, SOLO LAS Q ESTAN O ESTUVIERON EN SHOWS ########################################################### -->
+
 <div class="wrapper row3 gradient">
   <h2 class="page-title">Movie List</h2>
   <main class="hoc container clear" > 

@@ -108,7 +108,7 @@
                 $query = "SELECT * FROM bills as b 
                         INNER JOIN users as u 
                         on b.idUser=u.idUser 
-                        INNER JOIN creditcardpayments as c 
+                        INNER JOIN creditCardPayments as c 
                         on c.idCreditCardPayment = b.codePayment
                         WHERE codePayment = :codePayment";
                 
