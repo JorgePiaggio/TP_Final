@@ -63,12 +63,12 @@
                                     if($flag){?>
                                     <li class="seatTrue check">
                                         <input type="checkbox" class="seat"  name="seat[]" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>"/>
-                                        <label for="<?php echo $cant."-".$cantidad?>"></label>
+                                        <label class="lbl" for="<?php echo $cant."-".$cantidad?>"></label>
                                     </li>
                                     <?php }else{ ?>
                                     <li class="seatFalse check">
                                         <input type="checkbox" class="seat" id="<?php echo $cant."-".$cantidad?>" value="<?php echo $cant."-".$cantidad?>" disabled />
-                                        <label for="<?php echo $cant."-".$cantidad?>"></label>
+                                        <label class="lbl" for="<?php echo $cant."-".$cantidad?>"></label>
                                     </li>
                                     
                                     <?php  

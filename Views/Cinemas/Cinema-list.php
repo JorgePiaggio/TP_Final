@@ -9,7 +9,7 @@
                     <div class="container2">
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
-                                   <th>Name</th>
+                                   <th width="15%">Name</th>
                                    <th>Street</th>
                                    <th>Number</th>
                                    <th>City</th>
@@ -69,7 +69,7 @@
                     <div class="container2">
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
-                                   <th>Name</th>
+                                   <th width="15%">Name</th>
                                    <th>Street</th>
                                    <th>Number</th>
                                    <th>City</th>

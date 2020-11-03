@@ -75,7 +75,8 @@
                 $cinema = $this->cinemaDAO->search($idCinema);
                 $movieList = $this->cinemaDAO->getBillboard($idCinema);
                 $roomList = $this->roomDAO->getCinemaRooms($idCinema);
-                $showList=$this->showDAO->getAllbyCinema($idCinema);    
+                $showList=$this->showDAO->getAllbyCinema($idCinema);
+                $cinemaCapacity=$this->roomDAO->getCinemaCapacity($cinema);    
                 if(!$movieList){ 
                     $this->msg="This Cinema has no active Shows";
                 } 

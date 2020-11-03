@@ -282,7 +282,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     height: 20px;
     background: rgb(23, 22, 22);
     display: block;
-    border-radius: 0px;
+    border-radius: 20px;
     position: relative;
   }
   
@@ -294,7 +294,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     width: 11px;
     height: 11px;
     background: #fff;
-    border-radius: 90px;
+    border-radius: 20px;
     transition: 0.3s;
   }
   
@@ -324,7 +324,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     content: "\f0c8";
     font-family: "FontAwesome";
   }*/
-  .seatTrue.check label , .seatFalse.check label{
+  .seatTrue.check label.lbl , .seatFalse.check label.lbl{
     cursor: pointer;  
     text-indent: -9999px;
     width: 16px;
@@ -335,7 +335,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     position: relative; padding:0px 2px;
   }
 
-  .seatTrue.check label:after {
+  .seatTrue.check label.lbl:after {
     content: '\f0c8';
     position: absolute;
     top: 0px;
@@ -347,21 +347,21 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     transition: 0.3s;
   }
   
-  .seatTrue.check input:checked + label, .seatFalse.check input:checked + label {
+  .seatTrue.check input:checked + label.lbl, .seatFalse.check input:checked + label.lbl {
     background: #ff6817;
   }
   
-  .seatTrue.check input:checked + label:after, .seatFalse.check input:checked + label:after  {
+  .seatTrue.check input:checked + label.lbl:after, .seatFalse.check input:checked + label.lbl:after  {
     left: 0;    
     background:#f66336;
     transform: translateX(0%);
   }
   
-  .seatTrue.check label:active:after , .seatFalse.check label:active:after{
+  .seatTrue.check label.lbl:active:after , .seatFalse.check label.lbl:active:after{
     width: 20px;
   }
 
-  .seatFalse.check label:after  {
+  .seatFalse.check label.lbl:after  {
     content: '';
     position: absolute;
     top: 0px;

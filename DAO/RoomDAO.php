@@ -42,6 +42,7 @@
             }
         }
 
+
         public function getAll(){
             try
             {
@@ -77,12 +78,13 @@
             }
         }
     
+
+        /* devuelve todas las salas de un cine */
         public function getCinemaRooms($idCinema){
             try
             {
                 $roomList = array();
                
-
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema=:idCinema";
                 $parameters["idCinema"]=$idCinema;
                 $this->connection = Connection::getInstance();
@@ -97,8 +99,6 @@
                     $roomList=$mapping;
                     }
                 }
-
-                
             }
             catch(\PDOException $ex)
             {
@@ -109,11 +109,35 @@
             }else{
                 return null;
             }
-
-
         }
 
         
+        /* devuelve la capacidad total de un cine */
+        public function getCinemaCapacity($cinema){
+            try
+            {
+                $roomList = array();
+                
+                $query = "SELECT sum(capacity) FROM ".$this->tableName." WHERE idCinema=:idCinema";
+                $parameters["idCinema"]=$cinema->getIdCinema();
+                $this->connection = Connection::getInstance();
+
+                $result = $this->connection->execute($query,$parameters);
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if($result){
+                return $result[0][0];
+            }else{
+                return null;
+            }
+        }
+
+
+        /* busca una sala por cine y nombre de sala */
         public function search($idCinema,$name){
             try
             {
@@ -137,6 +161,8 @@
             }
         }
 
+
+        /* busca una sala por id */
         public function searchById($idRoom){
             try
             {
@@ -187,7 +213,7 @@
         }
 
        
-
+        /* busca la cartelera de un cine  */
         public function getBillboard($idCinema){
             try
             {
@@ -221,6 +247,8 @@
             }
         }
 
+
+        /* busca los generos de una pelicula para mapearla */
         protected function getMovieGenres($movie){
         try{
             $genreList= array();
@@ -250,6 +278,7 @@
             return $genreList;
     }
     
+
     private function searchMovieId($tmdbId){
         try
         {
@@ -271,6 +300,7 @@
             return null;
         }
     }
+
 
     private function searchCinema($idCinema){
         try

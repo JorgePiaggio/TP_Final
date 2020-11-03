@@ -58,7 +58,14 @@ File: Layout CSS
 .mrg_sides{
     margin: 0 20px;
 }
+.buttonCaprichoso{
+    margin-left: 280%;
+    margin-top: -100%;
+}
 
+.mrg_left{
+    margin-left: 20%;
+}
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
 #pageintro{padding:50px 0;}
@@ -371,6 +378,16 @@ img.posterSmall{min-height: 332px !important ;}
 }
 .cardStyle h4, .cardStyle3 h4{
 	color: white;
+}
+.cardStyle.orange h4 {
+	color: #FF5723;
+}
+.cardStyle.orange p {
+	color: white;
+}
+.cardStyle.orange p.orange2 {
+    color: #FF5723;
+    font-weight: bold;
 }
 .cardStyle.mrg_btm{
 	margin-bottom: 20px;
@@ -979,13 +996,14 @@ svg{display: inline;}
   .posterBillboard {
     height:auto;
     width:auto;
- 
+    min-width:330px;
+
   
   }
   /* home */ 
   .posterBillboardHome {
     height:auto;
-    width:330px;
+    width:auto;
     max-width:330px;
   }
 
@@ -1077,11 +1095,13 @@ label span{color:#FF0000; background-color:inherit;}
 input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay{color:#CBCBCB; background-color:inherit;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
-
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
 .cancel{margin-left: 5%; margin-right: 20%;}
 .invisible{opacity:0;}
+.noBack{
+    background-color: rgba(174, 1, 1, 0.593);
+}
 .gradient{
 	background: rgb(73,3,3); /* Old browsers */
 	background: -moz-linear-gradient(-45deg,  rgba(73,3,3,1) 0%, rgba(96,4,4,1) 36%, rgba(128,6,6,1) 42%, rgba(155,7,7,1) 44%, rgba(96,4,4,1) 48%, rgba(96,4,4,1) 51%, rgba(96,4,4,1) 62%, rgba(160,8,8,1) 75%, rgba(96,4,4,1) 88%, rgba(96,4,4,1) 100%); /* FF3.6-15 */

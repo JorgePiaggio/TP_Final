@@ -1,4 +1,6 @@
-    <?php if($movie->getBackdropPath() != null) { ?>
+<!-- ##################################### VISTA DETALLADA DE UNA PELICULA ########################################################### -->
+
+<?php if($movie->getBackdropPath() != null) { ?>
 <div class="bgded overlay gradient" style="background-image:url('https:\/\/image.tmdb.org\/t\/p\/w1280\/<?php echo $movie->getBackdropPath() ?>');background-repeat:no-repeat;background-size:cover;"> 
     <?php }else { ?>
   <div class="bgded overlay gradient"> 
@@ -16,42 +18,45 @@
       </div>
           </form>
         <?php } ?>
-        <div class="cardStyle">
+        <div class="cardStyle orange">
         <!-- ####################################### COLUMNA IZQUIERDA - DETALLES ######################################################### -->
         <div>
-          <div class="one_half first ">              
-            <div class="one_half first">
+          <div class="one_half first "> 
+
+            <div class="one_half first mrg_top">
               <div>
-                <p><h4>Release Date</h4><?php echo $movie->getReleaseDate()?></p>
+                <h4>Release Date</h4><p><?php echo $movie->getReleaseDate()?></p>
               </div><br>
               <div>
-                <p><h4>Genre</h4><?php $str=""; foreach($movie->getGenres() as $genre){
+                <h4>Genre</h4><p><?php $str=""; foreach($movie->getGenres() as $genre){
                                                             $str .=" ".$genre->getName()." /";}
                                                             echo substr_replace($str,"", -1); ?></p>
               </div>
             </div>
-            <div class="one_half">
+
+            <div class="one_half mrg_top">
               <div>
-                <p><h4>Runtime</h4><?php echo $movie->getRuntime()?> minutes</p>
+                <h4>Runtime</h4><p><?php echo $movie->getRuntime()?> minutes</p>
               </div><br>
               <div>
-                <p><h4>Homepage</h4>
+                <h4>Homepage</h4>
                   <?php if($movie->getHomepage() != null){ ?>
-                          <a href="<?php echo $movie->getHomepage()?>" target="_blank"> 
+                    <p><a href="<?php echo $movie->getHomepage()?>" target="_blank"> 
                           <?php echo $movie->getHomepage();?></a><?php
                           }else{ echo "Not Available";}?></p><br>
               </div>   
             </div>
+
             <div>
-              <p><h4>Director/s</h4><?php  $str=""; foreach($movie->getDirector() as $director){ 
+              <h4>Director/s</h4><p><?php  $str=""; foreach($movie->getDirector() as $director){ 
                                                           $str .=" ".$director." -";}
                                                             echo substr_replace($str,"", -1); ?></p><br>
-            </div>
+            </div><br>
             
             <div class="up">                                           <!-- si hay trailer se muestra, si no en ese espacio se muestra la descripcion -->
               <?php if(!$movie->getVideoPath()){ ?>     
-                      <p><h4>Description</h4><?php echo $movie->getDescription()?></p>
-                      <?php }else{ ?></p><h4>Trailer</h4>
+                      <h4>Description</h4><p><?php echo $movie->getDescription()?></p>
+                      <?php }else{ ?><h4>Trailer</h4>
                       <iframe class="" width="440" height="300" src="https://www.youtube.com/embed/<?php echo $movie->getVideoPath();?>" 
                       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                       </iframe> <?php } ?>
@@ -64,7 +69,7 @@
               <!-- ####################################### MITAD INFERIOR - FUNCIONES, DESCRIPCION Y REVIEW ######################################################### -->
 
           <div class="mrg_btm">
-              <button type="button" class="collapsible"><span class="">Show List<span></button>
+              <button type="button" class="collapsible"><span class="">Show List<span></button>     <!--- boton showlist -->
               <div class="content1">
               <?php if(!$showList){ ?>
                         <p class="p_orange">No shows on schedule</p> <hr><?php
@@ -109,12 +114,12 @@
               </div> 
             </div>
         </div>
-        <div class="container clear up ">
+        <div class="container clear up ">                                                                                 <!--- descripcion y review -->
             <div class="up2">
               <?php if($movie->getVideoPath()){ ?>           <!-- si hay trailer, la descripcion se muestra debajo -->
-              <p><h4>Description</h4><?php echo $movie->getDescription()?></p><br>
+              <h4>Description</h4><p><?php echo $movie->getDescription()?></p><br>
             </div> <?php } ?>
-            <p><h4>Review</h4><?php if($movie->getReview()){
+            <h4>Review</h4><p><?php if($movie->getReview()){
                                     echo $movie->getReview()['content'];} else {echo "Not reviewed yet";} ?></p>
             <p class= "fl_right"><?php if($movie->getReview()){
                                         echo $movie->getReview()['author'];}?></p>

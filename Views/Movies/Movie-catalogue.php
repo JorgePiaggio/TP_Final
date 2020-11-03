@@ -1,4 +1,5 @@
-    <!------ My billboard----->
+<!-- ##################################### LISTA QUE EL ADMIN PIDE A LA BDD ########################################################### -->
+
 <div class="wrapper row3 gradient">
   <h2 class="page-title"> Active Catalogue</h2> 
   <?php if($this->msg){?> 
