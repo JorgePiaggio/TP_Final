@@ -114,8 +114,8 @@
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
-                #var_dump($wanted);
-                if(!$wanted || $wanted->getCinema()->getIdCinema() != $cinema->getIdCinema()){          //si no existe la sala con ese nombre, o existe en un cine diferente, se deja crear
+            
+                if(!$wanted){                                       //si no existe la sala con ese nombre, o existe en un cine diferente, se deja crear
                     $room=new Room();
                     $room->setIdRoom($idRoom);
                     $room->setName($name);
