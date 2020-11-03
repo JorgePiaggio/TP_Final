@@ -104,7 +104,7 @@
                                                       echo $show->getRoom()->getCinema()->getName();}?>
                                               </p> <hr>
                                               <p class="p_white">
-                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
                                               </p>
                                             </a><?php 
                                           }
@@ -120,7 +120,7 @@
                                                       echo $show->getRoom()->getCinema()->getName();}?>
                                               </p> <hr>
                                               <p class="p_white">
-                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?><i class="fa fa-ticket" style="font-size: 1.73em"></i>
                                                 <?php echo "Login to buy tickets" ?>
                                               </p>
                                             <?php 
@@ -165,7 +165,7 @@
                               <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
                                       foreach($showList as $show){
                                           if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                            <a href="">
+                                            <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
                                               <p class="p_orange">
                                                 <?php if(strlen($show->getRoom()->getCinema()->getName()) > 13){
                                                       $str1 = substr($show->getRoom()->getCinema()->getName(), 0, 11) . '...';

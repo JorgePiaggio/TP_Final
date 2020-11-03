@@ -15,7 +15,6 @@
                             <th>Shift</th>
                             <th>Price</th>
                             <th>Seat</th>                            
-                            <th>Total</th>
                             <th>QR Code</th>
                         </thead>
                         <tbody>
@@ -28,7 +27,6 @@
                                     <td><p><?php echo $ticket->getShow()->getShift(); ?></p></td>  
                                     <td><p><?php echo "$ ".$ticket->getShow()->getRoom()->getPrice(); ?></p></td>  
                                     <td><p><?php echo "Row: ".$ticket->getSeat()->getRow()."  Column:".$ticket->getSeat()->getNumber(); ?></p></td>  
-                                    <td><p><?php echo "$ ".$ticket->getBill()->getTotalPrice();?></p></td> 
                                     <td><img src=" <?php echo IMG_PATH."tickets/".$ticket->getSeat()->getRow().$ticket->getSeat()->getNumber().$ticket->getShow()->getIdShow().".png"?>";></td>
                                 </tr> 
                                 <?php }
@@ -46,6 +44,7 @@
                             <div class="hoc cardStyle fit">
                         <h2 class="orange"><?php echo "Total Price (With discount): $ ".$ticket->getBill()->getTotalPrice(); ?></h2>
                         <h2 class="orange"><?php echo "User: ".$ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname(); ?></h2> 
+                        <h2 class="orange"><?php echo "Payment Code: ".$ticket->getBill()->getCreditCardPayment()->getCode(); ?></h2> 
                             </div>   
                         <center> 
 
@@ -111,3 +110,4 @@
           }); 
       }); 
   </script> 
+

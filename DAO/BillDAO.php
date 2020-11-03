@@ -76,7 +76,11 @@
         public function search($idBill){
             try
             {   
-                $query = "SELECT * FROM bills
+                $query = "SELECT * FROM bills as b 
+                            INNER JOIN users as u 
+                            on b.idUser=u.idUser
+                            INNER JOIN creditcardpayments as c 
+                            on c.idCreditCardPayment = b.codePayment
                             WHERE idBill = :idBill";
                 
                 $parameters["idBill"] = $idBill;
@@ -84,6 +88,36 @@
                 $this->connection = Connection::getInstance();
                 
                 $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if(!empty($result)){
+                return $this->mapBill($result[0]);
+            }else{
+                return null;
+            }
+        }
+
+        /* Retorna una factura buscada por codigo de pago o null si no existe*/
+        public function searchByCodePayment($codePayment){
+            try
+            {   
+                $query = "SELECT * FROM bills as b 
+                        INNER JOIN users as u 
+                        on b.idUser=u.idUser 
+                        INNER JOIN creditcardpayments as c 
+                        on c.idCreditCardPayment = b.codePayment
+                        WHERE codePayment = :codePayment";
+                
+                $parameters["codePayment"] = $codePayment;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+                
             }
             catch(\PDOException $ex)
             {
@@ -277,6 +311,7 @@
             $bill->setTotalPrice($value["totalPrice"]);
             $bill->setDiscount($value["discount"]);
             $bill->setUser($this->mapUser($value));
+            $bill->setCreditCardPayment($this->mapPayment($value));
             
             return $bill;
         }
@@ -297,6 +332,22 @@
                 return $user;
  
         }
+
+        protected function mapPayment($value){
+            
+           
+                     
+                            $payment= new CreditCardPayment();
+                            $payment->setCode($value['idCreditCardPayment']);
+                            $payment->setDate($value['datePayment']);
+                            $payment->setTotal($value['total']);
+            
+                            return $payment;
+                        
+            
+                    }
+
+
 
 
 

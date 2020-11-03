@@ -105,7 +105,7 @@
                     $show = new Show();
                     $show->setRoom($this->roomDAO->searchById($idRoom)); 
                     $show->setMovie($this->movieDAO->search($idMovie));
-                    $show->setDateTime($dateShow);
+                    $show->setDateTime($dateTime);
                     $result = $this->showDAO->add($show);
 
                     if($result > 0){

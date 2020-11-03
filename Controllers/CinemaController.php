@@ -71,7 +71,7 @@
             $roomList = $this->roomDAO->getCinemaRooms($idCinema);
             $showList=$this->showDAO->getAllbyCinema($idCinema);    
             if(!$movieList){ 
-                $this->msg="This Cinema has no active Shows";
+                $this->msg="This Cinema has active Shows";
             } 
             require_once(VIEWS_PATH."Cinemas/Cinema-view.php");
         }

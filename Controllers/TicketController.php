@@ -44,7 +44,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->seatDAO = new SeatDAO();
         $this->creditCardDAO = new CreditCardDAO();
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
-        $this->cinemDAO = new CinemaDAO();
+        $this->cinemaDAO = new CinemaDAO();
         $this->msg=null;
      
     }
@@ -64,7 +64,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
           $show = $this->showDAO->search($idShow);
           $total=0;
           $discount=$this->calculateDiscount(count($seats),$show->getDateTime(),$show->getRoom()->getPrice(), $total);
-
           require_once(VIEWS_PATH."Tickets/purchase-confirm.php");  
         }
         else{
@@ -86,13 +85,12 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
     public function showStatistics($idCinema=""){
-        echo $idCinema;
         $cinema = $this->cinemaDAO->search($idCinema);
-        #require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+        require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
 
 
-    public function showCash($idCinema, $date=""){
+    public function showData($idCinema, $date=""){
         $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
     }
 
@@ -132,16 +130,15 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 /* crear transaccion */
                 $actualDate=date('Y-m-d H:i:s');
                 $creditCardPayment = new CreditCardPayment();
-                $creditCardPayment->setTotal(count($seatNumber) * $show->getRoom()->getPrice());
+                $creditCardPayment->setTotal($total);
                 $creditCardPayment->setDate($actualDate);
                 $creditCardPayment->setCreditCard($creditCard);
                 $this->creditCardPaymentDAO->add($creditCardPayment);
-                $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d'));
-
+                $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d'));//agregar hora y min
+                
                 /* crear boleta */
                 $bill = new Bill();
                 $bill->setUser($user);
-                $bill->setCreditCardPayment($creditCardPayment);
                 $bill->setTickets(count($seatNumber));
                 $bill->setDate($actualDate);
                 $bill->setCreditCardPayment($payment);
@@ -158,17 +155,15 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 for($indice=0; $indice< count($seatNumber); $indice++){
                     $seat= new Seat();
                     $seat->setRow($seatRow[$indice]+1);
-<<<<<<< HEAD
-                    $seat->setNumber($seatNumber[$indice+1]);
-=======
                     $seat->setNumber($seatNumber[$indice]+1);
->>>>>>> d76424ca09f62d04dcbbb1fe58f69934ccbb71ad
+
                     $this->seatDAO->add($seat, $idShow);
-                    $billList=$this->billDAO->getAll();
+                    
                     $ticket = new Ticket();
-                    if($billList){
-                    $ticket->setBill($billList[count($billList)-1]);
-                    }
+                    
+                   # var_dump($this->billDAO->searchByCodePayment($payment->getCode()));
+                    $ticket->setBill($this->billDAO->searchByCodePayment($payment->getCode()));
+                    
                     $ticket->setShow($show);
                     $ticket->setSeat($this->seatDAO->search($idShow,$seat->getRow(),$seat->getNumber()));
                     $ticket->setPrice($show->getRoom()->getPrice());

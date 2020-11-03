@@ -194,7 +194,7 @@
         public function addMultipleMovies($movies=""){
             Validate::validateSession();
             Validate::checkParameter($movies);
-
+            $result = null;
             if($movies){
                 foreach($movies as $idMovie){
                     $result+= $this->addMovieToDatabase($idMovie);

@@ -21,10 +21,10 @@
     public function add($show){
         $sql = "INSERT INTO shows (idRoom, idMovie, dateTime, shift, remainingTickets)
                         VALUES (:idRoom, :idMovie, :dateTime, :shift, :remainingTickets)";
-        $stringDate =$show->getDateTime()->format('Y/m/d H:i:s');
+      
         $parameters['idRoom']=$show->getRoom()->getIdRoom();
         $parameters['idMovie']=$show->getMovie()->getTmdbID();
-        $parameters['dateTime']=$stringDate;
+        $parameters['dateTime']=$show->getDateTime();
         $parameters['shift']=$this->setShift($show->getDateTime()); //seteo el turno segun el horario de la funcion
 
 
