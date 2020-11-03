@@ -7,8 +7,8 @@
               <div class=" floating-label-form">
                 <form action="<?php echo FRONT_ROOT?>Show/selectCinema" class=" hoc center span" method="post">
                                 <div class="floating-label">
-                                        <select name="selection cinema" class="selection" onchange="this.form.submit()">
-                                        <option value="" selected disabled>Select Cinema</option>                                        
+                                        <select name="selection cinema" class="selection" required onchange="this.form.submit()" required >
+                                      
                                             <?php if(!$cinemaList){?>
                                           <option value="">No Cinemas Found</option>
                                                 <?php } if($cinema){?>
@@ -25,7 +25,7 @@
                 <form action="<?php echo FRONT_ROOT?>Show/add" class="center hoc span" method="post">                           
                         
                                 <div class="floating-label">
-                                        <select name="selection room" class="selection">
+                                        <select name="selection room" class="selection" required>
                                         <option value="" selected disabled>Select Room</option>                                        
                                               <?php if(!$roomList){?>
                                                 <option value="">No Rooms Found</option>
@@ -37,7 +37,7 @@
                                 </div><br><br>
                               <div>
                                   <div class="floating-label">
-                                          <select name="selection cinema" class="selection">
+                                          <select name="selection cinema" class="selection" required>
                                           <option value="" selected disabled>Select Movie</option>                                        
                                           <?php if(!$movieList){?>
                                                   <option value="">No actives movies Found</option>

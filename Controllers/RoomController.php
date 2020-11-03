@@ -111,7 +111,7 @@
                 $wanted=$this->roomDAO->search($idCinema,$name);
                 $cinema=$this->cinemaDAO->search($idCinema);
 
-                if(!$wanted || $wanted->getCinema()->getIdCinema() == $cinema->getIdCinema()){
+                if(!$wanted){
                     $room=new Room();
                     $room->setIdRoom($idRoom);
                     $room->setName($name);
