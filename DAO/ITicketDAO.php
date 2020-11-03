@@ -13,9 +13,8 @@
 
         /* gets tickets by cinema*/
         function ticketsByCinemaByDate($idCinema, $dateTime);
-        function ticketsByCinemaByThisMonth($idCinema);
+        function ticketsByCinemaByMonth($idCinema, $month);
         function ticketsByCinemaByYear($idCinema, $year);
-        function ticketsByCinemayThisYear($idCinema);
         function ticketsByshow($idShow);
         function ticketsByCinemaByMovie($idCinema, $idMovie);
         function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift);
@@ -24,7 +23,6 @@
         function cashByCinemaByDate($idCinema, $date);
         function cashByCinemaByMonth($idCinema, $month);
         function cashByCinemaByYear($idCinema, $year);
-        function cashByCinemaByThisYear($idCinema);
     }
 
 ?>

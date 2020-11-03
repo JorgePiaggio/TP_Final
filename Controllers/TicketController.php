@@ -90,6 +90,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     public function showStatistics($idCinema=""){
         $data = -1;
         $flag = 0;
+        $date = null;
         $cinema = $this->cinemaDAO->search($idCinema);
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
@@ -111,7 +112,19 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $data = $this->ticketDAO->cashByCinemaByYear($idCinema, $date);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;
-            
+            case 4:
+                $data = $this->ticketDAO->ticketsByCinemaByDate($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+            case 5:
+                $data = $this->ticketDAO->ticketsByCinemaByMonth($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+            case 6:
+                $data = $this->ticketDAO->ticketsByCinemaByYear($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+        
         }
     }
 
