@@ -22,7 +22,7 @@
 
         /* gets cash by cinema */
         function cashByCinemaByDate($idCinema, $date);
-        function cashByCinemaByMonth($idCinema);
+        function cashByCinemaByMonth($idCinema, $month);
         function cashByCinemaByYear($idCinema, $year);
         function cashByCinemaByThisYear($idCinema);
     }
