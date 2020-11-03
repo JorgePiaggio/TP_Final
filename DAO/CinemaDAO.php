@@ -99,8 +99,6 @@
                     }
                 }
 
-                # throw new \PDOException("testing catch on upper level");
-
             }
             catch(\PDOException $ex) //PDO Exception
             {
@@ -187,7 +185,8 @@
         
         public function search($idCinema){
             try
-            {   #throw new \PDOException("testing catch on upper level");
+            {  
+                #throw new \PDOException("testing catch on upper level");
                 $query = "SELECT * FROM ".$this->tableName." WHERE idCinema= :idCinema";
                 $parameters["idCinema"]=$idCinema;
                 $this->connection = Connection::getInstance();
@@ -205,6 +204,7 @@
                 return null;
             }
         }
+
 
         public function update($cinema){
             try
@@ -234,6 +234,7 @@
             }
         }
         
+
         #Metodos de Cartelera
         public function stateMovie($idCinema,$idMovie,$state){
             try{
@@ -254,6 +255,8 @@
                 }
 
         }
+
+
         //Busca la pelicula dentro del cine
         public function searchMovie($idCinema,$idMovie){
             try
@@ -328,6 +331,7 @@
             }
         }
 
+
         protected function getMovieGenres($movie){
 
             $genreList= array();
@@ -376,6 +380,7 @@
                 return null;
             }
         }
+
 
         protected function map($value){
             $value=is_array($value) ? $value: array();
@@ -438,6 +443,7 @@
 
         }
 
+        
         protected function mapGenre($value){
 
             $value=is_array($value) ? $value: array();

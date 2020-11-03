@@ -1,48 +1,91 @@
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/roll.jpg');">
     <h2 class="page-title"><?php echo $cinema->getName() ?></h2>
     <main class="hoc container clear"> 
-        <div class="cardStyle">
-            <div class="one_half first">  
-                <div class="one_half first">
+        <div class="cardStyle orange">
+
+            <div class="one_half first">    
+
+                <div class="one_half first mrg_top">
                     <div>
-                        <p><h4>Address</h4><?php echo $cinema->getStreet() . " " .$cinema->getNumber();?></p>
+                        <h4>Address</h4><p><?php echo $cinema->getStreet() . " " .$cinema->getNumber();?></p>
                     </div><br><br>
                     <div>
-                        <p><h4>Phone</h4><?php echo $cinema->getPhone(); ?></p>
-                    </div><br>
-                    
+                        <h4>Phone</h4><p><?php echo $cinema->getPhone(); ?></p>
+                    </div><br> 
+                    <div>
+                        <h4>Total Capacity</h4><p><?php echo $cinemaCapacity; ?></p>
+                    </div><br> 
                 </div>
 
-                <div class="one_half">
+                <div class="one_half mrg_top">
                     <div>
-                        <p><h4>City-Country</h4> <?php echo $cinema->getCity() . " - " . $cinema->getCountry();?></p>
+                        <h4>City - Country</h4><p> <?php echo $cinema->getCity() . " - " . $cinema->getCountry();?></p>
                     </div><br><br>
                     <div>
-                        <p><h4>Email</h4><?php echo $cinema->getEmail();?></p>
+                        <h4>Email</h4><p><?php echo $cinema->getEmail();?></p>
                     </div>    
                 </div>
-                                
-                <div class="one_half right">                 
+              
+            </div>  
+       
+
+            <div class="one_half">      
                     <?php $address= $cinema->getNumber().$cinema->getStreet().$cinema->getCity().$cinema->getCountry();
                     if (isset($address))
                     {
                     $address = str_replace(" ", "+", $address);
                     ?>
-                    <iframe class="map" width="200%" height="400" src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed"></iframe>
+                    <iframe class="map" width="100%" height="400" src="https://maps.google.com/maps?q=<?php echo $address; ?>&output=embed"></iframe>
                     <?php } ?>
+            </div> 
+
+        </div>
+
+
+            <?php if($roomList){ ?>
+            <div class="cardStyle hoc orange mrg_top">
+                <center>
+                <h4><u> Rooms</u></h4>
+
+
+                <div class="one_third first"> 
+                    <p class="orange2">Name</p>
                 </div>
-            </div>  
-        </div>
-        <?php if($roomList){ ?>
-            <div class="cardStyle mrg_top">
-                <div>                        
-                    <p><h4>Rooms</h4> </p>
+
+                <div class="one_third"> 
+                    <p class="orange2">Capacity</p>
+                </div>
+
+                <div class="one_third"> 
+                    <p class="orange2">Price</p>
+                </div>
+
+
+
+
+                <div class="one_third first"> 
                     <?php foreach($roomList as $room){ ?>
-                        <p> <?php echo" ■ ".$room->getName()." $".$room->getPrice(); ?> </p>
-                    <?php } ?>     
+                        <p> <?php echo" ■ ".$room->getName()?> </p>
+                        <?php } ?>    
+                </div>
+
+                <div class="one_third"> 
+                    <?php foreach($roomList as $room){ ?>
+                        <p> <?php echo $room->getCapacity(); ?> </p>
+                        <?php } ?>    
+                </div>
+
+                <div class="one_third"> 
+                    <?php foreach($roomList as $room){ ?>
+                        <p> <?php echo "$ ".$room->getPrice(); ?> </p>
+                        <?php } ?>    
+                </div>
+
+                </center>
             </div>
-    <?php }?>
-        </div>
+            <?php }?>
+
+
     </main>  
 </div>  
    
