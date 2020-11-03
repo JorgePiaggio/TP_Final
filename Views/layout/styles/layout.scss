@@ -372,6 +372,16 @@ img.posterSmall{min-height: 332px !important ;}
 .cardStyle h4, .cardStyle3 h4{
 	color: white;
 }
+.cardStyle.orange h4 {
+	color: #FF5723;
+}
+.cardStyle.orange p {
+	color: white;
+}
+.cardStyle.orange p.orange2 {
+    color: #FF5723;
+    font-weight: bold;
+}
 .cardStyle.mrg_btm{
 	margin-bottom: 20px;
 	padding: 20px 20px;
@@ -979,13 +989,14 @@ svg{display: inline;}
   .posterBillboard {
     height:auto;
     width:auto;
- 
+    min-width:330px;
+
   
   }
   /* home */ 
   .posterBillboardHome {
     height:auto;
-    width:330px;
+    width:auto;
     max-width:330px;
   }
 
@@ -1077,7 +1088,6 @@ label span{color:#FF0000; background-color:inherit;}
 input:focus, textarea:focus, *:required:focus{border-color:#FF5723;}
 .overlay{color:#CBCBCB; background-color:inherit;}
 .overlay::after{color:inherit; background-color:rgba(0,0,0,.2);}
-
 .btn, .btn.inverse:hover{color:black; background-color:#FF5723; border-color:#FF5723;}
 .btn:hover, .btn.inverse{color:inherit; background-color:transparent; border-color:#FF5723;}
 .cancel{margin-left: 5%; margin-right: 20%;}

@@ -34,6 +34,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         private $creditCardPaymentDAO;
         private $cinemaDAO;
         private $msg;
+        private $data;
       
 
     function __construct(){
@@ -46,6 +47,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
         $this->cinemaDAO = new CinemaDAO();
         $this->msg=null;
+        $this->data=null;
         date_default_timezone_set('America/Argentina/Buenos_Aires');
      
     }
@@ -86,14 +88,30 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
     public function showStatistics($idCinema=""){
+        $data = -1;
+        $flag = 0;
         $cinema = $this->cinemaDAO->search($idCinema);
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
 
 
-    public function showData($idCinema, $date="", $flag){
-        if($flag == 1){
-            $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+    public function showData($flag, $idCinema, $date=""){
+        $data = -1;
+        $cinema = $this->cinemaDAO->search($idCinema); 
+        switch($flag){
+            case 1:
+                $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+            case 2:
+                $data = $this->ticketDAO->cashByCinemaByMonth($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+            case 3:
+                $data = $this->ticketDAO->cashByCinemaByYear($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;
+            
         }
     }
 

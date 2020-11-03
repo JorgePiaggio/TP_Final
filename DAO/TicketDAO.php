@@ -387,14 +387,16 @@
         public function cashByCinemaByDate($idCinema, $date){
             try
             {   
-                $query = "SELECT sum(totalPrice) FROM bills 
+                $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            HAVING DATEDIFF(date, :date) = 0 AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom
+                            WHERE DATEDIFF(s.dateTime, :date) = 0 AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["date"] = $date;
@@ -408,24 +410,35 @@
                 throw $ex;
             }
 
-            return $result;        
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }
+
+
+                    
         }        
 
 
         /* Retorna el total de dinero recaudado en el mes actual en un cine*/
-        public function cashByCinemaByMonth($idCinema){
+        public function cashByCinemaByMonth($idCinema, $month){
             try
             {   
-                $query = "SELECT sum(totalPrice) FROM bills
+                $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom 
-                            HAVING DATEPART(month, date) = DATEPART(month, GETDATE()) AND DATEPART(year, date) =  DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom 
+                            WHERE MONTH(s.dateTime) = :month AND YEAR(s.dateTime) =  YEAR(NOW()) AND r.idCinema = :idCinema";
 
                 $parameters["idCinema"] = $idCinema;
+                $parameters["month"] = $month;
 
                 $this->connection = Connection::getInstance();
                 
@@ -436,7 +449,12 @@
                 throw $ex;
             }
 
-            return $result;
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }
         }
 
 
@@ -444,14 +462,16 @@
         public function cashByCinemaByYear($idCinema, $year){
             try
             {   
-                $query = "SELECT sum(totalPrice) FROM bills
+                $query = "SELECT sum(ccp.total) FROM bills AS b
                             JOIN tickets AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom 
-                            HAVING DATEPART(year, date) = :year AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom 
+                            WHERE YEAR(s.dateTime) = :year AND r.idCinema = :idCinema";
 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["year"] = $year;
@@ -465,7 +485,12 @@
                 throw $ex;
             }
 
-            return $result;
+            if($result[0][0]){
+                return $result[0][0];   
+            }
+            else{
+                return 0;
+            }
         }
 
 
