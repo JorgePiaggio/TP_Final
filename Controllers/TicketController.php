@@ -167,9 +167,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $bill->setDiscount(DISCOUNT);
                 $this->billDAO->add($bill);
 
-                //Tomo las entradas faltantes
-                $remainingTickets= $show->getRemainingTickets();
-
                 $ticketList=array();
 
                 /* crear asientos y tickets */
@@ -207,7 +204,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
                 }
                 //actualizo las entradas 
-                $show->setRemainingTickets($remainingTickets-count($seatNumber));
+                $show->setRemainingTickets(($show->getRemainingTickets())-count($seatNumber));
                 $this->showDAO->update($show);
 
                 $this->showPurchaseResult($ticketList);
