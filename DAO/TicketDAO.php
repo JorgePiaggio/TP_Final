@@ -188,13 +188,15 @@
             try
             {   
                 $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom 
-                            HAVING DATEDIFF(s.dateTime, :dateTime) = 0 AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom 
+                            WHERE DATEDIFF(ccp.datePayment, :dateTime) = 0 AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["dateTime"] = $dateTime;
@@ -208,24 +210,33 @@
                 throw $ex;
             }
 
-            return $result;        
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }      
         }    
         
         
         /* Retorna el total de tickets vendidos para el mes actual en un cine*/
-        public function ticketsByCinemaByThisMonth($idCinema){
+        public function ticketsByCinemaByMonth($idCinema, $month){
             try
             {   
                 $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            HAVING DATEPART(month, s.dateTime) = DATEPART(month, GETDATE()) AND DATEPART(year, s.dateTime) =  DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom
+                            WHERE MONTH(ccp.datePayment) = :month AND YEAR(ccp.datePayment) =  YEAR(NOW()) AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
+                $parameters["month"] = $month;
+
 
                 $this->connection = Connection::getInstance();
                 
@@ -235,8 +246,13 @@
             {
                 throw $ex;
             }
-
-            return $result;
+              
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }
         }
 
 
@@ -245,13 +261,15 @@
             try
             {   
                 $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            HAVING DATEPART(year, s.dateTime) = :year AND r.idCinema = :idCinema";
+                            ON s.idRoom = r.idRoom
+                            WHERE YEAR(ccp.datePayment) = :year AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["year"] = $year;
@@ -265,36 +283,14 @@
                 throw $ex;
             }
 
-            return $result;
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }
         }
 
-
-        /* Retorna el total de tickets vendidos para este año en un cine */
-        public function ticketsByCinemayThisYear($idCinema){
-            try
-            {   
-                $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
-                            ON b.idBill = t.idBil.
-                            JOIN shows AS s
-                            ON t.idShow = s.idShow
-                            JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            HAVING DATEPART(year, s.dateTime) = DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
-                
-                $parameters["idCinema"] = $idCinema;
-
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;        
-        }
 
 
         /* Retorna el total de tickets vendidos para una función */
@@ -388,7 +384,7 @@
             try
             {   
                 $query = "SELECT sum(ccp.total) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) as t
                             ON b.idBill = t.idBill
                             JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
@@ -396,7 +392,8 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom
-                            WHERE DATEDIFF(s.dateTime, :date) = 0 AND r.idCinema = :idCinema";
+                            WHERE DATEDIFF(ccp.datePayment, :date) = 0 AND r.idCinema = :idCinema";
+                
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["date"] = $date;
@@ -410,6 +407,7 @@
                 throw $ex;
             }
 
+            
             if($result[0][0]){
                 return $result[0][0];                
             }
@@ -427,7 +425,7 @@
             try
             {   
                 $query = "SELECT sum(ccp.total) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
                             JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
@@ -435,7 +433,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom 
-                            WHERE MONTH(s.dateTime) = :month AND YEAR(s.dateTime) =  YEAR(NOW()) AND r.idCinema = :idCinema";
+                            WHERE MONTH(ccp.datePayment) = :month AND YEAR(ccp.datePayment) =  YEAR(NOW()) AND r.idCinema = :idCinema";
 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["month"] = $month;
@@ -463,7 +461,7 @@
             try
             {   
                 $query = "SELECT sum(ccp.total) FROM bills AS b
-                            JOIN tickets AS t
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
                             JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
@@ -471,7 +469,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom 
-                            WHERE YEAR(s.dateTime) = :year AND r.idCinema = :idCinema";
+                            WHERE YEAR(ccp.datePayment) = :year AND r.idCinema = :idCinema";
 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["year"] = $year;
@@ -491,34 +489,6 @@
             else{
                 return 0;
             }
-        }
-
-
-        /* Retorna el total de dinero recaudado este año en un cine*/
-        public function cashByCinemaByThisYear($idCinema){
-            try
-            {   
-                $query = "SELECT sum(totalPrice) FROM bills
-                            JOIN tickets AS t
-                            ON b.idBill = t.idBill
-                            JOIN shows AS s
-                            ON t.idShow = s.idShow
-                            JOIN rooms AS r
-                            ON t.idRoom = r.idRoom 
-                            HAVING DATEPART(year, date) = DATEPART(year, GETDATE()) AND r.idCinema = :idCinema";
-                
-                $parameters["idCinema"] = $idCinema;
-
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;
         }
 
 
