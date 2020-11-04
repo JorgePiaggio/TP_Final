@@ -33,11 +33,11 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Ticket '.$date;
-    $mail->Body    = $name.' You have '.$cantTicket.' ticket/s <b>moviepass thanks you for your purchase<b> Cinema: '.$cinema." Room: ".$room." Movie: ".$movieTitle." Date: ".$date."  Seats: ".$seats;
+    $mail->Body    = $name.' You have '.$cantTicket.' <b>MoviePass<b> ticket/s. Thank you for your purchase. Cinema: '.$cinema." Room: ".$room." Movie: ".$movieTitle." Date: ".$date."  Seats: ".$seats;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    $this->msg='Message has been sent to: '.$email.', thanks you for your purchase';
+    $this->msg='Message has been sent to: '.$email.', thanks for your purchase';
 }catch (Exception $e) {
     $this->msg="Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

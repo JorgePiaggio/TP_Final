@@ -1,3 +1,77 @@
+<?php 
+
+#session_start();
+
+require './vendor/autoload.php';
+
+$fb = new Facebook\Facebook([
+
+    'app_id' => '372444494104218',
+    'app_secret' => '584f98f8239ae686cc19ed7889d85138',
+    'default_graph_version' => 'v2.7'
+
+]);
+
+$helper = $fb->getRedirectLoginHelper();
+$loginUrl = $helper->getLoginUrl('http://localhost/TP_Final/User/showLogin');
+
+# print_r($loginUrl);
+
+/*try{    
+
+    $accessToken= $helper->getAccessToken();
+
+    if(isset($accessToken)){
+        var_dump($accessToken);        
+        $_SESSION['loggedUser']=(string)$accessToken;
+    }
+
+}catch(Exception $e){
+        echo $e->getMessage();
+}*/
+
+if(empty($access_token)) {
+
+ # echo "<a href='{$fb->getRedirectLoginHelper()->getLoginUrl("http://localhost/TP_Final/User/showLogin")}'>Login with Facebook </a>";
+}
+
+/*Step 3 : Get Access Token*/
+$access_token = $fb->getRedirectLoginHelper()->getAccessToken();
+
+
+/*Step 4: Get the graph user*/
+if(isset($access_token)) {
+
+
+  try {
+      $response = $fb->get('/me',$access_token);
+
+      $fb_user = $response->getGraphUser();
+
+      echo  $fb_user->getName();
+
+
+
+
+      //  var_dump($fb_user);
+  } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+      echo  'Graph returned an error: ' . $e->getMessage();
+  } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+      // When validation fails or other local issues
+      echo 'Facebook SDK returned an error: ' . $e->getMessage();
+  }
+
+}
+
+
+?>
+
+
+
+
+
+
+
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container center up2 background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/maxence-pira-uX5nG3AKeXM-unsplash.jpg');">
@@ -23,14 +97,15 @@
                         </div><br>
                     </div>
 
-                    <!-- The JS SDK Login Button -->
-
-                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                    </fb:login-button>
-
-                    <!---<div id="status">
-                    </div>-->
-
+                   
+                   
+                    <div class="floating-label">
+                         <span>&nbsp;</span>
+                         <a class="btn inverse" href="<?php echo "{$fb->getRedirectLoginHelper()->getLoginUrl('http://localhost/TP_Final/User/showLogin')}" ?>" >Log in with Facebook</a>
+                    </div>   
+                   
+                   
+                   
 
                     <!-- Muestro un mensaje si no existe mail o no coincide pass -->
                     <?php if($this->msg != null){?>      
@@ -52,72 +127,3 @@
 </main>
 
 
-<script>
-
-  function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    console.log('statusChangeCallback');
-    console.log(response);                   // The current login status of the person.
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-      testAPI(); 
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this webpage.';
-    }
-  }
-
-
-  function checkLoginState() {               // Called when a person is finished with the Login Button.
-    FB.getLoginStatus(function(response) {   // See the onlogin handler
-      statusChangeCallback(response);
-    });
-  }
-
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '372444494104218',
-      cookie     : true,                     // Enable cookies to allow the server to access the session.
-      xfbml      : true,                     // Parse social plugins on this webpage.
-      version    : 'v8.0'           // Use this Graph API version for this call.
-    });
-
-    FB.api(
-  '/me',
-  'GET',
-  {"fields":"id,name,birthday,email"},
-  function(response) {
-     console.log('Good to see you, ' + response.name + '.');
-  }
-);
-
-    FB.login(function(response) {
-    if (response.authResponse) {
-     console.log('Welcome!  Fetching your information.... ');
-     FB.api('/me', function(response) {
-       console.log('Good to see you, ' + response.email + '.');
-     });
-    } else {
-     console.log('User cancelled login or did not fully authorize.');
-    }
-});
-    
-
-    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-      statusChangeCallback(response);        // Returns the login status.
-    });
-  };
- 
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.email);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.email + '!';
-    });
-  }
-
-</script>
-
-
-<!-- Load the JS SDK asynchronously -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>

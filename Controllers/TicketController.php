@@ -104,7 +104,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         foreach($newSeats as $seat){
             array_push($seatList,explode("-",$seat));
         }
-        require_once(VIEWS_PATH."tickets/purchase-email.php");
+        require_once(VIEWS_PATH."Tickets/purchase-email.php");
     }
 
 
@@ -236,7 +236,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $this->showPurchaseResult($ticketList);
 
             }else{
-                $this->msg="Not available tickets for this show";
+                $this->msg="No available tickets for this show";
                 $this->showPurchaseView($idShow);
             
                 }
