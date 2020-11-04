@@ -63,7 +63,7 @@
             {
                 $payList = array();
     
-                $query = "SELECT * FROM creditcardpayments";
+                $query = "SELECT * FROM creditCardPayments";
     
                 $this->connection = Connection::getInstance();
     

@@ -79,7 +79,7 @@
                 $query = "SELECT * FROM bills as b 
                             INNER JOIN users as u 
                             on b.idUser=u.idUser
-                            INNER JOIN creditcardpayments as c 
+                            INNER JOIN creditCardPayments as c 
                             on c.idCreditCardPayment = b.codePayment
                             WHERE idBill = :idBill";
                 
@@ -335,17 +335,14 @@
 
         protected function mapPayment($value){
             
-           
-                     
-                            $payment= new CreditCardPayment();
-                            $payment->setCode($value['idCreditCardPayment']);
-                            $payment->setDate($value['datePayment']);
-                            $payment->setTotal($value['total']);
-            
-                            return $payment;
-                        
-            
-                    }
+        $payment= new CreditCardPayment();
+        $payment->setCode($value['idCreditCardPayment']);
+        $payment->setDate($value['datePayment']);
+        $payment->setTotal($value['total']);
+
+        return $payment;
+    
+        }
 
 
 

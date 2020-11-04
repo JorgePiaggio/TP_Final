@@ -190,7 +190,7 @@
                 $query = "SELECT sum(b.tickets) FROM bills AS b
                             JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
@@ -226,7 +226,7 @@
                 $query = "SELECT sum(b.tickets) FROM bills AS b
                             JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
@@ -263,7 +263,7 @@
                 $query = "SELECT sum(b.tickets) FROM bills AS b
                             JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
                             ON b.idBill = t.idBill
-                            JOIN creditcardpayments AS ccp
+                            JOIN creditCardPayments AS ccp
                             ON b.codePayment = ccp.idCreditCardPayment
                             JOIN shows AS s
                             ON t.idShow = s.idShow
@@ -520,18 +520,18 @@
         }
 
         protected function mapRoom($value){
-            
-                $room=new Room();
-                $room->setIdRoom($value["idRoom"]);
-                $room->setType($value["type"]);
-                $room->setCapacity($value["capacity"]);
-                $room->setColumns($value["roomcolumns"]);
-                $room->setRows($value["roomrows"]);
-                $room->setPrice($value["price"]);
-                $room->setName($value["name_room"]);
-                $room->setCinema($this->mapCinema($value));
+        
+            $room=new Room();
+            $room->setIdRoom($value["idRoom"]);
+            $room->setType($value["type"]);
+            $room->setCapacity($value["capacity"]);
+            $room->setColumns($value["roomcolumns"]);
+            $room->setRows($value["roomrows"]);
+            $room->setPrice($value["price"]);
+            $room->setName($value["name_room"]);
+            $room->setCinema($this->mapCinema($value));
 
-                return $room;
+            return $room;
 
             
         }
