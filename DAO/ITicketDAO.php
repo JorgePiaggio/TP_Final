@@ -15,7 +15,7 @@
         function ticketsByCinemaByDate($idCinema, $dateTime);
         function ticketsByCinemaByMonth($idCinema, $month);
         function ticketsByCinemaByYear($idCinema, $year);
-        function ticketsByshow($idShow);
+        function ticketsByShow($idShow);
         function ticketsByCinemaByMovie($idCinema, $idMovie);
         function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift);
 
