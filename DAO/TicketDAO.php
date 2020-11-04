@@ -234,7 +234,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom
-                            WHERE MONTH(s.dateTime) = :month AND YEAR((s.dateTime) =  YEAR(NOW()) AND r.idCinema = :idCinema";
+                            WHERE MONTH(s.dateTime) = :month AND YEAR(s.dateTime) =  YEAR(NOW()) AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["month"] = $month;

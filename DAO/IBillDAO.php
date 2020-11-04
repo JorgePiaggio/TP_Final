@@ -6,7 +6,7 @@
     interface IBillDAO{
         function add(Bill $bill);
         #function search($idBill);
-        function searchByCodePayment($codePayment)
+        function searchByCodePayment($codePayment);
         function getAll();
 
         /* gets bills */

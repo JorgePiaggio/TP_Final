@@ -98,8 +98,8 @@
                 return $this->mapBill($result[0]);
             }else{
                 return null;
-            } */
-        }
+            } 
+        } */
 
         /* Retorna una factura buscada por codigo de pago o null si no existe*/
         public function searchByCodePayment($codePayment){
