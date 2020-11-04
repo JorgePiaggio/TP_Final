@@ -90,9 +90,9 @@
 </div>  
    
     <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
- <div class="gradient">
+<div class="background-pic gradient" >
     <h2 class="page-title mrg_btm3">Billboard</h2>
-    <div class="clear grid" > 
+    <main class="down clear grid"> 
               <?php if($movieList){
                         foreach($movieList as $movie){?>
                         
@@ -150,19 +150,20 @@
 
                                 </div>
 
-                            </div><?php 
+                            </div><br><br><br><br><?php 
                         }
                     }?>
-         <br><br> <br><br>                     <br><br>   
-    </div> 
+                                     
                
   
 
 
-        <?php if($this->msg != null){?>    <div class="center noBack">
-        <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br></div>
-    
+                <?php if($this->msg != null){?>    <div class="center noBack">
+                <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br></div>
+            
 
+
+    </main>
 </div>
 
 <!-- ################################################################################################ -->
