@@ -24,6 +24,7 @@
             if($_GET){
                 $this->msg=$_GET['alert'];
             }
+            
             $cinemaList=array();        /* se crean antes para evitar mostrar errores en las vistas si hay una excepcion */
             $movieList=array();
             $movieListSlider=array();
