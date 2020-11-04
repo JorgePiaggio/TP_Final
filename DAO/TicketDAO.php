@@ -78,7 +78,8 @@
             }
 
         }
-
+        
+        /*
         public function getbyShow($idShow){
 
             try
@@ -117,7 +118,7 @@
                 throw $ex;
             }
 
-        }
+        } */
 
         public function search($idTicket){
             try
@@ -141,6 +142,7 @@
             }
         }
 
+        /*
         public function remove($idTicket){
             try{
             $query="DELETE FROM tickets WHERE idTicket=:idTicket";
@@ -153,10 +155,10 @@
             {
             throw $ex;
             } 
-        }
+        }*/
 
 
-        
+        /*
         public function update($ticket){
             try
             {   
@@ -180,7 +182,7 @@
             {
                 throw $ex;
             }
-        }
+        }*/
 
 
         /* Retorna el total de tickets vendidos para una fecha en un cine */
@@ -196,7 +198,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom 
-                            WHERE DATEDIFF(ccp.datePayment, :dateTime) = 0 AND r.idCinema = :idCinema";
+                            WHERE DATEDIFF(s.dateTime, :dateTime) = 0 AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["dateTime"] = $dateTime;
@@ -219,7 +221,7 @@
         }    
         
         
-        /* Retorna el total de tickets vendidos para el mes actual en un cine*/
+        /* Retorna el total de tickets vendidos para un mes de este año en un cine*/
         public function ticketsByCinemaByMonth($idCinema, $month){
             try
             {   
@@ -232,7 +234,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom
-                            WHERE MONTH(ccp.datePayment) = :month AND YEAR(ccp.datePayment) =  YEAR(NOW()) AND r.idCinema = :idCinema";
+                            WHERE MONTH(s.dateTime) = :month AND YEAR((s.dateTime) =  YEAR(NOW()) AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["month"] = $month;
@@ -269,7 +271,7 @@
                             ON t.idShow = s.idShow
                             JOIN rooms AS r
                             ON s.idRoom = r.idRoom
-                            WHERE YEAR(ccp.datePayment) = :year AND r.idCinema = :idCinema";
+                            WHERE YEAR(s.dateTime) = :year AND r.idCinema = :idCinema";
                 
                 $parameters["idCinema"] = $idCinema;
                 $parameters["year"] = $year;
@@ -292,8 +294,118 @@
         }
 
 
+        /* Retorna el total de tickets vendidos por turno para una fecha en un cine */
+        public function ticketsByCinemaByShiftByDate($idCinema, $shift, $date){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                            ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON s.idRoom = r.idRoom
+                            WHERE DATEDIFF(s.dateTime, :date) = 0  AND r.idCinema = :idCinema AND s.shift = :shift";
 
-        /* Retorna el total de tickets vendidos para una función */
+                $parameters["idCinema"] = $idCinema;
+                $parameters["shift"] = $shift;
+                $parameters["date"] = $date;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }        
+        }
+
+
+        /* Retorna el total de tickets vendidos por turno para un mes de este año en un cine */
+        public function ticketsByCinemaByShiftByMonth($idCinema, $shift, $month){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                            ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON s.idRoom = r.idRoom
+                            WHERE MONTH(s.dateTime) = :month AND YEAR(s.dateTime) =  YEAR(NOW())  AND r.idCinema = :idCinema AND s.shift = :shift";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["shift"] = $shift;
+                $parameters["month"] = $month;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }        
+        }
+
+
+        /* Retorna el total de tickets vendidos por turno para un año en un cine */
+        public function ticketsByCinemaByShiftByYear($idCinema, $shift, $year){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                            ON b.idBill = t.idBill
+                            JOIN creditcardpayments AS ccp
+                            ON b.codePayment = ccp.idCreditCardPayment
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON s.idRoom = r.idRoom
+                            WHERE YEAR(s.dateTime) = :year AND YEAR(s.dateTime) =  YEAR(NOW())  AND r.idCinema = :idCinema AND s.shift = :shift";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["shift"] = $shift;
+                $parameters["year"] = $year;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }        
+        }
+
+        
+        /* Retorna el total de tickets vendidos para una función */ /*
         public function ticketsByshow($idShow){
             try
             {   
@@ -315,10 +427,10 @@
 
             return $result;        
         }
-
+        /*
 
         
-        /* Retorna el total de tickets vendidos para una película en un cine */
+        /* Retorna el total de tickets vendidos para una película en un cine */ /*
         public function ticketsByCinemaByMovie($idCinema, $idMovie){
             try
             {   
@@ -345,41 +457,14 @@
 
             return $result;        
         }
-
+        */
 
             
-        /* Retorna el total de tickets vendidos para un pelicula para un turno en un cine */
-        public function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift){
-            try
-            {   
-                $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
-                            ON b.idBill = t.idBill
-                            JOIN shows AS s
-                            ON t.idShow = s.idShow
-                            JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            WHERE s.idMovie = :idMovie  AND r.idCinema = :idCinema AND s.shift = :shift";
 
-                $parameters["idCinema"] = $idCinema;
-                $parameters["idMovie"] = $idMovie;
-                $parameters["shift"] = $shift;
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;        
-        }
 
 
         
-        /* Retorna el total de dinero recaudado en una fecha en un cine*/
+        /* Retorna el total de dinero recaudado en una fecha en un cine*/ 
         public function cashByCinemaByDate($idCinema, $date){
             try
             {   
@@ -413,14 +498,11 @@
             }
             else{
                 return 0;
-            }
-
-
-                    
+            }       
         }        
 
 
-        /* Retorna el total de dinero recaudado en el mes actual en un cine*/
+        /* Retorna el total de dinero recaudado en un mes en un cine*/ 
         public function cashByCinemaByMonth($idCinema, $month){
             try
             {   

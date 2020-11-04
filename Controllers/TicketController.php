@@ -91,6 +91,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     public function showStatistics($idCinema=""){
         $data = -1;
         $flag = 0;
+        $shift = null;
         $date = null;
         $cinema = $this->cinemaDAO->search($idCinema);
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
@@ -108,14 +109,14 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showData($flag, $idCinema, $date=""){
+    public function showData($flag="", $idCinema="", $date="", $shift=""){
         $data = -1;
         $cinema = $this->cinemaDAO->search($idCinema); 
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         switch($flag){
             case 1:
-                $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+                $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);       
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;
             case 2:
@@ -136,6 +137,18 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 break;
             case 6:
                 $data = $this->ticketDAO->ticketsByCinemaByYear($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break; 
+            case 7:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByDate($idCinema, $shift, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;    
+            case 8:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByMonth($idCinema, $shift, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;   
+            case 9:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByYear($idCinema, $shift, $date);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;      
         }
