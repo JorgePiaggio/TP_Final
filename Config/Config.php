@@ -8,6 +8,7 @@ define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "layout/styles/");
 define("SCRIPT_PATH", FRONT_ROOT.VIEWS_PATH. "layout/scripts/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("IMG_PATH", FRONT_ROOT.VIEWS_PATH."layout/images/");
+define("IMG_PATH_TICKET", VIEWS_PATH."layout/images/tickets/");
 define("MODELS_PATH","Models/");
 define("DAO_PATH","DAO/");
 define("DB_HOST", "localhost");

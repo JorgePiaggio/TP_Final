@@ -83,6 +83,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         }else{
             $this->msg="A problem has occurred with your purchase, please try again later";
         }
+        $seats= array();
         require_once(VIEWS_PATH."Tickets/purchase-result.php");  
 
     }
@@ -95,6 +96,15 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+    }
+
+    public function showSendEmail($name,$email,$seats,$movieTitle,$date,$cinema,$room,$cantTicket,$idShow){
+        $newSeats=explode("/",$seats);
+        $seatList=array();
+        foreach($newSeats as $seat){
+            array_push($seatList,explode("-",$seat));
+        }
+        require_once(VIEWS_PATH."tickets/purchase-email.php");
     }
 
 
