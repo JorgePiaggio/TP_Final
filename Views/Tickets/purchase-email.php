@@ -1,9 +1,9 @@
 <?php 
 
 
-use Config\PHPMailer as PHPMailer;
-use Config\Exception as Exception;
-use Config\SMTP as SMTP;
+use lib\PHPMailer\PHPMailer as PHPMailer;
+use lib\PHPMailer\Exception as Exception;
+use lib\PHPMailer\SMTP as SMTP;
 
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -25,24 +25,53 @@ try {
 
 
     // Attachments
-    foreach($seatList as $seat){
+    /*foreach($seatList as $seat){
        
     $mail->addAttachment( ROOT.IMG_PATH_TICKET.$seat[0].$seat[1].$idShow.'.png'); 
-    }        // Add attachments
+    }        // Add attachments*/
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Ticket '.$date;
-    $mail->Body    = $name.' You have '.$cantTicket.' ticket/s <b>moviepass thanks you for your purchase<b> Cinema: '.$cinema." Room: ".$room." Movie: ".$movieTitle." Date: ".$date."  Seats: ".$seats;
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+    $msg= $name.' You have '.$cantTicket.' ticket/s <b>moviepass thanks you for your purchase<b><br><br><br>';
+    $msg.=  '<table border="1" width="auto" height="auto" bgcolor="#ffa500">
+    <thead class="bg-dark text-white">
+        <th>User</th>
+        <th>Cinema</th>
+        <th>Room</th>
+        <th>Movie</th>
+        <th>Date </th>
+        <th>Seat</th>                            
+        <th>QR Code</th>
+    </thead>
+<tbody>';
+        
+        if($seatList){ 
+            foreach($seatList as $seat){
+            $msg.='<tr>';
+               $msg.= '<td><p>'.$name.'</p></td>';
+               $msg.= '<td><p>'.$cinema.'</p></td>';
+               $msg.= '<td><p>'.$room.'</p></td>';
+               $msg.='<td><p>'.$movieTitle.'</p></td>';  
+               $msg.='<td><p>'.$date.' hs</p></td>';   
+                $msg.='<td><p>'." Row: ".$seat[0]."  Column:".$seat[1].'</p></td>'; 
+                $msg.='<td><img src="'.APIQRCODE.$card.$seat[0].$seat[1].$idShow.'">'.'</td>';
+           $msg.=' </tr> ';
+             }
+        } 
+        
+        
+  $msg.= ' </tbody>
+</table><br><br>';
+$mail->Body = $msg;
     $mail->send();
     $this->msg='Message has been sent to: '.$email.', thanks you for your purchase';
 }catch (Exception $e) {
-    $this->msg="Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    $this->msg='Message could not be sent, Mailer Error:'.$mail->ErrorInfo;
 }
 
 ?>
+
 <div class="hoc"><br>
 <?php if($this->msg != null){?> 
         <center><h4 class="msg"><?php  echo $this->msg;} ?> </h4></center>
