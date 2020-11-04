@@ -10,12 +10,8 @@ $fb = new Facebook\Facebook([
     'app_secret' => APPSECRET,
     'default_graph_version' => GRAPHVERSION
 
-]); 
-
+]);
 ?>
-
-
-
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -43,42 +39,38 @@ $fb = new Facebook\Facebook([
                     </div>
 
                    
+                   <!-- *********************** FACEBOOK LOGIN ************************* -->
                     <?php if(empty($access_token)) { ?>
                       
                     <div class="floating-label">
-                         <span>&nbsp;</span>
-                         <a class="btn inverse" href="<?php echo "{$fb->getRedirectLoginHelper()->getLoginUrl('http://localhost/TP_Final/User/showLogin')}" ?>" >Log in with Facebook</a>
-                    </div>   
+                         <a class="fa fa-facebook bb" href="<?php echo "{$fb->getRedirectLoginHelper()->getLoginUrl('https://localhost/TP_Final/User/showLogin',['email'])}" ?>" > <p> Log in with Facebook</p></a>
+                    </div><br><br>
                    
                   <?php
-
-                  /*Step 3 : Get Access Token*/
+                  /* Get Access Token*/
                   $access_token = $fb->getRedirectLoginHelper()->getAccessToken();
                   }
                   
-                  /*Step 4: Get the graph user*/
+                  /* Get the graph user*/
                   if(isset($access_token)){
-                    
+                                     
                     try {
-                   #     $response = $fb->get('/me?fields=id,name,email',$access_token);
-                        $response = $fb->get('/me?locale=en_US&fields=name,email',$access_token);
-                        $fb_user = $response->getGraphUser();
-
-                        # var_dump($fb_user);
-                        echo  $fb_user->getName();
-                        
-                    } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                        echo  'Graph returned an error: ' . $e->getMessage();
-                    } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                        // When validation fails or other local issues
-                        echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                      // Returns a `FacebookFacebookResponse` object
+                      $response = $fb->get('/me?fields=email,id,first_name,last_name',$access_token);
+                    } catch(FacebookExceptionsFacebookResponseException $e) {
+                      echo 'Graph returned an error: ' . $e->getMessage();
+                      exit;
+                    } catch(FacebookExceptionsFacebookSDKException $e) {
+                      echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                      exit;
                     }
-                  
-                  }
-                  
-                  
+
+                    $graphNode = $response->getGraphNode(); 
+                    var_dump($graphNode);
+                }
                   ?>
-                   
+                  <!-- *********************** FACEBOOK LOGIN ************************* -->
+
 
                     <!-- Muestro un mensaje si no existe mail o no coincide pass -->
                     <?php if($this->msg != null){?>      
