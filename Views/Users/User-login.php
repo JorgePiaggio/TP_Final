@@ -6,68 +6,13 @@ require './vendor/autoload.php';
 
 $fb = new Facebook\Facebook([
 
-    'app_id' => '372444494104218',
-    'app_secret' => '584f98f8239ae686cc19ed7889d85138',
-    'default_graph_version' => 'v2.7'
+    'app_id' => APPID,
+    'app_secret' => APPSECRET,
+    'default_graph_version' => GRAPHVERSION
 
-]);
-
-$helper = $fb->getRedirectLoginHelper();
-$loginUrl = $helper->getLoginUrl('http://localhost/TP_Final/User/showLogin');
-
-# print_r($loginUrl);
-
-/*try{    
-
-    $accessToken= $helper->getAccessToken();
-
-    if(isset($accessToken)){
-        var_dump($accessToken);        
-        $_SESSION['loggedUser']=(string)$accessToken;
-    }
-
-}catch(Exception $e){
-        echo $e->getMessage();
-}*/
-
-if(empty($access_token)) {
-
- # echo "<a href='{$fb->getRedirectLoginHelper()->getLoginUrl("http://localhost/TP_Final/User/showLogin")}'>Login with Facebook </a>";
-}
-
-/*Step 3 : Get Access Token*/
-$access_token = $fb->getRedirectLoginHelper()->getAccessToken();
-
-
-/*Step 4: Get the graph user*/
-if(isset($access_token)) {
-
-
-  try {
-      $response = $fb->get('/me',$access_token);
-
-      $fb_user = $response->getGraphUser();
-
-      echo  $fb_user->getName();
-
-
-
-
-      //  var_dump($fb_user);
-  } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-      echo  'Graph returned an error: ' . $e->getMessage();
-  } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-      // When validation fails or other local issues
-      echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  }
-
-}
-
+]); 
 
 ?>
-
-
-
 
 
 
@@ -98,13 +43,41 @@ if(isset($access_token)) {
                     </div>
 
                    
-                   
+                    <?php if(empty($access_token)) { ?>
+                      
                     <div class="floating-label">
                          <span>&nbsp;</span>
                          <a class="btn inverse" href="<?php echo "{$fb->getRedirectLoginHelper()->getLoginUrl('http://localhost/TP_Final/User/showLogin')}" ?>" >Log in with Facebook</a>
                     </div>   
                    
-                   
+                  <?php
+
+                  /*Step 3 : Get Access Token*/
+                  $access_token = $fb->getRedirectLoginHelper()->getAccessToken();
+                  }
+                  
+                  /*Step 4: Get the graph user*/
+                  if(isset($access_token)){
+                    
+                    try {
+                   #     $response = $fb->get('/me?fields=id,name,email',$access_token);
+                        $response = $fb->get('/me?locale=en_US&fields=name,email',$access_token);
+                        $fb_user = $response->getGraphUser();
+
+                        # var_dump($fb_user);
+                        echo  $fb_user->getName();
+                        
+                    } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                        echo  'Graph returned an error: ' . $e->getMessage();
+                    } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                        // When validation fails or other local issues
+                        echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                    }
+                  
+                  }
+                  
+                  
+                  ?>
                    
 
                     <!-- Muestro un mensaje si no existe mail o no coincide pass -->
