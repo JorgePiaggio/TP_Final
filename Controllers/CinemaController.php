@@ -157,11 +157,12 @@
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección
         public function validateCinema($name, $address){
+            $cinemaList=array();
 
             try{
                 $cinemaList = $this->cinemaDAO->getAll();
                 $idFound=null;
-
+                
                 foreach($cinemaList as $cinema){
                     $addressAux = $cinema->getStreet() . $cinema->getNumber();
                     if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
@@ -248,20 +249,24 @@
         
         private function refreshBillboard(){ // activa el estado de peliculas que esten en una funcion de la semana por cine y las pone en cartelera del cine
             $this->initializeBillboard();
+            $cinemaList=array();
 
             try{
+
                 $cinemaList=$this->cinemaDAO->getAllActive();
-            
-                foreach($cinemaList as $cinema){
-                    $shows=$this->showDAO->getByCinema($cinema->getIdCinema());
-                    if($shows){
-                        
-                        foreach($shows as $show){
-                            $this->addToBillboard($cinema->getIdCinema(),$show->getMovie());
+
+                    if(is_array($cinemaList)){
+                        foreach($cinemaList as $cinema){
+                            $shows=$this->showDAO->getByCinema($cinema->getIdCinema());
+                            if($shows){
+                                
+                                foreach($shows as $show){
+                                    $this->addToBillboard($cinema->getIdCinema(),$show->getMovie());
+                                }
+                                
+                            }
                         }
-                        
                     }
-                }
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }

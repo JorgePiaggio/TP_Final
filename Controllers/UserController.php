@@ -96,7 +96,7 @@ class UserController{
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
-
+        
         if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
             $_SESSION["loggedUser"]=$email; 
             if(strcmp($email,"admin@moviepass.com")!=0){   

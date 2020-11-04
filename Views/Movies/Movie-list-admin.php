@@ -17,18 +17,15 @@
                       <input type="number" name="pass" placeholder="# Page" value="<?php if($page){echo $page;} ?>" class="floating-input fl_left pageNumber" min="1" max="70" required>
                   
                       <button type="submit" name="id" class="btn fl_left up2" value="">Show Movie Page</button> 
-                    <?php if($this->msg){ ?> <h1 class="msg"><?php echo $this->msg;} ?></h1>
+                   
                   </div>
             </form>
           </div>
 
-          <div class="one_half">
+          <div class="one_half up2">
+             <?php if($this->msg){ ?> <h1 class="msg"><?php echo $this->msg;} ?></h1>
 
             <form action="<?php echo FRONT_ROOT?>Movie/addMultipleMovies" method="POST" >
-
-                <div class="floating-label">
-                  <button type="submit" name="idadd" class="btn buttonCaprichoso" value="">Add movies</button> 
-                </div>
 
           </div><?php } ?>
 
@@ -36,7 +33,7 @@
         
          <!-- ####################################### MOVIE GALLERY ######################################################### -->
       <div id="gallery">
-        <figure>
+        <figure> 
           <ul class="nospace clear">
           
               <?php $indice=0; ?>
@@ -84,7 +81,10 @@
                   </li><?php } 
                 $indice++;
               }?>
-          
+                <div class="fl_right floating-label">
+            <button type="submit" name="idadd" class="btn buttonCaprichoso" value="">Add movies</button> 
+   
+                </div>
             </form>
           </ul>
         </figure>

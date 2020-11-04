@@ -84,7 +84,9 @@
         <?php foreach($movieShows as $movie){?>
           
           <div class="cardStyle mrg_btm3 mrg_top">
-            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
+            <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 30){
+                                                          $str1 = substr($movie->getTitle(), 0, 27) . '...';
+                                                          echo $str1; ?><?php }else{ echo $movie->getTitle(); } ?></button>
 
             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
               <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
@@ -156,6 +158,7 @@
   <section class="hoc container clear up6 "> 
     <ul class="nospace group">
       <?php $indice=0;
+        if(isset($cinemaList)){   // para evitar errores cuando la bdd esta vacia
             if(is_array($cinemaList)){
               foreach ($cinemaList as $cinema){
                 if($indice % 4 == 0){?>
@@ -199,7 +202,7 @@
                   </div>
                 </article>
               </li><?php 
-            }?>
+            }}?>
     </ul>
   </section>
 </div>

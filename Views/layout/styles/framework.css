@@ -44,9 +44,12 @@ hr.orangeHr{border:1px solid #FF5723 !important;}
 a{outline:none; text-decoration:none;}
 
 .grid{
-  display: flex;
+  display: flex;  
+  flex-wrap: wrap;
   justify-content: space-between;
 }
+
+
 .marginAuto{
   margin: 0 auto;
 }
@@ -268,48 +271,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   .check label:active:after {
     width: 10px;
   }
-/*****************************************************************/
-  input[type=checkbox]{
-    height: 0;
-    width: 0;
-    visibility: hidden;
-  }
-  
-  .check label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 30px;
-    height: 20px;
-    background: rgb(23, 22, 22);
-    display: block;
-    border-radius: 20px;
-    position: relative;
-  }
-  
-  .check label:after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 0px;
-    width: 11px;
-    height: 11px;
-    background: #fff;
-    border-radius: 20px;
-    transition: 0.3s;
-  }
-  
-  .check input:checked + label {
-    background: #ff6817;
-  }
-  
-  .check input:checked + label:after {
-    left: calc(100% - 1px);
-    transform: translateX(-100%);
-  }
-  
-  .check label:active:after {
-    width: 10px;
-  }
+
 
 
   /******** checkbox seats ************************/
@@ -325,11 +287,11 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     font-family: "FontAwesome";
   }*/
   .seatTrue.check label.lbl , .seatFalse.check label.lbl{
-    cursor: pointer;  
+    cursor: pointer;
     text-indent: -9999px;
     width: 16px;
     height: 16px;
-    background: rgb(23, 22, 22);
+    background: rgb(23, 22, 22);  
     display: inline;
     border-radius: 0px;
     position: relative; padding:0px 2px;
@@ -346,11 +308,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     border-radius: 0px;
     transition: 0.3s;
   }
-  
-  .seatTrue.check input:checked + label.lbl, .seatFalse.check input:checked + label.lbl {
-    background: #ff6817;
-  }
-  
+   
   .seatTrue.check input:checked + label.lbl:after, .seatFalse.check input:checked + label.lbl:after  {
     left: 0;    
     background:#f66336;
@@ -358,7 +316,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   }
   
   .seatTrue.check label.lbl:active:after , .seatFalse.check label.lbl:active:after{
-    width: 20px;
+    width: 16px;
   }
 
   .seatFalse.check label.lbl:after  {
