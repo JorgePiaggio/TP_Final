@@ -153,65 +153,6 @@
 </div>
 
 <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
-<div class="gradient">
-    <h2 class="page-title mrg_btm3">Billboard</h2>
-    <div class="clear grid" > 
-        <div class="hoc"></div>
-            <?php if($movieList){
-                    foreach($movieList as $movie){?>
-                    
-                        <div class="cardStyle mrg_btm3  mrg_sides">
-                            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
-
-                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-                            <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                                <img class="posterBillboardHome " src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
-                            </a>
-                            </div>
-
-                            <div>
-                                <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
-                                <button type="button" class="collapsible">Show List</button>
-                                    <div class="content1">
-                                    <?php   foreach($showList as $show){
-                                                if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                                <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
-                                                    <p class="p_orange">
-                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                            echo "Room: ".$str1; ?></h6><?php }else{
-                                                            echo "Room: ".$show->getRoom()->getName();}?>
-                                                    </p> <hr>
-                                                    <p class="p_white">
-                                                    <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
-                                                    </p>
-                                                    <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
-                                                    <p class="p_white"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
-                                                    <p class="p_white"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
-                                                </a><?php 
-                                                }
-                                            }?> 
-                                    </div>
-
-                            </div>
-
-                                    </div><?php }
-                    }?>
-                        
-        </div> 
-               
-    </div>
-
-    <div class="center noBack"><br><br>
-        <?php if($this->msg != null){?> 
-        <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br>
-    </div>
-
-</div>
-
-
-<!-- ################################################################################################ -->
-
 <div class="bordo">
   <div class="container ctr"> 
                        <!------------------------------------------------ CONTENT ------------------------------------------------>
@@ -255,8 +196,8 @@
                                                 <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
                                               </p>
                                               <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
-                                                <p class="p_white"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
-                                                <p class="p_white"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
+                                                <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
+                                                <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
                                               
                                             </a><?php 
                                           }
@@ -299,8 +240,8 @@
                                                 <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
                                               </p>
                                               <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
-                                                <p class="p_white"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
-                                                <p class="p_white"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
+                                                <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
+                                                <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
                                             </a><?php 
                                           }
                                       }?> 
