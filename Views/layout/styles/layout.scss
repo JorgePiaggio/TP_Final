@@ -59,8 +59,8 @@ File: Layout CSS
     margin: 0 20px;
 }
 .buttonCaprichoso{
-    margin-left: 280%;
-    margin-top: -100%;
+    margin-top: 50%;
+    margin-left: -320%;
 }
 
 .mrg_left{
@@ -400,6 +400,11 @@ img.posterSmall{min-height: 332px !important ;}
 .cardStyle.fit{
 	width: fit-content;
 }
+.cardStyle.leftmrg {
+    margin-left:10px;    
+    margin-right:10px;
+
+}
 
 /* Gallery
 --------------------------------------------------------------------------------------------------------------- */
@@ -473,8 +478,92 @@ max-height: 678px;
 }
 
 
-/* home billboard back anim
-******************************************************************************************************************/
+
+/************ NOMBRE Y GENERO DE PELI QUE BAJA AL POSTER ON HOVER ******/
+.slideDown{
+    max-height: 420px;
+    }
+    
+    .slideDown p{
+        font-size: 22px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
+        color:#dc481a; 
+        text-align: center;
+        text-shadow: 2px 2px #000000;
+        padding: 20px 20px;
+    }
+    
+    .slideDown .p-title{
+        font-size: 25px;
+        color: #FF5723; 
+        font-weight: bold;
+        font-size: 30px;
+        } 
+    .slideDown i{
+        text-shadow: none;
+        } 
+    .slideDown p{
+        opacity:0;
+        transform: translateY(-400px);
+        transition: all .3s linear;
+    }
+     .slideDown:hover p{
+        opacity:1;
+        transform: translateY(-350px);
+      }
+      .slideDown.mlist p{
+        opacity:0;
+        transform: translateY(-400px);
+        transition: all .3s linear;
+    }
+     .slideDown.mlist:hover p{
+        opacity:1;
+        transform: translateY(-350px);
+      }
+    .slideDown.spec:hover p{
+        opacity:1;
+        transform: translateY(-500px);
+      }
+    
+    svg{display: inline;}
+    
+    
+      svg text{
+        stroke:#FF5723;
+        font-family: "Faster One";
+        font-size: 150px;
+        font-weight: 700;
+        stroke-width: 5;
+        letter-spacing: 32px;
+        animation: svgAnim 6s infinite ;
+        animation-delay: 1.2s;
+        animation-timing-function: ease-in-out;
+    }
+    
+    @keyframes svgAnim{
+      
+    
+        0%{
+            stroke-dasharray: 80% 0 ;
+            stroke-dashoffset: -20%;
+        }    
+        50%{
+            stroke-dasharray:20% 16%;
+            stroke-dashoffset: 20%;        
+        }
+        100%{
+            stroke-dasharray: 80% 0 ;
+            stroke-dashoffset: -20%;
+        }  
+    }
+
+
+
+
+
+
+/* 
+*************************** PUNTOS DE COLORES QUE SE MUEVEN EN LOS FONDOS ***************************************************************************************/
 @keyframes move {
     100% {
         transform: translate3d(0, 0, 1px) rotate(360deg);
@@ -810,131 +899,8 @@ max-height: 678px;
 }
 
 
-
-
-
-/******************/
-.slideDown{
-max-height: 420px;
-}
-
-.slideDown p{
-	font-size: 22px;
-	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-	color:#dc481a; 
-	text-align: center;
-    text-shadow: 2px 2px #000000;
-    padding: 20px 20px;
-}
-
-.slideDown .p-title{
-	font-size: 25px;
-	color: #FF5723; 
-	font-weight: bold;
-	font-size: 30px;
-	} 
-.slideDown i{
-	text-shadow: none;
-	} 
-.slideDown p{
-	opacity:0;
-    transform: translateY(-350px);
-    transition: all .3s linear;
-}
- .slideDown:hover p{
-	opacity:1;
-	transform: translateY(-300px);
-  }
-  .slideDown.mlist p{
-	opacity:0;
-    transform: translateY(-400px);
-    transition: all .3s linear;
-}
- .slideDown.mlist:hover p{
-	opacity:1;
-	transform: translateY(-350px);
-  }
-.slideDown.spec:hover p{
-	opacity:1;
-    transform: translateY(-500px);
-  }
-
-svg{display: inline;}
-
-
-  svg text{
-    stroke:#FF5723;
-	font-family: "Faster One";
-    font-size: 150px;
-    font-weight: 700;
-    stroke-width: 5;
-    letter-spacing: 32px;
-    animation: svgAnim 6s infinite ;
-    animation-delay: 1.2s;
-    animation-timing-function: ease-in-out;
-}
-
-@keyframes svgAnim{
-  
-
-    0%{
-        stroke-dasharray: 80% 0 ;
-        stroke-dashoffset: -20%;
-    }    
-    50%{
-        stroke-dasharray:20% 16%;
-        stroke-dashoffset: 20%;        
-    }
-    100%{
-        stroke-dasharray: 80% 0 ;
-        stroke-dashoffset: -20%;
-    }  
-}
-
-
-
-/* Font Awesome Social Icons
---------------------------------------------------------------------------------------------------------------- */
-.faico{margin:0; padding:0; list-style:none;}
-.faico li{display:inline-block; margin:8px 5px 0 0; padding:0; line-height:normal;}
-.faico li:last-child{margin-right:0;}
-.faico a{display:inline-block; width:36px; height:36px; line-height:36px; font-size:18px; text-align:center;}
-
-.faico a{color:#FFFFFF; background-color:#FF5723;}
-.faico a:hover{}
-
-.faicon-dribble:hover{background-color:#EA4C89;}
-.faicon-facebook:hover{background-color:#3B5998;}
-.faicon-google-plus:hover{background-color:#DB4A39;}
-.faicon-linkedin:hover{background-color:#0E76A8;}
-.faicon-twitter:hover{background-color:#00ACEE;}
-.faicon-vk:hover{background-color:#4E658E;}
-
-.fa-star{color:yellow;}
-.fa-tags{color:green;}
-.fa-ticket{color: #FF5723; heigth: 20px;}
-
-/* Cinema Gallery homepage
- ------------------------------------------------------------------------------------------------------------ */
-.heading.font-x1.center{
-	color:#FF5723;
-	background-color:rgba(7, 7, 7, 0.687);
-	border-radius: 5%;
-	padding: 20px 20px;
-	overflow:hidden; text-overflow: ellipsis;  
-}
-
-
-.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; padding: 6px 6px; }
-
-
-
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
 /* BILLBOARD LIST PAGE
-***********************************************************************************************************************/
+******************************************* BOTON DESPLEGABLE VER SHOWS ABAJO DE LAS PELICULAS ****************************************************************************/
 @at-root
 .notCollapsible {
     background-color: black;
@@ -1083,6 +1049,49 @@ svg{display: inline;}
     font-size: 15px;
     font-weight: bold;
 }
+
+
+/* Font Awesome Social Icons
+--------------------------------------------------------------------------------------------------------------- */
+.faico{margin:0; padding:0; list-style:none;}
+.faico li{display:inline-block; margin:8px 5px 0 0; padding:0; line-height:normal;}
+.faico li:last-child{margin-right:0;}
+.faico a{display:inline-block; width:36px; height:36px; line-height:36px; font-size:18px; text-align:center;}
+
+.faico a{color:#FFFFFF; background-color:#FF5723;}
+.faico a:hover{}
+
+.faicon-dribble:hover{background-color:#EA4C89;}
+.faicon-facebook:hover{background-color:#3B5998;}
+.faicon-google-plus:hover{background-color:#DB4A39;}
+.faicon-linkedin:hover{background-color:#0E76A8;}
+.faicon-twitter:hover{background-color:#00ACEE;}
+.faicon-vk:hover{background-color:#4E658E;}
+
+.fa-star{color:yellow;}
+.fa-tags{color:green;}
+.fa-ticket{color: #FF5723; heigth: 20px;}
+
+/* Cinema Gallery homepage
+ ------------------------------------------------------------------------------------------------------------ */
+.heading.font-x1.center{
+	color:#FF5723;
+	background-color:rgba(7, 7, 7, 0.687);
+	border-radius: 5%;
+	padding: 20px 20px;
+	overflow:hidden; text-overflow: ellipsis;  
+}
+
+
+.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; padding: 6px 6px; }
+
+
+
+/* ------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------ */
+
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */

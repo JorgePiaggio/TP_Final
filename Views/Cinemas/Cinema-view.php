@@ -93,73 +93,75 @@
  <div class="gradient">
     <h2 class="page-title mrg_btm3">Billboard</h2>
     <div class="clear grid" > 
-        <div class="hoc"></div>
-            <?php if($movieList){
-                    foreach($movieList as $movie){?>
-                    
-                        <div class="cardStyle mrg_btm3  mrg_sides">
-                            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
-
-                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-                            <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                                <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
-                            </a>
-                            </div>
-
-                            <div>
-                                <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
-                                <button type="button" class="collapsible">Show List</button>
-                                    <div class="content1">
-                                    <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
-                                             foreach($showList as $show){
-                                                if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                                <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
-                                                    <p class="p_orange">
-                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                            echo "Room: ".$str1; ?></h6><?php }else{
-                                                            echo "Room: ".$show->getRoom()->getName();}?>
-                                                    </p> <hr>
-                                                    <p class="p_white">
-                                                    <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
-                                                    <i class="fa fa-ticket" style="font-size: 1.73em"></i>
-                                                    </p>
-                                                </a><?php 
-                                                }
-                                            }
-                                        }else{
-                                            foreach($showList as $show){
-                                                if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                                    <p class="p_orange">
-                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                            echo "Room: ".$str1; ?></h6><?php }else{
-                                                            echo "Room: ".$show->getRoom()->getName();}?>
-                                                    </p> <hr>
-                                                    <p class="p_white">
-                                                    <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
-                                                    <i class="fa fa-ticket" style="font-size: 1.73em"></i>
-                                                    <?php echo "Login" ?>
-                                                    </p>
-                                                <?php
-                                                }
-                                            } 
-                                        }?> 
-                                    </div>
-
-                            </div>
-
-                                    </div><?php }
-                    }?>
+              <?php if($movieList){
+                        foreach($movieList as $movie){?>
                         
-        </div> 
-               
-    </div>
+                            <div class="cardStyle mrg_btm3 leftmrg ">
+                                <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 30){
+                                                                $str1 = substr($movie->getTitle(), 0, 27) . '...';
+                                                                echo $str1; ?><?php }else{ echo $movie->getTitle(); } ?></button>
 
-    <div class="center noBack"><br><br>
-        <?php if($this->msg != null){?> 
-        <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br>
-    </div>
+                                <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
+                                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                                    <img class="posterBillboard posterBillboardHome" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                                </a>
+                                </div>
+
+                                <div>
+                                    <button type="" class="notCollapsible nc2"><?php echo $movie->getGenres()[0]->getName()?></button>
+                                    <button type="button" class="collapsible">Show List</button>
+                                        <div class="content1">
+                                            <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                                                foreach($showList as $show){
+                                                    if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                                    <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
+                                                        <p class="p_orange">
+                                                        <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                                $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                                echo "Room: ".$str1; ?><?php }else{
+                                                                echo "Room: ".$show->getRoom()->getName();}?>
+                                                        </p> <hr>
+                                                        <p class="p_white">
+                                                        <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                                                        <i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                                        </p>
+                                                    </a><?php 
+                                                    }
+                                                }
+                                            }else{
+                                                foreach($showList as $show){
+                                                    if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                                        <p class="p_orange">
+                                                        <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                                $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                                echo "Room: ".$str1; ?></h6><?php }else{
+                                                                echo "Room: ".$show->getRoom()->getName();}?>
+                                                        </p> <hr>
+                                                        <p class="p_white">
+                                                        <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs";?>
+                                                        <i class="fa fa-ticket" style="font-size: 1.73em"></i>
+                                                        <?php echo "Login" ?>
+                                                        </p>
+                                                    <?php
+                                                    }
+                                                } 
+                                            }?> 
+                                        </div>
+
+                                </div>
+
+                            </div><?php 
+                        }
+                    }?>
+         <br><br> <br><br>                     <br><br>   
+    </div> 
+               
+  
+
+
+        <?php if($this->msg != null){?>    <div class="center noBack">
+        <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br></div>
+    
 
 </div>
 

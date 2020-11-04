@@ -111,7 +111,7 @@
 
 
         /*Obtener pagina de pelicula directamente de la API*/
-        public function showMoviePage($page=1,$language="en-US"){
+        public function showMoviePage($page=1,$language="en-US"){   
             Validate::validateSession();
 
             $allGenre=$this->getAllGenre();
@@ -281,7 +281,7 @@
                     $result+= $this->addMovieToDatabase($idMovie);
                 }
                 if($result > 0){
-                    $this->msg="Movies Added Correctly";
+                    $this->msg="Movies Added Succesfully";
                 }else{
                     $this->msg="Internal error. Please try again later";
                 }
@@ -292,7 +292,7 @@
         }
 
 
-        /* agregar peliculas a la BDD */
+        /* agregar pelicula a la BDD */
         public function addMovieToDatabase($tmdbId=""){
             Validate::validateSession();
             Validate::checkParameter($tmdbId);
@@ -312,7 +312,7 @@
             try{
                 $result=$this->movieDAO->add($movie);
                 if($result > 0){
-                    $this->msg= "Movie Added Succesfully";
+                    $this->msg= "Movies Added Succesfully";
                 }else{
                     $this->msg="Internal error. Please try again later";
                 }
