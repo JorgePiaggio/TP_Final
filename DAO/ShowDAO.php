@@ -183,7 +183,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >=0  AND s.dateTime >= :dateTime
+            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND s.dateTime >= :dateTime
             ORDER BY s.dateTime ASC";
 
             $parameters["dateTime"] = $dateNow;
@@ -341,7 +341,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) >= 0";
+            WHERE r.idCinema= :idCinema AND s.dateTime >= :dateTime";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["dateTime"]=$dateNow;
@@ -628,6 +628,40 @@
         {
             throw $ex;
         }
+        if($resultSet){
+            return $movieList;
+        }else{
+            return null;
+        }
+    }
+
+    /* Retorna las películas que tuvieron o tienen función en un cine */
+    public function getAllMoviesByCinema($idCinema){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT idMovie FROM cinemaxmovies WHERE idCinema=:idCinema";
+
+            $this->connection = Connection::getInstance();
+            $parameters["idCinema"]=$idCinema;
+
+            $resultSet = $this->connection->execute($query,$parameters);
+           
+            foreach ($resultSet as $row)
+            {                
+                $movie=$this->searchMovieId($row["idMovie"]);
+                    if(!in_array($movie, $movieList)){ 
+                        array_push($movieList,$movie);
+                    }
+            }
+        
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+        
         if($resultSet){
             return $movieList;
         }else{

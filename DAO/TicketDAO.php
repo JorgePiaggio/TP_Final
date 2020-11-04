@@ -404,6 +404,40 @@
             }        
         }
 
+
+              /* Retorna el total de tickets vendidos para una película en un cine */ 
+              public function ticketsByCinemaByMovie($idCinema, $idMovie){
+                try
+                {   
+                    $query = "SELECT sum(b.tickets) FROM bills AS b
+                                JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                                ON b.idBill = t.idBill
+                                JOIN shows AS s
+                                ON t.idShow = s.idShow
+                                JOIN rooms AS r
+                                ON s.idRoom = r.idRoom
+                                WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema";
+    
+                    $parameters["idCinema"] = $idCinema;
+                    $parameters["idMovie"] = $idMovie;
+                    
+                    $this->connection = Connection::getInstance();
+                    
+                    $result = $this->connection->execute($query, $parameters);
+                }
+                catch(\PDOException $ex)
+                {
+                    throw $ex;
+                }
+    
+                if($result[0][0]){
+                    return $result[0][0];                
+                }
+                else{
+                    return 0;
+                }           
+            }
+
         
         /* Retorna el total de tickets vendidos para una función */ /*
         public function ticketsByshow($idShow){
@@ -430,34 +464,8 @@
         /*
 
         
-        /* Retorna el total de tickets vendidos para una película en un cine */ /*
-        public function ticketsByCinemaByMovie($idCinema, $idMovie){
-            try
-            {   
-                $query = "SELECT sum(b.tickets) FROM bills AS b
-                            JOIN tickets AS t
-                            ON b.idBill = t.idBil.
-                            JOIN shows AS s
-                            ON t.idShow = s.idShow
-                            JOIN rooms AS r
-                            ON t.idRoom = r.idRoom
-                            WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema";
-
-                $parameters["idCinema"] = $idCinema;
-                $parameters["idMovie"] = $idMovie;
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;        
-        }
-        */
+  
+        
 
             
 

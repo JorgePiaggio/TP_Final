@@ -12,7 +12,7 @@
                 <div class="one_third">
                     <p> Choose date to search</p>  <br>
                     <div class="floating-label">
-                        <form action="<?php echo FRONT_ROOT?>Ticket/showData/" class="center" method="post">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                             <input type="hidden" id="flag" name="flag" value="1">
                             <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
                             <input type="date" name="date" value="" class="floating-input" required>
@@ -89,7 +89,7 @@
                 <div class="one_third">
                     <p> Choose date to search</p>  <br>
                     <div class="floating-label">
-                        <form action="<?php echo FRONT_ROOT?>Ticket/showData/" class="center" method="post">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                             <input type="hidden" id="flag" name="flag" value="4">
                             <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
                             <input type="date" name="date" value="" class="floating-input" required>
@@ -160,7 +160,7 @@
                 <div class="one_third">
                     <p> Choose date and shift to search</p>  <br>
                     <div class="floating-label">
-                        <form action="<?php echo FRONT_ROOT?>Ticket/showData/" class="center" method="post">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                             <input type="hidden" id="flag" name="flag" value="7">
                             <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
                             
@@ -244,9 +244,45 @@
                         </div>
                 </div>
             </div>
-        </main>
+           
+<!-- ######################################################### ESTADÍSTICAS TICKETS POR PELICULA  ######################################################### -->
+            <div class="cardStyle mrg_top">
+                <div class="one_third">
+                    <p> Choose movie to search</p>  <br>
+                    <div class="floating-label">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
+                            <input type="hidden" id="flag" name="flag" value="10">
+                            <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
+                            <input type="hidden" id="date" name="date" value="">
+                            <input type="hidden" id="shift" name="shift" value="">
+                        
+                            <select name="idMovie" class="selection" required>
+                                <option value="" selected disabled>Select Movie</option>
+                                
+                                <?php if($allMovies){ 
+                                    foreach($allMovies as $film){  ?>
+                                      <option name="idMovie" value="<?php echo $film->getTmdbId(); ?>"> <?php echo $film->getTitle();?> </option>
+                                <?php } 
+                                }?>
+                                
+                            </select><br>  <br> 
 
-       
+                            <div> 
+                                <button type="submit" name="search10" class="btn btn-primary ml-auto d-block">Search</button> 
+                            </div>
+                        </form>
+                    </div> 
+                    <div>
+                      <?php if($flag == 10){ ?>
+                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
+                               
+                            <?php } ?> 
+                    </div>
+                </div>
+            </div>
+
+
+        </main> 
     </div>
 </div>
 

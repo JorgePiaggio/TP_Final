@@ -19,6 +19,8 @@ use DAO\CreditCardDAO as CreditCardDAO;
 use DAO\CreditCardPaymentDAO as CreditCardPaymentDAO;
 use DAO\UserDAO as UserDAO;
 use DAO\CinemaDAO as CinemaDAO;
+use DAO\MovieDAO as MovieDAO;
+
 use Config\Validate as Validate;
 
 define("DISCOUNT", 25);
@@ -33,6 +35,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         private $creditCardDAO;
         private $creditCardPaymentDAO;
         private $cinemaDAO;
+        private $movieDAO;
         private $msg;
         private $data;
       
@@ -46,6 +49,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $this->creditCardDAO = new CreditCardDAO();
         $this->creditCardPaymentDAO = new CreditCardPaymentDAO();
         $this->cinemaDAO = new CinemaDAO();
+        $this->movieDAO = new MovieDAO();
         $this->msg=null;
         $this->data=null;
         date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -93,8 +97,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $flag = 0;
         $shift = null;
         $date = null;
+        #$movie2 = null;
         $cinema = $this->cinemaDAO->search($idCinema);
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
+        $allMovies = $this->showDAO->getAllMoviesByCinema($idCinema);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
@@ -109,10 +115,12 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showData($flag="", $idCinema="", $date="", $shift=""){
+    public function showData($flag="", $idCinema="", $date="", $shift="", $idMovie=""){
         $data = -1;
         $cinema = $this->cinemaDAO->search($idCinema); 
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
+        $allMovies = $this->showDAO->getAllMoviesByCinema($idCinema);
+        #$movie2 = $this->movieDAO->search($idMovie);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         switch($flag){
             case 1:
@@ -151,6 +159,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $data = $this->ticketDAO->ticketsByCinemaByShiftByYear($idCinema, $shift, $date);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;      
+            case 10: 
+                $data = $this->ticketDAO->ticketsByCinemaByMovie($idCinema, $idMovie);
+                var_dump($data);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;     
         }
     }
 
