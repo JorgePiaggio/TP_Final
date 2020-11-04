@@ -32,7 +32,7 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Ticket' .$date;
+    $mail->Subject = 'Ticket '.$date;
     $mail->Body    = $name.' You have '.$cantTicket.' ticket/s <b>moviepass thanks you for your purchase<b> Cinema: '.$cinema." Room: ".$room." Movie: ".$movieTitle." Date: ".$date."  Seats: ".$seats;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
