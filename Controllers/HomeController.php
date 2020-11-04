@@ -34,8 +34,8 @@
 
             try{
                 $cinemaList=$this->cinemaDAO->getAllActive();
-                $movieList= $this->movieDAO->getBestRated();            // 20 peliculas mejor rankeadas
-                $movieListSlider= $this->movieDAO->getMostPopular();    // 5 peliculas mas populares
+                $movieList= $this->showDAO->getMoviesByRank();            // 20 peliculas mejor rankeadas
+                $movieListSlider= $this->showDAO->getMoviesByPopularity();    // 5 peliculas mas populares
                 
                 $showList = $this->showDAO->getAllActive();
                 $movieShows=array();

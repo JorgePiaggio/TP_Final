@@ -27,7 +27,7 @@
                          </div> <br> 
                          
                          <div class="floating-label">
-                              <input type="email" maxlength="50" name="mail" maxvalue="<?php if($this->user != null){echo $this->user->geEmail();}  ?>" placeholder=" " class="floating-input" required>
+                              <input type="email" maxlength="50" name="mail" maxvalue="<?php if($this->user != null){echo $this->user->getEmail();}  ?>" placeholder=" " class="floating-input" required>
                               <span class="highlight"></span><label for="">Email</label>
                          </div>   <br>                      
 

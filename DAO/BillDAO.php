@@ -218,6 +218,19 @@
 
         
 
+        protected function mapBill($value){
+            $bill= new Bill();
+            $bill->setIdBill($value["idBill"]);
+            $bill->setUser($this->mapUser($value));
+            $bill->setTickets($value["tickets"]);
+            $bill->setDate($value["date"]);
+            $bill->setTotalPrice($value["totalPrice"]);
+            $bill->setDiscount($value["discount"]);
+            
+            return $bill;
+
+        }
+
         protected function mapUser($p){
         
             

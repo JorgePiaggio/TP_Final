@@ -1,7 +1,5 @@
 <div class="bgded overlay back" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/cineBack2.jpg');">   
-                      <?php if($this->msg != null){?> 
-                            <h4 class="msg"><?php  echo $this->msg;?> </h4> <?php
-                        } ?> 
+                     
                      
   <!-- ###################################### FLEXSLIDER ######################################## -->
   <div id="pageintro" class="hoc clear"> 
@@ -82,6 +80,9 @@
               <span></span>
               <span></span>
   <main class="clear grid" > 
+        <?php if($this->msg != null){?> 
+              <h4 class="msg"><?php  echo $this->msg;?> </h4> <?php
+          } ?> 
         <?php foreach($movieShows as $movie){?>
           
           <div class="cardStyle mrg_btm3 mrg_top">

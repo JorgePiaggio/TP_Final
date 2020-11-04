@@ -343,9 +343,12 @@
 
 
 
-    public function showListView($idCinema=1){
+    public function showListView($idCinema=""){
         try{
+            $cinema=null;
+            if($idCinema!=""){
             $cinema = $this->cinemaDAO->search($idCinema);
+            }
             $cinemaList=$this->cinemaDAO->getAllActive();
             $showList=null;
             if($cinema){

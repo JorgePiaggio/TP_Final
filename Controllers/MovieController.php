@@ -64,12 +64,26 @@
 
         public function filterByGenre($idGenre){
             $actualGenre = null;
+            $movieList=array();
             if($idGenre!=-1){
                 $allGenre=$this->getAllGenre();
                 try{
-                    $movieList=$this->movieDAO->getByGenre($idGenre);
-                    $genreList=$this->genreDAO->getAll();
+                    $shows=$this->showDAO->getAll();
+                    
+                    if($shows){                                          
+                        foreach($shows as $show){
+                                if(!in_array($show->getMovie(), $movieList)) { 
+                                    foreach($show->getMovie()->getGenres() as $genre){
+                                        if($genre->getId() == $idGenre){
+                                            array_push($movieList,$show->getMovie());
+                                        }
+                                }
+                            }
+                        }       
+                    }
                     $actualGenre=$this->genreDAO->search($idGenre);
+                    $genreList=$this->genreDAO->getAll();
+                
                 }catch(\Exception $e){
                     echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
                 }

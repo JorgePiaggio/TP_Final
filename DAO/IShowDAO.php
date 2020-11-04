@@ -13,6 +13,8 @@
         function getByCinemaByMovie($idCinema, $idMovie);
         function getByDate($date);
         function getByCinemaByMovieByShift($idCinema, $idMovie, $shift);
+        function getMoviesByPopularity();
+        function getMoviesByRank();
         function update(Show $show);
     }
 

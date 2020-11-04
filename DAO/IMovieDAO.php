@@ -8,8 +8,8 @@
         function addGenresXMovies($genres, $IdMovie);
         function getAll();
         #function getAllNotInBillboard();
-        function getBestRated();
-        function getMostPopular();
+        #function getBestRated();
+        #sfunction getMostPopular();
         function search($tmdbId);
         function getByGenre($idGenre);
     }

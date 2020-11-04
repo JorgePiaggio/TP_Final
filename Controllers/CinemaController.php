@@ -163,10 +163,12 @@
                 $cinemaList = $this->cinemaDAO->getAll();
                 $idFound=null;
                 
-                foreach($cinemaList as $cinema){
-                    $addressAux = $cinema->getStreet() . $cinema->getNumber();
-                    if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
-                        $idFound = $cinema->getIdCinema();
+                if($cinemaList){ 
+                    foreach($cinemaList as $cinema){
+                        $addressAux = $cinema->getStreet() . $cinema->getNumber();
+                        if((strcasecmp($cinema->getName(), $name) == 0) && (strcasecmp($addressAux, $address) == 0))
+                            $idFound = $cinema->getIdCinema();
+                    }
                 }
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();

@@ -165,6 +165,80 @@
         
     }
 
+    /*Retorna las 20 peliculas con mejor ranking */
+    public function getMoviesByRank(){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            ORDER BY m.voteAverage DESC LIMIT 20";
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query);
+          
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapMovie($value);  
+                    if(!in_array($mapping, $movieList)){
+                        array_push($movieList, $mapping);
+                    }
+                }
+                return $movieList;
+            }
+            else{
+                return null;
+            }
+            
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+        
+    }
+
+    /*Retorna las 5 peliculas más populares */
+    public function getMoviesByPopularity(){
+        try
+        {
+            $movieList = array();
+
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            ORDER BY m.popularity DESC LIMIT 5";
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query);
+          
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapMovie($value);  
+                    if(!in_array($mapping, $movieList)){
+                        array_push($movieList, $mapping);
+                    }
+                }
+                return $movieList;
+            }
+            else{
+                return null;
+            }
+            
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+        
+    }
+
 
 
     /* Retorna las funciones activas de la semana */
@@ -254,6 +328,8 @@
      
     }
 
+
+    
     /* retorna peliculas por sala por fecha */
     public function getShowbyTimebyRoom($idRoom,$date){
         $showList = array();

@@ -161,7 +161,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 break;      
             case 10: 
                 $data = $this->ticketDAO->ticketsByCinemaByMovie($idCinema, $idMovie);
-                var_dump($data);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;     
         }

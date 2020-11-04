@@ -298,95 +298,97 @@
         <div class=" padSides">
 
               <?php $indice=0;
-                  foreach($movieList as $movie){
-                      if($indice % 4 == 0){?>
-                      
-                        <!------------------------------------------------ PRIMER CUARTO ------------------------------------------->
-        
-                        <div class="one_quarter first mrg_btm up">
-                          <div class="cardStyle mrg_sides">
+                  if($movieList){
+                    foreach($movieList as $movie){
+                        if($indice % 4 == 0){?>
+                        
+                          <!------------------------------------------------ PRIMER CUARTO ------------------------------------------->
+          
+                          <div class="one_quarter first mrg_btm up">
+                            <div class="cardStyle mrg_sides">
 
-                          <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
-                          
-                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
+                            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
+                            
+                              <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
+                                <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
+                                  <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
+                                </a>
+                              </div>
+            
+                              <div>
+                                <button type="button" class="collapsible">Show List</button>
+                                <div class="content1">
+                                  <?php  foreach($showList as $show){
+                                            if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                              <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
+                                              <p class="p_orange">
+                                                      <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                              $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                              echo $str1; ?></h6><?php }else{
+                                                              echo $show->getRoom()->getName();}?>
+                                              </p> <hr>
+                                                <p class="p_white">
+                                                  <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                                                </p>
+                                                <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
+                                                  <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
+                                                  <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
+                                                
+                                              </a><?php 
+                                            }
+                                          } ?> 
+                                </div> 
+                              </div>
+
+                            </div>
+                          </div>
+          
+                            <?php 
+                        } else { ?>
+          
+                                <!------------------------------------------------ LOS OTROS CUARTOS ---------------------------------->
+
+                          <div class="one_quarter mrg_btm up">
+                            <div class="cardStyle mrg_sides">
+                              
+                            <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
+
+                              <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
                               <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
                                 <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
                               </a>
+                              </div>
+              
+                              <div>
+                                <button type="button" class="collapsible">Show List</button>
+                                <div class="content1">
+                                <?php foreach($showList as $show){
+                                            if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
+                                              <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
+                                                  <p class="p_orange">
+                                                      <?php if(strlen($show->getRoom()->getName()) > 13){
+                                                              $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
+                                                              echo $str1; ?></h6><?php }else{
+                                                              echo $show->getRoom()->getName();}?>
+                                                  </p> <hr>
+                                                <p class="p_white">
+                                                  <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
+                                                </p>
+                                                <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
+                                                  <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
+                                                  <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
+                                              </a><?php 
+                                            }
+                                        }?> 
+                                </div> 
+                              </div>
+                              </div>
                             </div>
-          
-                            <div>
-                              <button type="button" class="collapsible">Show List</button>
-                              <div class="content1">
-                                <?php  foreach($showList as $show){
-                                          if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                            <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
-                                            <p class="p_orange">
-                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                            echo $str1; ?></h6><?php }else{
-                                                            echo $show->getRoom()->getName();}?>
-                                            </p> <hr>
-                                              <p class="p_white">
-                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
-                                              </p>
-                                              <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
-                                                <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
-                                                <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
-                                              
-                                            </a><?php 
-                                          }
-                                        } ?> 
-                              </div> 
-                            </div>
-
-                          </div>
-                        </div>
-        
                           <?php 
-                      } else { ?>
-        
-                              <!------------------------------------------------ LOS OTROS CUARTOS ---------------------------------->
-
-                        <div class="one_quarter mrg_btm up">
-                          <div class="cardStyle mrg_sides">
-                            
-                          <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
-
-                            <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
-                            <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                              <img class="posterBillboard" src="<?php echo $movie->getPoster()?>" alt="<?php echo $movie->getTitle()?> movie poster">
-                            </a>
-                            </div>
-            
-                            <div>
-                              <button type="button" class="collapsible">Show List</button>
-                              <div class="content1">
-                              <?php foreach($showList as $show){
-                                          if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
-                                            <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
-                                                <p class="p_orange">
-                                                    <?php if(strlen($show->getRoom()->getName()) > 13){
-                                                            $str1 = substr($show->getRoom()->getName(), 0, 11) . '...';
-                                                            echo $str1; ?></h6><?php }else{
-                                                            echo $show->getRoom()->getName();}?>
-                                                </p> <hr>
-                                              <p class="p_white">
-                                                <?php echo date('l d M - H:i', strtotime($show->getDateTime()))." hs ";?>
-                                              </p>
-                                              <?php $ticketsSold = $show->getRoom()->getCapacity() - $show->getRemainingTickets(); ?>
-                                                <p class="p_green"> <?php echo "Tickets sold: $ticketsSold";  ?> </p>
-                                                <p class="p_red"> <?php echo "Remaining tickets: " . $show->getRemainingTickets(); ?></p>
-                                            </a><?php 
-                                          }
-                                      }?> 
-                              </div> 
-                            </div>
-                            </div>
-                          </div>
-                        <?php 
-                      } $indice++;
-                    }  ?>
-                                 <!------------------------------------------- Error message ---------------------------------------------------------------->
+                        } $indice++;
+                      } 
+                    }   ?>
+                                  <!------------------------------------------- Error message ---------------------------------------------------------------->
                     <div class="hoc" margin-left="40%"><br>
                       <?php if($this->msg != null){?> 
                             <h4 class="msg"><?php  echo $this->msg;

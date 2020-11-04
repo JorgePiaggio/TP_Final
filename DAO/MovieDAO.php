@@ -227,8 +227,8 @@ class MovieDAO implements IMovieDAO{
 
 
 
-    /* Retorna las mejores 20 peliculas según valoración */
-    public function getBestRated(){
+    /* Retorna las mejores 20 peliculas según valoración *//*
+    public function getBestRated(){ 
         try
         {
             $movieList = array();
@@ -259,10 +259,10 @@ class MovieDAO implements IMovieDAO{
         }else{
             return null;
         }
-    }
+    }*/
 
 
-      /* Retorna las mejores 5 peliculas según popularidad */
+      /* Retorna las mejores 5 peliculas según popularidad */ /*
       public function getMostPopular(){
         try
         {
@@ -297,7 +297,7 @@ class MovieDAO implements IMovieDAO{
         }else{
             return null;
         }
-    }
+    }*/
 
 
 

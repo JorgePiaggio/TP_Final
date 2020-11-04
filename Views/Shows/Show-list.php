@@ -8,15 +8,18 @@
                                         <select name="selection cinema" class="selection" onchange="this.form.submit()">
                                         <center>
                                             <?php if(!$cinemaList){?>
-                                          <option value="">No Cinemas Found</option>
-                                                <?php } if($cinema){?>
-                                          <option value="<?php echo $cinema->getIdCinema();?>" name="cinemasearch" selected disabled> <?php echo $cinema->getName(); ?></option>
-                                            <?php }?>
-                                              <?php foreach($cinemaList as $cinema){ ?>
-                                          <option value="<?php echo $cinema->getIdCinema(); ?>" name="cinema"><?php echo $cinema->getName(); ?></option>
-                                              <?php }?>
+                                                  <option value="">No Cinemas Found</option>
+                                             <?php } else{ ?>
+                                                       <option value="" name="cinemanull" selected disabled> Select cinema</option>
+                                                       <?php if($cinema){?>
+                                                            <option value="<?php echo $cinema->getIdCinema();?>" name="cinemasearch" selected disabled> <?php echo $cinema->getName(); ?></option>
+                                                     <?php }?>
+                                                  <?php foreach($cinemaList as $cinema){ ?>
+                                                            <option value="<?php echo $cinema->getIdCinema(); ?>" name="cinema"><?php echo $cinema->getName(); ?></option>
+                                              <?php }}?>
                                               </center>  
                                         </select> 
+
                                                      
                                 </div>
                 </form>

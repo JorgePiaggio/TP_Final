@@ -90,7 +90,7 @@ class UserController{
 
 
     public function login($email="",$pass=""){
-        Validate::checkParameter($email);
+        #Validate::checkParameter($email);
 
         try{
             $user=$this->userDAO->search($email); //busco el user a traves del email
@@ -98,7 +98,7 @@ class UserController{
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
         
-        if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un usere y coincide mail y pass
+        if(($email=="admin@moviepass.com" && $pass=="admin") || ($user!=null && strcmp($user->getPassWord(),$pass)==0)){ //Comparo si es el admin o un user y si coincide mail y pass
             $_SESSION["loggedUser"]=$email; 
             if(strcmp($email,"admin@moviepass.com")!=0){   
                 $_SESSION["role"]=$user->getRole()->getId();
