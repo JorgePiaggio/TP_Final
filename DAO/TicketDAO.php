@@ -405,38 +405,72 @@
         }
 
 
-              /* Retorna el total de tickets vendidos para una película en un cine */ 
-              public function ticketsByCinemaByMovie($idCinema, $idMovie){
-                try
-                {   
-                    $query = "SELECT sum(b.tickets) FROM bills AS b
-                                JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
-                                ON b.idBill = t.idBill
-                                JOIN shows AS s
-                                ON t.idShow = s.idShow
-                                JOIN rooms AS r
-                                ON s.idRoom = r.idRoom
-                                WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema";
-    
-                    $parameters["idCinema"] = $idCinema;
-                    $parameters["idMovie"] = $idMovie;
-                    
-                    $this->connection = Connection::getInstance();
-                    
-                    $result = $this->connection->execute($query, $parameters);
-                }
-                catch(\PDOException $ex)
-                {
-                    throw $ex;
-                }
-    
-                if($result[0][0]){
-                    return $result[0][0];                
-                }
-                else{
-                    return 0;
-                }           
+        /* Retorna el total de tickets vendidos para una película en un cine */ 
+        public function ticketsByCinemaByMovie($idCinema, $idMovie){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON s.idRoom = r.idRoom
+                            WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["idMovie"] = $idMovie;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
             }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }           
+        }
+
+        /* Retorna el total de tickets vendidos para una película en un turno en un cine */ 
+        public function ticketsByCinemaByMovieByShift($idCinema, $shift, $idMovie){
+            try
+            {   
+                $query = "SELECT sum(b.tickets) FROM bills AS b
+                            JOIN (SELECT * FROM tickets GROUP BY idBill) AS t
+                            ON b.idBill = t.idBill
+                            JOIN shows AS s
+                            ON t.idShow = s.idShow
+                            JOIN rooms AS r
+                            ON s.idRoom = r.idRoom
+                            WHERE s.idMovie = :idMovie AND r.idCinema = :idCinema AND s.shift = :shift";
+
+                $parameters["idCinema"] = $idCinema;
+                $parameters["shift"] = $shift;
+                $parameters["idMovie"] = $idMovie;
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query, $parameters);
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            if($result[0][0]){
+                return $result[0][0];                
+            }
+            else{
+                return 0;
+            }           
+        }
 
         
         /* Retorna el total de tickets vendidos para una función */ /*

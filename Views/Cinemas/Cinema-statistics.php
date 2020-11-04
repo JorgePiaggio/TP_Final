@@ -21,19 +21,19 @@
                                 <button type="submit" name="search" class="btn btn-primary ml-auto d-block">Search</button>
                             </div>
                         </form>
+                    
+                        <div>
+                                <?php if($flag == 1){ ?>
+                                  <p class="p_green"> <?php echo "COLLECT: $$data" ?> </p> 
+                                  <p class="p_white"> <?php echo "DATE: $date"; ?> </p>
+                              <?php } ?> 
+                        </div>
                     </div> 
-                    <div>
-                            <?php if($flag == 1){ ?>
-                              <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
-                              <p class="p_white"> <?php echo "Date: $date"; ?> </p>
-                          <?php } ?> 
-                    </div>
                 </div>         
 
                 <div class="one_third">
                     <p> Choose month this year to search</p>  <br>
-                    
-                        <span class="floating-label">
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="2">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -43,12 +43,13 @@
                                     <button type="submit" name="search2" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div>
-                                <?php if($flag == 2){ ?>
-                                  <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
-                                  <p class="p_white"> <?php echo "Month: $date"; ?> </p>
-                          <?php } ?> 
+                        
+                            <div>
+                                    <?php if($flag == 2){ ?>
+                                      <p class="p_green"> <?php echo "COLLECT: $$data" ?> </p> 
+                                      <p class="p_white"> <?php echo "MONTH: $date"; ?> </p>
+                              <?php } ?> 
+                            </div>
                         </div>
                 </div>
             
@@ -56,7 +57,7 @@
                 <div class="one_quarter right">
                     <p> Choose year to search</p>  <br>
                     
-                        <span class="floating-label">
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="3">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -66,12 +67,13 @@
                                     <button type="submit" name="search3" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div class="right">
-                                <?php if($flag == 3){ ?>
-                                  <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
-                                  <p class="p_white"> <?php echo "Year: $date"; ?> </p>
-                          <?php } ?> 
+                        
+                            <div class="right">
+                                    <?php if($flag == 3){ ?>
+                                      <p class="p_green"> <?php echo "COLLECT: $$data" ?> </p> 
+                                      <p class="p_white"> <?php echo "YEAR: $date"; ?> </p>
+                              <?php } ?> 
+                            </div>
                         </div>
                 </div>
             </div>
@@ -98,12 +100,13 @@
                                 <button type="submit" name="search4" class="btn btn-primary ml-auto d-block">Search</button>
                             </div>
                         </form>
-                    </div> 
-                    <div>
-                            <?php if($flag == 4){ ?>
-                              <p class="p_green"> <?php echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Date: $date"; ?> </p> 
-                            <?php } ?> 
+                     
+                        <div>
+                                <?php if($flag == 4){ ?>
+                                  <p class="p_green"> <?php echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "DATE: $date"; ?> </p> 
+                                <?php } ?> 
+                        </div>
                     </div>
                 </div>
             
@@ -111,8 +114,7 @@
 
                 <div class="one_third">
                     <p> Choose month this year to search</p>  <br>
-                    
-                        <span class="floating-label">
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="5">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -122,20 +124,20 @@
                                     <button type="submit" name="search5" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div>
-                            <?php if($flag == 5){ ?>
-                              <p class="p_green"> <?php echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Month: $date"; ?> </p> 
-                            <?php } ?> 
+                        
+                            <div>
+                                <?php if($flag == 5){ ?>
+                                  <p class="p_green"> <?php echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "MONTH: $date"; ?> </p> 
+                                <?php } ?> 
+                            </div>
                         </div>
                 </div>
             
 
                 <div class="one_quarter right">
                     <p> Choose year to search</p>  <br>
-                    
-                        <span class="floating-label">
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="6">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -145,18 +147,20 @@
                                     <button type="submit" name="search6" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div class="right">
-                            <?php if($flag == 6){ ?>
-                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Year: $date"; ?> </p> 
-                            <?php } ?> 
+                        
+                          <div class="right">
+                              <?php if($flag == 6){ ?>
+                                <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                <p class="p_white"> <?php echo "YEAR: $date"; ?> </p> 
+                              <?php } ?> 
+                          </div>
                         </div>
                 </div>
             </div>
 
 <!-- ######################################################### ESTADÍSTICAS TICKETS POR FECHAS POR TURNO ######################################################### -->
             <div class="cardStyle mrg_top">
+
                 <div class="one_third">
                     <p> Choose date and shift to search</p>  <br>
                     <div class="floating-label">
@@ -176,21 +180,22 @@
                                 <button type="submit" name="search7" class="btn btn-primary ml-auto d-block">Search</button>
                             </div>
                         </form>
+                    
+                        <div>
+                          <?php if($flag == 7){ ?>
+                                  <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "DATE: $date - SHIFT: $shift"; ?> </p> 
+                                <?php } ?> 
+                        </div>
                     </div> 
-                    <div>
-                      <?php if($flag == 7){ ?>
-                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Date: $date - Shift: $shift"; ?> </p> 
-                            <?php } ?> 
-                    </div>
                 </div>
-            
+              
            
 
                 <div class="one_third">
                     <p> Choose month this year and shift </p>  <br>
                     
-                        <span class="floating-label">
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="8">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -206,20 +211,20 @@
                                     <button type="submit" name="search8" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div>
-                          <?php if($flag == 8){ ?>
-                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Month: $date - Shift: $shift"; ?> </p> 
-                            <?php } ?> 
+                        
+                            <div>
+                              <?php if($flag == 8){ ?>
+                                  <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "MONTH: $date - SHIFT: $shift"; ?> </p> 
+                                <?php } ?> 
+                            </div>
                         </div>
                 </div>
             
 
                 <div class="one_quarter right">
-                    <p> Choose year and select shift</p>  <br>
-                    
-                        <span class="floating-label">
+                    <p> Choose year and select shift</p>  <br>     
+                        <div class="floating-label">
                             <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
                                 <input type="hidden" id="flag" name="flag" value="9">
                                 <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
@@ -235,19 +240,19 @@
                                     <button type="submit" name="search9" class="btn btn-primary ml-auto d-block">Search</button>
                                 </div>
                             </form>
-                        </span>
-                        <div class="right">
-                            <?php if($flag == 9){ ?>
-                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
-                              <p class="p_white"> <?php echo "Year: $date - Shift: $shift"; ?> </p> 
-                            <?php } ?> 
+                            <div class="right">
+                                <?php if($flag == 9){ ?>
+                                  <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "YEAR: $date - SHIFT: $shift"; ?> </p> 
+                                <?php } ?> 
+                            </div>
                         </div>
                 </div>
             </div>
            
 <!-- ######################################################### ESTADÍSTICAS TICKETS POR PELICULA  ######################################################### -->
             <div class="cardStyle mrg_top">
-                <div class="one_third">
+                <div class="one_third right">
                     <p> Choose movie to search</p>  <br>
                     <div class="floating-label">
                         <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
@@ -271,12 +276,55 @@
                                 <button type="submit" name="search10" class="btn btn-primary ml-auto d-block">Search</button> 
                             </div>
                         </form>
-                    </div> 
-                    <div>
-                      <?php if($flag == 10){ ?>
-                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
-                               
-                            <?php } ?> 
+                     
+                      <div>
+                        <?php if($flag == 10){ ?>
+                                <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                <p class="p_white"> <?php echo "MOVIE: ".$movie2->getTitle()  ?> </p> 
+                              <?php } ?> 
+                      </div>
+                    </div>
+                </div>
+            
+
+              <div class="two_quarter right">
+                    <p> Choose movie and shift to search</p>  <br>
+                    <div class="floating-label">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
+                            <input type="hidden" id="flag" name="flag" value="11">
+                            <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
+                            <input type="hidden" id="date" name="date" value="">
+
+                            <select name="shift" class="selection" required>
+                                    <option value="" selected disabled>Select Shift</option>                                        
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Night">Night</option>
+                            </select>
+
+                            <select name="idMovie" class="selection" required>
+                                <option value="" selected disabled>Select Movie</option>
+                                
+                                <?php if($allMovies){ 
+                                    foreach($allMovies as $film){  ?>
+                                      <option name="idMovie" value="<?php echo $film->getTmdbId(); ?>"> <?php echo $film->getTitle();?> </option>
+                                <?php } 
+                                }?>     
+                            </select> <br> <br>
+
+                            
+
+                            <div> 
+                                <button type="submit" name="search11" class="btn btn-primary ml-auto d-block">Search</button> 
+                            </div>
+                        </form>
+                     
+                        <div>
+                          <?php if($flag == 11){ ?>
+                                  <p class="p_green"><?php  echo "TICKETS SOLD: $data" ?> </p>
+                                  <p class="p_white"> <?php echo "MOVIE: ".$movie2->getTitle()." - SHIFT: ".$shift; ?> </p> 
+                                <?php } ?> 
+                        </div>
                     </div>
                 </div>
             </div>

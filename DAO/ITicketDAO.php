@@ -23,6 +23,7 @@
 
         /*gets tickets by cinema by movie */
         function ticketsByCinemaByMovie($idCinema, $idMovie);
+        function ticketsByCinemaByMovieByShift($idCinema, $shift, $idMovie);
         #function ticketsByShow($idShow);
         
 
