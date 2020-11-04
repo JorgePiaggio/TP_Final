@@ -72,7 +72,7 @@
 
 
 
-        /* Retorna una factura buscada por id o null si no existe*/
+        /* Retorna una factura buscada por id o null si no existe*/ /*
         public function search($idBill){
             try
             {   
@@ -98,8 +98,8 @@
                 return $this->mapBill($result[0]);
             }else{
                 return null;
-            }
-        }
+            } 
+        } */
 
         /* Retorna una factura buscada por codigo de pago o null si no existe*/
         public function searchByCodePayment($codePayment){
@@ -132,8 +132,8 @@
         }
 
 
-
-        /* Retorna el total de facturas vendidas en una fecha */
+        
+        /* Retorna el total de facturas vendidas en una fecha */ /*
         public function billsByDate($date){
             try
             {   
@@ -152,10 +152,10 @@
             }
 
             return $result;        
-        }        
+        }        */
 
 
-        /* Retorna el total de facturas vendidas en el mes actual */
+        /* Retorna el total de facturas vendidas en el mes actual */ /*
         public function billsByThisMonth(){
             try
             {   
@@ -172,10 +172,10 @@
             }
 
             return $result;
-        }
+        }*/
 
 
-        /* Retorna el total de facturas vendidas en un año */
+        /* Retorna el total de facturas vendidas en un año */ /*
         public function billsByYear($year){
             try
             {   
@@ -194,10 +194,10 @@
             }
 
             return $result;
-        }
+        } */
 
 
-        /* Retorna el total de facturas vendidas este año */
+        /* Retorna el total de facturas vendidas este año */ /*
         public function billsByThisYear(){
             try
             {   
@@ -214,107 +214,9 @@
             }
 
             return $result;
-        }
+        } */
 
         
-        /* Retorna el total de dinero recaudado en una fecha */
-        public function cashByDate($date){
-            try
-            {   
-                $query = "SELECT sum(totalPrice) FROM bills 
-                            HAVING DATEDIFF(date, :date) = 0";
-                
-                $parameters["date"] = $date;
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;        
-        }        
-
-
-        /* Retorna el total de dinero recaudado en el mes actual */
-        public function cashByMonth(){
-            try
-            {   
-                $query = "SELECT sum(totalPrice) FROM bills 
-                            HAVING DATEPART(month, date) = DATEPART(month, GETDATE()) AND DATEPART(year, date) =  DATEPART(year, GETDATE())";
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;
-        }
-
-
-        /* Retorna el total de dinero recaudado en un año */
-        public function cashByYear($year){
-            try
-            {   
-
-                $query = "SELECT sum(totalPrice) FROM bills
-                            HAVING DATEPART(year, date) = :year";
-                
-                $parameters["year"] = $year;
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query, $parameters);
-
-               
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-           return $result;
-        }
-
-
-        /* Retorna el total de dinero recaudado este año */
-        public function cashByThisYear(){
-            try
-            {   
-                $query = "SELECT sum(totalPrice) FROM bills
-                            HAVING DATEPART(year, date) = DATEPART(year, GETDATE())";
-                
-                $this->connection = Connection::getInstance();
-                
-                $result = $this->connection->execute($query);
-            }
-            catch(\PDOException $ex)
-            {
-                throw $ex;
-            }
-
-            return $result;
-        }
-
-
-        protected function mapBill($value){
-            $bill = new Bill();
-            $bill->setIdBill($value["idBill"]);
-            $bill->setTickets($value["tickets"]);
-            $bill->setDate($value["date"]);
-            $bill->setTotalPrice($value["totalPrice"]);
-            $bill->setDiscount($value["discount"]);
-            $bill->setUser($this->mapUser($value));
-            $bill->setCreditCardPayment($this->mapPayment($value));
-            
-            return $bill;
-        }
 
         protected function mapUser($p){
         

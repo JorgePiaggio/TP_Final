@@ -76,7 +76,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     }
 
-    public function showPurchaseResult($tickets){
+    public function showPurchaseResult($tickets,$card){
 
         if($tickets){
             $this->msg="Purchase completed successfully, enjoy the show";
@@ -91,6 +91,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     public function showStatistics($idCinema=""){
         $data = -1;
         $flag = 0;
+        $shift = null;
         $date = null;
         $cinema = $this->cinemaDAO->search($idCinema);
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
@@ -98,7 +99,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
 
-    public function showSendEmail($name,$email,$seats,$movieTitle,$date,$cinema,$room,$cantTicket,$idShow){
+    public function showSendEmail($name,$email,$seats,$movieTitle,$date,$cinema,$room,$cantTicket,$card,$idShow){
         $newSeats=explode("/",$seats);
         $seatList=array();
         foreach($newSeats as $seat){
@@ -108,14 +109,14 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showData($flag, $idCinema, $date=""){
+    public function showData($flag="", $idCinema="", $date="", $shift=""){
         $data = -1;
         $cinema = $this->cinemaDAO->search($idCinema); 
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         switch($flag){
             case 1:
-                $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);
+                $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);       
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;
             case 2:
@@ -136,6 +137,18 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 break;
             case 6:
                 $data = $this->ticketDAO->ticketsByCinemaByYear($idCinema, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break; 
+            case 7:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByDate($idCinema, $shift, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;    
+            case 8:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByMonth($idCinema, $shift, $date);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;   
+            case 9:
+                $data = $this->ticketDAO->ticketsByCinemaByShiftByYear($idCinema, $shift, $date);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                 break;      
         }
@@ -217,8 +230,8 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                     $this->ticketDAO->add($ticket);
                     array_push($ticketList,$ticket);
 
-                    $imageUrl = $qrCode.".png";
-                    @$rawImage = file_get_contents($imageUrl);
+                    
+                    @$rawImage = file_get_contents($qrCode);
                     if($rawImage)
                     {
                     file_put_contents(VIEWS_PATH.'layout/images/tickets/'.$seat->getRow().$seat->getNumber().$show->getIdShow().'.png',$rawImage);
@@ -233,7 +246,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $show->setRemainingTickets(($show->getRemainingTickets())-count($seatNumber));
                 $this->showDAO->update($show);
 
-                $this->showPurchaseResult($ticketList);
+                $this->showPurchaseResult($ticketList,$creditCardNumber);
 
             }else{
                 $this->msg="No available tickets for this show";

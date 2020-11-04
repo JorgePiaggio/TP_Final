@@ -85,6 +85,7 @@
             <input type="hidden" id="cinema" name="cinema"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getCinema()->getName();?>" />
             <input type="hidden" id="croom" name="room"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getName();?>" />
             <input type="hidden" id="cant" name="cant"  type="text" value="<?php echo count($tickets);?>" />
+            <input type="hidden" id="card" name="card"  type="text" value="<?php echo $card;?>" />
             <input type="hidden" id="show" name="show"  type="text" value="<?php echo $ticket->getShow()->getIdShow();?>" />
     
                             

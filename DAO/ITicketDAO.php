@@ -7,17 +7,21 @@
         function add(Ticket $ticket);
         function getAll();
         function search($idTicket);
-        function getByShow($idShow);
-        function remove($idTicket);
-        function update(Ticket $ticket);
+        #function getByShow($idShow);
+        #function remove($idTicket);
+        #function update(Ticket $ticket);
 
-        /* gets tickets by cinema*/
+        /* gets tickets by cinema by dates*/
         function ticketsByCinemaByDate($idCinema, $dateTime);
         function ticketsByCinemaByMonth($idCinema, $month);
         function ticketsByCinemaByYear($idCinema, $year);
-        function ticketsByShow($idShow);
-        function ticketsByCinemaByMovie($idCinema, $idMovie);
-        function ticketsByCinemaByMovieByShift($idCinema, $idMovie, $shift);
+
+        /* gets tickets by cinema by dates by shift */
+        function ticketsByCinemaByShiftByDate($idCinema, $shift, $date);
+        function ticketsByCinemaByShiftByMonth($idCinema, $shift, $date);
+        function ticketsByCinemaByShiftByYear($idCinema, $shift, $date);
+        #function ticketsByShow($idShow);
+        #function ticketsByCinemaByMovie($idCinema, $idMovie);
 
         /* gets cash by cinema */
         function cashByCinemaByDate($idCinema, $date);

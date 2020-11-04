@@ -1,7 +1,7 @@
 <div class="wrapper bgded overlay" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/tickets.jpg');">
     <h2 class="page-title"><?php echo $cinema->getName() . " - Stadistics" ?></h2>
     <div class="cardStyle">
-<!-- ################################################################### ESTADÍSTICAS RECAUDACIÓN ################################################################### -->
+<!-- ############################################################ ESTADÍSTICAS RECAUDACIÓN POR FECHAS ############################################################## -->
         <main class="hoc container clear"> 
             <div class="cardStyle">
                 <h2 class="orange center">Statistics Cash <i class="fa fa-search" style="font-size: 1.73em"></i></h2>
@@ -23,9 +23,10 @@
                         </form>
                     </div> 
                     <div>
-                            <?php if($data != -1 && $flag == 1){ ?>
-                                <h4 class="msg"><?php  echo "Collection $date: $ $data";
-                            } ?> </h4>
+                            <?php if($flag == 1){ ?>
+                              <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
+                              <p class="p_white"> <?php echo "Date: $date"; ?> </p>
+                          <?php } ?> 
                     </div>
                 </div>         
 
@@ -44,9 +45,10 @@
                             </form>
                         </span>
                         <div>
-                                <?php if($data != -1 && $flag == 2){ ?>
-                                    <h4 class="msg"><?php  echo "Collection month $date: $ $data";
-                                } ?> </h4>
+                                <?php if($flag == 2){ ?>
+                                  <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
+                                  <p class="p_white"> <?php echo "Month: $date"; ?> </p>
+                          <?php } ?> 
                         </div>
                 </div>
             
@@ -66,15 +68,18 @@
                             </form>
                         </span>
                         <div class="right">
-                                <?php if($data != -1 && $flag == 3){ ?>
-                                    <h4 class="msg"><?php  echo "Collection year $date: $ $data";
-                                } ?> </h4>
+                                <?php if($flag == 3){ ?>
+                                  <p class="p_green"> <?php echo "Collect: $$data" ?> </p> 
+                                  <p class="p_white"> <?php echo "Year: $date"; ?> </p>
+                          <?php } ?> 
                         </div>
                 </div>
             </div>
         </main>
 
-<!-- ################################################################### ESTADÍSTICAS RECAUDACIÓN ################################################################### -->
+        
+
+<!-- ############################################################## ESTADÍSTICAS TICKETS POR FECHAS ############################################################### -->
         <main class="hoc container clear"> 
             <div class="cardStyle">
                 <h2 class="orange center">Statistics Tickets <i class="fa fa-ticket" style="font-size: 1.73em"></i>
@@ -95,9 +100,10 @@
                         </form>
                     </div> 
                     <div>
-                            <?php if($data != -1 && $flag == 4){ ?>
-                                <h4 class="msg"><?php  echo "Tickets Sold $date: $data";
-                            } ?> </h4>
+                            <?php if($flag == 4){ ?>
+                              <p class="p_green"> <?php echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Date: $date"; ?> </p> 
+                            <?php } ?> 
                     </div>
                 </div>
             
@@ -118,9 +124,10 @@
                             </form>
                         </span>
                         <div>
-                                <?php if($data != -1 && $flag == 5){ ?>
-                                    <h4 class="msg"><?php  echo "Tickets Sold $date: $data";
-                                } ?> </h4>
+                            <?php if($flag == 5){ ?>
+                              <p class="p_green"> <?php echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Month: $date"; ?> </p> 
+                            <?php } ?> 
                         </div>
                 </div>
             
@@ -140,9 +147,100 @@
                             </form>
                         </span>
                         <div class="right">
-                                <?php if($data != -1 && $flag == 6){ ?>
-                                    <h4 class="msg"><?php  echo "Tickets Sold $date: $data";
-                                } ?> </h4>
+                            <?php if($flag == 6){ ?>
+                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Year: $date"; ?> </p> 
+                            <?php } ?> 
+                        </div>
+                </div>
+            </div>
+
+<!-- ######################################################### ESTADÍSTICAS TICKETS POR FECHAS POR TURNO ######################################################### -->
+            <div class="cardStyle mrg_top">
+                <div class="one_third">
+                    <p> Choose date and shift to search</p>  <br>
+                    <div class="floating-label">
+                        <form action="<?php echo FRONT_ROOT?>Ticket/showData/" class="center" method="post">
+                            <input type="hidden" id="flag" name="flag" value="7">
+                            <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
+                            
+                            <input type="date" name="date" value="" class="floating-input" required>
+                            <span class="highlight"></span><label for="">Date </label> <br> <br>
+                            <select name="shift" class="selection" required>
+                                <option value="" selected disabled>Select Shift</option>                                        
+                                <option value="Morning">Morning</option>
+                                <option value="Afternoon">Afternoon</option>
+                                <option value="Night">Night</option>
+                            </select><br>  <br> 
+                            <div> 
+                                <button type="submit" name="search7" class="btn btn-primary ml-auto d-block">Search</button>
+                            </div>
+                        </form>
+                    </div> 
+                    <div>
+                      <?php if($flag == 7){ ?>
+                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Date: $date - Shift: $shift"; ?> </p> 
+                            <?php } ?> 
+                    </div>
+                </div>
+            
+           
+
+                <div class="one_third">
+                    <p> Choose month this year and shift </p>  <br>
+                    
+                        <span class="floating-label">
+                            <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
+                                <input type="hidden" id="flag" name="flag" value="8">
+                                <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
+                                <input type="number" max="<?php echo date('m') ?>" min="1" name="month" value="" class="floating-input" required>
+                                <span class="highlight"></span><label for="">Month </label> <br> <br>
+                                <select name="shift" class="selection" required>
+                                    <option value="" selected disabled>Select Shift</option>                                        
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Night">Night</option>
+                                </select><br>  
+                                <div> <br>
+                                    <button type="submit" name="search8" class="btn btn-primary ml-auto d-block">Search</button>
+                                </div>
+                            </form>
+                        </span>
+                        <div>
+                          <?php if($flag == 8){ ?>
+                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Month: $date - Shift: $shift"; ?> </p> 
+                            <?php } ?> 
+                        </div>
+                </div>
+            
+
+                <div class="one_quarter right">
+                    <p> Choose year and select shift</p>  <br>
+                    
+                        <span class="floating-label">
+                            <form action="<?php echo FRONT_ROOT?>Ticket/showData" class="center" method="post">
+                                <input type="hidden" id="flag" name="flag" value="9">
+                                <input type="hidden" id="idCinema" name="idCinema" value="<?php echo $cinema->getIdCinema(); ?>">
+                                <input type="number" max="<?php echo date('Y') ?>" min="2020" name="year" value="" class="floating-input" required>
+                                <span class="highlight"></span><label for="">Year </label> <br> <br>
+                                <select name="shift" class="selection" required>
+                                    <option value="" selected disabled>Select Shift</option>                                        
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Night">Night</option>
+                                </select><br>
+                                <div><br>
+                                    <button type="submit" name="search9" class="btn btn-primary ml-auto d-block">Search</button>
+                                </div>
+                            </form>
+                        </span>
+                        <div class="right">
+                            <?php if($flag == 9){ ?>
+                              <p class="p_green"><?php  echo "Tickets Sold: $data" ?> </p>
+                              <p class="p_white"> <?php echo "Year: $date - Shift: $shift"; ?> </p> 
+                            <?php } ?> 
                         </div>
                 </div>
             </div>
