@@ -7,7 +7,8 @@
   <div id="pageintro" class="hoc clear"> 
     <div class="flexslider basicslider">
       <ul class="slides"> 
-        <?php $cant=null; if(isset($movieListSlider)){$cant = count($movieListSlider);}
+        <?php $cant=null;  if(isset($movieListSlider)){$cant = count($movieListSlider);}
+
         if($cant>0){
           for($i=0; $i<$cant; $i++){ ?>
             <li>

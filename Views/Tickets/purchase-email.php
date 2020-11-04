@@ -33,7 +33,8 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Ticket '.$date;
-    $msg= $name.' You have '.$cantTicket.' ticket/s <b>moviepass thanks you for your purchase<b><br><br><br>';
+
+    $msg= $name.' You have '.$cantTicket.' <b>MoviePass<b> ticket/s. Thank you for your purchase<br><br><br>';
     $msg.=  '<table border="1" width="auto" height="auto" bgcolor="#ffa500">
     <thead class="bg-dark text-white">
         <th>User</th>
@@ -65,7 +66,7 @@ try {
 </table><br><br>';
 $mail->Body = $msg;
     $mail->send();
-    $this->msg='Message has been sent to: '.$email.', thanks you for your purchase';
+    $this->msg='Message has been sent to: '.$email.', thanks for your purchase';
 }catch (Exception $e) {
     $this->msg='Message could not be sent, Mailer Error:'.$mail->ErrorInfo;
 }

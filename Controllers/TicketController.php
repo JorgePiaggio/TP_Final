@@ -111,7 +111,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         foreach($newSeats as $seat){
             array_push($seatList,explode("-",$seat));
         }
-        require_once(VIEWS_PATH."tickets/purchase-email.php");
+        require_once(VIEWS_PATH."Tickets/purchase-email.php");
     }
 
 
@@ -219,9 +219,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 $bill->setDiscount(DISCOUNT);
                 $this->billDAO->add($bill);
 
-                //Tomo las entradas faltantes
-                $remainingTickets= $show->getRemainingTickets();
-
                 $ticketList=array();
 
                 /* crear asientos y tickets */
@@ -259,13 +256,13 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
                 }
                 //actualizo las entradas 
-                $show->setRemainingTickets($remainingTickets-count($seatNumber));
+                $show->setRemainingTickets(($show->getRemainingTickets())-count($seatNumber));
                 $this->showDAO->update($show);
 
                 $this->showPurchaseResult($ticketList,$creditCardNumber);
 
             }else{
-                $this->msg="Not available tickets for this show";
+                $this->msg="No available tickets for this show";
                 $this->showPurchaseView($idShow);
             
                 }
