@@ -14,11 +14,12 @@ class Room{         /* sala */
     private $rows;
     private $columns;
     private $cinema;
-    #private $seats;
+    private $state;
+
 
     function __construct(){
-        #$this->seats = new Seat();
         $this->cinema = new Cinema();
+        $this->state=true;
     
     }
 
@@ -30,8 +31,7 @@ class Room{         /* sala */
     function getCinema(){return $this->cinema;}
     function getRows(){return $this->rows;}
     function getColumns(){return $this->columns;}
-
-    #function getSeats(){return $this->seats;}
+    function getState(){return $this->state;}
 
     function setIdRoom($idRoom){$this->idRoom=$idRoom;}
     function setName($name){$this->name=$name;}
@@ -41,7 +41,8 @@ class Room{         /* sala */
     function setCinema($cinema){$this->cinema=$cinema;}
     function setRows($rows){$this->rows=$rows;}
     function setColumns($columns){$this->columns=$columns;}
-    #function setSeats($seats){$this->seats=$seats;}
+    function setState($state){$this->state=$state;}
+
 
 }
 ?>

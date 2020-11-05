@@ -15,6 +15,7 @@
         function getByCinemaByMovieByShift($idCinema, $idMovie, $shift);
         function getMoviesByPopularity();
         function getMoviesByRank();
+        function getByRoom($idRoom);
         function update(Show $show);
     }
 

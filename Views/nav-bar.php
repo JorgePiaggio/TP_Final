@@ -17,14 +17,14 @@
 
         
           <!----------------- MENU USUARIO (ICONO DEL CHABONCITO)-----------------------> 
-          <?php if($_SESSION){?>
+          <?php if(isset($_SESSION["loggedUser"])){?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
           <?php }else{ ?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
           <?php }?>
 
           <ul>
-            <?php if($_SESSION){   ?>
+            <?php if(isset($_SESSION["loggedUser"])){   ?>
             <?php if($_SESSION["loggedUser"]=="admin@moviepass.com" || $_SESSION["role"] == 1)  { ?>
               
             <!---Admin-->

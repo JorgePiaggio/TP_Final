@@ -21,7 +21,7 @@
         }
         
         public function add($room){
-            $sql = "INSERT INTO ".$this->tableName." (idCinema,name_room,capacity,roomrows,roomcolumns,type,price) VALUES (:idCinema,:name,:capacity,:rows,:columns,:type,:price)";
+            $sql = "INSERT INTO ".$this->tableName." (idCinema,name_room,capacity,roomrows,roomcolumns,type,price,stateRoom) VALUES (:idCinema,:name,:capacity,:rows,:columns,:type,:price,:stateRoom)";
 
             $parameters["idCinema"]=$room->getCinema()->getIdCinema();
             $parameters["name"]=$room->getName();
@@ -30,6 +30,7 @@
             $parameters["columns"]=$room->getColumns();
             $parameters["capacity"]=$room->getCapacity();
             $parameters["price"]=$room->getPrice();
+            $parameters["stateRoom"]=$room->getState();
             
 
 
@@ -77,7 +78,108 @@
                 return null;
             }
         }
+
+        public function getAllActive($idCinema){
+            try
+            {
+                $roomList = array();
+               
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE stateRoom=1 AND idCinema=:idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+                
+                            
+                if($resultSet){
+                    $mapping= $this->map($resultSet);
+                    if(!is_array($mapping)){
+                        array_push($roomList,$mapping);
+                    }else{
+                    $roomList=$mapping;
+                    }
+                }
+
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if($resultSet){
+                return $roomList;
+            }else{
+                return null;
+            }
+        }
+
+        public function getAllInactive($idCinema){
+            try
+            {
+                $roomList = array();
+               
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE stateRoom=0 AND idCinema=:idCinema";
+                $parameters["idCinema"]=$idCinema;
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->execute($query,$parameters);
+                
+                            
+                if($resultSet){
+                    $mapping= $this->map($resultSet);
+                    if(!is_array($mapping)){
+                        array_push($roomList,$mapping);
+                    }else{
+                    $roomList=$mapping;
+                    }
+                }
+
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+            if($resultSet){
+                return $roomList;
+            }else{
+                return null;
+            }
+        }
     
+        
+        public function changeState($idRoom){
+            try
+            {
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE idRoom= :idRoom";
+                $parameters["idRoom"]=$idRoom;
+                $this->connection = Connection::getInstance();
+
+                $result = $this->connection->execute($query,$parameters);
+                if(!empty($result)){
+                    $room=$this->map($result);
+                    if($room->getState()){
+                   
+                    $query = "UPDATE ".$this->tableName." set stateRoom=0 WHERE idRoom= :idRoom";
+
+                    }else{
+                    
+                    $query = "UPDATE ".$this->tableName." set stateRoom=1 WHERE idRoom= :idRoom";
+                    }
+
+                    $rowCant=$this->connection->executeNonQuery($query,$parameters);
+                }
+                return $rowCant;
+                
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+        }
 
         /* devuelve todas las salas de un cine */
         public function getCinemaRooms($idCinema){
@@ -189,7 +291,7 @@
         public function update($room){
             try
             {
-                $query = "UPDATE rooms SET name_room=:name, capacity=:capacity, roomrows=:rows, roomcolumns=:columns , type=:type, price=:price  WHERE idRoom=:idRoom";
+                $query = "UPDATE rooms SET name_room=:name, capacity=:capacity, roomrows=:rows, roomcolumns=:columns , type=:type, price=:price , stateRoom=:stateRoom  WHERE idRoom=:idRoom";
 
                 
                 $parameters["idRoom"]=$room->getIdRoom();
@@ -199,6 +301,7 @@
                 $parameters["columns"]=$room->getColumns();
                 $parameters["type"]=$room->getType();
                 $parameters["price"]=$room->getPrice();
+                $parameters["stateRoom"]=$room->getState();
                # $parameters["idCinema"]=$room->getCinema()->getIdCinema();
 
                 $this->connection = Connection::getInstance();
@@ -214,7 +317,7 @@
 
        
         /* busca la cartelera de un cine  */
-        public function getBillboard($idCinema){
+        private function getBillboard($idCinema){
             try
             {
                 $movieList = array();
@@ -336,6 +439,7 @@
             $room->setRows($p["roomrows"]);
             $room->setPrice($p["price"]);
             $room->setName($p["name_room"]);
+            $room->setState($p["stateRoom"]);
             $room->setCinema($this->searchCinema($p["idCinema"]));
 
             return $room;

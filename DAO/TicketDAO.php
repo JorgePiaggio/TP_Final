@@ -653,6 +653,7 @@
             $room->setRows($value["roomrows"]);
             $room->setPrice($value["price"]);
             $room->setName($value["name_room"]);
+            $room->setState($value["stateRoom"]);
             $room->setCinema($this->mapCinema($value));
 
             return $room;

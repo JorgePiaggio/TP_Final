@@ -379,7 +379,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND s.dateTime > :dateTime";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["dateTime"]=$dateNow;
@@ -456,7 +456,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND s.dateTime > :dateTime AND s.idMovie = :idMovie";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["idMovie"]=$idMovie;
@@ -484,6 +484,44 @@
 
       
     }
+ // funciones activas en salas
+    public function getByRoom($idRoom){
+        $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
+        $showList = array();
+        try
+        {   
+            $query = "SELECT * FROM shows s 
+            INNER JOIN movies m ON s.idMovie = m.idMovie 
+            INNER JOIN rooms r ON s.idRoom = r.idRoom 
+            INNER JOIN cinemas c ON r.idCinema = c.idCinema
+            WHERE s.dateTime > :dateTime AND s.idRoom = :idRoom";
+            
+            $this->connection = Connection::getInstance();
+            $parameters["idRoom"]=$idRoom;
+            $parameters["dateTime"]=$dateNow;
+
+            
+
+            $result = $this->connection->execute($query,$parameters);
+            
+            if($result){
+                foreach($result as $value){
+                    $mapping = $this->mapShow($value);  
+                    array_push($showList, $mapping);
+                }
+                return $showList;
+            }
+            else{
+                return null;
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        } 
+
+
+    }
 
 
 
@@ -499,7 +537,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
+            WHERE DATEDIFF(s.dateTime, :dateTime) <= 7 AND s.dateTime > :dateTime  AND s.idMovie = :idMovie";
             
             $parameters["idMovie"]=$idMovie;
             $parameters["dateTime"]=$dateNow;
@@ -538,7 +576,7 @@
                 INNER JOIN movies m ON s.idMovie = m.idMovie 
                 INNER JOIN rooms r ON s.idRoom = r.idRoom 
                 INNER JOIN cinemas c ON r.idCinema = c.idCinema
-                WHERE DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie";
+                WHERE s.dateTime > :dateTime AND s.idMovie = :idMovie";
                 
                 $parameters["idMovie"]=$idMovie;
                 $parameters["dateTime"]=$dateNow;
@@ -615,7 +653,7 @@
             INNER JOIN movies m ON s.idMovie = m.idMovie 
             INNER JOIN rooms r ON s.idRoom = r.idRoom 
             INNER JOIN cinemas c ON r.idCinema = c.idCinema
-            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND DATEDIFF(s.dateTime, :dateTime) >= 0 AND s.idMovie = :idMovie AND s.shift=:shift";
+            WHERE r.idCinema= :idCinema AND DATEDIFF(s.dateTime, :dateTime) <= 7 AND s.dateTime > :dateTime AND s.idMovie = :idMovie AND s.shift=:shift";
             
             $parameters["idCinema"]=$idCinema;
             $parameters["idMovie"]=$idMovie;
@@ -837,6 +875,7 @@
             $room->setRows($value["roomrows"]);
             $room->setPrice($value["price"]);
             $room->setName($value["name_room"]);
+            $room->setState($value["stateRoom"]);
             $room->setCinema($this->mapCinema($value));
 
             return $room;

@@ -30,6 +30,7 @@
                          
                          </tbody>
                     </table>
+                    <input type="hidden"  name="idstate" value= "<?php echo $editRoom->getState();  ?>" >
                     <td colspan="7"><button type="submit" name="idsave" class="btn unique" value="<?php echo $editRoom->getIdRoom(); ?>"> Save </button></td>
                     </form>
                </div>    

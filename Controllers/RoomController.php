@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\RoomDAO as RoomDAO;
+    use DAO\ShowDAO as ShowDAO;
     use Models\Room as Room;
     use DAO\CinemaDAO as CinemaDAO;
     use Config\Validate as Validate;
@@ -13,6 +14,7 @@
     class RoomController{
         private $cinemaDAO;
         private $roomDAO;
+        private $showDAO;
         private $msg;
         
 
@@ -20,6 +22,7 @@
         {
             $this->cinemaDAO=new CinemaDAO();
             $this->roomDAO=new RoomDAO();
+            $this->showDAO=new ShowDAO();
             $this->msg=null;
         }
         
@@ -54,7 +57,8 @@
 
             try{
                 $cinemaSearch=$this->cinemaDAO->search($idCinema);
-                $roomList=$this->roomDAO->getCinemaRooms($idCinema);
+                $roomList=$this->roomDAO->getAllActive($idCinema);
+                $roomListInactive=$this->roomDAO->getAllInactive($idCinema);
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
@@ -105,42 +109,84 @@
         }
 
 
-        public function edit($idCinema="",$name="",$rows="",$columns="",$type="",$price="", $idRoom=""){
+        public function edit($idCinema="",$name="",$rows="",$columns="",$type="",$price="",$state="", $idRoom=""){
             Validate::checkParameter($idRoom);
-            
+            $flagEdit=false;
             try{
                 $wanted=$this->roomDAO->search($idCinema,$name);
                 $cinema=$this->cinemaDAO->search($idCinema);
+                $shows=$this->showDAO->getByRoom($idRoom);
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
             }
-            
-                if(!$wanted || $wanted->getIdRoom()==$idRoom){     //si no existe la sala con ese nombre, o existe en un cine diferente, se deja crear
-                    $room=new Room();
-                    $room->setIdRoom($idRoom);
-                    $room->setName($name);
-                    $room->setCapacity($rows*$columns);
-                    $room->setRows($rows);
-                    $room->setColumns($columns);
-                    $room->setType($type);
-                    $room->setPrice($price);
-                    $room->setCinema($cinema);
-                    try{
-                        $result = $this->roomDAO->update($room);
-                    }catch(\Exception $e){
-                        echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
-                    }
 
-                    if($result > 0){
-                        $this->msg = "Room modified successfully";
-                        }else{
-                            $this->msg = "No rows updated. Please check your values";
+            if(!$shows){ // si no tengo en esa sala funciones activas*/
+            
+                if(!$wanted){   //sino encuentra una sala con ese nombre, edito directamente
+                    $this->updateRoom($idRoom,$name,$rows,$columns,$type,$price,$cinema,$state);  
+                 
+                }else{ //si encuentro debo validar que no haya una distinta con el mismo nombre
+                    $roomList=$this->roomDAO->getCinemaRooms($idCinema); // traigo todas las salas de ese cine
+                  
+                    foreach($roomList as $room){
+                        if($room->getIdRoom()!=$idRoom && strcasecmp($room->getName(),$name)==0){ // evaluo salas con Id distinto y con el mismo nombre
+                            $this->msg="Room: ".$wanted->getName()." in cinema ".$cinema->getName()." already exists"; 
+                            $flagEdit=true;
                         }
-                }else{
-                    $this->msg="Room: '$name' in cinema '" . $cinema->getName() ."' already exists"; 
+                    }
+                    if(!$flagEdit){ // sino hay salas con el mismo nombre dentro de ese cine , es posible editarla
+                        $this->updateRoom($idRoom,$name,$rows,$columns,$type,$price,$cinema,$state);  
+                    }
+                    
+                    
                 }
-          
+            }else{
+                $this->msg= ' This Room has active shows, no edit posible';
+            }
             $this->showRoomList($idCinema);
+        }
+
+        public function changeState($name,$idCinema){ //Alta, baja de Salas
+            try{
+            $wanted=$this->roomDAO->search($idCinema,$name);
+            if($wanted){
+            $shows=$this->showDAO->getByRoom($wanted->getIdRoom()); //funciones activas de la sala
+            
+
+                if(!$shows){
+                $this->roomDAO->changeState($wanted->getIdRoom());
+                }else{
+                $this->msg= ' This Room has active shows, no remove posible'; 
+                }
+            }
+            }catch(\Exception $e){
+            echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+             }
+            $this->showRoomList($idCinema);
+        }
+
+        public function updateRoom($idRoom,$name,$rows,$columns,$type,$price,$cinema,$state){
+            $room=new Room();
+            $room->setIdRoom($idRoom);
+            $room->setName($name);
+            $room->setCapacity($rows*$columns);
+            $room->setRows($rows);
+            $room->setColumns($columns);
+            $room->setType($type);
+            $room->setState($state);
+            $room->setPrice($price);
+            $room->setCinema($cinema);
+            try{
+                $result = $this->roomDAO->update($room);
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+
+            if($result > 0){
+                $this->msg = "Room modified successfully";
+                }else{
+                    $this->msg = "No rows updated. Please check your values";
+                }
         }
 
     }
