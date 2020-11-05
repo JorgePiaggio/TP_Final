@@ -1,3 +1,33 @@
+<?php 
+
+#session_start();
+if(!session_id()) {
+     session_start();
+}
+require './vendor/autoload.php';
+
+$fb = new Facebook\Facebook([
+
+'app_id' => APPID,
+'app_secret' => APPSECRET,
+'default_graph_version' => GRAPHVERSION
+
+]);
+
+$helper = $fb->getRedirectLoginHelper();
+
+
+$permissions = ['email']; // Optional permissions
+$callbackUrl = htmlspecialchars('https://localhost/TP_Final/User-login-facebook.php');
+$loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);
+
+
+?>
+
+
+
+
+
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -24,8 +54,16 @@
                         </div><br>
                     </div>
 
-  
-<!-- *********************** FACEBOOK LOGIN ************************* -->
+
+                         <!-- *********************** FACEBOOK LOGIN ************************* -->
+                         <div class="floating-label">
+                         <a class="fa fa-facebook bb" href="<?php echo $loginUrl ?>" > <p> Log in with Facebook</p></a>
+                         </div><br><br>
+
+                 
+                         <!-- *********************** FACEBOOK LOGIN ************************* -->
+
+
                     <!-- Muestro un mensaje si no existe mail o no coincide pass -->
                     <?php if($this->msg != null){?>      
                          <h4 class="msg"><?php echo $this->msg;

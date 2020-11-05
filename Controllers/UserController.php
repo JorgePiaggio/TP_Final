@@ -10,6 +10,9 @@ use Models\Role as Role;
 use DAO\UsersReviewsDAO as UsersReviewsDAO;
 use Config\Validate as Validate;
 use \Exception as Exception;
+use lib\PHPMailer\PHPMailer as PHPMailer;
+#use lib\PHPMailer\Exception as Exception;
+use lib\PHPMailer\SMTP as SMTP;
 
 class UserController{
     private $userDAO;
@@ -119,7 +122,29 @@ class UserController{
     }
     
 
+    /* usuario logueado por facebook, si no existe se registra */
+    public function userFacebook(){
+    
+        $name= $_SESSION['facebookUser']['first_name'];
+        $surname= $_SESSION['facebookUser']['last_name'];
+        $email= $_SESSION['facebookUser']['email'];
+        $pass= "F".substr($_SESSION['facebookUser']['id'],0,15);
+
+        $user = $this->userDAO->search($email);
+
+        if($user == false){
+            $this->register($name, $surname,"0","Undefined","0",$email, $pass, $pass);
+        }else{
+            $_SESSION["loggedUser"]=$email;
+            $_SESSION["role"]=$user->getRole()->getId();
+            header("location:../Home/index");
+        }
+    }
+
+
+
     public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
+        var_dump($name, $surname,$email,$pass);
         Validate::checkParameter($name);
 
         if(!$this->validateEmail($email)){ 
@@ -132,14 +157,20 @@ class UserController{
                 $this->user->setNumber($number);
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
+
                 try{
                     $this->userDAO->add($this->user);
+               
+                    $_SESSION["loggedUser"]=$email;
+                    $_SESSION["role"]=$this->user->getRole()->getId();
+
+                    if(isset($_SESSION["facebookUser"])){   //usuario registrado a traves de facebook
+                        $this->sendEmail($email,$name,$surname,$pass);
+                    }
                 }catch(\Exception $e){
                     echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
                 }
-                $_SESSION["loggedUser"]=$email;
-                $_SESSION["role"]=$this->user->getRole()->getId();
-                header("location:../Home/index");
+               header("location:../Home/index");
             }
             else{
                 $this->msg = "Invalid password";  
@@ -261,6 +292,43 @@ class UserController{
         
         $this->showUserView($userEmail);
     }
+
+
+    public function sendEmail($email,$name,$lastname,$pass){
+     
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'moviepassdevelopers@gmail.com';                     // SMTP username
+            $mail->Password   = 'moviepass1';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        
+        //Recipients
+            $mail->setFrom('moviepassdevelopers@gmail.com', 'MoviePass');
+            $mail->addAddress($email, $name);     // Add a recipient
+                // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Welcome to MoviePass!';
+                $mail->Body = 'Thanks '.$name.' '.$lastname. ' for registering in MoviePass.'. '<br><br> Change your password for your account security.<br><br>
+                                Email: '. $email.'<br>
+                                Password: '. $pass.'<br> ';
+            $mail->send();
+            $this->msg='Message has been sent to: '.$email.', thanks for registering';
+        }catch (Exception $e) {
+            $this->msg='Message could not be sent, Mailer Error:'.$mail->ErrorInfo;
+        }
+
+    }
+
+
 
 
     /* Guarda mensajes de users sobre la web en un json */    

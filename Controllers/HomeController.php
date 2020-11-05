@@ -21,7 +21,7 @@
 
         public function index($message = "")
         {
-            if($_GET){
+            if(isset($_GET["alert"])){
                 $this->msg=$_GET['alert'];
             }
             
