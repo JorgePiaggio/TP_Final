@@ -19,8 +19,8 @@ $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ['email']; // Optional permissions
 $callbackUrl = htmlspecialchars('https://localhost/TP_Final/User-login-facebook.php');
-$loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);*/
-
+$loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);
+*/
 
 ?>
 

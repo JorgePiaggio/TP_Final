@@ -67,10 +67,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showConfirm($seats="", $company="", $cardNumber="", $propietary="", $monthExp="", $yearExp="", $idShow=""){
+    public function showConfirm($seats="", $company="", $cardNumber="", $propietaryName="",$propietarySurname="", $monthExp="", $yearExp="", $idShow=""){
         Validate::checkParameter($idShow);
         $this->validateNotAdmin();
-   
+        $propietary=$propietaryName." ".$propietarySurname;
         if($seats){
           $show = $this->showDAO->search($idShow);
           $total=0;
