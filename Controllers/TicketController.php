@@ -97,7 +97,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $flag = 0;
         $shift = null;
         $date = null;
-        #$movie2 = null;
+        $movie2 = null;
         $cinema = $this->cinemaDAO->search($idCinema);
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
         $allMovies = $this->showDAO->getAllMoviesByCinema($idCinema);
@@ -120,7 +120,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $cinema = $this->cinemaDAO->search($idCinema); 
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
         $allMovies = $this->showDAO->getAllMoviesByCinema($idCinema);
-        #$movie2 = $this->movieDAO->search($idMovie);
+        $movie2 = $this->movieDAO->search($idMovie);
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         switch($flag){
             case 1:
@@ -162,7 +162,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
             case 10: 
                 $data = $this->ticketDAO->ticketsByCinemaByMovie($idCinema, $idMovie);
                 require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
-                break;     
+                break;    
+            case 11: 
+                $data = $this->ticketDAO->ticketsByCinemaByMovieByShift($idCinema, $shift, $idMovie);
+                require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
+                break;   
         }
     }
 
