@@ -1,6 +1,9 @@
 <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/serena-wong-SdjA-_Xzuxg-unsplash.jpg');">
      <main class="list">
-               <h2 class="page-title v2 up2"> Cinema: <?php echo $cinemaSearch->getName()?> <br></h2>
+               <h2 class="page-title v2 up2"> Cinema: <?php echo $cinemaSearch->getName()?> <br></h2><br><br>
+               <?php if($this->msg){ ?> <!-- Si ya existe una sala con ese nombre en el mismo cine muestro el mensaje -->
+                                        <center> <h4 class="msg"> <?php echo $this->msg;?></h4></center> <br><br>
+                              <?php }?>
                <h2 class="page-title"> Active Rooms<br></h2>
                <div class="hoc">
                     <div class="container2">
@@ -33,9 +36,7 @@
                               </tbody>
                          </table>
                     </div>
-                                   <?php if($this->msg){ ?> <!-- Si ya existe una sala con ese nombre en el mismo cine muestro el mensaje -->
-                                        <center> <h4 class="msg"> <?php echo $this->msg;?></h4></center> 
-                              <?php }?>
+                                 
                </div>
      </main>
 </div>
