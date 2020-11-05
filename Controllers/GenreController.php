@@ -1,5 +1,6 @@
 <?php
-    namespace Controllers;
+    
+    namespace Controllers; /*
     if(!$_SESSION || $_SESSION['role'] == 0){
         header("location:../Home/index");
     }
@@ -16,7 +17,7 @@
             $this->genreDAO = new GenreDAO(); 
         }
 
-         /* ver todos los generos de la base de datos 
+         ver todos los generos de la base de datos 
          public function showAllGenres(){
             $genreList=$this->genreDAO->getAll();
             require_once(VIEWS_PATH."Movies/Movie-list-full.php");

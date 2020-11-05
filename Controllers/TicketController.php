@@ -57,15 +57,19 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    public function showPurchaseView($idShow){
+    public function showPurchaseView($idShow=""){
+        Validate::checkParameter($idShow);
+        $this->validateNotAdmin();
+        
         $show = $this->showDAO->search($idShow);
         $seats=$this->seatDAO->getbyShow($idShow);
         require_once(VIEWS_PATH."Tickets/purchase-view.php");
     }
 
 
-    public function showConfirm($seats, $company, $cardNumber, $propietary, $monthExp, $yearExp, $idShow){
-        
+    public function showConfirm($seats="", $company="", $cardNumber="", $propietary="", $monthExp="", $yearExp="", $idShow=""){
+        Validate::checkParameter($idShow);
+        $this->validateNotAdmin();
    
         if($seats){
           $show = $this->showDAO->search($idShow);
@@ -80,7 +84,9 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     }
 
-    public function showPurchaseResult($tickets,$card){
+    public function showPurchaseResult($tickets="", $card=""){
+        Validate::checkParameter($tickets);
+        $this->validateNotAdmin();
 
         if($tickets){
             $this->msg="Purchase completed successfully, enjoy the show";
@@ -91,8 +97,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         require_once(VIEWS_PATH."Tickets/purchase-result.php");  
 
     }
-
+    
     public function showStatistics($idCinema=""){
+        Validate::checkParameter($idCinema);
+        Validate::validateSession();
+
         $data = -1;
         $flag = 0;
         $shift = null;
@@ -104,8 +113,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         $showList=$this->showDAO->getAllbyCinema($idCinema);
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
+    
+    public function showSendEmail($name="", $email="", $seats="", $movieTitle="", $date="", $cinema="", $room="", $cantTicket="", $card="", $idShow=""){
+        Validate::checkParameter($seats);
+        $this->validateNotAdmin();
 
-    public function showSendEmail($name,$email,$seats,$movieTitle,$date,$cinema,$room,$cantTicket,$card,$idShow){
         $newSeats=explode("/",$seats);
         $seatList=array();
         foreach($newSeats as $seat){
@@ -114,8 +126,11 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         require_once(VIEWS_PATH."Tickets/purchase-email.php");
     }
 
-
+    /*Según la estadística buscada llama a cada función del DAO */
     public function showData($flag="", $idCinema="", $date="", $shift="", $idMovie=""){
+        Validate::checkParameter($flag);
+        Validate::validateSession();
+
         $data = -1;
         $cinema = $this->cinemaDAO->search($idCinema); 
         $movieList = $this->cinemaDAO->getBillboard($idCinema);
@@ -170,8 +185,9 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         }
     }
 
-    public function add($creditCardCompany,$creditCardNumber, $creditCardPropietary, $creditCardExpiration,$total,$seats,$idShow){
+    public function add($creditCardCompany="", $creditCardNumber="", $creditCardPropietary="", $creditCardExpiration="", $total="", $seats="", $idShow=""){
         Validate::checkParameter($idShow);
+        $this->validateNotAdmin();
 
         $show=$this->showDAO->search($idShow);
         $user=$this->userDAO->search($_SESSION["loggedUser"]);
@@ -280,7 +296,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
-    private function calculateDiscount($seatNumber, $date, $price,&$total){
+    private function calculateDiscount($seatNumber="", $date="", $price="", &$total=""){
+        Validate::checkParameter($seatNumber);
+        $this->validateNotAdmin();
+
         $total = $price*$seatNumber;
 
         $day= date('l', strtotime($date));
@@ -292,6 +311,14 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         }else{
 
         return false;
+        }
+    }
+
+
+     /* Valida que solo puedan ingresar usuarios registrados no administradores */
+     static public function validateNotAdmin(){
+        if(!$_SESSION || $_SESSION['role'] == 1){
+            header("location:../Home/index");
         }
     }
 

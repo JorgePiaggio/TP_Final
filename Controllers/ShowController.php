@@ -65,6 +65,8 @@
 
     /* vista para agregar funciones */
     public function showAddView(){
+        Validate::validateSession();
+        
         try{
             $cinemaList = $this->cinemaDAO->getAllActive();
             $cinema=null;
@@ -81,6 +83,9 @@
 
 
     public function showEditView($idShow=""){
+        Validate::checkParameter($idShow);
+        Validate::validateSession();
+        
         try{
             $editShow=$this->showDAO->search($idShow);
             $roomList=$this->roomDAO->getCinemaRooms($editShow->getRoom()->getCinema()->getIdCinema());
@@ -93,8 +98,10 @@
 
 
     /* agregar show */
-    public function add($idRoom, $idMovie, $date, $time){
-        
+    public function add($idRoom="", $idMovie="", $date="", $time=""){
+        Validate::checkParameter($idRoom);
+        Validate::validateSession();
+
         if($this->checkAvailability($idMovie, $idRoom, $date,-1)){//para agregar pongo un idshow no existente
 
             date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -141,7 +148,10 @@
     }
 
 
-    public function edit($idRoom, $idMovie, $date, $time,$tickets,$idShow){//para editar idshow cuenta
+    public function edit($idRoom="", $idMovie="", $date="", $time="", $tickets="", $idShow=""){//para editar idshow 
+        Validate::checkParameter($idRoom);
+        Validate::validateSession();
+
         if($this->checkAvailability($idMovie, $idRoom, $date,$idShow)){
 
             date_default_timezone_set('America/Argentina/Buenos_Aires');
@@ -219,8 +229,10 @@
     }
 
 
-    /* eliminar show si no tiene entradas vendidas */
+    /* elimina show si no tiene entradas vendidas */
     public function remove($idShow=""){
+        Validate::checkParameter($idShow);
+        Validate::validateSession();
 
         try{
             $editShow=$this->showDAO->search($idShow);
@@ -248,7 +260,10 @@
 
 
     /*elegir cine para agregar show */
-    public function selectCinema($idCinema){
+    public function selectCinema($idCinema=""){
+        Validate::checkParameter($idCinema);
+        Validate::validateSession();
+
         try{
             $cinema = $this->cinemaDAO->search($idCinema);
             $cinemaList=$this->cinemaDAO->getAllActive();
@@ -297,7 +312,9 @@
 
 
     /* Filtra shows por fecha */
-    public function filterByDate($date){
+    public function filterByDate($date=""){
+        Validate::checkParameter($date);
+
         try{
             $showList = $this->showDAO->getByDate($date);
         }catch(\Exception $e){
@@ -308,7 +325,9 @@
 
 
     /* Filtra shows activos por genero */
-    public function filterByGenre($genre){    
+    public function filterByGenre($genre=""){  
+        Validate::checkParameter($genre);  
+
         $showList = array();
         try{
             $showsActives = $this->showDAO->getAllActive();                    //Busco shows activos
@@ -325,7 +344,8 @@
 
 
       /* Filtra shows por fecha y genero */
-    public function filterByDateByGenre($date, $genre){     
+    public function filterByDateByGenre($date="", $genre=""){    
+        Validate::checkParameter($date); 
         $showList = array();
         try{
             $showsByDate = $this->showDAO->getByDate($date);                  //Busco shows por fecha
@@ -347,7 +367,7 @@
         try{
             $cinema=null;
             if($idCinema!=""){
-            $cinema = $this->cinemaDAO->search($idCinema);
+                $cinema = $this->cinemaDAO->search($idCinema);
             }
             $cinemaList=$this->cinemaDAO->getAllActive();
             $showList=null;
@@ -363,7 +383,10 @@
 
 
     /* chequea que haya una diferencia de 15 minutos entre funcion y funcion */
-    private function validateShow($idRoom,$idMovie,$date,$idShow){ // le envio idShow para que no tenga en cuenta el tiempo previo en la misma funcion que estoy editando
+    private function validateShow($idRoom="", $idMovie="", $date="", $idShow=""){ // le envio idShow para que no tenga en cuenta el tiempo previo en la misma funcion que estoy editando
+        Validate::checkParameter($idShow);
+        Validate::validateSession();
+
         try{
             $showList=$this->showDAO->getShowbyTimebyRoom($idRoom,$date);
             //Runtime y horario de pelicula ingresada
@@ -398,7 +421,10 @@
         
     
     /* chequea q la pelicula no este en una funcion en la fecha solicitada */
-    private function checkAvailability($idMovie, $idRoom, $date,$idShow){
+    private function checkAvailability($idMovie="", $idRoom="", $date="", $idShow=""){
+        Validate::checkParameter($idMovie);
+        Validate::validateSession();
+
         try{
             $s=$this->showDAO->getByMovieByDay($idMovie, $date); /* saber si hay funcion de esa peli ese dia */
         }catch(\Exception $e){

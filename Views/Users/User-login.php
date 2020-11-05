@@ -1,9 +1,9 @@
 <?php 
 
-#session_start();
+#session_start();  
 if(!session_id()) {
      session_start();
-}
+}/*
 require './vendor/autoload.php';
 
 $fb = new Facebook\Facebook([
@@ -14,12 +14,12 @@ $fb = new Facebook\Facebook([
 
 ]);
 
-$helper = $fb->getRedirectLoginHelper();
+$helper = $fb->getRedirectLoginHelper(); 
 
 
 $permissions = ['email']; // Optional permissions
 $callbackUrl = htmlspecialchars('https://localhost/TP_Final/User-login-facebook.php');
-$loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);
+$loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);*/
 
 
 ?>
