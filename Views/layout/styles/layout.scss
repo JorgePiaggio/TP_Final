@@ -20,7 +20,7 @@ File: Layout CSS
 #header #logo h1{margin:0; padding:0; font-size:50px; text-transform:uppercase; color:#FF5723; }
 .page-title{font-size: 40px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
 .page-title-variation{font-size: 40px; background-color: rgba(7, 7, 7, 0.687); color:white;text-align: center; padding: 1.5rem 0 1.5rem; border-radius: 15%;}
-.page-title.v2{font-size: 55px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
+.page-title.v2{font-size: 30px; background-color: rgba(136,136,136,.5);color:#FF5723;text-align: center; padding: 1.5rem 0 1.5rem;}
 .page-title-special{margin: auto;}
 .page-title.backg{background-color: rgba(85, 84, 84, 0.689);}
 .up{margin-top:-20px;}
@@ -65,6 +65,13 @@ File: Layout CSS
 
 .mrg_left{
     margin-left: 20%;
+}
+
+.mrg_left2{
+    position: absolute;
+    margin-left: -16%;
+    margin-top: 3%;
+    opacity: 0.5;
 }
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */

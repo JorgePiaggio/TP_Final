@@ -67,21 +67,24 @@
                     </div>
                     <h2 class="page-title" >Inactive Cinemas </h2>
                     <div class="container2">
-                         <table class="table bg-light">
-                              <thead class="bg-dark text-white">
-                                   <th width="15%">Name</th>
-                                   <th>Street</th>
-                                   <th>Number</th>
-                                   <th>City</th>
-                                   <th>Country</th>
-                                   <th>Phone</th>
-                                   <th>Email</th>
-                                   
-                                   <th  colspan="3">Action</th>
-                              </thead>
-                              <tbody>
-                              <?php if($cinemaListInactive!=null){ 
-                                        if(!is_array($cinemaListInactive)){?>
+                        
+                              <?php if($cinemaListInactive!=null){ ?>
+
+                                   <table class="table bg-light">
+                                        <thead class="bg-dark text-white">
+                                             <th width="15%">Name</th>
+                                             <th>Street</th>
+                                             <th>Number</th>
+                                             <th>City</th>
+                                             <th>Country</th>
+                                             <th>Phone</th>
+                                             <th>Email</th>
+                                             
+                                             <th  colspan="3">Action</th>
+                                        </thead>
+                                   <tbody>
+
+                                       <?php if(!is_array($cinemaListInactive)){?>
                                    <tr>    
                                         <td><?php echo $cinemaListInactive->getName(); ?> </td>     
                                         <td><?php echo $cinemaListInactive->getStreet(); ?> </td>

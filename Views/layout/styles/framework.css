@@ -153,6 +153,10 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   opacity: 0;
 }
 
+.floating-input.floatnav ~ label{
+  color: #ff56237d; 
+}
+
 .floating-input:focus ~ input[placeholder], .floating-input:not(:placeholder-shown) ~ input[placeholder] {
   opacity: 1;
 }

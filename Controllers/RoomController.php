@@ -146,6 +146,7 @@
             $this->showRoomList($idCinema);
         }
 
+        
         public function changeState($name,$idCinema){ //Alta, baja de Salas
             try{
             $wanted=$this->roomDAO->search($idCinema,$name);

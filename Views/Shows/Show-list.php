@@ -29,18 +29,19 @@
                                     } ?> </h4></center>
                                 </div> 
                     <div class="container2">
-                         <table class="table bg-light">
-                              <thead class="bg-dark text-white">
-                                   <th>Room</th>
-                                   <th>Movie</th>
-                                   <th>Date</th>
-                                   <th>Shift</th>
-                                   <th>Tickets</th>
-                                   
-                                   <th  colspan="2">Action</th>
-                              </thead>
-                              <tbody>
-                                   <?php if($showList){ 
+                  
+                                   <?php if($showList){ ?>
+                                        <table class="table bg-light">
+                                        <thead class="bg-dark text-white">
+                                             <th>Room</th>
+                                             <th>Movie</th>
+                                             <th>Date</th>
+                                             <th>Shift</th>
+                                             <th>Tickets</th>
+                                             
+                                             <th  colspan="2">Action</th>
+                                        </thead>
+                                        <tbody><?php
                                         foreach($showList as $show){ ?>
                                              <tr>    
                                         <td><center><?php echo $show->getRoom()->getName(); ?> </center></td>     
