@@ -72,7 +72,7 @@
             $cinema=null;
             if($cinemaList){
                 $idCinema=$cinemaList[0]->getIdCinema();
-                $roomList = $this->roomDAO->getCinemaRooms($idCinema);
+                $roomList = $this->roomDAO->getAllActive($idCinema);
                 $movieList = $this->movieDAO->getAllStateOne();
             }
         }catch(\Exception $e){
@@ -267,7 +267,7 @@
         try{
             $cinema = $this->cinemaDAO->search($idCinema);
             $cinemaList=$this->cinemaDAO->getAllActive();
-            $roomList = $this->roomDAO->getCinemaRooms($idCinema);
+            $roomList = $this->roomDAO->getAllActive($idCinema);
             $movieList = $this->movieDAO->getAllStateOne();
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();

@@ -220,7 +220,7 @@
             {
                 $roomList = array();
                 
-                $query = "SELECT sum(capacity) FROM ".$this->tableName." WHERE idCinema=:idCinema";
+                $query = "SELECT sum(capacity) FROM ".$this->tableName." WHERE idCinema=:idCinema AND stateRoom = 1";
                 $parameters["idCinema"]=$cinema->getIdCinema();
                 $this->connection = Connection::getInstance();
 

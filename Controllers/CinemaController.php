@@ -78,7 +78,7 @@
             try{
                 $cinema = $this->cinemaDAO->search($idCinema);
                 $movieList = $this->cinemaDAO->getBillboard($idCinema);
-                $roomList = $this->roomDAO->getCinemaRooms($idCinema);
+                $roomList = $this->roomDAO->getAllActive($idCinema);
                 $showList=$this->showDAO->getAllbyCinema($idCinema);
                 $cinemaCapacity=$this->roomDAO->getCinemaCapacity($cinema);    
                 if(!$movieList){ 
