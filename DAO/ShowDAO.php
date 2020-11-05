@@ -484,7 +484,9 @@
 
       
     }
- // funciones activas en salas
+
+
+    // funciones activas en salas
     public function getByRoom($idRoom){
         $dateNow = (new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires')))->format('Y-m-d H:i:s');
         $showList = array();
@@ -850,7 +852,8 @@
     }
     
 
-    
+
+
     protected function mapShow($value){
         
             $show=new Show();

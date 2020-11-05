@@ -304,10 +304,8 @@
                 }
             }
         }
-        
 
         $this->showBillboard($showList, 1, $actualGenre);
-        
     }
 
 
@@ -362,8 +360,10 @@
     }
 
 
-
+    /* lista de shows para admin */
     public function showListView($idCinema=""){
+        Validate::validateSession();
+
         try{
             $cinema=null;
             if($idCinema!=""){
@@ -455,7 +455,6 @@
     }
 
     
-  
 
 
 }

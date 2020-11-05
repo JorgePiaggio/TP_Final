@@ -12,6 +12,8 @@
         #sfunction getMostPopular();
         function search($tmdbId);
         function getByGenre($idGenre);
+        function searchByWord($word);
+
     }
 
 ?>

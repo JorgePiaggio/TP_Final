@@ -79,6 +79,8 @@ h1, h2, h3, h4, h5, h6, .heading{font-family:'Trebuchet MS', 'Lucida Sans Unicod
 --------------------------------------------------------------------------------------------------------------- */
 
 form, fieldset, legend{margin:100px;display:inline;  padding:0; border:none;}
+form.noClass{margin: 0 0;}
+
 legend{display:none;}
 label, input, textarea, button{display:inline; resize:none; outline:none; color:inherit; font-size:inherit; font-family:inherit; vertical-align:middle;}
 label{margin-bottom:5px;}
@@ -91,7 +93,6 @@ select.selection{color: black ; background-color: #FF5723; border-color:#df4516;
 .normal{color: black ; background-color: #FF5723; border-color:#df4516; border-radius: 30px; border-style: groove; font-display: inherit;  font-size: 10px;}
 select.selection option.selected:hover{color: black ; background-color: #FF5723; }
 
-.floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
 
 .margin1{margin: -60px 0;}
 .margin2{display: inline;top:-10%; left: 71%; margin-bottom:-200px;}
@@ -102,6 +103,7 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
+.floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
 
 .form-title{
     margin: -30px 0 20px 10px;

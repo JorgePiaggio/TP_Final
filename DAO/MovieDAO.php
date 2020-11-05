@@ -325,6 +325,38 @@ class MovieDAO implements IMovieDAO{
     }
 
 
+
+    /* retorna por coincidencia de palabra en el titulo */
+    public function searchByWord($word){
+
+        try
+        {
+            $query = "SELECT * FROM movies 
+                        WHERE movies.title LIKE '%$word%'";
+
+
+            $this->connection = Connection::getInstance();
+
+            $result = $this->connection->execute($query);
+            
+            if($result){
+                
+                $mapping = $this->map($result);  
+
+                return $mapping;
+            }
+            else{
+                return null;
+            }
+        }
+        catch(\PDOException $ex)
+        {
+            throw $ex;
+        }
+    }
+    
+
+
       /* retorna las peliculas por genero*/
     public function getByGenre($idGenre){
         try

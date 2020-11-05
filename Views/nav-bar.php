@@ -6,10 +6,24 @@
             <text x="450%" y="190%" width="100%" height="100%" transform="scale(.3, .4)" fill="transparent" text-anchor="middle">Moviepass</text>
         </svg>
       </a>
-    </div>
+    </div> 
+
+    <form action="<?php echo FRONT_ROOT?>Movie/searchMovie" method="post" class= "noClass">
     <nav id="mainav" class="hoc fl_right">
+
         <!----------------- MENU GENERAL -----------------------> 
-      <ul class="clear">         
+
+      <ul class="clear">                 
+        <li>
+        <div class="floating-label-form">
+            <div class="floating-label">  
+                <input type="text" minlength="1" maxlength="30" name="search" placeholder="" class="floating-input"><i class="fa fa-search orange" style="font-size: 1.13em"></i>
+                <span class="highlight"></span><label for=""></label> 
+            </div>          
+            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />         
+         </div>                  
+    </form>
+        </li>
         <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
@@ -17,11 +31,14 @@
 
         
           <!----------------- MENU USUARIO (ICONO DEL CHABONCITO)-----------------------> 
+          
           <?php if(isset($_SESSION["loggedUser"])){?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-logged.png"></a>
           <?php }else{ ?>
         <li class="active"><a class="drop" href="#"><img class="icon" src="<?php echo IMG_PATH?>/icons/profile-user-guest3.png"></a>
           <?php }?>
+
+          <!----------------- SUB - MENU DESPLEGABLE -----------------------> 
 
           <ul>
             <?php if(isset($_SESSION["loggedUser"])){   ?>

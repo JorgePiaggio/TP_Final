@@ -497,6 +497,45 @@
         }
 
 
+        /* buscar peliculas por coincidencia de palabra en titulo */
+        public function searchMovie($string=""){
+
+            $movieList=array();
+            $movieListResults=array();
+            $showList= $this->showDAO->getAll(); //todos los shows
+
+
+            try{
+                $movieListPre= $this->movieDAO->searchByWord($string);      //todas las pelis que coinciden con la busqueda
+                if(!is_array($movieListPre)){
+                    array_push($movieListResults, $movieListPre);
+                }else{
+                    $movieListResults = $movieListPre;
+                }
+
+              #  var_dump($movieListPre);
+                if(!empty($movieListResults) && !empty($showList)){
+                    foreach($movieListResults as $movie){
+                        foreach($showList as $showMovie){
+                            if($showMovie->getMovie()->getTmdbId() == $movie->getTmdbId()){
+                                if(!in_array($movie, $movieList)){
+                                    array_push($movieList,$movie);                 // filtro: si las pelis estan o estuvieron en un show se muestran al user
+                                }
+                            }
+                        }
+                    }
+               
+                }
+
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+    
+            require_once(VIEWS_PATH."Movies/Show-search-results.php");
+    
+        }
+    
+
         /*Genero ficticio para traer todas las películas con todos los géneros */
         private function getAllGenre(){
             $all= new Genre();

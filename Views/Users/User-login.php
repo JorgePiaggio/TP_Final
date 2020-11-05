@@ -3,7 +3,11 @@
 #session_start();  
 if(!session_id()) {
      session_start();
-}/*
+}
+
+
+/* COMENTAR SI SE USA WAMPP */
+
 require './vendor/autoload.php';
 
 $fb = new Facebook\Facebook([
@@ -20,7 +24,9 @@ $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email']; // Optional permissions
 $callbackUrl = htmlspecialchars('https://localhost/TP_Final/User-login-facebook.php');
 $loginUrl = $helper->getLoginUrl($callbackUrl, $permissions);
-*/
+
+
+/* COMENTAR SI SE USA WAMPP */
 
 ?>
 
