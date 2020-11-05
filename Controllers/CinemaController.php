@@ -11,8 +11,7 @@
     use Config\Validate as Validate;
     use \Exception as Exception;
 
- 
-    #Validate::validateSession();
+
  
     class CinemaController{
         private $cinemaDAO;
@@ -34,11 +33,14 @@
 
         
         public function showAddView(){
+            Validate::validateSession();
+
             require_once(VIEWS_PATH."Cinemas/Cinema-add.php");
         }
 
 
         public function showListView(){
+            Validate::validateSession();
 
             try{
                 $cinemaList = $this->cinemaDAO->getAllActive();
@@ -52,12 +54,13 @@
 
 
         public function showEditView(){
+            Validate::validateSession();
+           
             require_once(VIEWS_PATH."Cinemas/Cinema-edit.php");
         }
 
 
         public function showAllCinemas(){
-
             try{
                 $cinemaList = $this->cinemaDAO->getAllActive();
             }catch(\Exception $e){
@@ -69,7 +72,8 @@
         }
         
 
-        public function showCinema($idCinema){
+        public function showCinema($idCinema=""){
+            Validate::checkParameter($idCinema);
 
             try{
                 $cinema = $this->cinemaDAO->search($idCinema);
@@ -90,8 +94,9 @@
 
 
 
-        public function addToBillboard($idCinema="",$movie){
+        public function addToBillboard($idCinema="", $movie=""){
             Validate::checkParameter($idCinema);
+            
             
             try{
                 if(!$this->cinemaDAO->searchMovie($idCinema,$movie->getTmdbId())){
@@ -106,8 +111,9 @@
         }
 
 
-        public function removeToBillboard($idCinema="",$movie){
-            Validate::checkParameter($idCinema);
+        public function removeToBillboard($idCinema="", $movie=""){
+           # Validate::checkParameter($idCinema);
+           # Validate::validateSession();
             
             try{
                 if($this->cinemaDAO->searchMovie($idCinema,$movie->getTmdbId())){
@@ -123,6 +129,8 @@
         
         public function add($name="", $street="", $number="", $city="", $country="", $phone="", $email="", $poster=""){
             Validate::checkParameter($name);
+            Validate::validateSession();
+
             $address = $street . $number;
 
             if($this->validateCinema($name, $address) == null){ 
@@ -156,7 +164,10 @@
 
 
         //Valida si no existe ya un cine con el mismo nombre y misma dirección
-        public function validateCinema($name, $address){
+        public function validateCinema($name="", $address=""){
+            Validate::checkParameter($name);
+            Validate::validateSession();
+
             $cinemaList=array();
 
             try{
@@ -179,6 +190,7 @@
 
         public function changeState($idRemove=""){
             Validate::checkParameter($idRemove);
+            Validate::validateSession();
 
             try{
                 $activeShows=$this->showDAO->getAllbyCinema($idRemove);
@@ -198,6 +210,7 @@
 
         public function searchEdit($idCinema=""){
             Validate::checkParameter($idCinema);
+            Validate::validateSession();
 
             try{
                 $editCinema = $this->cinemaDAO->search($idCinema);
@@ -210,6 +223,8 @@
 
         public function edit($name="", $street="", $number="", $city="", $country="", $phone="", $email="",$poster="", $idCinema=""){
             Validate::checkParameter($name);
+            Validate::validateSession();
+
             try{
                 $aux = $this->cinemaDAO->search($idCinema);
                 $address = $street . $number;
@@ -250,6 +265,7 @@
 
         
         private function refreshBillboard(){ // activa el estado de peliculas que esten en una funcion de la semana por cine y las pone en cartelera del cine
+
             $this->initializeBillboard();
             $cinemaList=array();
 

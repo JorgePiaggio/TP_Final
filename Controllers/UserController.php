@@ -36,8 +36,12 @@ class UserController{
     }
 
     public function showProfile(){
-        $user = $this->userDAO->search($_SESSION['loggedUser']);
-        require_once(VIEWS_PATH."Users/User-profile.php");
+        if($_SESSION){
+            $user = $this->userDAO->search($_SESSION['loggedUser']);
+            require_once(VIEWS_PATH."Users/User-profile.php");
+        }else{
+            header("location:../Home/index");
+        }
     }
 
     public function showRegister(){
@@ -45,7 +49,11 @@ class UserController{
     }
 
     public function showEditView(){
-        require_once(VIEWS_PATH."Users/User-profile.php");
+        if($_SESSION){
+            require_once(VIEWS_PATH."Users/User-profile.php");
+        }else{
+            header("location:../Home/index");
+        }
     }
 
     public function showSelectUser(){
@@ -55,6 +63,7 @@ class UserController{
     }
 
     public function showUserView($emailUser=""){
+        Validate::checkParameter($emailUser);
         Validate::validateSession();
 
         try{
@@ -144,7 +153,6 @@ class UserController{
 
 
     public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
-        var_dump($name, $surname,$email,$pass);
         Validate::checkParameter($name);
 
         if(!$this->validateEmail($email)){ 
@@ -186,6 +194,7 @@ class UserController{
     public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
         Validate::validateSession();
+
         try{
             $userAux = $this->userDAO->search($email);
                 
@@ -219,7 +228,9 @@ class UserController{
     }
 
 
-    public function validatePass($pass, $repass){
+    private function validatePass($pass, $repass){
+        Validate::checkParameter($pass);
+
         /*if(strlen($pass) < 8){
            $this->msg = "The password must be at least 8 characters";
            return false;
@@ -248,8 +259,9 @@ class UserController{
     }
 
 
-    public function validateEmail($email=""){
+    private function validateEmail($email=""){
         Validate::checkParameter($email);
+
         try{
             $users = $this->userDAO->getAll(); 
         }catch(\Exception $e){
@@ -275,7 +287,8 @@ class UserController{
     }
 
 
-    public function changeRole($userEmail){
+    public function changeRole($userEmail=""){
+        Validate::checkParameter($userEmail);
         Validate::validateSession();
         
         try{
@@ -294,8 +307,9 @@ class UserController{
     }
 
 
-    public function sendEmail($email,$name,$lastname,$pass){
-     
+    public function sendEmail($email="", $name="", $lastname="", $pass=""){
+        Validate::checkParameter($email);
+
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
 

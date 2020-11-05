@@ -97,7 +97,9 @@
     
 
         /* vista de una pelicula en particular */
-        public function showMovie($tmdbId){
+        public function showMovie($tmdbId=""){
+            Validate::checkParameter($tmdbId);
+
             try{
                 /* solicitar detalles de la pelicula */
                 $jsonMovie=$this->getMovieDetails($tmdbId);
@@ -125,7 +127,7 @@
 
 
         /*Obtener pagina de pelicula directamente de la API*/
-        public function showMoviePage($page=1,$language="en-US"){   
+        public function showMoviePage($page=1, $language="en-US"){   
             Validate::validateSession();
 
             $allGenre=$this->getAllGenre();
@@ -142,7 +144,9 @@
 
 
         /* solicitar detalles de la pelicula */
-        public function getMovieDetails($tmdbId){
+        public function getMovieDetails($tmdbId=""){
+            Validate::checkParameter($tmdbId);
+
             try{
                 $request=file_get_contents(APIURL."movie/".$tmdbId."?api_key=".APIKEY."&language=en");
                 #$request=false; /* testing exceptions */ 
@@ -161,7 +165,9 @@
 
         
         /* solicitar trailer de la pelicula */
-        public function getVideoTrailer($tmdbId){  
+        public function getVideoTrailer($tmdbId=""){ 
+            Validate::checkParameter($tmdbId);
+
             try{
                 $request_two=file_get_contents(APIURL."movie/".$tmdbId."/videos?api_key=".APIKEY."&language=en-US");
                 if($request_two === FALSE){
@@ -189,7 +195,8 @@
 
 
         /* solicitar director de la pelicula */
-        public function getDirector($tmdbId){
+        public function getDirector($tmdbId=""){
+            Validate::checkParameter($tmdbId);
 
             try{
                 $request_three = file_get_contents(APIURL."movie/".$tmdbId."/credits?api_key=".APIKEY);
@@ -215,7 +222,9 @@
 
 
          /* solicitar review */
-        public function getReview($tmdbId){
+        public function getReview($tmdbId=""){
+            Validate::checkParameter($tmdbId);
+
             try{
                 $request_four = file_get_contents(APIURL."movie/".$tmdbId."/reviews?api_key=".APIKEY."&language=en-US&page=1");
 
@@ -246,8 +255,8 @@
 
         /* obtener de la API la lista de peliculas que se estan dando actualmente*/        
         public function getNowPlayingMovies($page, $language){     
-            Validate::validateSession();
             Validate::checkParameter($page);
+            Validate::validateSession();
 
             $movies= array();
 
@@ -273,6 +282,8 @@
 
         /* agregar o quitar peliculas al catalogo para que esten disponibles para shows -> cambia estado de movie en la bdd */
         public function showManageCatalogue(){
+            Validate::validateSession();
+
             try{
                 $movieListInactive=$this->movieDAO->getAllStateZero();
                 $movieListActive=$this->movieDAO->getAllStateOne();
@@ -287,8 +298,9 @@
 
         /*agregar multiples peliculas a la BDD*/
         public function addMultipleMovies($movies=""){
-            Validate::validateSession();
             Validate::checkParameter($movies);
+            Validate::validateSession();
+
             $result = null;
             if($movies){
                 foreach($movies as $idMovie){
@@ -308,8 +320,8 @@
 
         /* agregar pelicula a la BDD */
         public function addMovieToDatabase($tmdbId=""){
-            Validate::validateSession();
             Validate::checkParameter($tmdbId);
+            Validate::validateSession();    
 
             /* solicitar detalles de la pelicula */
             $jsonMovie=$this->getMovieDetails($tmdbId);
@@ -340,6 +352,8 @@
 
 
         public function changeState(){
+            Validate::validateSession();
+
             $alert=false; // flag para activar el mensaje
             $cant=0; // contador para peliculas que tengan funciones activas
             if($_POST){
@@ -441,6 +455,7 @@
         /* agregar generos al DAO  */
         public function updateGenreList(){
             Validate::validateSession();
+            
             $nowGenre=$this->getNowGenres();
             try{
                 foreach($nowGenre as $genre){
