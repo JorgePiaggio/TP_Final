@@ -4,7 +4,6 @@
                <form action="<?php echo FRONT_ROOT?>User/showUserView" class="center" method="post">
                          <div class="floating-label-form">
                             <div class="floating-label">
-                            <div class="floating-label">
                                    <input type="email" name="email" placeholder=" " class="floating-input" required>
                                    <span class="highlight"></span><label for="">Email</label>
                             </div>      

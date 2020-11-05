@@ -502,18 +502,19 @@
 
             $movieList=array();
             $movieListResults=array();
-            $showList= $this->showDAO->getAll(); //todos los shows
-
 
             try{
+                $showList= $this->showDAO->getAll();                        //todos los shows
                 $movieListPre= $this->movieDAO->searchByWord($string);      //todas las pelis que coinciden con la busqueda
-                if(!is_array($movieListPre)){
-                    array_push($movieListResults, $movieListPre);
-                }else{
-                    $movieListResults = $movieListPre;
+
+                if(isset($movieListPre)){   //MALDITO FOREACH   
+                    if(!is_array($movieListPre)){
+                        array_push($movieListResults, $movieListPre);
+                    }else{
+                        $movieListResults = $movieListPre;
+                    }
                 }
 
-              #  var_dump($movieListPre);
                 if(!empty($movieListResults) && !empty($showList)){
                     foreach($movieListResults as $movie){
                         foreach($showList as $showMovie){

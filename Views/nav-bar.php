@@ -8,25 +8,26 @@
       </a>
     </div> 
 
-    <form action="<?php echo FRONT_ROOT?>Movie/searchMovie" method="post" class= "noClass">
+    <form action="<?php echo FRONT_ROOT?>Movie/searchMovie" method="post" >
     <nav id="mainav" class="hoc fl_right">
 
         <!----------------- MENU GENERAL -----------------------> 
 
-      <ul class="clear">                 
-        <li>
-        <div class="floating-label-form">
-            <div class="floating-label">  
-                <input type="text" minlength="1" maxlength="30" name="search" placeholder="" class="floating-input"><i class="fa fa-search orange" style="font-size: 1.13em"></i>
-                <span class="highlight"></span><label for=""></label> 
-            </div>          
-            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />         
-         </div>                  
-    </form>
-        </li>
+      <ul class="clear">          
         <li><a href="<?php echo FRONT_ROOT?>Show/showBillboard">Billboard</a></li>
         <li><a href="<?php echo FRONT_ROOT?>Movie/showAllMovies">Movies</a></li>
-        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>
+        <li><a href="<?php echo FRONT_ROOT?>Cinema/showAllCinemas">Cinemas</a></li>          
+        <li>
+          <div class="floating-label-form">
+              <div class="floating-label">  
+                  <input type="text" maxlength="30" name="search" placeholder=" " class="floating-input floatnav"><i class="fa fa-search orange mrg_left2" style="font-size: 1.13em"></i>
+                  <span class="highlight"></span><label for="" class="orange">Search</label> 
+              </div>          
+              <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />         
+          </div>                  
+         </form>
+        </li>
+     
 
 
         
