@@ -3,3 +3,15 @@
 Views/layout/images/tickets/
 
 
+
+
+
+
+# Don't track these files
+
+Views/layout/images/cineambassador.jpg
+Views/layout/images/theater-movie.jpg
+Views/layout/images/cinema2.jpg
+Views/layout/images/cinema3.jpg
+Views/layout/images/cinema4.jpg
+Views/layout/images/cinemaMark.jpg

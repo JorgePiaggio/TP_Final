@@ -309,7 +309,7 @@
                 if($result > 0){
                     $this->msg="Movies Added Succesfully";
                 }else{
-                    $this->msg="Internal error. Please try again later";
+                    $this->msg="Error. Selected movies were already in MoviePass collection";
                 }
             }else{
                 $this->msg="You must select a Movie";
@@ -340,7 +340,7 @@
                 if($result > 0){
                     $this->msg= "Movies Added Succesfully";
                 }else{
-                    $this->msg="Internal error. Please try again later";
+                    $this->msg="Error. Selected movies were already in MoviePass collection";
                 }
             }catch(\Exception $e){
                 echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();

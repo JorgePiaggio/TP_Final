@@ -86,8 +86,8 @@
         <?php foreach($movieShows as $movie){?>
           
           <div class="cardStyle mrg_btm3 mrg_top">
-            <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 30){
-                                                          $str1 = substr($movie->getTitle(), 0, 27) . '...';
+            <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 26){
+                                                          $str1 = substr($movie->getTitle(), 0, 23) . '...';
                                                           echo $str1; ?><?php }else{ echo $movie->getTitle(); } ?></button>
 
             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">

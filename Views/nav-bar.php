@@ -34,22 +34,22 @@
                 <li><a href="<?php echo FRONT_ROOT?>Cinema/showListView">List / Edit</a></li>
               </ul>
             </li>
-            <li class="active"><a>Movies</a>
-              <ul>
-                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
-                <li><a href="<?php echo FRONT_ROOT?>Movie/showManageCatalogue">Edit</a></li>
-              </ul>
-            </li>
             <li class="active"><a>Rooms</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showAddRoom">Add</a></li>
                 <li><a href="<?php echo FRONT_ROOT?>Room/showSelectCinema">List / Edit</a></li>
               </ul>
             </li>
+            <li class="active"><a>Movies</a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT?>Movie/showMoviePage">Add</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Movie/showManageCatalogue">List / Edit</a></li>
+              </ul>
+            </li>
             <li class="active"><a>Shows</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT?>Show/showAddView">Add</a></li>
-                <li><a href="<?php echo FRONT_ROOT?>Show/showListView">Edit / Remove</a></li>
+                <li><a href="<?php echo FRONT_ROOT?>Show/showListView">List / Edit</a></li>
               </ul>
             </li>
              <li class="active"><a>Users</a>
@@ -72,7 +72,7 @@
             <?php } ?>
           </ul>
         </li>
-        <li><a class="" href="#"><img src=""></a></li>
+        <li><a class="" href="#"><img src=""></a></li><!--- boton ivisible para acomodar-->
 
       </ul>
     </nav>

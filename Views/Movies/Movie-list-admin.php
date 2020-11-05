@@ -22,7 +22,7 @@
             </form>
           </div>
 
-          <div class="one_half up2">
+          <div class="one_half up3">
              <?php if($this->msg){ ?> <h1 class="msg"><?php echo $this->msg;} ?></h1>
 
             <form action="<?php echo FRONT_ROOT?>Movie/addMultipleMovies" method="POST" >
@@ -45,7 +45,7 @@
                       <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
                     </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt=""> 
+                      <img class="posterSmall shadow" src="<?php echo $movie->getPoster()?>" alt=""> 
                     </a>         
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>
@@ -65,7 +65,7 @@
                       <label for="<?php echo $movie->getTmdbID();?>">Toggle</label>
                     </div>
                     <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
-                      <img class="posterSmall" src="<?php echo $movie->getPoster()?>" alt="">
+                      <img class="posterSmall shadow" src="<?php echo $movie->getPoster()?>" alt="">
                     </a>
                     <p class="p-title"><?php echo $movie->getTitle()?></p>
                     <p><i class="fa-spin fa fa-star"></i><?php echo " ".$movie->getVoteAverage()?></p>

@@ -45,7 +45,7 @@
             <?php if($roomList){ ?>
             <div class="cardStyle hoc orange mrg_top">
                 <center>
-                <h4><u> Rooms</u></h4>
+                <h4> Rooms</h4>
 
 
                 <div class="one_third first"> 
@@ -92,13 +92,18 @@
     <!-- ################################################################### BILLBOARD GALLERY ################################################################### -->
 <div class="background-pic gradient" >
     <h2 class="page-title mrg_btm3">Billboard</h2>
-    <main class="down clear grid"> 
+    <main class="down clear grid">     
+        
+        <?php if($this->msg != null){?>   <!---error msg-->
+        <h4 class="msg"><?php  echo $this->msg;} ?> </h4>
+
+
               <?php if($movieList){
                         foreach($movieList as $movie){?>
                         
                             <div class="cardStyle mrg_btm3 leftmrg ">
-                                <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 30){
-                                                                $str1 = substr($movie->getTitle(), 0, 27) . '...';
+                                <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 24){
+                                                                $str1 = substr($movie->getTitle(), 0, 21) . '...';
                                                                 echo $str1; ?><?php }else{ echo $movie->getTitle(); } ?></button>
 
                                 <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
@@ -158,8 +163,7 @@
   
 
 
-                <?php if($this->msg != null){?>    <div class="center noBack">
-                <h4 class="msg"><?php  echo $this->msg;} ?> </h4><br><br><br><br><br><br></div>
+            
             
 
 

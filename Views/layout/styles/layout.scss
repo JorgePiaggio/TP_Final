@@ -60,7 +60,7 @@ File: Layout CSS
 }
 .buttonCaprichoso{
     margin-top: 50%;
-    margin-left: -320%;
+    margin-left: -380%;
 }
 
 .mrg_left{
@@ -73,7 +73,7 @@ File: Layout CSS
 #pageintro article{max-width:75%;}
 #pageintro article *{text-transform:uppercase;}
 #pageintro article .heading{margin:0 0 20px -20px; padding:0; line-height:1; font-size:46px;}
-#pageintro article p{margin:0; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;} 																
+#pageintro article p{margin:0; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;} 																
 #pageintro article p:first-of-type{margin-bottom:35px; margin-left:150px; text-align: right;font-size:12px;} 			/* PARRAFO INFERIOR DE SLIDES */
 #pageintro article footer{margin-top:-10px;margin-bottom:10px; align-content: center; margin-left: 350px;}
 
@@ -199,7 +199,7 @@ ul.room li {
 --------------------------------------------------------------------------------------------------------------- */
 nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
-h1.logo{font-family: 'Faster One', cursive;}
+/*h1.logo{font-family: 'Faster One', cursive;}*/
 #mainav, #breadcrumb, .sidebar nav{line-height:normal;}
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
 
@@ -220,7 +220,7 @@ h1.logo{font-family: 'Faster One', cursive;}
 #mainav li li .drop::after{top:15px; left:5px;}
 #mainav ul ul{visibility:hidden; opacity:0;}
 #mainav ul li:hover > ul{visibility:visible; opacity:1;}
-
+#mainav a{font-size: 16px;}
 #mainav form{display:none; margin:0; padding:0;}
 #mainav form select, #mainav form select option{display:block; cursor:pointer; outline:none;}
 #mainav form select{width:100%; padding:5px; border:1px solid;}
@@ -486,8 +486,8 @@ max-height: 678px;
     
     .slideDown p{
         font-size: 22px;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-        color:#dc481a; 
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      color:#dc481a; 
         text-align: center;
         text-shadow: 2px 2px #000000;
         padding: 20px 20px;
@@ -902,6 +902,9 @@ max-height: 678px;
 /* BILLBOARD LIST PAGE
 ******************************************* BOTON DESPLEGABLE VER SHOWS ABAJO DE LAS PELICULAS ****************************************************************************/
 @at-root
+.btn.notCollapsible{
+    font-size: 22px !important;
+}
 .notCollapsible {
     background-color: black;
     color: #FF5723;
@@ -911,14 +914,15 @@ max-height: 678px;
     border: none;
     text-align: center;
     outline: none;
-    font-size: 15px;
+    font-size: 22px !important;
     font-weight: bold;
-    
+    overflow: collapse;
+    text-overflow: hidden;
   }
   .notCollapsible.nc2{
     color: grey;
 }
- 
+
   .collapsible {
     background-color: #FF5723;
     color: black;
@@ -966,6 +970,10 @@ max-height: 678px;
 
   
   }
+
+
+
+  
   /* home */ 
   .posterBillboardHome {
     height:auto;
@@ -1095,7 +1103,7 @@ max-height: 678px;
 }
 
 
-.name{color:#FF5723; text-align: center; font-family: 'Times New Roman', Times, serif; font-weight: bold; padding: 6px 6px; }
+.name{color:#FF5723; text-align: center; font-family:Georgia, "Times New Roman", Times, serif; font-weight: bold; padding: 6px 6px; }
 
 
 

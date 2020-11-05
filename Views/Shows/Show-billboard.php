@@ -71,9 +71,11 @@
                         <!------------------------------------------------ PRIMER CUARTO ------------------------------------------->
         
                         <div class="one_quarter first mrg_btm up">
-                          <div class="cardStyle mrg_sides">
+                          <div class="cardStyle ">
 
-                          <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
+                          <button type="" class="notCollapsible"><?php if(strlen($movie->getTitle()) > 33){
+                                                          $str1 = substr($movie->getTitle(), 0, 30) . '...';
+                                                          echo $str1; ?><?php }else{ echo $movie->getTitle(); } ?></button>
                           
                             <div class="posterBillboard-hover-zoom posterBillboard-hover-zoom--slowmo">
                               <a href="<?php echo FRONT_ROOT?>Movie/showMovie/<?php echo $movie->getTmdbID()?>">
@@ -140,7 +142,7 @@
                               <!------------------------------------------------ LOS OTROS CUARTOS ---------------------------------->
 
                         <div class="one_quarter mrg_btm up">
-                          <div class="cardStyle mrg_sides">
+                          <div class="cardStyle ">
                             
                           <button type="" class="notCollapsible"><?php echo $movie->getTitle()?></button>
 

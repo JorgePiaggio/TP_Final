@@ -70,8 +70,8 @@ a{outline:none; text-decoration:none;}
 
 /* Fonts
 --------------------------------------------------------------------------------------------------------------- */
-body, input, textarea, select{font-family:Verdana, Geneva, sans-serif;}
-h1, h2, h3, h4, h5, h6, .heading{font-family:Georgia, "Times New Roman", Times, serif;}
+body, input, textarea, select{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+h1, h2, h3, h4, h5, h6, .heading{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 .heading{font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif};
 
 
@@ -282,10 +282,6 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
     margin: 14px 14px;
   }
  
- /* .seatTrue.check label:before{
-    content: "\f0c8";
-    font-family: "FontAwesome";
-  }*/
   .seatTrue.check label.lbl , .seatFalse.check label.lbl{
     cursor: pointer;
     text-indent: -9999px;
