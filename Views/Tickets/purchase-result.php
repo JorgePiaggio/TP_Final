@@ -5,8 +5,8 @@
     <main class="hoc container clear"> 
 
         <div class="hoc cardStyle up">
-            <div id="html-content-holder">      
-
+            <div id="html-content-holder">  <!--- el contenido de este div se descarga en la imagen de la compra, y se envia x mail -->    
+                    <br><br>
                     <table class="tablePurchase tt">
                         <thead class="bg-dark text-white">
                             <th>User</th>
@@ -19,32 +19,27 @@
                         </thead>
                         <tbody>
                             <?php 
-
-
-
                                 if($tickets){ 
-                                foreach($tickets as $ticket){?>
-                                <tr>
-                                    <td><p><?php echo $ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname();?></p></td>
-                                    <td><p><?php echo $ticket->getShow()->getMovie()->getTitle(); ?></p></td>  
-                                    <td><p><?php echo date('l d M - H:i', strtotime($ticket->getShow()->getDateTime()))." hs"; ?></p></td>  
-                                    <td><p><?php echo $ticket->getShow()->getShift(); ?></p></td>  
-                                    <td><p><?php echo "$ ".$ticket->getShow()->getRoom()->getPrice(); ?></p></td>  
-                                    <td><p><?php echo "Row: ".$ticket->getSeat()->getRow()."  Column:".$ticket->getSeat()->getNumber(); ?></p></td> 
-                                    <?php  array_push($seats,$ticket->getSeat()->getRow()."-".$ticket->getSeat()->getNumber()); ?> 
-                                    <td><img src=" <?php echo IMG_PATH."tickets/".$ticket->getSeat()->getRow().$ticket->getSeat()->getNumber().$ticket->getShow()->getIdShow().".png"?>";></td>
-                                </tr> 
-                                <?php }
-                            } ?>
-                            
+                                    foreach($tickets as $ticket){?>
+                                        <tr>
+                                            <td><p><?php echo $ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname();?></p></td>
+                                            <td><p><?php echo $ticket->getShow()->getMovie()->getTitle(); ?></p></td>  
+                                            <td><p><?php echo date('l d M - H:i', strtotime($ticket->getShow()->getDateTime()))." hs"; ?></p></td>  
+                                            <td><p><?php echo $ticket->getShow()->getShift(); ?></p></td>  
+                                            <td><p><?php echo "$ ".$ticket->getShow()->getRoom()->getPrice(); ?></p></td>  
+                                            <td><p><?php echo "Row: ".$ticket->getSeat()->getRow()."  Column:".$ticket->getSeat()->getNumber(); ?></p></td> 
+                                            <?php  array_push($seats,$ticket->getSeat()->getRow()."-".$ticket->getSeat()->getNumber()); ?> 
+                                            <td><img src=" <?php echo IMG_PATH."tickets/".$ticket->getSeat()->getRow().$ticket->getSeat()->getNumber().$ticket->getShow()->getIdShow().".png"?>";></td>
+                                        </tr> 
+                                        <?php 
+                                    } 
+                                } ?>
                         </tbody>
-                    </table><br><br>
+                    </table><br><br><br><br>
 
             </div>
 
            
-
-
                         <center> 
                             <div class="hoc cardStyle fit">
                         <h2 class="orange"><?php echo "Total Price (With discount): $ ".$ticket->getBill()->getTotalPrice(); ?></h2>
@@ -73,23 +68,20 @@
             </div>      
 
             <form id="formu" action="<?php echo FRONT_ROOT?>Ticket/showSendEmail"  name="formu" class="center" method="post">
-
-   
-            <input type="hidden" id="nombre" name="nombre" type="text" value="<?php echo $ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname(); ?>" />
-  
-
-            <input type="hidden" id="email" name="email"  type="email" value="<?php echo $ticket->getBill()->getUser()->getEmail();?>" />
-            <input type="hidden" id="seats" name="seats"  type="text" value="<?php echo implode("/",$seats);?>" />
-            <input type="hidden" id="movie" name="movie"  type="text" value="<?php echo $ticket->getShow()->getMovie()->getTitle();?>" />
-            <input type="hidden" id="date" name="date"  type="text" value="<?php echo $ticket->getShow()->getDateTime();?>" />
-            <input type="hidden" id="cinema" name="cinema"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getCinema()->getName();?>" />
-            <input type="hidden" id="croom" name="room"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getName();?>" />
-            <input type="hidden" id="cant" name="cant"  type="text" value="<?php echo count($tickets);?>" />
-            <input type="hidden" id="card" name="card"  type="text" value="<?php echo $card;?>" />
-            <input type="hidden" id="show" name="show"  type="text" value="<?php echo $ticket->getShow()->getIdShow();?>" />
     
-                            
-            <button id="btn-email"  value="" class="btn btn-primary ml-auto d-block" type="submit">Send Email</button>
+                <input type="hidden" id="nombre" name="nombre" type="text" value="<?php echo $ticket->getBill()->getUser()->getName()."  ".$ticket->getBill()->getUser()->getSurname(); ?>" />
+                <input type="hidden" id="email" name="email"  type="email" value="<?php echo $ticket->getBill()->getUser()->getEmail();?>" />
+                <input type="hidden" id="seats" name="seats"  type="text" value="<?php echo implode("/",$seats);?>" />
+                <input type="hidden" id="movie" name="movie"  type="text" value="<?php echo $ticket->getShow()->getMovie()->getTitle();?>" />
+                <input type="hidden" id="date" name="date"  type="text" value="<?php echo $ticket->getShow()->getDateTime();?>" />
+                <input type="hidden" id="cinema" name="cinema"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getCinema()->getName();?>" />
+                <input type="hidden" id="croom" name="room"  type="text" value="<?php echo $ticket->getShow()->getRoom()->getName();?>" />
+                <input type="hidden" id="cant" name="cant"  type="text" value="<?php echo count($tickets);?>" />
+                <input type="hidden" id="card" name="card"  type="text" value="<?php echo $card;?>" />
+                <input type="hidden" id="show" name="show"  type="text" value="<?php echo $ticket->getShow()->getIdShow();?>" />
+        
+                                
+                <button id="btn-email"  value="" class="btn btn-primary ml-auto d-block" type="submit">Send Email</button>
             </form>
 
 

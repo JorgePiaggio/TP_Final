@@ -103,7 +103,22 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
 
 /*Forms with floating label
 ------------------------------------------------------------------------------------------------------*/
-.floating-input.pageNumber{ margin-left:200px; margin-top:-75px;}
+/* buscar en pagina API */
+.floating-input.pageNumber{ 
+  margin-left:200px; 
+  margin-top:-75px;
+}
+
+/* buscar en el nav */
+.floating-input.floatnav {
+  border-bottom: .5px solid #ff562381;
+}
+.floating-input.floatnav ~ label{
+  color: #ff56237d; 
+}
+
+
+/* demas floating input */
 
 .form-title{
     margin: -30px 0 20px 10px;
@@ -151,10 +166,6 @@ select.selection option.selected:hover{color: black ; background-color: #FF5723;
   }
   .floating-input ~ input[placeholder] {
   opacity: 0;
-}
-
-.floating-input.floatnav ~ label{
-  color: #ff56237d; 
 }
 
 .floating-input:focus ~ input[placeholder], .floating-input:not(:placeholder-shown) ~ input[placeholder] {

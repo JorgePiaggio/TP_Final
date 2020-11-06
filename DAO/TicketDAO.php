@@ -616,6 +616,69 @@
         }
 
 
+        /* retorna historial de tickets comprados del cliente, solo datos q se muestran en profile */
+        public function getTicketsByClient($idUser){
+            try
+            {   
+                $query = "SELECT bills.tickets, bills.totalPrice, tickets.idTicket, shows.dateTime, cinemas.name, movies.title FROM bills
+                            INNER JOIN tickets ON tickets.idBill = bills.idBill
+                            INNER JOIN shows ON tickets.idShow = shows.idShow
+                            INNER JOIN movies ON shows.idMovie = movies.idMovie
+                            INNER JOIN rooms ON shows.idRoom = rooms.idRoom
+                            INNER JOIN cinemas ON rooms.idCinema = cinemas.idCinema
+                            WHERE idUser = $idUser
+                            GROUP BY bills.idBill";
+                          
+                
+                $this->connection = Connection::getInstance();
+                
+                $result = $this->connection->execute($query);
+                $history= array();
+
+                if($result){
+                    foreach($result as $r){
+                        $results = $this->mapHistory($r);
+                        array_push($history, $results);
+                    }
+                }
+            }
+            catch(\PDOException $ex)
+            {
+                throw $ex;
+            }
+
+            return $history;        
+        }
+
+
+        /* mapea resumen de historial de compras de cliente */
+        protected function mapHistory($value){
+            $ticket = new Ticket();
+            $bill = new Bill();
+            $show = new Show();
+            $room = new Room();
+            $cinema = new Cinema();
+            $movie = new Movie();
+
+            $ticket->setIdTicket($value["idTicket"]);
+            $bill->setTickets($value["tickets"]);
+            $bill->setTotalPrice($value["totalPrice"]);
+            $show->setDateTime($value["dateTime"]);
+            $cinema->setName($value["name"]);
+            $movie->setTitle($value["title"]);
+            
+            $room->setCinema($cinema);
+            $show->setRoom($room);
+            $show->setMovie($movie);
+            $ticket->setShow($show);
+            $ticket->setBill($bill);
+
+            return $ticket;
+
+        }
+
+
+
         protected function mapTicket($value){
             $ticket=new Ticket();
             $ticket->setIdTicket($value["idTicket"]);
