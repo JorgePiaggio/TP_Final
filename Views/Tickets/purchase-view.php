@@ -96,10 +96,10 @@
                                 <span class="highlight"></span><label for="">Card Number</label>
                             </div> <br> 
                             <div class="floating-label">
-                            <input type="text" maxlength="100" name="propietary" value="" placeholder="Name" pattern="[a-z]+" class="floating-input" required>
+                            <input type="text" maxlength="100" name="propietary" value="" placeholder="Name" pattern="[A-Za-z]+" class="floating-input" required>
                             </div> 
                             <div class="floating-label">
-                               <input type="text" maxlength="100" name="propietaryname" value="" placeholder="Surname" pattern="[a-z]+" class="floating-input" required>
+                               <input type="text" maxlength="100" name="propietaryname" value="" placeholder="Surname" pattern="[A-Za-z]+" class="floating-input" required>
                             </div> 
                             
                             <div>

@@ -74,7 +74,7 @@
               <?php if(!$showList){ ?>
                         <p class="p_orange">No shows on schedule</p> <hr><?php
                     }else{
-                        if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                        if((isset($_SESSION)) && (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"] != "admin@moviepass.com")){
                           foreach($showList as $show){
                             if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
                               <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">

@@ -222,6 +222,7 @@
             $bill= new Bill();
             $bill->setIdBill($value["idBill"]);
             $bill->setUser($this->mapUser($value));
+            $bill->setCreditCardPayment($this->mapPayment($value));
             $bill->setTickets($value["tickets"]);
             $bill->setDate($value["date"]);
             $bill->setTotalPrice($value["totalPrice"]);

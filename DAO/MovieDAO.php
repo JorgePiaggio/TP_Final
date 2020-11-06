@@ -161,7 +161,7 @@ class MovieDAO implements IMovieDAO{
 
             $movieList = array();
 
-            $query = "SELECT * FROM movies WHERE state = 1";
+            $query = "SELECT * FROM movies WHERE state = 1 ORDER BY title";
 
             $this->connection = Connection::getInstance();
 
@@ -197,7 +197,7 @@ class MovieDAO implements IMovieDAO{
         {
             $movieList = array();
 
-            $query = "SELECT * FROM movies WHERE state = 0";
+            $query = "SELECT * FROM movies WHERE state = 0 ORDER BY title";
 
             $this->connection = Connection::getInstance();
 
