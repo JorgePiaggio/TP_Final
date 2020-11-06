@@ -95,7 +95,7 @@
                             <div>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
-                                <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                                <?php if((isset($_SESSION)) && (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"] != "admin@moviepass.com")){
                                         foreach($showList as $show){
                                           if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
                                             <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">
@@ -164,7 +164,7 @@
                             <div>
                               <button type="button" class="collapsible">Show List</button>
                               <div class="content1">
-                              <?php if($_SESSION && $_SESSION["loggedUser"] != "admin@moviepass.com"){
+                              <?php if((isset($_SESSION)) && (isset($_SESSION["loggedUser"]) && $_SESSION["loggedUser"] != "admin@moviepass.com")){
                                       foreach($showList as $show){
                                           if($show->getMovie()->getTmdbId() == $movie->getTmdbId()){ ?>
                                             <a href="<?php echo FRONT_ROOT?>/Ticket/showPurchaseView/<?php echo $show->getIdShow()?>">

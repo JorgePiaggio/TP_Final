@@ -244,7 +244,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                     $creditCardPayment->setCreditCard($creditCard);
                     $this->creditCardPaymentDAO->add($creditCardPayment);
                     $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d H:i:s'));
-                    
+
                     /* crear boleta */
                     $bill = new Bill();
                     $bill->setUser($user);
@@ -262,7 +262,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                         $seat= new Seat();
                         $seat->setRow($seatRow[$indice]+1);
                         $seat->setNumber($seatNumber[$indice]+1);
-
                         $this->seatDAO->add($seat, $idShow);
                         
                         $ticket = new Ticket();
@@ -274,6 +273,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                         $ticket->setQrCode($qrCode);
                         $this->ticketDAO->add($ticket);
                         array_push($ticketList,$ticket);
+                        
 
                         /* descarga el codigo qr que manda la api */
                         @$rawImage = file_get_contents($qrCode);

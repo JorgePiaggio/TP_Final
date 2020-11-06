@@ -27,6 +27,7 @@ class Bill {
     public function getDate(){return $this->date;}
     public function getTotalPrice(){return $this->totalPrice;}
     public function getDiscount(){return $this->discount;}
+    
     public function setIdBill($idBill){$this->idBill=$idBill;}
     public function setUser($user){$this->user=$user;}
     public function setCreditCardPayment($creditCardPayment){$this->creditCardPayment=$creditCardPayment;}
