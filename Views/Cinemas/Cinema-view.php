@@ -95,7 +95,7 @@
     <main class="down clear grid">     
         
         <?php if($this->msg != null){?>   <!---error msg-->
-        <h4 class="msg"><?php  echo $this->msg;} ?> </h4>
+       <center> <h4 class="msg"><?php  echo $this->msg;} ?> </h4> </center>
 
 
               <?php if($movieList){

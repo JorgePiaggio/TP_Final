@@ -172,7 +172,7 @@
                   }
                 }
               }
-              else{ ?><span class="center"><h4 class="msg">No matching results</h4></span><?php
+              else{ ?><center><h4 class="msg">No matching results</h4></center><?php
               } ?>
                 
             </form>

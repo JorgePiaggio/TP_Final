@@ -81,7 +81,7 @@
               <span></span>
   <main class="clear grid" > 
         <?php if($this->msg != null){?> 
-              <h4 class="msg"><?php  echo $this->msg;?> </h4> <?php
+             <center> <h4 class="msg"><?php  echo $this->msg;?> </h4></center> <?php
           } ?> 
         <?php foreach($movieShows as $movie){?>
           

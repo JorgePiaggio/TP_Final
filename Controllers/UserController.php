@@ -32,7 +32,7 @@ class UserController{
     }
 
     public function showLogin(){
-        require_once(VIEWS_PATH."Users/User-login.php");
+    require_once(VIEWS_PATH."Users/User-login.php");
     }
 
     public function showProfile(){
@@ -125,9 +125,13 @@ class UserController{
     }
 
 
-    public function logout(){     
+    public function logout(){ 
+  
         session_destroy();
-        header("location:../Home/index");
+        
+        #header("location:../Home/index");
+
+        $this->showLogin();
     }
     
 

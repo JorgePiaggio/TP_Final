@@ -1,10 +1,11 @@
 <?php 
 
 #session_start();  
+/*
 if(!session_id()) {
      session_start();
 }
-
+*/
 
 /* COMENTAR SI SE USA WAMPP */
 
