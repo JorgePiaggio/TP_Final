@@ -7,6 +7,7 @@ use Models\User as User;
 use DAO\UserDAO as UserDAO;
 use DAO\RoleDAO as RoleDAO;
 use Models\Role as Role;
+use DAO\TicketDAO as TicketDAO;
 use DAO\UsersReviewsDAO as UsersReviewsDAO;
 use Config\Validate as Validate;
 use \Exception as Exception;
@@ -20,12 +21,14 @@ class UserController{
     private $user;
     private $msg;
     private $roleDAO;
+    private $ticketDAO;
     
     public function __construct(){
         $this->userDAO = new UserDAO(); 
         $this->userReviewsDAO = new UsersReviewsDAO(); 
         $this->user = null;
         $this->msg = null;
+        $this->ticketDAO= new TicketDAO();
         $this->roleDAO= new RoleDAO();
         $this->createRoles();
    
@@ -35,18 +38,29 @@ class UserController{
     require_once(VIEWS_PATH."Users/User-login.php");
     }
 
+
     public function showProfile(){
+        
         if($_SESSION){
-            $user = $this->userDAO->search($_SESSION['loggedUser']);
+            try{
+                $user = $this->userDAO->search($_SESSION['loggedUser']);
+                $ticketHistory = $this->ticketDAO->getTicketsByClient($user->getIdUser());
+            }catch(\Exception $e){
+                echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+            }
+
             require_once(VIEWS_PATH."Users/User-profile.php");
+
         }else{
             header("location:../Home/index");
         }
     }
 
+
     public function showRegister(){
         require_once(VIEWS_PATH."Users/User-register.php");
     }
+
 
     public function showEditView(){
         if($_SESSION){
@@ -56,11 +70,13 @@ class UserController{
         }
     }
 
+
     public function showSelectUser(){
         Validate::validateSession();
 
         require_once(VIEWS_PATH."Users/User-search.php");
     }
+
 
     public function showUserView($emailUser=""){
         Validate::checkParameter($emailUser);

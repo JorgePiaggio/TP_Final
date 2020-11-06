@@ -93,6 +93,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     }
 
+
     public function showPurchaseResult($tickets="", $card=""){
         Validate::checkParameter($tickets);
         $this->validateNotAdmin();
@@ -107,6 +108,20 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
     }
     
+
+    public function showSendEmail($name="", $email="", $seats="", $movieTitle="", $date="", $cinema="", $room="", $cantTicket="", $card="", $idShow=""){
+        Validate::checkParameter($seats);
+        $this->validateNotAdmin();
+
+        $newSeats=explode("/",$seats);
+        $seatList=array();
+        foreach($newSeats as $seat){
+            array_push($seatList,explode("-",$seat));
+        }
+        require_once(VIEWS_PATH."Tickets/purchase-email.php");
+    }
+
+
     public function showStatistics($idCinema=""){
         Validate::checkParameter($idCinema);
         Validate::validateSession();
@@ -127,17 +142,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
     
-    public function showSendEmail($name="", $email="", $seats="", $movieTitle="", $date="", $cinema="", $room="", $cantTicket="", $card="", $idShow=""){
-        Validate::checkParameter($seats);
-        $this->validateNotAdmin();
-
-        $newSeats=explode("/",$seats);
-        $seatList=array();
-        foreach($newSeats as $seat){
-            array_push($seatList,explode("-",$seat));
-        }
-        require_once(VIEWS_PATH."Tickets/purchase-email.php");
-    }
 
     /*Según la estadística buscada llama a cada función del DAO */
     public function showData($flag="", $idCinema="", $date="", $shift="", $idMovie=""){
@@ -201,6 +205,8 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         }
     }
 
+
+    /* compra de tickets, crear boleta, pago, tickets y asientos */
     public function add($creditCardCompany="", $creditCardNumber="", $creditCardPropietary="", $creditCardExpiration="", $total="", $seats="", $idShow=""){
         Validate::checkParameter($idShow);
         $this->validateNotAdmin();
@@ -225,80 +231,86 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 if($show->getRemainingTickets() >= count($seatNumber)){
 
                 
-                    /*creat tarjeta de credito */
+                    /*crear tarjeta de credito */
                     $creditCard= new CreditCard();
                     $creditCard->setCompany($creditCardCompany);
                     $creditCard->setPropietary($creditCardPropietary);
                     $creditCard->setNumber($creditCardNumber);
                     $creditCard->setExpiration($date);
                 
-                    $card=$this->creditCardDAO->search($creditCardNumber,$creditCardCompany);
-                    if(!$card){
-                        $this->creditCardDAO->add($creditCard);
+                    $card=$this->creditCardDAO->search($creditCardNumber,$creditCardCompany);  
+                    if(!$card){     // agregarla si no existe
+                        $resultCard=$this->creditCardDAO->add($creditCard);  
                     }
-                    /* crear transaccion */
-                    $actualDate=date('Y-m-d H:i:s');
-                    $creditCardPayment = new CreditCardPayment();
-                    $creditCardPayment->setTotal($total);
-                    $creditCardPayment->setDate($actualDate);
-                    $creditCardPayment->setCreditCard($creditCard);
-                    $this->creditCardPaymentDAO->add($creditCardPayment);
-                    $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d H:i:s'));
 
-                    /* crear boleta */
-                    $bill = new Bill();
-                    $bill->setUser($user);
-                    $bill->setTickets(count($seatNumber));
-                    $bill->setDate($actualDate);
-                    $bill->setCreditCardPayment($payment);
-                    $bill->setTotalPrice($total);
-                    $bill->setDiscount(DISCOUNT);
-                    $this->billDAO->add($bill);
+                    if( $card || $resultCard > 0 ){                                                                 // si se aprueba la tarjeta se continua el proceso, sino se cancela
 
-                    $ticketList=array();
+                        /* crear transaccion */
+                        $actualDate=date('Y-m-d H:i:s');
+                        $creditCardPayment = new CreditCardPayment();
+                        $creditCardPayment->setTotal($total);
+                        $creditCardPayment->setDate($actualDate);
+                        $creditCardPayment->setCreditCard($creditCard);
+                        $resultPayment= $this->creditCardPaymentDAO->add($creditCardPayment);
 
-                    /* crear asientos y tickets */
-                    for($indice=0; $indice< count($seatNumber); $indice++){
-                        $seat= new Seat();
-                        $seat->setRow($seatRow[$indice]+1);
-                        $seat->setNumber($seatNumber[$indice]+1);
-                        $this->seatDAO->add($seat, $idShow);
-                        
-                        $ticket = new Ticket();
-                        $ticket->setBill($this->billDAO->searchByCodePayment($payment->getCode()));
-                        $ticket->setShow($show);
-                        $ticket->setSeat($this->seatDAO->search($idShow,$seat->getRow(),$seat->getNumber()));
-                        $ticket->setPrice($show->getRoom()->getPrice());
-                        $qrCode=APIQRCODE.$creditCardNumber.$seat->getRow().$seat->getNumber().$show->getIdShow();
-                        $ticket->setQrCode($qrCode);
-                        $this->ticketDAO->add($ticket);
-                        array_push($ticketList,$ticket);
-                        
+                        if( $resultPayment > 0 ){                                                                   // si se aprueba el pago se continua el proceso
 
-                        /* descarga el codigo qr que manda la api */
-                        @$rawImage = file_get_contents($qrCode);
+                            // se busca el pago en el DAO porque aun no tenia seteado un id
+                            $payment= $this->creditCardPaymentDAO->search($creditCardNumber, $creditCardCompany, date('Y-m-d H:i:s'));
+                            
+                            /* crear boleta */
+                            $bill = new Bill();
+                            $bill->setUser($user);
+                            $bill->setTickets(count($seatNumber));
+                            $bill->setDate($actualDate);
+                            $bill->setCreditCardPayment($payment);
+                            $bill->setTotalPrice($total);
+                            $bill->setDiscount(DISCOUNT);
+                            $resultBill = $this->billDAO->add($bill);
 
-                        if($rawImage){
-                            file_put_contents(VIEWS_PATH.'layout/images/tickets/'.$seat->getRow().$seat->getNumber().$show->getIdShow().'.png',$rawImage);
-                        }else{
-                            echo 'Error Occured';
+
+                            $ticketList=array();
+
+                            /* crear asientos y tickets */
+                            for($indice=0; $indice< count($seatNumber); $indice++){
+                                $seat= new Seat();
+                                $seat->setRow($seatRow[$indice]+1);
+                                $seat->setNumber($seatNumber[$indice]+1);
+
+                                $this->seatDAO->add($seat, $idShow);
+                                
+                                $ticket = new Ticket();
+                                $ticket->setBill($this->billDAO->searchByCodePayment($payment->getCode()));
+                                $ticket->setShow($show);
+                                $ticket->setSeat($this->seatDAO->search($idShow,$seat->getRow(),$seat->getNumber()));
+                                $ticket->setPrice($show->getRoom()->getPrice());
+                                $qrCode=APIQRCODE.$creditCardNumber.$seat->getRow().$seat->getNumber().$show->getIdShow();
+                                $ticket->setQrCode($qrCode);
+                                $this->ticketDAO->add($ticket);
+                                array_push($ticketList,$ticket);
+
+                                /* descarga el codigo qr que manda la api */
+                                @$rawImage = file_get_contents($qrCode);
+
+                                if($rawImage){
+                                    file_put_contents(VIEWS_PATH.'layout/images/tickets/'.$seat->getRow().$seat->getNumber().$show->getIdShow().'.png',$rawImage);
+                                }else{
+                                    echo 'Error Occured';
+                                }
+                            }
+                    
+                            //actualizo las entradas 
+                            $show->setRemainingTickets(($show->getRemainingTickets())-count($seatNumber));
+                            $this->showDAO->update($show);
+
+                            $this->showPurchaseResult($ticketList,$creditCardNumber);
                         }
-
                     }
-
-                    //actualizo las entradas 
-                    $show->setRemainingTickets(($show->getRemainingTickets())-count($seatNumber));
-                    $this->showDAO->update($show);
-
-                    $this->showPurchaseResult($ticketList,$creditCardNumber);
 
                 }else{
                     $this->msg="No available tickets for this show";
                     $this->showPurchaseView($idShow);
-                
                 }
-                
-
             }
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
@@ -306,6 +318,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
     }
 
 
+    /* evalua por dia y cantidad de tickets si corresponde descuento o no */
     private function calculateDiscount($seatNumber="", $date="", $price="", &$total=""){
         Validate::checkParameter($seatNumber);
         $this->validateNotAdmin();
