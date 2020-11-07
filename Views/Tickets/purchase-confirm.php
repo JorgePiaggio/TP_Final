@@ -65,12 +65,13 @@
 
             <div>
 
-                <form action="<?php echo FRONT_ROOT?>Ticket/add" class="center" method="post"><?php $exp=$monthExp."/".$yearExp;?>
+                <form action="<?php echo FRONT_ROOT?>Ticket/add" class="center" method="post">
                     <div>
                         <input type="hidden" name="company" value="<?php echo $company;?>">
                         <input type="hidden" name="cardNumber" value="<?php echo $cardNumber;?>">
                         <input type="hidden" name="propietary" value="<?php echo $propietary;?>">
-                        <input type="hidden" name="expiration" value="<?php echo $exp;?>">
+                        <input type="hidden" name="monthExp" value="<?php echo $monthExp;?>">
+                        <input type="hidden" name="yearExp" value="<?php echo $yearExp;?>">
                         <input type="hidden" name="total" value="<?php echo $total;?>">
                         <input type="hidden" name="seats" value="<?php echo implode("/",$seats);?>">
                     </div>

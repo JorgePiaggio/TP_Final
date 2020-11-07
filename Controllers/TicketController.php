@@ -22,6 +22,7 @@ use DAO\CinemaDAO as CinemaDAO;
 use DAO\MovieDAO as MovieDAO;
 
 use Config\Validate as Validate;
+use \DateTime;
 
 define("DISCOUNT", 25);
 define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=');
@@ -207,7 +208,7 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
 
 
     /* compra de tickets, crear boleta, pago, tickets y asientos */
-    public function add($creditCardCompany="", $creditCardNumber="", $creditCardPropietary="", $creditCardExpiration="", $total="", $seats="", $idShow=""){
+    public function add($creditCardCompany="", $creditCardNumber="", $creditCardPropietary="", $monthExp="", $yearExp="", $total="", $seats="", $idShow=""){
         Validate::checkParameter($idShow);
         $this->validateNotAdmin();
 
@@ -225,8 +226,10 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
             }
 
 
-            $expiration=explode("/",$creditCardExpiration);
-            $date = date("Y-m-d", mktime($expiration[1],$expiration[0],1));
+            #$expiration=explode("/",$creditCardExpiration);
+            $date = date($yearExp."-".$monthExp."-1 0:0:0");
+            
+
             if($show){
                 if($show->getRemainingTickets() >= count($seatNumber)){
 
