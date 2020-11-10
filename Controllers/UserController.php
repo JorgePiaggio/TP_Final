@@ -200,9 +200,7 @@ class UserController{
                 }
                header("location:../Home/index");
             }
-            else{
-                $this->msg = "Invalid password";  
-            }
+          
         }
         else{
             $this->msg="Email: '$email' already exists";
@@ -213,8 +211,7 @@ class UserController{
 
     public function edit($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
-        Validate::validateSession();
-
+        #Validate::validateSession();
         try{
             $userAux = $this->userDAO->search($email);
                 
@@ -251,8 +248,8 @@ class UserController{
     private function validatePass($pass, $repass){
         Validate::checkParameter($pass);
 
-        /*if(strlen($pass) < 8){
-           $this->msg = "The password must be at least 8 characters";
+        if(strlen($pass) < 6){
+           $this->msg = "The password must be at least 6 characters";
            return false;
         }
         if(strlen($pass) > 16){
@@ -271,10 +268,10 @@ class UserController{
            $this->msg = "The password must have at least one numeric character";
            return false;
         }
-        if (strcmp($pass, $repass) == 0){     
+        if (strcmp($pass, $repass) != 0){     
             $this->msg = "Passwords don't match";
-            return false;*/
-
+            return false;
+        }
         return true;
     }
 

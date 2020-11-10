@@ -82,7 +82,7 @@
                                     <td class="center"><?php echo $ticket->getShow()->getMovie()->getTitle(); ?></td>    
                                     <td class="center"><?php echo $ticket->getShow()->getRoom()->getCinema()->getName(); ?></td>
                                     <td class="center"><?php echo $ticket->getBill()->getTickets(); ?></td>
-                                    <td class="center"><?php echo $ticket->getBill()->getTotalPrice(); ?></td>
+                                    <td class="center"><?php echo "$ ".$ticket->getBill()->getTotalPrice(); ?></td>
                                 </tr>     
                                     <?php $totalCash+=$ticket->getBill()->getTotalPrice(); 
                                           $totalTickets+=$ticket->getBill()->getTickets(); 

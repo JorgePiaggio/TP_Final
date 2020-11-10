@@ -40,8 +40,7 @@
               </div><br>
               <div>
                 <h4>Homepage</h4>
-                  <?php if($movie->getHomepage() != null){ ?>
-                    <p><a href="<?php echo $movie->getHomepage()?>" target="_blank"> 
+                  <p><?php if($movie->getHomepage() != null){ ?><a href="<?php echo $movie->getHomepage()?>" target="_blank"> 
                           <?php echo $movie->getHomepage();?></a><?php
                           }else{ echo "Not Available";}?></p><br>
               </div>   
