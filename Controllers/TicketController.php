@@ -38,7 +38,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
         private $cinemaDAO;
         private $movieDAO;
         private $msg;
-        private $data;
       
 
     function __construct(){
@@ -225,8 +224,6 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
                 array_push($seatRow,$value[0]);
             }
 
-
-            #$expiration=explode("/",$creditCardExpiration);
             $date = date($yearExp."-".$monthExp."-1 0:0:0");
             
 

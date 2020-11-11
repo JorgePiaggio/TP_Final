@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 23-10-2020 a las 04:23:21
--- Versión del servidor: 8.0.21
--- Versión de PHP: 7.3.21
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-11-2020 a las 01:40:51
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,18 +27,14 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `bills`
 --
 
-DROP TABLE IF EXISTS `bills`;
-CREATE TABLE IF NOT EXISTS `bills` (
-  `idBill` int NOT NULL AUTO_INCREMENT,
-  `idUser` int NOT NULL,
-  `codePayment` int NOT NULL,
-  `tickets` int NOT NULL,
+CREATE TABLE `bills` (
+  `idBill` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `codePayment` int(11) NOT NULL,
+  `tickets` int(11) NOT NULL,
   `date` date NOT NULL,
   `totalPrice` float NOT NULL,
-  `discount` float DEFAULT NULL,
-  PRIMARY KEY (`idBill`),
-  KEY `fkUserBill` (`idUser`),
-  KEY `fkCodePayment` (`codePayment`)
+  `discount` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -47,17 +43,29 @@ CREATE TABLE IF NOT EXISTS `bills` (
 -- Estructura de tabla para la tabla `cinemas`
 --
 
-DROP TABLE IF EXISTS `cinemas`;
-CREATE TABLE IF NOT EXISTS `cinemas` (
-  `idCinema` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cinemas` (
+  `idCinema` int(11) NOT NULL,
   `state` tinyint(1) NOT NULL,
   `name` varchar(50) NOT NULL,
   `street` varchar(50) NOT NULL,
-  `number` int NOT NULL,
-  `phone` bigint NOT NULL,
+  `number` int(11) NOT NULL,
+  `phone` bigint(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  PRIMARY KEY (`idCinema`),
-  UNIQUE KEY `unqIdName` (`idCinema`,`name`)
+  `poster` varchar(1000) DEFAULT NULL,
+  `city` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cinemaxmovies`
+--
+
+CREATE TABLE `cinemaxmovies` (
+  `idCinema` int(11) NOT NULL,
+  `idMovie` int(11) NOT NULL,
+  `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -66,14 +74,12 @@ CREATE TABLE IF NOT EXISTS `cinemas` (
 -- Estructura de tabla para la tabla `creditcardpayments`
 --
 
-DROP TABLE IF EXISTS `creditcardpayments`;
-CREATE TABLE IF NOT EXISTS `creditcardpayments` (
-  `code` int NOT NULL AUTO_INCREMENT,
-  `idCreditCard` int NOT NULL,
-  `date` date NOT NULL,
-  `total` double NOT NULL,
-  PRIMARY KEY (`code`),
-  KEY `fkCreditCard` (`idCreditCard`)
+CREATE TABLE `creditcardpayments` (
+  `idCreditCardPayment` int(11) NOT NULL,
+  `idCreditCard` bigint(20) NOT NULL,
+  `idCreditCardCompany` varchar(50) NOT NULL,
+  `datePayment` datetime NOT NULL,
+  `total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -82,15 +88,11 @@ CREATE TABLE IF NOT EXISTS `creditcardpayments` (
 -- Estructura de tabla para la tabla `creditcards`
 --
 
-DROP TABLE IF EXISTS `creditcards`;
-CREATE TABLE IF NOT EXISTS `creditcards` (
-  `idCreditCard` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `creditcards` (
   `company` varchar(50) NOT NULL,
-  `number` bigint NOT NULL,
+  `numberCard` bigint(20) NOT NULL,
   `propietary` varchar(50) DEFAULT NULL,
-  `expiration` date DEFAULT NULL,
-  `state` tinyint(1) NOT NULL,
-  PRIMARY KEY (`idCreditCard`)
+  `expiration` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -99,12 +101,9 @@ CREATE TABLE IF NOT EXISTS `creditcards` (
 -- Estructura de tabla para la tabla `genres`
 --
 
-DROP TABLE IF EXISTS `genres`;
-CREATE TABLE IF NOT EXISTS `genres` (
-  `idGenre` int NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`idGenre`),
-  UNIQUE KEY `unqGenre` (`name`)
+CREATE TABLE `genres` (
+  `idGenre` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -113,10 +112,9 @@ CREATE TABLE IF NOT EXISTS `genres` (
 -- Estructura de tabla para la tabla `movies`
 --
 
-DROP TABLE IF EXISTS `movies`;
-CREATE TABLE IF NOT EXISTS `movies` (
-  `idMovie` int NOT NULL,
-  `title` varchar(50) NOT NULL,
+CREATE TABLE `movies` (
+  `idMovie` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
   `originalTitle` varchar(50) DEFAULT NULL,
   `voteAverage` float DEFAULT NULL,
   `overview` varchar(2000) DEFAULT NULL,
@@ -127,11 +125,11 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `posterPath` varchar(200) DEFAULT NULL,
   `backDropPath` varchar(100) DEFAULT NULL,
   `originalLanguage` varchar(10) DEFAULT NULL,
-  `runtime` int DEFAULT NULL,
+  `runtime` int(11) DEFAULT NULL,
   `homepage` varchar(100) DEFAULT NULL,
   `director` varchar(50) DEFAULT NULL,
   `review` varchar(10000) DEFAULT NULL,
-  PRIMARY KEY (`idMovie`)
+  `state` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -140,14 +138,10 @@ CREATE TABLE IF NOT EXISTS `movies` (
 -- Estructura de tabla para la tabla `moviesxgenres`
 --
 
-DROP TABLE IF EXISTS `moviesxgenres`;
-CREATE TABLE IF NOT EXISTS `moviesxgenres` (
-  `idMovieGenre` int NOT NULL AUTO_INCREMENT,
-  `idMovie` int NOT NULL,
-  `idGenre` int NOT NULL,
-  PRIMARY KEY (`idMovieGenre`),
-  KEY `fkMovieGenre` (`idMovie`),
-  KEY `fkGenreMovie` (`idGenre`)
+CREATE TABLE `moviesxgenres` (
+  `idMovieGenre` int(11) NOT NULL,
+  `idMovie` int(11) NOT NULL,
+  `idGenre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -156,11 +150,9 @@ CREATE TABLE IF NOT EXISTS `moviesxgenres` (
 -- Estructura de tabla para la tabla `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `idRole` int NOT NULL,
-  `description` varchar(50) NOT NULL,
-  PRIMARY KEY (`idRole`)
+CREATE TABLE `roles` (
+  `idRole` int(11) NOT NULL,
+  `description` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -169,17 +161,30 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Estructura de tabla para la tabla `rooms`
 --
 
-DROP TABLE IF EXISTS `rooms`;
-CREATE TABLE IF NOT EXISTS `rooms` (
-  `idRoom` int NOT NULL AUTO_INCREMENT,
-  `idCinema` int NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `capacity` int NOT NULL,
+CREATE TABLE `rooms` (
+  `idRoom` int(11) NOT NULL,
+  `idCinema` int(11) NOT NULL,
+  `name_room` varchar(50) DEFAULT NULL,
+  `capacity` int(11) NOT NULL,
   `type` varchar(10) NOT NULL,
   `price` float NOT NULL,
-  PRIMARY KEY (`idRoom`),
-  UNIQUE KEY `unqIdCinemaNumber` (`idCinema`,`name`)
+  `roomrows` int(11) NOT NULL,
+  `roomcolumns` int(11) NOT NULL,
+  `stateRoom` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seats`
+--
+
+CREATE TABLE `seats` (
+  `idSeat` int(11) NOT NULL,
+  `rowSeat` int(11) NOT NULL,
+  `numberSeat` int(11) NOT NULL,
+  `idShow` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -187,17 +192,13 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 -- Estructura de tabla para la tabla `shows`
 --
 
-DROP TABLE IF EXISTS `shows`;
-CREATE TABLE IF NOT EXISTS `shows` (
-  `idShow` int NOT NULL AUTO_INCREMENT,
-  `idRoom` int NOT NULL,
-  `idMovie` int NOT NULL,
+CREATE TABLE `shows` (
+  `idShow` int(11) NOT NULL,
+  `idRoom` int(11) NOT NULL,
+  `idMovie` int(11) NOT NULL,
   `dateTime` datetime DEFAULT NULL,
   `shift` varchar(30) DEFAULT NULL,
-  `remainingTickets` int NOT NULL,
-  PRIMARY KEY (`idShow`),
-  KEY `fkRoomShow` (`idRoom`),
-  KEY `fkMovieShow` (`idMovie`)
+  `remainingTickets` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -206,17 +207,13 @@ CREATE TABLE IF NOT EXISTS `shows` (
 -- Estructura de tabla para la tabla `tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
-CREATE TABLE IF NOT EXISTS `tickets` (
-  `idTicket` int NOT NULL AUTO_INCREMENT,
-  `idBill` int NOT NULL,
-  `idShow` int NOT NULL,
-  `seat` int NOT NULL,
-  `price` int NOT NULL,
-  `qrCode` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idTicket`),
-  KEY `fkBillTicket` (`idBill`),
-  KEY `fkShowTicket` (`idShow`)
+CREATE TABLE `tickets` (
+  `idTicket` int(11) NOT NULL,
+  `idBill` int(11) NOT NULL,
+  `idShow` int(11) NOT NULL,
+  `seat` int(11) NOT NULL,
+  `priceTicket` int(11) DEFAULT NULL,
+  `qrCode` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -225,21 +222,180 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `idUser` int NOT NULL AUTO_INCREMENT,
-  `idRole` int NOT NULL,
-  `dni` int NOT NULL,
+CREATE TABLE `users` (
+  `idUser` int(11) NOT NULL,
+  `idRole` int(11) NOT NULL,
+  `dni` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `street` varchar(50) NOT NULL,
-  `number` int NOT NULL,
+  `number` int(11) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `password` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`idUser`),
-  UNIQUE KEY `unqEmail` (`email`),
-  KEY `fkRoleUser` (`idRole`)
+  `password` varchar(16) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `bills`
+--
+ALTER TABLE `bills`
+  ADD PRIMARY KEY (`idBill`),
+  ADD KEY `fkUserBill` (`idUser`),
+  ADD KEY `fkCodePayment` (`codePayment`);
+
+--
+-- Indices de la tabla `cinemas`
+--
+ALTER TABLE `cinemas`
+  ADD PRIMARY KEY (`idCinema`),
+  ADD UNIQUE KEY `unqIdName` (`idCinema`,`name`);
+
+--
+-- Indices de la tabla `cinemaxmovies`
+--
+ALTER TABLE `cinemaxmovies`
+  ADD PRIMARY KEY (`idCinema`,`idMovie`),
+  ADD KEY `FK_idMovie` (`idMovie`);
+
+--
+-- Indices de la tabla `creditcardpayments`
+--
+ALTER TABLE `creditcardpayments`
+  ADD PRIMARY KEY (`idCreditCardPayment`),
+  ADD KEY `fkCreditCardCompany` (`idCreditCardCompany`),
+  ADD KEY `idCreditCard` (`idCreditCard`);
+
+--
+-- Indices de la tabla `creditcards`
+--
+ALTER TABLE `creditcards`
+  ADD PRIMARY KEY (`company`,`numberCard`);
+
+--
+-- Indices de la tabla `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`idGenre`),
+  ADD UNIQUE KEY `unqGenre` (`name`);
+
+--
+-- Indices de la tabla `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`idMovie`);
+
+--
+-- Indices de la tabla `moviesxgenres`
+--
+ALTER TABLE `moviesxgenres`
+  ADD PRIMARY KEY (`idMovieGenre`),
+  ADD KEY `fkMovieGenre` (`idMovie`),
+  ADD KEY `fkGenreMovie` (`idGenre`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`idRole`);
+
+--
+-- Indices de la tabla `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`idRoom`),
+  ADD UNIQUE KEY `unqIdCinemaNumber` (`idCinema`,`name_room`);
+
+--
+-- Indices de la tabla `seats`
+--
+ALTER TABLE `seats`
+  ADD PRIMARY KEY (`idSeat`),
+  ADD KEY `fk-show` (`idShow`);
+
+--
+-- Indices de la tabla `shows`
+--
+ALTER TABLE `shows`
+  ADD PRIMARY KEY (`idShow`),
+  ADD KEY `fkRoomShow` (`idRoom`),
+  ADD KEY `fkMovieShow` (`idMovie`);
+
+--
+-- Indices de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`idTicket`),
+  ADD KEY `fkBillTicket` (`idBill`),
+  ADD KEY `fkShowTicket` (`idShow`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`idUser`),
+  ADD UNIQUE KEY `unqEmail` (`email`),
+  ADD KEY `fkRoleUser` (`idRole`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `idBill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+
+--
+-- AUTO_INCREMENT de la tabla `cinemas`
+--
+ALTER TABLE `cinemas`
+  MODIFY `idCinema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de la tabla `creditcardpayments`
+--
+ALTER TABLE `creditcardpayments`
+  MODIFY `idCreditCardPayment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+
+--
+-- AUTO_INCREMENT de la tabla `moviesxgenres`
+--
+ALTER TABLE `moviesxgenres`
+  MODIFY `idMovieGenre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
+
+--
+-- AUTO_INCREMENT de la tabla `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `idRoom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `seats`
+--
+ALTER TABLE `seats`
+  MODIFY `idSeat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+
+--
+-- AUTO_INCREMENT de la tabla `shows`
+--
+ALTER TABLE `shows`
+  MODIFY `idShow` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `idTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=253;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
@@ -249,14 +405,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Filtros para la tabla `bills`
 --
 ALTER TABLE `bills`
-  ADD CONSTRAINT `fkCodePayment` FOREIGN KEY (`codePayment`) REFERENCES `creditcardpayments` (`code`),
+  ADD CONSTRAINT `fkCodePayment` FOREIGN KEY (`codePayment`) REFERENCES `creditcardpayments` (`idCreditCardPayment`),
   ADD CONSTRAINT `fkUserBill` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
+
+--
+-- Filtros para la tabla `cinemaxmovies`
+--
+ALTER TABLE `cinemaxmovies`
+  ADD CONSTRAINT `FK_idCinema` FOREIGN KEY (`idCinema`) REFERENCES `cinemas` (`idCinema`),
+  ADD CONSTRAINT `FK_idMovie` FOREIGN KEY (`idMovie`) REFERENCES `movies` (`idMovie`);
 
 --
 -- Filtros para la tabla `creditcardpayments`
 --
 ALTER TABLE `creditcardpayments`
-  ADD CONSTRAINT `fkCreditCard` FOREIGN KEY (`idCreditCard`) REFERENCES `creditcards` (`idCreditCard`);
+  ADD CONSTRAINT `fkCreditCardCompany` FOREIGN KEY (`idCreditCardCompany`) REFERENCES `creditcards` (`company`);
 
 --
 -- Filtros para la tabla `moviesxgenres`
@@ -270,6 +433,12 @@ ALTER TABLE `moviesxgenres`
 --
 ALTER TABLE `rooms`
   ADD CONSTRAINT `fkCinemaRoom` FOREIGN KEY (`idCinema`) REFERENCES `cinemas` (`idCinema`);
+
+--
+-- Filtros para la tabla `seats`
+--
+ALTER TABLE `seats`
+  ADD CONSTRAINT `fk-show` FOREIGN KEY (`idShow`) REFERENCES `shows` (`idShow`);
 
 --
 -- Filtros para la tabla `shows`
