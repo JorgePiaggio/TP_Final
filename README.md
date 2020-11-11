@@ -5,10 +5,12 @@ Proyecto final para las materias *Laboratorio 4* y *Metodología de Sistemas*, d
 
 Este trabajo es parte de un examen, por lo que no se permiten colaboraciones externas, pero cualquier sugerencia es bienvenida.
 
-
 ### El equipo
 
 @[Fran](https://github.com/frangrande91), @[Maxi](https://github.com/maxi2991), y @[Jorge](https://github.com/JorgePiaggio).
+
+
+[![Captura-de-pantalla-de-2020-11-11-19-33-20.png](https://i.postimg.cc/Z5KxjZMC/Captura-de-pantalla-de-2020-11-11-19-33-20.png)](https://postimg.cc/yktR8qBH)
 
 
 ## Consigna
@@ -42,6 +44,10 @@ nombre, precio y capacidad en butacas.**
 3. Consultar cantidades vendidas y remanentes de las proyecciones (Película, Cine, Turno).
 4. Consultar totales vendidos en pesos (por película ó por cine, entre fechas).
 
+
+[![Captura-de-pantalla-de-2020-11-11-19-33-56.png](https://i.postimg.cc/9XdPhr3D/Captura-de-pantalla-de-2020-11-11-19-33-56.png)](https://postimg.cc/w3BR5xjz)
+
+
 ## Requisitos No Funcionales
 Programación en capas de la aplicación respetando la arquitectura de 3 capas lógicas vista durante
 la cursada. Esto implica el desarrollo de las clases que representen las entidades del modelo y
@@ -54,6 +60,10 @@ De alli usaremos los GET:
 ```- movie/now_playing : retorna la lista de películas actuales```
 
 ```- genre/movie/list : retorna la lista de géneros (temas)```
+
+
+[![Captura-de-pantalla-de-2020-11-11-19-34-08.png](https://i.postimg.cc/ncTvXghZ/Captura-de-pantalla-de-2020-11-11-19-34-08.png)](https://postimg.cc/N59yVNXP)
+
 
 ## Implementación mínima para la aprobación:
 1. Revisión
