@@ -1,6 +1,7 @@
 <main class="py-5">
           <div class="container background-pic" style="background-image:url('<?php echo IMG_PATH?>/backgrounds/jake-hills-23LET4Hxj_U-unsplash.jpg');">  
           <h2 class="page-title up2">Add Room</h2><br><br>
+          <?php if($cinemaList){?> 
                <form action="<?php echo FRONT_ROOT?>Room/add" class="center" method="post">
                          <div class="floating-label-form">
                          <div class="floating-label">
@@ -37,8 +38,12 @@
                               <br><br>
                               <div class="floating-label">
                                    <span>&nbsp;</span>
-                                   <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button><br><br>
-                                   
+                                    
+                                        <button type="submit" name="" class="btn btn-primary ml-auto d-block">Add</button><br><br>
+          <?php }
+          else{ ?>
+               <center><h4 class="msg"> No cinemas</h4></center>
+     <?php } ?>
                                    <?php if($this->msg){  //Si ya existe una sala con ese número en el mismo cine muestro el mensaje
                                         ?><h4 class="msg"> <?php echo $this->msg;} 
                                    ?></h4>
