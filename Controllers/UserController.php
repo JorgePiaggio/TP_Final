@@ -174,9 +174,7 @@ class UserController{
 
     public function register($name="",$surname="",$dni="",$street="",$number="",$email="",$pass="",$repass=""){
         Validate::checkParameter($name);
-
-        if(!$this->validateEmail($email)){ 
-            if($this->validatePass($pass, $repass)){
+   
                 $this->user= new user();
                 $this->user->setName($name);
                 $this->user->setSurname($surname);
@@ -186,24 +184,26 @@ class UserController{
                 $this->user->setEmail($email);
                 $this->user->setPassword($pass);
 
-                try{
-                    $this->userDAO->add($this->user);
-               
-                    $_SESSION["loggedUser"]=$email;
-                    $_SESSION["role"]=$this->user->getRole()->getId();
+            if(!$this->validateEmail($email)){                   //Valido que ya no exista un usuario con ese email
+                if($this->validatePass($pass, $repass)){         //Valido que la contraseña cumpla con los requisitos
+                    try{
+                        $this->userDAO->add($this->user);
+                
+                        $_SESSION["loggedUser"]=$email;
+                        $_SESSION["role"]=$this->user->getRole()->getId();
 
-                    if(isset($_SESSION["facebookUser"])){   //usuario registrado a traves de facebook
-                        $this->sendEmail($email,$name,$surname,$pass);
+                        if(isset($_SESSION["facebookUser"])){   //usuario registrado a traves de facebook
+                            $this->sendEmail($email,$name,$surname,$pass);
+                        }
+                    }catch(\Exception $e){
+                        echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
                     }
-                }catch(\Exception $e){
-                    echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
+                header("location:../Home/index");
                 }
-               header("location:../Home/index");
-            }
           
-        }
-        else{
-            $this->msg="Email: '$email' already exists";
+            }
+            else{
+                $this->msg="Email: '$email' already exists";
         }
         $this->showRegister();
     }
@@ -275,32 +275,28 @@ class UserController{
         return true;
     }
 
-
+    /* Valida que ya no exista un usuario con ese email */
     private function validateEmail($email=""){
         Validate::checkParameter($email);
 
         try{
-            $users = $this->userDAO->getAll(); 
+            $user = $this->userDAO->search($email); 
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
 
         $answer = false;
-        if($users){
-        if(is_array($users)){
-        foreach($users as $value){
-            if($value->getEmail() == $email){
-                $answer = true;
-            }
+        
+        if($user){
+            $answer = true;
         }
-        }else{
-            if($users->getEmail() == $email){
+        else{
+            if($email == "admin@moviepass.com"){             //Valido que el email ingresado no sea igual al email del super admin
                 $answer = true;
             }
         }
 
-    }
-        return $answer;
+        return $answer;     //Retorna true si ya existe un usuario con ese email y false si no
     }
 
 
