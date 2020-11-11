@@ -768,7 +768,6 @@
             $seat->setIdSeat($value["idSeat"]);
             $seat->setRow($value["rowSeat"]);
             $seat->setNumber($value["numberSeat"]);
-            $seat->setState($value["stateSeat"]);
 
             return $seat;
         }

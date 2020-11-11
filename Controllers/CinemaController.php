@@ -11,7 +11,6 @@
     use Config\Validate as Validate;
     use \Exception as Exception;
 
-
  
     class CinemaController{
         private $cinemaDAO;
@@ -93,7 +92,7 @@
         }
 
 
-
+        /* Agrega una película a la cartelera de un cine */
         public function addToBillboard($idCinema="", $movie=""){
             Validate::checkParameter($idCinema);
             

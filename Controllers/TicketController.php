@@ -157,52 +157,44 @@ define ("APIQRCODE", 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&d
             switch($flag){
                 case 1:
                     $data = $this->ticketDAO->cashByCinemaByDate($idCinema, $date);       
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;
                 case 2:
                     $data = $this->ticketDAO->cashByCinemaByMonth($idCinema, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;
                 case 3:
                     $data = $this->ticketDAO->cashByCinemaByYear($idCinema, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;
                 case 4:
                     $data = $this->ticketDAO->ticketsByCinemaByDate($idCinema, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;
                 case 5:
                     $data = $this->ticketDAO->ticketsByCinemaByMonth($idCinema, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;
                 case 6:
                     $data = $this->ticketDAO->ticketsByCinemaByYear($idCinema, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break; 
                 case 7:
                     $data = $this->ticketDAO->ticketsByCinemaByShiftByDate($idCinema, $shift, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;    
                 case 8:
                     $data = $this->ticketDAO->ticketsByCinemaByShiftByMonth($idCinema, $shift, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;   
                 case 9:
                     $data = $this->ticketDAO->ticketsByCinemaByShiftByYear($idCinema, $shift, $date);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;      
                 case 10: 
                     $data = $this->ticketDAO->ticketsByCinemaByMovie($idCinema, $idMovie);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;    
                 case 11: 
                     $data = $this->ticketDAO->ticketsByCinemaByMovieByShift($idCinema, $shift, $idMovie);
-                    require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
                     break;   
             }
+
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }
+
+        require_once(VIEWS_PATH."Cinemas/Cinema-statistics.php");
     }
 
 

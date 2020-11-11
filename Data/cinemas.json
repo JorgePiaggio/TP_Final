@@ -1,67 +1,14 @@
 [
     {
-        "id": "1",
+        "idCinema": "1",
         "state": true,
         "name": "Ambassador",
-        "address": "Cordoba 3800",
-        "phone": "4123333",
-        "email": "ambassador@hotmail.com"
-    },
-    {
-        "id": "2",
-        "state": true,
-        "name": "Paseo Diagonal",
-        "address": "Rivadavia 1250",
-        "phone": "4956666",
-        "email": "paseodiagonal@hotmail.com"
-    },
-    {
-        "id": "3",
-        "state": true,
-        "name": "Paseo Aldrey",
-        "address": "Sarmiento 2222",
-        "phone": "4748888",
-        "email": "paseoaldrey@gmail.com"
-    },
-    {
-        "id": "4",
-        "state": false,
-        "name": "Cine Centro",
-        "address": "Belgrano 2500",
-        "phone": "4789988",
-        "email": "cinemacentro@gmail.com"
-    },
-    {
-        "id": "5",
-        "state": false,
-        "name": "Cine Puerto",
-        "address": "12 de Octubre 8882",
-        "phone": "4156363",
-        "email": "puerto@hotmail.com"
-    },
-    {
-        "id": "6",
-        "state": true,
-        "name": "Los Gallegos",
-        "address": "Rivadavia 1500",
-        "phone": "4756363",
-        "email": "gallegosShopping@hotmail.com"
-
-    },
-    {
-        "id": "7",
-        "state": false,
-        "name": "Cinema Mogotes",
-        "address": "Av. de los Trabajadores 5000",
-        "phone": "4751111",
-        "email": "farocinema@hotmail.com"
-    },
-    {
-        "id": 8,
-        "state": false,
-        "name": "Hoyts",
-        "address": "Calchaqui 4050",
-        "phone": "42155666",
-        "email": "hoyts@hoyts.com"
+        "street": "Cordoba",
+        "number": "654",
+        "city": "Mar del Plata",
+        "country": "Argentina",
+        "phone": "56465454",
+        "email": "ambassador@hotmail.com",
+        "poster": "\/TP_Final\/Views\/layout\/images\/cinema1.jpg"
     }
 ]

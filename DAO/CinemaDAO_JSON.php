@@ -49,38 +49,16 @@
             $wanted = $this->search($idCinema);
             if($wanted != null){
                 $this->retrieveData();
-                if($this->cinemaList[($wanted->getId())-1]->getState() == true){
-                    $this->cinemaList[($wanted->getId())-1]->setState(false);
+                if($this->cinemaList[($wanted->getIdCinema())-1]->getState() == true){
+                    $this->cinemaList[($wanted->getIdCinema())-1]->setState(false);
                 }
                 else{
-                    $this->cinemaList[($wanted->getId())-1]->setState(true);
+                    $this->cinemaList[($wanted->getIdCinema())-1]->setState(true);
                 }
                 $this->saveData();
             }
         }
 
-        /*
-        public function restore($idCinema){
-            $wanted = $this->search($idCinema);
-            if($wanted != null){
-                $this->retrieveData();
-                $this->cinemaList[($wanted->getId())-1]->setState(true);
-                $this->saveData();
-            }
-        }
-        
-        public function remove($idCinema){
-            $this->retrieveData();
-            $newList = array();
-            foreach($this->cinemaList as $cinema){
-                if($cinema->getId() != $idCinema){
-                    array_push($newList, $cinema);
-                }
-            }
-            $this->cinemaList = $newList;
-		    $this->saveData();
-        }
-        */
         
         public function search($idCinema){
             $wanted = null;
@@ -113,11 +91,13 @@
                 $valuesArray["state"] = $cinema->getState();
                 $valuesArray["name"] = $cinema->getName();
                 $valuesArray["street"] = $cinema->getStreet();
+                $valuesArray["number"] = $cinema->getNumber();
                 $valuesArray["city"] = $cinema->getCity();
                 $valuesArray["country"] = $cinema->getCountry();
                 $valuesArray["phone"] = $cinema->getPhone();
                 $valuesArray["email"] = $cinema->getEmail();
-                $valuesArray["number"] = $cinema->getNumber();
+                $valuesArray["poster"] = $cinema->getPoster();
+        
                 array_push($arrayToEncode, $valuesArray);
             }
             $jsonContent = json_encode($arrayToEncode , JSON_PRETTY_PRINT);
@@ -139,12 +119,13 @@
                     $cinema->setState($valuesArray["state"]);
                     $cinema->setName($valuesArray["name"]);
                     $cinema->setStreet($valuesArray["street"]);
+                    $cinema->setNumber($valuesArray["number"]);
                     $cinema->setCity($valuesArray["city"]);
                     $cinema->setCountry($valuesArray["country"]);
-                    $cinema->setNumber($valuesArray["number"]);
                     $cinema->setPhone($valuesArray["phone"]);
                     $cinema->setEmail($valuesArray["email"]);
-                    
+                    $cinema->setPoster($valuesArray["poster"]);
+                    $cinema->setBillboard(null);
                     array_push($this->cinemaList, $cinema);
                 }
 
@@ -158,6 +139,14 @@
 
             return true;
         }
+
+
+
+        //Métodos vacíos de la cartelera de un cine
+        public function stateMovie($idCinema,$idMovie,$state){}
+        public function searchMovie($idCinema,$idMovie){return false;}
+        public function addMovie($idCinema,$idMovie){}
+        public function getBillboard($idCinema){}
     }             
 
 ?>

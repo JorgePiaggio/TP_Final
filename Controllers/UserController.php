@@ -157,7 +157,7 @@ class UserController{
         $name= $_SESSION['facebookUser']['first_name'];
         $surname= $_SESSION['facebookUser']['last_name'];
         $email= $_SESSION['facebookUser']['email'];
-        $pass= "F".substr($_SESSION['facebookUser']['id'],0,15);
+        $pass= "Ff".substr($_SESSION['facebookUser']['id'],0,14);
 
         $user = $this->userDAO->search($email);
 

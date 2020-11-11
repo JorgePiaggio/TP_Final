@@ -10,6 +10,9 @@ Views/layout/images/tickets/
 # Don't track these files
 
 *.ibd
+Data/genres.json
+Data/movies.json
+Data/users.json
 Views/layout/images/cineambassador.jpg
 Views/layout/images/theater-movie.jpg
 Views/layout/images/cinema2.jpg
