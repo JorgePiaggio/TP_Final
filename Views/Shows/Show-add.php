@@ -5,13 +5,14 @@
           <div class="hoc"><br><br>
 
               <div class=" floating-label-form">
+                <?php if($cinemaList){?>
                 <form action="<?php echo FRONT_ROOT?>Show/selectCinema" class=" hoc center span" method="post">
                                 <div class="floating-label">
                                         <select name="selection cinema" class="selection" required onchange="this.form.submit()" required >
                                       
-                                            <?php if(!$cinemaList){?>
-                                          <option value="">No Cinemas Found</option>
-                                                <?php } if($cinema){?>
+                                            
+                                          
+                                            <?php if($cinema){?>
                                           <option value="<?php echo $cinema->getIdCinema();?>" name="cinemasearch" selected disabled> <?php echo $cinema->getName(); ?></option>
                                             <?php }?>
                                               <?php foreach($cinemaList as $cinema){ ?>
@@ -74,6 +75,10 @@
                                   } ?> </h4>
                               </div>            
                 </form>
+              <?php } 
+                else { ?>
+                  <center><h4 class="msg">No cinemas found</h4></center>
+         <?php  } ?>
             </div>
           </div>
 

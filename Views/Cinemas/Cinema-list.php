@@ -9,6 +9,7 @@
                     <div class="container2">
                          <table class="table bg-light">
                               <thead class="bg-dark text-white">
+                                   <?php if($cinemaList){ ?>
                                    <th width="15%">Name</th>
                                    <th>Street</th>
                                    <th>Number</th>
@@ -20,8 +21,8 @@
                                    <th  colspan="3">Action</th>
                               </thead>
                               <tbody>
-                                   <?php if($cinemaList!=null){ 
-                                        if(!is_array($cinemaList)){?>
+                                   
+                              <?php     if(!is_array($cinemaList)){?>
                                              <tr>    
                                         <td><?php echo $cinemaList->getName(); ?> </td>     
                                         <td><?php echo $cinemaList->getStreet(); ?> </td>
@@ -61,14 +62,17 @@
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Statistics </button></td>
                                         </form>
                                    </tr>
-                              <?php }}} ?>
+                              <?php }}} 
+                              else{ ?>
+                                   <center><h4 class="msg">No active cinemas</h4></center>
+                         <?php  } ?>
                               </tbody>
                          </table>
                     </div>
                     <h2 class="page-title" >Inactive Cinemas </h2>
                     <div class="container2">
                         
-                              <?php if($cinemaListInactive!=null){ ?>
+                              <?php if($cinemaListInactive){ ?>
 
                                    <table class="table bg-light">
                                         <thead class="bg-dark text-white">
@@ -125,7 +129,10 @@
                                         <td><button type="submit" name="idCinema" class="btn" value="<?php echo $cinema->getIdCinema()?>"> Statistics </button></td>
                                         </form>
                                    </tr>
-                              <?php }}}?>
+                              <?php }}}
+                                else{ ?>
+                                   <center><h4 class="msg">No inactive cinemas</h4></center>
+                         <?php  } ?>
                               </tbody>
                          </table>
                     </div>
