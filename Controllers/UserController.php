@@ -280,7 +280,7 @@ class UserController{
         Validate::checkParameter($email);
 
         try{
-            $user = $this->userDAO->search($email); 
+            $user = $this->userDAO->search($email);           //Busco en la BD un usuario a través del email
         }catch(\Exception $e){
             echo "Caught Exception: ".get_class($e)." - ".$e->getMessage();
         }

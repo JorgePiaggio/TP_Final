@@ -4,7 +4,7 @@
                <form action="<?php echo FRONT_ROOT?>Room/showRoomList" class="center" method="post">
                          <div class="floating-label-form">
                          <div class="floating-label">
-                         <?php if(!empty($cinamaList)){ ?>
+                         <?php if($cinemaList){ ?>
                                   <select name="selection cinema" class="selection">
                                    
                                       <?php for($i=0; $i<count($cinemaList); $i++){ ?>

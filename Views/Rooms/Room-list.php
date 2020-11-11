@@ -9,6 +9,7 @@
                     <div class="container2">
                          <table class="table bg-light small">
                               <thead class="bg-dark text-white" width="60%">
+                              <?php if($roomList){ ?>
                                    <th>Name</th>
                                    <th>Capacity</th>
                                    <th>Type</th>
@@ -16,7 +17,7 @@
                                    <th colspan="2">Action</th>
                               </thead>
                               <tbody>
-                                   <?php if($roomList!=null){ ?>
+                                   
                               <?php for($i=0; $i<count($roomList); $i++){ ?>
                                    <tr>       
                                         <td><?php echo $roomList[$i]->getName(); ?> </td>
@@ -32,7 +33,10 @@
                                         <td style="width: 10%;"><button type="submit" name="idCinema1" class="btn" value="<?php echo  $roomList[$i]->getCinema()->getIdCinema();?>"> Remove </button></td>
                                         </form>
                                    </tr>
-                              <?php } }?>
+                              <?php } }
+                                   else {?>
+                                        <center><h4 class="msg">No active rooms</h4></center>
+                               <?php }?>
                               </tbody>
                          </table><br><br>
                     </div>
@@ -69,7 +73,10 @@
                                                        <td style="width: 10%;"><button type="submit" name="idCinema" class="btn" value="<?php echo  $roomListInactive[$i]->getCinema()->getIdCinema();?>"> Restore </button></td>
                                                        </form>
                                                   </tr>
-                              <?php } }?>
+                              <?php } }
+                                   else {?>
+                                        <center><h4 class="msg">No inactive rooms</h4></center>
+                               <?php }?>
                               </tbody>
                          </table>
                     </div>
