@@ -9,6 +9,7 @@ Views/layout/images/tickets/
 
 # Don't track these files
 
+*.ibd
 Views/layout/images/cineambassador.jpg
 Views/layout/images/theater-movie.jpg
 Views/layout/images/cinema2.jpg
