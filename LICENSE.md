@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2020 JorgeP
+Copyright (c) 2020 @[Fran](https://github.com/frangrande91), @[Maxi](https://github.com/maxi2991), y @[Jorge](https://github.com/JorgePiaggio)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
