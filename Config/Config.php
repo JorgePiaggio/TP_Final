@@ -19,11 +19,11 @@ define("DB_PASS", "");
 /*Constantes para conectar con la API */
 define("APIURL","http://api.themoviedb.org/3/");
 define("POSTERURL","https://image.tmdb.org/t/p/w500/");
-define("APIKEY","eb58beadef111937dbd1b1d107df8f4c");
+define("APIKEY","");
 
 /*Constantes de facebook */
 define("APPID","372444494104218");
-define("APPSECRET","584f98f8239ae686cc19ed7889d85138");
+define("APPSECRET","");
 define("GRAPHVERSION",'v8.0');
 
 ?>
